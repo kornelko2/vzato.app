@@ -29,6 +29,9 @@ struct MedicationDetailView: View {
                 if !medication.dosageText.isEmpty {
                     LabeledContent("Dose") { Text(medication.dosageText) }
                 }
+                if medication.unitsPerDose != 1 {
+                    LabeledContent("Units per dose") { Text(DoseFormatter.units(medication.effectiveUnitsPerDose)) }
+                }
                 if let schedule {
                     LabeledContent("Days") { Text(weekdaysText(schedule)) }
                     LabeledContent("Times") { Text(timesText(schedule)) }
@@ -48,7 +51,7 @@ struct MedicationDetailView: View {
 
             Section("Supply") {
                 if medication.tracksStock {
-                    LabeledContent("Units at home") { Text(medication.stockCount, format: .number) }
+                    LabeledContent("Units at home") { Text(DoseFormatter.units(medication.stockCount)) }
                     LabeledContent("Doses left") { Text(medication.dosesInStock, format: .number) }
                     if let runOut {
                         LabeledContent("Runs out") { Text(runOut, style: .date) }

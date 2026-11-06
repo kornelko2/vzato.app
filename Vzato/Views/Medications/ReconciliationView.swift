@@ -11,7 +11,7 @@ struct ReconciliationView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var medication: Medication
 
-    @State private var actual: Int?
+    @State private var actual: Double?
     @State private var recordMissing = true
 
     private var report: ReconciliationReport {
@@ -28,13 +28,13 @@ struct ReconciliationView: View {
                         LabeledContent("Recorded as taken") { Text(report.recordedTaken, format: .number) }
                         LabeledContent("Skipped") { Text(report.recordedSkipped, format: .number) }
                         LabeledContent("Without a record") { Text(report.unaccounted, format: .number) }
-                        LabeledContent("Should be at home") { Text(report.expectedStock, format: .number) }
+                        LabeledContent("Should be at home") { Text(DoseFormatter.units(report.expectedStock)) }
                     }
                 }
 
                 Section {
-                    TextField("Units you have at home", value: $actual, format: .number)
-                        .numericKeyboard()
+                    TextField("Units you have at home", value: $actual, format: .number.precision(.fractionLength(0...2)))
+                        .decimalKeyboard()
                 } header: {
                     Text("Count what you have")
                 } footer: {
@@ -80,14 +80,14 @@ struct ReconciliationView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Label("Fewer units than the records expect.", systemImage: "exclamationmark.circle")
                     .foregroundStyle(Palette.overdue)
-                Text("Units missing: \(report.unitDifference ?? 0). That is about \(doses) doses taken without being recorded.")
+                Text("Units missing: \(DoseFormatter.units(report.unitDifference ?? 0)). That is about \(doses) doses taken without being recorded.")
                     .font(.subheadline).foregroundStyle(.secondary)
             }
         case .overRecordedDoses(let doses):
             VStack(alignment: .leading, spacing: 6) {
                 Label("More units than the records expect.", systemImage: "questionmark.circle")
                     .foregroundStyle(Palette.overdue)
-                Text("Units extra: \(-(report.unitDifference ?? 0)). About \(doses) recorded doses may not have been taken. Review them in History.")
+                Text("Units extra: \(DoseFormatter.units(-(report.unitDifference ?? 0))). About \(doses) recorded doses may not have been taken. Review them in History.")
                     .font(.subheadline).foregroundStyle(.secondary)
             }
         }

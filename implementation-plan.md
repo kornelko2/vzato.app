@@ -15,7 +15,7 @@ Vychází ze `specification.md` (revize 6. 11. 2026). Plán říká, v jakém po
 | Závislosti | Žádné | Licence, bezpečnost, jednoduchost buildu. |
 | Server | **Žádný**, rozhodnuto 6. 11. 2026 | Vše přes CloudKit a veřejná API. Vývojář nezpracovává data uživatelů; viz specifikace 5.1 a 13. |
 | Testy | Swift Testing, Core Data s in‑memory store (`NSInMemoryStoreType`) | Rychlé, bez simulátoru. |
-| Lokalizace | `Localizable.xcstrings`, anglické klíče, čeština a slovenština překlad | Standard Apple, plurály v katalogu. Primární trh CZ/SK. |
+| Lokalizace | `Localizable.xcstrings`, anglické klíče, čeština, slovenština a maďarština překlad | Standard Apple, plurály v katalogu. Primární trh CZ/SK, maďarština pro rodinné testery. |
 | Ukládání fotek | atribut `imageData: Binary Data` s „Allows External Storage“ | Core Data je uloží mimo databázi, CloudKit jako přílohu (CKAsset). |
 | Licence | **MPL-2.0**, rozhodnuto 6. 11. 2026 | Slučitelná s App Storem, bez CLA, změny souborů zůstávají otevřené. Hlavička MPL v každém zdrojovém souboru. |
 | Úložiště | **Core Data** (`NSPersistentCloudKitContainer`), rozhodnuto 6. 11. 2026 | SwiftData neumí CloudKit sdílení (CKShare); ověřeno 11/2026, stále platí. Viz specifikace, kapitoly 10.3 a 13. |
@@ -218,8 +218,8 @@ CONTRIBUTING.md, licence, screenshoty cs/sk/en, **zásady ochrany soukromí** (s
 ## 3. Lokalizace – jak na to prakticky
 
 - Všechny texty v SwiftUI jako literály (`Text("Taken")`), v kódu `String(localized:)`. Žádné skládání vět z částí.
-- Dva překlady (cs, sk) vedle anglického klíče. Slovenština není kopie češtiny: překládat zvlášť, kontrolovat rodilým mluvčím.
-- Klíče s čísly používají formát (`"%lld left"`) a pro češtinu i slovenštinu plurálové varianty v katalogu (`one`, `few`, `many`, `other`).
+- Tři překlady (cs, sk, hu) vedle anglického klíče. Slovenština není kopie češtiny: překládat zvlášť. Maďarštinu kontrolovat rodilým mluvčím.
+- Klíče s čísly používají formát (`"%lld left"`) a pro češtinu i slovenštinu plurálové varianty v katalogu (`one`, `few`, `many`, `other`); maďarština má jen `one`/`other`. Počty kusů jsou desetinné a formátují se přes `DoseFormatter` (½, ¼), proto jsou v klíčích jako `%@`.
 - Při každém PR: build s `SWIFT_EMIT_LOC_STRINGS`, nové klíče ve stavu „new“ musí dostat český překlad, jinak PR neprojde (kontrola skriptem nad JSON katalogu).
 - Texty notifikačních akcí se registrují při startu, takže změna jazyka se projeví po restartu aplikace. Přijatelné.
 - Datum a čas vždy přes `Text(date, style:)` / `FormatStyle`, nikdy ručně.

@@ -9,17 +9,17 @@ public final class Medication: NSManagedObject {
     @NSManaged public var id: UUID?
     @NSManaged public var name: String
     @NSManaged public var dosageText: String
-    @NSManaged public var unitsPerDose: Int
+    @NSManaged public var unitsPerDose: Double
     @NSManaged public var notes: String
     @NSManaged public var colorHex: String
     @NSManaged public var createdAt: Date?
     @NSManaged public var isArchived: Bool
     @NSManaged public var archivedAt: Date?
     @NSManaged public var tracksStock: Bool
-    @NSManaged public var stockCount: Int
-    @NSManaged public var lowStockThreshold: Int
+    @NSManaged public var stockCount: Double
+    @NSManaged public var lowStockThreshold: Double
     @NSManaged public var stockCountedAt: Date?
-    @NSManaged public var stockAtLastCount: Int
+    @NSManaged public var stockAtLastCount: Double
     @NSManaged public var lowStockNotifiedAt: Date?
     @NSManaged public var profile: Profile?
     @NSManaged public var schedules: NSSet?
@@ -62,7 +62,11 @@ public final class Medication: NSManagedObject {
         photoList.filter { $0.kind == kind }
     }
 
-    var isLowStock: Bool { tracksStock && stockCount <= lowStockThreshold }
-    var isOutOfStock: Bool { tracksStock && stockCount < max(1, unitsPerDose) }
-    var dosesInStock: Int { tracksStock ? stockCount / max(1, unitsPerDose) : 0 }
+    /// Smallest dose the app works with: a quarter tablet.
+    static let minimumDoseUnits = 0.25
+
+    var effectiveUnitsPerDose: Double { max(Self.minimumDoseUnits, unitsPerDose) }
+    var isLowStock: Bool { tracksStock && stockCount <= lowStockThreshold + 0.0001 }
+    var isOutOfStock: Bool { tracksStock && stockCount + 0.0001 < effectiveUnitsPerDose }
+    var dosesInStock: Int { tracksStock ? Int((stockCount / effectiveUnitsPerDose + 0.0001).rounded(.down)) : 0 }
 }

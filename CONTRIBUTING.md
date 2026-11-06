@@ -10,8 +10,8 @@ Thanks for helping. A few rules keep the project small and trustworthy.
 - **Not a medical device.** The app reminds and records what the user entered.
   It must not recommend doses, check interactions or interpret health data.
 - **Privacy first.** Nothing leaves the device without an explicit user action.
-- **Czech, Slovak and English are all first-class.** Every user-facing string
-  ships with all three in the same change.
+- **Czech, Slovak, English and Hungarian are all first-class.** Every user-facing
+  string ships with all four in the same change.
 
 ## Workflow
 
@@ -33,7 +33,7 @@ Thanks for helping. A few rules keep the project small and trustworthy.
   relationships. Add a new model version for any schema change.
 - A scheduled dose has no `DoseEvent` until the user acts. Never pre-create
   events.
-- Strings: English literal in code, `cs` and `sk` in
+- Strings: English literal in code, `cs`, `sk` and `hu` in
   `Vzato/Resources/Localizable.xcstrings`. Use `%lld` / `%@` keys, never
   concatenated fragments.
 - Never commit `Config/Local.xcconfig`, `buildServer.json` or the generated

@@ -1,18 +1,24 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "%@: %lld left": {
+    "%@: %@ left": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: zbývá %lld"
+            "value": "%@: zbývá %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@ maradt"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: zostáva %lld"
+            "value": "%@: zostáva %@"
           }
         }
       }
@@ -67,6 +73,24 @@
             }
           }
         },
+        "hu": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld nap"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld nap"
+                }
+              }
+            }
+          }
+        },
         "sk": {
           "variations": {
             "plural": {
@@ -107,6 +131,12 @@
             "value": "%lld min"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld perc"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -118,6 +148,12 @@
     "%lld×": {
       "localizations": {
         "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld×"
+          }
+        },
+        "hu": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld×"
@@ -139,6 +175,12 @@
             "value": "O aplikaci"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Névjegy"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -153,6 +195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Přidejte lék na záložce Léky a dostanete připomínky."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjon hozzá gyógyszert a Gyógyszerek lapon, hogy emlékeztetőket kapjon."
           }
         },
         "sk": {
@@ -171,6 +219,12 @@
             "value": "Přidat lék"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer hozzáadása"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -185,6 +239,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Přidat fotografii"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotó hozzáadása"
           }
         },
         "sk": {
@@ -203,6 +263,12 @@
             "value": "Přidat čas"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Időpont hozzáadása"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -217,6 +283,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dodržení"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betartás"
           }
         },
         "sk": {
@@ -235,6 +307,12 @@
             "value": "Po jídle"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étkezés után"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -249,6 +327,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dnes máte hotovo"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mára minden kész"
           }
         },
         "sk": {
@@ -267,6 +351,12 @@
             "value": "Povolit oznámení"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Értesítések engedélyezése"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -281,6 +371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kdykoli"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bármikor"
           }
         },
         "sk": {
@@ -299,6 +395,12 @@
             "value": "Vzhled"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megjelenés"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -313,6 +415,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Archivovat lék"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer archiválása"
           }
         },
         "sk": {
@@ -331,6 +439,12 @@
             "value": "Archivace zachová historii. Smazání odstraní lék i všechny jeho záznamy."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az archiválás megőrzi az előzményeket. A törlés eltávolítja a gyógyszert és minden bejegyzését."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -345,6 +459,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Před jídlem"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étkezés előtt"
           }
         },
         "sk": {
@@ -363,6 +483,12 @@
             "value": "Zrušit"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mégse"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -377,6 +503,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Změníte ho v Nastavení systému › Obecné › Jazyk a oblast › Aplikace."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Rendszerbeállítások › Általános › Nyelv és régió › Alkalmazások menüben módosíthatja."
           }
         },
         "sk": {
@@ -395,6 +527,12 @@
             "value": "Vybrat z knihovny"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Választás a könyvtárból"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -409,6 +547,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Barva"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szín"
           }
         },
         "sk": {
@@ -427,6 +571,12 @@
             "value": "Obrázek se nepodařilo načíst."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kép nem olvasható."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -441,6 +591,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spočítat a zkontrolovat zásobu"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készlet megszámolása és ellenőrzése"
           }
         },
         "sk": {
@@ -459,6 +615,12 @@
             "value": "Spočítejte, co máte"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Számolja meg, mennyi van otthon"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -473,6 +635,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spočítáno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megszámolva"
           }
         },
         "sk": {
@@ -491,6 +659,12 @@
             "value": "Tmavý"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sötét"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -505,6 +679,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dny"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napok"
           }
         },
         "sk": {
@@ -523,6 +703,12 @@
             "value": "Smazat"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Törlés"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -537,6 +723,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Smazat lék"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer törlése"
           }
         },
         "sk": {
@@ -555,6 +747,12 @@
             "value": "Smazat fotografii"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotó törlése"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -569,6 +767,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Smazat tento lék a jeho historii?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Törli ezt a gyógyszert és az előzményeit?"
           }
         },
         "sk": {
@@ -587,6 +791,12 @@
             "value": "Hotovo"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kész"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -603,10 +813,38 @@
             "value": "Dávka"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adag"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
             "value": "Dávka"
+          }
+        }
+      }
+    },
+    "Dose and supply": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka a zásoba"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adag és készlet"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka a zásoba"
           }
         }
       }
@@ -617,6 +855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historie dávek"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adagolási előzmények"
           }
         },
         "sk": {
@@ -635,6 +879,12 @@
             "value": "Dávka, např. 400 mg"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adag, pl. 400 mg"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -651,26 +901,16 @@
             "value": "Zbývá dávek"
           }
         },
-        "sk": {
+        "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zostáva dávok"
-          }
-        }
-      }
-    },
-    "Each confirmed dose lowers the count. You get a notification when it runs low.": {
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Každá potvrzená dávka počet sníží. Když zásoba dochází, dostanete oznámení."
+            "value": "Hátralévő adagok"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Každá potvrdená dávka počet zníži. Keď zásoba dochádza, dostanete upozornenie."
+            "value": "Zostáva dávok"
           }
         }
       }
@@ -681,6 +921,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Upravit"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szerkesztés"
           }
         },
         "sk": {
@@ -699,6 +945,12 @@
             "value": "Upravit lék"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer szerkesztése"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -713,6 +965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konec"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vége"
           }
         },
         "sk": {
@@ -731,6 +989,12 @@
             "value": "Datum konce"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befejezés dátuma"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -745,6 +1009,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zadejte počet kusů a začněte sledovat zásobu tohoto léku."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adja meg a darabszámot a készlet követésének megkezdéséhez."
           }
         },
         "sk": {
@@ -763,6 +1033,12 @@
             "value": "Každý den"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden nap"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -777,6 +1053,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Všechny plánované dávky jsou zaznamenané."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden tervezett adag rögzítve van."
           }
         },
         "sk": {
@@ -795,6 +1077,12 @@
             "value": "Exportovat CSV"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV exportálása"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -809,6 +1097,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dávka navíc"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra adag"
           }
         },
         "sk": {
@@ -827,6 +1121,12 @@
             "value": "Méně kusů, než odpovídá záznamům."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kevesebb darab, mint amennyit a bejegyzések mutatnak."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -841,6 +1141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Přejít"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ugrás"
           }
         },
         "sk": {
@@ -859,6 +1165,12 @@
             "value": "Historie"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Előzmények"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -873,6 +1185,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importovat soubor"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fájl importálása"
           }
         },
         "sk": {
@@ -891,6 +1209,12 @@
             "value": "Jazyk"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyelv"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -905,6 +1229,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Naposledy spočítáno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utoljára megszámolva"
           }
         },
         "sk": {
@@ -923,6 +1253,12 @@
             "value": "Příbalový leták"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betegtájékoztató"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -937,6 +1273,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Světlý"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Világos"
           }
         },
         "sk": {
@@ -955,6 +1297,12 @@
             "value": "Zaznamenat"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rögzítés"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -969,6 +1317,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zaznamenat dávku navíc"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra adag rögzítése"
           }
         },
         "sk": {
@@ -987,6 +1341,12 @@
             "value": "Upozornění na docházející zásobu"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Figyelmeztetés fogyó készletre"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1001,6 +1361,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Označit jako zmeškané po"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elmulasztottnak jelölés ennyi idő után"
           }
         },
         "sk": {
@@ -1019,6 +1385,12 @@
             "value": "Já"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Én"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1033,6 +1405,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jídlo"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étkezés"
           }
         },
         "sk": {
@@ -1051,6 +1429,12 @@
             "value": "Lék"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1065,6 +1449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Léky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszerek"
           }
         },
         "sk": {
@@ -1083,6 +1473,12 @@
             "value": "Zmeškáno"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elmulasztva"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1097,6 +1493,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Více kusů, než odpovídá záznamům."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Több darab, mint amennyit a bejegyzések mutatnak."
           }
         },
         "sk": {
@@ -1115,6 +1517,12 @@
             "value": "Název"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Név"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1129,6 +1537,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nový lék"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Új gyógyszer"
           }
         },
         "sk": {
@@ -1147,6 +1561,12 @@
             "value": "Příští"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Következő"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1161,6 +1581,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Další měsíc"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Következő hónap"
           }
         },
         "sk": {
@@ -1179,6 +1605,12 @@
             "value": "V tento den žádné dávky"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezen a napon nincs adag"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1193,6 +1625,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zatím žádné zaznamenané dávky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még nincs rögzített adag"
           }
         },
         "sk": {
@@ -1211,6 +1649,12 @@
             "value": "Dnes žádné dávky"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ma nincs adag"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1225,6 +1669,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Žádné léky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nincs gyógyszer"
           }
         },
         "sk": {
@@ -1243,6 +1693,12 @@
             "value": "Zatím žádné fotografie. Přidejte krabičku, tabletu nebo leták, ať je máte vždy po ruce."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még nincs fotó. Adja hozzá a dobozt, a tablettát vagy a betegtájékoztatót, hogy mindig kéznél legyenek."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1257,6 +1713,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zatím nepotvrzeno. Až lék vezmete, klepněte na Vzato."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még nincs megerősítve. Koppintson a Bevéve gombra, ha bevette."
           }
         },
         "sk": {
@@ -1275,6 +1737,12 @@
             "value": "Poznámka"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megjegyzés"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1289,6 +1757,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oznámení jsou povolena"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az értesítések engedélyezve vannak"
           }
         },
         "sk": {
@@ -1307,6 +1781,12 @@
             "value": "Oznámení jsou vypnutá"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az értesítések ki vannak kapcsolva"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1323,6 +1803,12 @@
             "value": "Vypnuto"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ki"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1331,18 +1817,24 @@
         }
       }
     },
-    "Only %lld left. Time to get more.": {
+    "Only %@ left. Time to get more.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zbývá jen %lld. Je čas zajít pro další."
+            "value": "Zbývá jen %@. Je čas zajít pro další."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Már csak %@ maradt. Ideje újat beszerezni."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zostáva len %lld. Je čas zájsť po ďalšie."
+            "value": "Zostáva len %@. Je čas zájsť po ďalšie."
           }
         }
       }
@@ -1353,6 +1845,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otevřít nastavení systému"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendszerbeállítások megnyitása"
           }
         },
         "sk": {
@@ -1371,6 +1869,12 @@
             "value": "Po termínu"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lejárt"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1385,6 +1889,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Krabička"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doboz"
           }
         },
         "sk": {
@@ -1403,6 +1913,12 @@
             "value": "Strana %lld"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld. oldal"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1417,6 +1933,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Čeká"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Várakozik"
           }
         },
         "sk": {
@@ -1435,6 +1957,12 @@
             "value": "Fotografie"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotó"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1449,6 +1977,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fotografie"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotók"
           }
         },
         "sk": {
@@ -1467,6 +2001,12 @@
             "value": "Tableta"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tabletta"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1481,6 +2021,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fotografie tablety"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tabletta fotója"
           }
         },
         "sk": {
@@ -1499,6 +2045,12 @@
             "value": "Předchozí měsíc"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Előző hónap"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1513,6 +2065,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Poslední dávky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legutóbbi adagok"
           }
         },
         "sk": {
@@ -1531,6 +2089,12 @@
             "value": "Doplnit chybějící dávky jako vzaté"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hiányzó adagok rögzítése bevettként"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1545,6 +2109,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zaznamenáno jako vzaté"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevettként rögzítve"
           }
         },
         "sk": {
@@ -1563,6 +2133,12 @@
             "value": "Zaznamená tuto dávku jako právě vzatou"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezt az adagot most bevettként rögzíti"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1577,6 +2153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Obnovit připomínky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emlékeztetők frissítése"
           }
         },
         "sk": {
@@ -1595,6 +2177,12 @@
             "value": "Připomínky"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emlékeztetők"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1609,6 +2197,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opakovat nepotvrzené připomínky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meg nem erősített emlékeztetők ismétlése"
           }
         },
         "sk": {
@@ -1627,6 +2221,12 @@
             "value": "Vrátit zpět"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visszaállítás"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1643,6 +2243,12 @@
             "value": "Výsledek"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eredmény"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1651,18 +2257,24 @@
         }
       }
     },
-    "Running low, %lld left": {
+    "Running low, %@ left": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dochází, zbývá %lld"
+            "value": "Dochází, zbývá %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fogytán, %@ maradt"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dochádza, zostáva %lld"
+            "value": "Dochádza, zostáva %@"
           }
         }
       }
@@ -1673,6 +2285,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dochází. Je čas zajít pro další."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fogytán van. Ideje újat beszerezni."
           }
         },
         "sk": {
@@ -1691,6 +2309,12 @@
             "value": "Dochází: %@"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fogytán: %@"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1705,6 +2329,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dojde"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elfogy"
           }
         },
         "sk": {
@@ -1723,6 +2353,12 @@
             "value": "Dojde %@. Je čas zajít pro další."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekkor fogy el: %@. Ideje újat beszerezni."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1737,6 +2373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uložit"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mentés"
           }
         },
         "sk": {
@@ -1755,6 +2397,12 @@
             "value": "Naskenovat leták"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betegtájékoztató beolvasása"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1769,6 +2417,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plán"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ütemezés"
           }
         },
         "sk": {
@@ -1787,6 +2441,12 @@
             "value": "Plánované dávky"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tervezett adagok"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1801,6 +2461,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Naplánované připomínky: %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ütemezett emlékeztetők: %lld"
           }
         },
         "sk": {
@@ -1819,6 +2485,12 @@
             "value": "Nastavení"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beállítások"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1833,6 +2505,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mělo by být doma"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otthon kellene lennie"
           }
         },
         "sk": {
@@ -1851,6 +2529,12 @@
             "value": "Zobrazit fotografii tablety"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tabletta fotójának megjelenítése"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1865,6 +2549,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Od posledního spočítání"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az utolsó számolás óta"
           }
         },
         "sk": {
@@ -1883,6 +2573,12 @@
             "value": "Přeskočit"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kihagyás"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1897,6 +2593,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Přeskočeno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kihagyva"
           }
         },
         "sk": {
@@ -1915,6 +2617,12 @@
             "value": "Odložit"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szundi"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1929,6 +2637,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Odložit o %lld min"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szundi %lld perc"
           }
         },
         "sk": {
@@ -1947,6 +2661,12 @@
             "value": "Zdrojový kód a licence (MPL-2.0)"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forráskód és licenc (MPL-2.0)"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1961,6 +2681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Začátek"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kezdés"
           }
         },
         "sk": {
@@ -1979,6 +2705,12 @@
             "value": "Zásoba"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készlet"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -1993,6 +2725,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kontrola zásoby"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készletellenőrzés"
           }
         },
         "sk": {
@@ -2011,6 +2749,12 @@
             "value": "Zásoba léku %@ dochází"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A(z) %@ készlete fogytán van"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2025,6 +2769,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sledování zásoby začíná tímto počtem."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A készletkövetés ezzel a számolással kezdődik."
           }
         },
         "sk": {
@@ -2043,6 +2793,12 @@
             "value": "Podle systému"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendszer"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2057,6 +2813,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vyfotit"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotó készítése"
           }
         },
         "sk": {
@@ -2075,6 +2837,12 @@
             "value": "Vzato"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2089,6 +2857,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vzato %lld z %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld bevéve"
           }
         },
         "sk": {
@@ -2107,6 +2881,12 @@
             "value": "Vzato v"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve:"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2121,6 +2901,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klepněte na + a přidejte první lék."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppintson a + gombra az első gyógyszer hozzáadásához."
           }
         },
         "sk": {
@@ -2139,6 +2925,12 @@
             "value": "Tento měsíc"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebben a hónapban"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2153,6 +2945,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Čas"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Időpont"
           }
         },
         "sk": {
@@ -2171,6 +2969,12 @@
             "value": "Je čas vzít si %@."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideje bevenni: %@."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2185,6 +2989,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Je čas vzít si dávku."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideje bevenni az adagot."
           }
         },
         "sk": {
@@ -2203,6 +3013,12 @@
             "value": "Časy"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Időpontok"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2217,6 +3033,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dnes"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ma"
           }
         },
         "sk": {
@@ -2235,6 +3057,12 @@
             "value": "Sledovat zásobu"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készlet követése"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2251,10 +3079,38 @@
             "value": "Zapněte je v nastavení systému, abyste dostávali připomínky."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapcsolja be a rendszerbeállításokban, hogy emlékeztetőket kapjon."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
             "value": "Zapnite ich v nastaveniach systému, aby ste dostávali pripomienky."
+          }
+        }
+      }
+    },
+    "Units are tablets or other pieces; a half or a quarter tablet works too. Each confirmed dose lowers the count. You get a notification when it runs low.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusy jsou tablety nebo jiné jednotky; půlka i čtvrtka tablety fungují také. Každá potvrzená dávka počet sníží. Když zásoba dochází, dostanete oznámení."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A darab tablettát vagy más egységet jelent; fél vagy negyed tabletta is megadható. Minden megerősített adag csökkenti a számot. Értesítést kap, ha fogytán van."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusy sú tablety alebo iné jednotky; polovica aj štvrtina tablety fungujú tiež. Každá potvrdená dávka počet zníži. Keď zásoba dochádza, dostanete upozornenie."
           }
         }
       }
@@ -2267,6 +3123,12 @@
             "value": "Kusů doma"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Darab otthon"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2275,34 +3137,46 @@
         }
       }
     },
-    "Units extra: %lld. About %lld recorded doses may not have been taken. Review them in History.": {
+    "Units extra: %@. About %lld recorded doses may not have been taken. Review them in History.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kusů navíc: %lld. Asi %lld zaznamenaných dávek možná nebylo vzato. Zkontrolujte je v Historii."
+            "value": "Kusů navíc: %@. Asi %lld zaznamenaných dávek možná nebylo vzato. Zkontrolujte je v Historii."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Többlet: %@ darab. Körülbelül %lld rögzített adag talán nem lett bevéve. Ellenőrizze az Előzményekben."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kusov navyše: %lld. Asi %lld zaznamenaných dávok možno nebolo vzatých. Skontrolujte ich v Histórii."
+            "value": "Kusov navyše: %@. Asi %lld zaznamenaných dávok možno nebolo vzatých. Skontrolujte ich v Histórii."
           }
         }
       }
     },
-    "Units missing: %lld. That is about %lld doses taken without being recorded.": {
+    "Units missing: %@. That is about %lld doses taken without being recorded.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chybí kusů: %lld. To odpovídá asi %lld dávkám vzatým bez záznamu."
+            "value": "Chybí kusů: %@. To odpovídá asi %lld dávkám vzatým bez záznamu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiányzik: %@ darab. Ez körülbelül %lld rögzítés nélkül bevett adag."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chýba kusov: %lld. To zodpovedá asi %lld dávkam vzatým bez záznamu."
+            "value": "Chýba kusov: %@. To zodpovedá asi %lld dávkam vzatým bez záznamu."
           }
         }
       }
@@ -2313,6 +3187,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kusů na dávku"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Darab adagonként"
           }
         },
         "sk": {
@@ -2331,6 +3211,12 @@
             "value": "Kusů, které máte doma"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otthon lévő darabszám"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2345,6 +3231,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Do"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eddig"
           }
         },
         "sk": {
@@ -2363,6 +3255,12 @@
             "value": "Verze"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzió"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2371,18 +3269,24 @@
         }
       }
     },
-    "Vzato follows the language you set for it in the system settings. Czech, Slovak and English are available.": {
+    "Vzato follows the language you set for it in the system settings. Czech, Slovak, English and Hungarian are available.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vzato se řídí jazykem, který mu nastavíte v nastavení systému. K dispozici je čeština, slovenština a angličtina."
+            "value": "Vzato se řídí jazykem, který mu nastavíte v nastavení systému. K dispozici je čeština, slovenština, angličtina a maďarština."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzato a rendszerbeállításokban az alkalmazáshoz megadott nyelvet követi. Cseh, szlovák, angol és magyar nyelven érhető el."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vzato sa riadi jazykom, ktorý mu nastavíte v nastaveniach systému. K dispozícii je čeština, slovenčina a angličtina."
+            "value": "Vzato sa riadi jazykom, ktorý mu nastavíte v nastaveniach systému. K dispozícii je čeština, slovenčina, angličtina a maďarčina."
           }
         }
       }
@@ -2393,6 +3297,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vzato není zdravotnický prostředek a nenahrazuje lékaře ani lékárníka. Jen připomíná a vede vaše vlastní záznamy."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzato nem orvostechnikai eszköz, és nem helyettesíti az orvost vagy a gyógyszerészt. Csak emlékeztet, és az Ön saját feljegyzéseit vezeti."
           }
         },
         "sk": {
@@ -2411,6 +3321,12 @@
             "value": "Upozornit před dojitím zásoby"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Figyelmeztetés az elfogyás előtt"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2425,6 +3341,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Upozornit pod"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Figyelmeztetés ez alatt"
           }
         },
         "sk": {
@@ -2443,6 +3365,12 @@
             "value": "Celý den"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egész nap"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2457,6 +3385,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "S jídlem"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étkezés közben"
           }
         },
         "sk": {
@@ -2475,6 +3409,12 @@
             "value": "Bez záznamu"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bejegyzés nélkül"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2489,6 +3429,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Došlo. Zajděte pro další co nejdřív."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elfogyott. Szerezzen be újat, amint tud."
           }
         },
         "sk": {
@@ -2507,6 +3453,12 @@
             "value": "Váš počet odpovídá záznamům."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A számolás egyezik a bejegyzésekkel."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2521,6 +3473,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vaše data zůstávají v tomto zařízení a ve vašem iCloudu. Nic se nesbírá."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adatai ezen az eszközön és az Ön iCloudjában maradnak. Semmit nem gyűjtünk."
           }
         },
         "sk": {
@@ -2539,6 +3497,12 @@
             "value": "navíc"
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "extra"
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",
@@ -2553,6 +3517,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS dovolí nejvýše 64 naplánovaných připomínek. Některé časy nebyly naplánovány."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az iOS legfeljebb 64 ütemezett emlékeztetőt enged. Néhány időpont nem lett ütemezve."
           }
         },
         "sk": {

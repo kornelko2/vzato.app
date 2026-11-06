@@ -3,7 +3,7 @@
 Vzato is a free, open source medication reminder: SwiftUI universal app (iOS 17+,
 iPadOS 17+, macOS 14+), Core Data with `NSPersistentCloudKitContainer` (CloudKit not
 enabled yet), local notifications, Swift 6 strict concurrency, zero dependencies.
-Czech, Slovak and English via `Vzato/Resources/Localizable.xcstrings`.
+Czech, Slovak, English and Hungarian via `Vzato/Resources/Localizable.xcstrings`.
 
 Design documents are in Czech and are the source of truth: `specification.md` (what),
 `implementation-plan.md` (how and when, phases 1–13), `design-options.md` (name and
@@ -78,16 +78,18 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 ## Conventions
 
 - Core Data model: every attribute optional or with a default, every relationship
-  optional with an inverse, no unique constraints, no ordered relationships. Any schema
-  change = new model version (`Vzato 2.xcdatamodel`), lightweight migration.
+  optional with an inverse, no unique constraints, no ordered relationships. Until the
+  first TestFlight build ships, the current version (`Vzato 2`) may be edited in place;
+  after that, any schema change = new model version with lightweight migration.
 - A scheduled dose has no `DoseEvent` until the user acts. Status for an unrecorded
   slot is derived (pending → missed after the grace period). Never pre-create events.
 - Stock changes only in `DoseLogger` (dose taken/reset) and `StockService.setStock`.
 - Services that touch managed objects are `@MainActor`; the notification delegate is
   `nonisolated` and hops to the main actor with plain values (UUID, Int, Date).
-- Strings: English literal in code (`Text("Taken")`, `String(localized:)`), `cs` and
-  `sk` added to the String Catalog in the same change; use `%lld` / `%@` format keys,
-  no sentence fragments. Button copy is "Taken" → cs "Vzato", sk "Vzaté" (neutral form,
+- Strings: English literal in code (`Text("Taken")`, `String(localized:)`), `cs`, `sk` and
+  `hu` added to the String Catalog in the same change; use `%lld` / `%@` format keys,
+  no sentence fragments. Tablet counts are `Double` and go through `DoseFormatter.units`
+  (½, ¼), so they appear in keys as `%@`. Button copy is "Taken" → cs "Vzato", sk "Vzaté" (neutral form,
   decided by the user; do not change to "Vzal jsem").
 - Dates: always `Calendar` arithmetic and `Text(date, style:)` / `FormatStyle`; never
   manual seconds math or hard-coded formats.

@@ -21,18 +21,17 @@ struct ReconciliationReport {
     let scheduledDoses: Int
     let recordedTaken: Int
     let recordedSkipped: Int
-    let expectedStock: Int
-    let actualStock: Int?
+    let expectedStock: Double
+    let actualStock: Double?
 
     /// Scheduled doses with no record at all (missed or still pending).
     var unaccounted: Int { max(0, scheduledDoses - recordedTaken - recordedSkipped) }
 
-    var unitDifference: Int? { actualStock.map { expectedStock - $0 } }
+    var unitDifference: Double? { actualStock.map { expectedStock - $0 } }
 
     var doseDifference: Int? {
         guard let unitDifference else { return nil }
-        let units = Double(max(1, medication.unitsPerDose))
-        return Int((Double(unitDifference) / units).rounded())
+        return Int((unitDifference / medication.effectiveUnitsPerDose).rounded())
     }
 
     var verdict: Verdict {
@@ -46,7 +45,7 @@ struct ReconciliationReport {
 
 @MainActor
 enum ReconciliationService {
-    static func report(for medication: Medication, actualStock: Int?, now: Date = Date(), calendar: Calendar = .current) -> ReconciliationReport {
+    static func report(for medication: Medication, actualStock: Double?, now: Date = Date(), calendar: Calendar = .current) -> ReconciliationReport {
         let since = medication.stockCountedAt ?? medication.createdAt ?? now
         let interval = DateInterval(start: min(since, now), end: now)
         let scheduled = DoseScheduler.slots(for: [medication], in: interval, calendar: calendar)
@@ -62,8 +61,8 @@ enum ReconciliationService {
             guard event.status == .skipped, let at = event.scheduledAt else { return false }
             return interval.contains(at)
         }.count
-        let units = max(1, medication.unitsPerDose)
-        let expected = medication.tracksStock ? max(0, medication.stockAtLastCount - taken * units) : 0
+        let units = medication.effectiveUnitsPerDose
+        let expected = medication.tracksStock ? max(0, medication.stockAtLastCount - Double(taken) * units) : 0
         return ReconciliationReport(
             medication: medication,
             since: since,
@@ -77,7 +76,7 @@ enum ReconciliationService {
 
     /// Saves the counted stock. Optionally marks the oldest unaccounted scheduled doses as taken
     /// (source: reconciliation) to match the count. Never removes records.
-    static func apply(_ report: ReconciliationReport, actualStock: Int, recordMissingDoses: Bool, context: NSManagedObjectContext, now: Date = Date(), calendar: Calendar = .current, notifier: any DoseNotifying) {
+    static func apply(_ report: ReconciliationReport, actualStock: Double, recordMissingDoses: Bool, context: NSManagedObjectContext, now: Date = Date(), calendar: Calendar = .current, notifier: any DoseNotifying) {
         let medication = report.medication
         if recordMissingDoses, case .unrecordedDoses(let count) = ReconciliationReport(
             medication: medication, since: report.since, scheduledDoses: report.scheduledDoses,

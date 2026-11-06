@@ -16,6 +16,12 @@
             "value": "Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device."
           }
         },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzato a kamerát a gyógyszer, a tabletták és a betegtájékoztatók lefényképezésére használja. A fotók az eszközén maradnak."
+          }
+        },
         "sk": {
           "stringUnit": {
             "state": "translated",

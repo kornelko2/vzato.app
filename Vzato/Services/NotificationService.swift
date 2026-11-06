@@ -209,7 +209,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         content.title = String(localized: "Running low: \(medication.name)")
         content.body = medication.isOutOfStock
             ? String(localized: "You are out. Get more as soon as you can.")
-            : String(localized: "Only \(medication.stockCount) left. Time to get more.")
+            : String(localized: "Only \(DoseFormatter.units(medication.stockCount)) left. Time to get more.")
         content.sound = .default
         content.categoryIdentifier = Category.lowStock
         content.threadIdentifier = "lowstock"

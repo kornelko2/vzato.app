@@ -20,7 +20,9 @@ All notable changes to Vzato are listed here. The format follows
 - Supply check: compare the recorded doses with a physical count and backfill
   missing records.
 - Extra doses outside the plan.
-- Czech, Slovak and English.
+- Czech, Slovak, English and Hungarian.
+- Doses in half or quarter tablets; supply counts can be fractional and are
+  shown as 10½.
 - Settings: appearance, snooze length, missed-after grace period, low-supply
   alerts, notification permission.
 - Debug launch argument `--sample-data`.

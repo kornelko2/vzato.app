@@ -19,7 +19,7 @@ extension DoseNotifying {
 @MainActor
 enum StockService {
     /// The user counted (or bought) pills: this becomes the new baseline for the supply check.
-    static func setStock(_ medication: Medication, count: Int, at date: Date = Date()) {
+    static func setStock(_ medication: Medication, count: Double, at date: Date = Date()) {
         medication.tracksStock = true
         medication.stockCount = max(0, count)
         medication.stockAtLastCount = medication.stockCount
@@ -45,13 +45,13 @@ enum StockService {
     static func projectedRunOutDate(for medication: Medication, from now: Date = Date(), calendar: Calendar = .current, horizonDays: Int = 365) -> Date? {
         guard medication.tracksStock else { return nil }
         var remaining = medication.stockCount
-        let units = max(1, medication.unitsPerDose)
+        let units = medication.effectiveUnitsPerDose
         var day = calendar.startOfDay(for: now)
         for _ in 0..<horizonDays {
             let upcoming = DoseScheduler.slots(for: [medication], on: day, calendar: calendar)
                 .filter { $0.event == nil && $0.scheduledAt >= now }
             for slot in upcoming {
-                if remaining < units { return slot.scheduledAt }
+                if remaining + 0.0001 < units { return slot.scheduledAt }
                 remaining -= units
             }
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }

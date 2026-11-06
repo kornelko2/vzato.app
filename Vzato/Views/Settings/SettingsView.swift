@@ -18,7 +18,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    Text("Vzato follows the language you set for it in the system settings. Czech, Slovak and English are available.")
+                    Text("Vzato follows the language you set for it in the system settings. Czech, Slovak, English and Hungarian are available.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     #if os(iOS)

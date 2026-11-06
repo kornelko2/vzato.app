@@ -23,9 +23,9 @@ struct MedicationFormView: View {
     @State private var hasEndDate = false
     @State private var endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date()) ?? Date()
     @State private var tracksStock = false
-    @State private var stockCount = 30
-    @State private var unitsPerDose = 1
-    @State private var lowStockThreshold = 5
+    @State private var stockCount: Double = 30
+    @State private var unitsPerDose: Double = 1
+    @State private var lowStockThreshold: Double = 5
 
     private let calendar = Calendar.current
 
@@ -43,7 +43,7 @@ struct MedicationFormView: View {
         _colorHex = State(initialValue: medication.colorHex)
         _tracksStock = State(initialValue: medication.tracksStock)
         _stockCount = State(initialValue: medication.stockCount)
-        _unitsPerDose = State(initialValue: max(1, medication.unitsPerDose))
+        _unitsPerDose = State(initialValue: medication.effectiveUnitsPerDose)
         _lowStockThreshold = State(initialValue: medication.lowStockThreshold)
         if let schedule = medication.allSchedules.first {
             _weekdays = State(initialValue: Set(schedule.weekdays))
@@ -94,25 +94,25 @@ struct MedicationFormView: View {
                 }
 
                 Section {
+                    Stepper(value: $unitsPerDose, in: Medication.minimumDoseUnits...10, step: 0.25) {
+                        LabeledContent("Units per dose") { Text(DoseFormatter.units(unitsPerDose)) }
+                    }
                     Toggle("Track supply", isOn: $tracksStock)
                     if tracksStock {
                         LabeledContent("Units at home") {
-                            TextField("Units at home", value: $stockCount, format: .number)
+                            TextField("Units at home", value: $stockCount, format: .number.precision(.fractionLength(0...2)))
                                 .multilineTextAlignment(.trailing)
-                                .numericKeyboard()
+                                .decimalKeyboard()
                                 .labelsHidden()
                         }
-                        Stepper(value: $unitsPerDose, in: 1...10) {
-                            LabeledContent("Units per dose") { Text(unitsPerDose, format: .number) }
-                        }
-                        Stepper(value: $lowStockThreshold, in: 0...100) {
-                            LabeledContent("Warn when below") { Text(lowStockThreshold, format: .number) }
+                        Stepper(value: $lowStockThreshold, in: 0...100, step: 1) {
+                            LabeledContent("Warn when below") { Text(DoseFormatter.units(lowStockThreshold)) }
                         }
                     }
                 } header: {
-                    Text("Supply")
+                    Text("Dose and supply")
                 } footer: {
-                    Text("Each confirmed dose lowers the count. You get a notification when it runs low.")
+                    Text("Units are tablets or other pieces; a half or a quarter tablet works too. Each confirmed dose lowers the count. You get a notification when it runs low.")
                 }
             }
             .formStyle(.grouped)
@@ -212,8 +212,8 @@ struct MedicationFormView: View {
         schedule.startDate = calendar.startOfDay(for: startDate)
         schedule.endDate = hasEndDate ? calendar.startOfDay(for: endDate) : nil
 
+        target.unitsPerDose = max(Medication.minimumDoseUnits, unitsPerDose)
         if tracksStock {
-            target.unitsPerDose = max(1, unitsPerDose)
             target.lowStockThreshold = max(0, lowStockThreshold)
             if !target.tracksStock || target.stockCount != stockCount {
                 StockService.setStock(target, count: stockCount)

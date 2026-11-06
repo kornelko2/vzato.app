@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15).
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština.
 
 ---
 
@@ -19,7 +19,7 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 - Zapisovat užité dávky do Apple Health.
 - Zůstat zdarma, bez reklam, bez sledování a bez předplatného.
 - **Bez vlastního serveru.** Rozhodnuto 6. 11. 2026. Veškerá data jsou jen v zařízeních uživatele a v jeho iCloudu; vývojář k nim nemá přístup. Všechny funkce, včetně budoucích rozšíření (kapitoly 10–12), se staví jen nad infrastrukturou Apple a veřejnými API. Odůvodnění v kapitole 13.
-- Primární trh: Česko a Slovensko. Čeština, slovenština a angličtina od první verze.
+- Primární trh: Česko a Slovensko. Čeština, slovenština, angličtina a maďarština od první verze (maďarština kvůli rodinným testerům).
 
 ### Mimo rozsah (v1)
 
@@ -42,13 +42,13 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 | Widgety | WidgetKit + App Intents | Stejný kód pro všechny platformy, interaktivní tlačítko „vzal jsem“ na iOS 17+ a macOS 14+. |
 | Zdraví | HealthKit | Zápis užitých dávek. Ověřit aktuální API pro léky v dokumentaci Apple před implementací. |
 | Jazyk | Swift | Minimální závislosti (ideálně žádné). |
-| Lokalizace | String Catalog (`.xcstrings`) | Angličtina jako zdrojový jazyk, čeština a slovenština jako překlady. |
+| Lokalizace | String Catalog (`.xcstrings`) | Angličtina jako zdrojový jazyk, čeština, slovenština a maďarština jako překlady. |
 
 ## 3. Funkce
 
 ### 3.1 Léky a plán
 
-- Přidání léku: název, dávka (volný text, např. „500 mg“), počet kusů na dávku (výchozí 1), barva/ikona, poznámka.
+- Přidání léku: název, dávka (volný text, např. „500 mg“), počet kusů na dávku (výchozí 1; lze i půlka nebo čtvrtka tablety, krok ¼), barva/ikona, poznámka.
 - Plán: dny v týdnu, časy (více za den), volitelně „s jídlem / před jídlem / po jídle / bez ohledu“.
 - Začátek a konec léčby (volitelně), pauza.
 - Jednorázová dávka mimo plán (např. lék na bolest), zaznamená se do historie a odečte ze zásoby.
@@ -89,7 +89,7 @@ Design: zvolen směr C „Jistota“ (viz `design-options.md`). Obrazovka Dnes m
 
 ### 3.5 Zásoby
 
-- U léku lze zapnout sledování zásoby: počet kusů doma a počet kusů na dávku.
+- U léku lze zapnout sledování zásoby: počet kusů doma a počet kusů na dávku. Oboje může být desetinné (10,5 tablety), zobrazuje se jako 10½; odečítá se přesně podle kusů na dávku (½, ¼).
 - Každé potvrzení dávky zásobu odečte, zrušení potvrzení ji vrátí. Jednorázová dávka mimo plán se odečítá také.
 - Hranice pro upozornění (výchozí 5 kusů). Při poklesu pod hranici: upozornění v aplikaci (banner na přehledu dneška, štítek u léku) a jedna lokální notifikace „Dochází: název, zbývá N“. Další notifikace přijde až po doplnění a opětovném poklesu.
 - Odhad, kdy zásoba dojde: z plánu se dopočítá datum první dávky, na kterou už nebude dost kusů. Zobrazuje se na detailu léku („Dojde 24. 11.“) a volitelně jako včasné upozornění (např. 7 dní předem, nastavitelné), aby stihl uživatel zajít pro recept.
@@ -138,7 +138,7 @@ Uživatel si občas není jistý, zda lék vzal a jen zapomněl potvrdit, nebo p
 
 ### 3.11 Nastavení
 
-- Jazyk: čeština, slovenština a angličtina. Aplikace se řídí jazykem systému, resp. jazykem nastaveným pro aplikaci v Nastavení systému. V aplikaci je odkaz, jak jazyk změnit.
+- Jazyk: čeština, slovenština, angličtina a maďarština. Aplikace se řídí jazykem systému, resp. jazykem nastaveným pro aplikaci v Nastavení systému. V aplikaci je odkaz, jak jazyk změnit.
 - Vzhled: světlý, tmavý, podle systému.
 - Výchozí odklad notifikace, počet opakování, lhůta pro „zmeškáno“.
 - Upozornění na zásoby: zapnout/vypnout, kolik dní předem.
@@ -160,7 +160,7 @@ Medication
   profile: Profile             // od fáze 1, i když UI zatím ukazuje jen „Já“
   name: String
   dosageText: String?          // "500 mg"
-  unitsPerDose: Int            // kusů na dávku, výchozí 1
+  unitsPerDose: Double         // kusů na dávku, výchozí 1, krok ¼
   notes: String?
   colorHex: String?
   createdAt: Date
@@ -169,10 +169,10 @@ Medication
 
   // zásoba
   tracksStock: Bool
-  stockCount: Int              // aktuální počet kusů doma
-  lowStockThreshold: Int       // hranice upozornění
+  stockCount: Double           // aktuální počet kusů doma (může být 10,5)
+  lowStockThreshold: Double    // hranice upozornění
   stockCountedAt: Date?        // kdy uživatel naposledy zadal/spočítal zásobu
-  stockAtLastCount: Int        // kolik kusů tehdy zadal (základ pro kontrolu)
+  stockAtLastCount: Double     // kolik kusů tehdy zadal (základ pro kontrolu)
   lowStockNotifiedAt: Date?    // aby notifikace o docházející zásobě přišla jen jednou
 
 Schedule
@@ -214,7 +214,7 @@ Pravidla pro CloudKit: všechny atributy mají výchozí hodnotu nebo jsou volit
 - **Spolehlivost:** notifikace musí dorazit v nastavený čas. Ověřit v testech i při vypnutém Focus a v úsporném režimu.
 - **Přístupnost:** VoiceOver, Dynamic Type, kontrast, velké tlačítka pro potvrzení.
 - **Výkon:** start aplikace do 1 s, widgety bez zatížení baterie (timeline po změnách, ne každou minutu). Fotografie zmenšené, miniatury cachované.
-- **Lokalizace:** všechny texty přes String Catalog. Čeština, slovenština i angličtina kompletní v každém vydání; nepřeložený text je chyba. Pozor na české a slovenské množné číslo (1 dávka / 2 dávky / 5 dávek) – používat plurálová pravidla katalogu, ne skládání řetězců.
+- **Lokalizace:** všechny texty přes String Catalog. Čeština, slovenština, angličtina i maďarština kompletní v každém vydání; nepřeložený text je chyba. Pozor na české a slovenské množné číslo (1 dávka / 2 dávky / 5 dávek) – používat plurálová pravidla katalogu, ne skládání řetězců.
 - **Limit notifikací:** iOS dovolí nejvýše 64 naplánovaných lokálních notifikací. Plánovat jen nejbližší dny a přeplánovat při každém spuštění a změně.
 
 ### 5.1 Soukromí a GDPR bez serveru
@@ -244,7 +244,7 @@ Upozornění: toto není právní rada, jen shrnutí pro rozhodování; před vy
 - UI testy: přidání léku, potvrzení dávky z notifikace, oprava stavu v kalendáři, přidání fotografie.
 - Manuální testy na fyzických zařízeních: iPhone, iPad, Mac, sync mezi dvěma zařízeními přihlášenými stejným Apple ID.
 - Testovat časové zóny, změnu času a přechod přes půlnoc.
-- Testovat všechny tři jazyky (screenshoty cs/sk/en), délku českých a slovenských textů v tlačítkách.
+- Testovat všechny čtyři jazyky (screenshoty cs/sk/en/hu), délku českých, slovenských a maďarských textů v tlačítkách. Maďarský překlad nechat zkontrolovat rodilým mluvčím.
 
 ## 8. Milníky
 

@@ -50,4 +50,13 @@ extension View {
         return self
         #endif
     }
+
+    /// Decimal pad on iPhone (for counts like 10.5); no-op elsewhere.
+    func decimalKeyboard() -> some View {
+        #if os(iOS)
+        return keyboardType(.decimalPad)
+        #else
+        return self
+        #endif
+    }
 }

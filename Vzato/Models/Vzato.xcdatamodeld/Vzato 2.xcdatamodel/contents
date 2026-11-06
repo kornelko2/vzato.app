@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A335" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <!-- Version 2: MedicationPhoto (phase 4). CloudKit rules: every attribute optional or with a default, every relationship optional with an inverse, no unique constraints, no ordered relationships. -->
+    <!-- Version 2: MedicationPhoto (phase 4); dose and stock as Double so ½ and ¼ tablets work. CloudKit rules: every attribute optional or with a default, every relationship optional with an inverse, no unique constraints, no ordered relationships. -->
     <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="none">
         <attribute name="colorHex" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,14 +18,14 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isArchived" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="lowStockNotifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="lowStockThreshold" optional="YES" attributeType="Integer 64" defaultValueString="5" usesScalarValueType="YES"/>
+        <attribute name="lowStockThreshold" optional="YES" attributeType="Double" defaultValueString="5" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="notes" optional="YES" attributeType="String" defaultValueString=""/>
-        <attribute name="stockAtLastCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="stockCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stockAtLastCount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stockCount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="stockCountedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="tracksStock" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="unitsPerDose" optional="YES" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="unitsPerDose" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="doseEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DoseEvent" inverseName="medication" inverseEntity="DoseEvent"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MedicationPhoto" inverseName="medication" inverseEntity="MedicationPhoto"/>
         <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="medications" inverseEntity="Profile"/>

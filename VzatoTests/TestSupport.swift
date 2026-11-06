@@ -32,7 +32,7 @@ final class TestStore {
 
     @discardableResult
     func medication(name: String = "Ibuprofen", times: [Int] = [8 * 60, 20 * 60], weekdays: [Int] = Array(1...7),
-                    start: Date = monday, end: Date? = nil, stock: Int? = nil, unitsPerDose: Int = 1) -> Medication {
+                    start: Date = monday, end: Date? = nil, stock: Double? = nil, unitsPerDose: Double = 1) -> Medication {
         let medication = Medication(context: context)
         medication.name = name
         medication.profile = controller.ensureDefaultProfile()

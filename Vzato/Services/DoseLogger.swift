@@ -65,7 +65,7 @@ struct DoseLogger {
         guard let medication = event.medication, medication.tracksStock else { return }
         let was = event.status == .taken
         let will = newStatus == .taken
-        let units = max(1, medication.unitsPerDose)
+        let units = medication.effectiveUnitsPerDose
         if !was && will {
             medication.stockCount = max(0, medication.stockCount - units)
         } else if was && !will {

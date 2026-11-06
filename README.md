@@ -2,7 +2,7 @@
 
 Free, open source medication reminder for iPhone, iPad and Mac. One SwiftUI code
 base, no server, no accounts. Your data stays on your devices and, once sync
-ships, in your own iCloud. Czech, Slovak and English.
+ships, in your own iCloud. Czech, Slovak, English and Hungarian.
 
 **Vzato is not a medical device and does not replace your doctor or pharmacist.**
 It reminds you and keeps your own notes, nothing more. It never suggests doses
@@ -31,7 +31,8 @@ with the app closed. No push server.
 (mark as taken late, skip, reset), monthly adherence, CSV export.
 
 **Supply.** Pill count per medication, automatic decrement on each confirmed
-dose, warning and notification when running low, projected run-out date.
+dose, warning and notification when running low, projected run-out date. Doses
+can be half or quarter tablets; counts are shown as 10½.
 
 **Supply check.** Count what you have at home and compare it with what the app
 recorded. Catches doses you took without confirming, or confirmed without
@@ -40,8 +41,8 @@ taking, and can backfill the records.
 **Extra doses.** Log a painkiller or anything outside the plan; it shows in the
 history and lowers the supply.
 
-**Languages.** Czech, Slovak and English, following the language you choose for
-the app in system settings.
+**Languages.** Czech, Slovak, English and Hungarian, following the language you
+choose for the app in system settings.
 
 Planned, in the order people ask for it: photos of the package, pill and
 leaflet, iCloud sync, widgets, Apple Health, profiles for children and pets,
@@ -116,7 +117,7 @@ Vzato/App         app entry, root tabs, Core Data stack, settings keys
 Vzato/Models      Core Data model and NSManagedObject subclasses
 Vzato/Services    scheduling, dose logging, supply, supply check, notifications, CSV
 Vzato/Views       SwiftUI screens, shared by iPhone, iPad and Mac
-Vzato/Resources   String Catalog (en, cs, sk), assets, privacy manifest
+Vzato/Resources   String Catalog (en, cs, sk, hu), assets, privacy manifest
 VzatoTests        Swift Testing unit tests
 Config            signing (local, gitignored), entitlements, export options
 Design/icon       app icon drafts (SVG)
