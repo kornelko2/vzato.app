@@ -72,6 +72,10 @@ struct SettingsView: View {
                     .onChange(of: repeatCount) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: runOutWarningDays) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: snoozeMinutes) { Task { await notifications.rescheduleAll() } }
+                    .onChange(of: missedAfterMinutes) {
+                        AppSettings.shareWithWidgets()
+                        WidgetBridge.shared.reloadNow()
+                    }
                 } header: {
                     Text("Reminders")
                 } footer: {
@@ -80,6 +84,18 @@ struct SettingsView: View {
                     } else {
                         Text("Scheduled reminders: \(notifications.scheduledCount)")
                     }
+                }
+
+                Section {
+                    NavigationLink {
+                        ActivityLogView()
+                    } label: {
+                        Label("Activity log", systemImage: "list.bullet.rectangle")
+                    }
+                } header: {
+                    Text("Activity")
+                } footer: {
+                    Text("Who recorded what and when, on which device.")
                 }
 
                 Section {

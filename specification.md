@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…).
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3).
 
 ---
 
@@ -126,14 +126,16 @@ Uživatel si občas není jistý, zda lék vzal a jen zapomněl potvrdit, nebo p
 ### 3.9 Widgety
 
 - **iPhone a iPad:** widget „Dnes“ (seznam dávek, tlačítko potvrdit), widget na zamykací obrazovce s nejbližší dávkou.
-- **Mac:** widget „Dnes“ v Centru oznámení.
+- **Mac:** widget „Dnes“ v Centru oznámení a na ploše.
+- Tlačítko „Vzato“ ve widgetu potvrdí dávku bez otevření aplikace; widget sám nesynchronizuje, zápis přenese aplikace.
 - Stav widgetu se synchronizuje přes sdílená data (App Group).
 
 ### 3.10 Synchronizace
 
 - Automaticky přes iCloud (CloudKit) při přihlášení uživatele k Apple ID.
 - Bez přihlášení funguje aplikace lokálně.
-- Konflikty: poslední změna vyhrává na úrovni jednotlivého záznamu. Potvrzení dávky má přednost před „vynecháno“.
+- Konflikty: dvě zařízení mohou stejnou dávku zaznamenat dřív, než se synchronizují. Po synchronizaci se záznamy sloučí podle pevného pravidla, stejného na všech zařízeních: **vzato má vždy přednost** před přeskočeno, pak nejdřívější čas užití, pak nejdřívější zápis, pak identifikátor záznamu. Ještě před sloučením obrazovka i widget ukazují jen vítězný záznam. Zásoba se při sloučení nemění. Každé sloučení se zapíše do záznamu činností. U ostatních polí platí poslední změna.
+- **Záznam činností:** každá akce s dávkou (vzato, přeskočeno, vráceno, dávka navíc), spočítání zásoby, kontrola zásoby a každé automatické sloučení se trvale zapíše: kdy, co, který lék, která dávka, na kterém zařízení a odkud (aplikace, notifikace, widget, kontrola zásoby). Záznamy se nemění, synchronizují se a přežijí smazání léku. Zobrazení a export CSV v Nastavení › Záznam činností.
 - Stav synchronizace viditelný v nastavení (naposledy synchronizováno, chyby).
 
 ### 3.11 Nastavení

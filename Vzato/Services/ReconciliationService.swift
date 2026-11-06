@@ -78,6 +78,7 @@ enum ReconciliationService {
     /// (source: reconciliation) to match the count. Never removes records.
     static func apply(_ report: ReconciliationReport, actualStock: Double, recordMissingDoses: Bool, context: NSManagedObjectContext, now: Date = Date(), calendar: Calendar = .current, notifier: any DoseNotifying) {
         let medication = report.medication
+        var backfilled = 0
         if recordMissingDoses, case .unrecordedDoses(let count) = ReconciliationReport(
             medication: medication, since: report.since, scheduledDoses: report.scheduledDoses,
             recordedTaken: report.recordedTaken, recordedSkipped: report.recordedSkipped,
@@ -90,9 +91,16 @@ enum ReconciliationService {
             let logger = DoseLogger(context: context, now: now, notifier: notifier)
             for slot in open {
                 logger.markTaken(slot, at: slot.scheduledAt, source: .reconciliation)
+                backfilled += 1
             }
         }
-        StockService.setStock(medication, count: actualStock, at: now)
+        let counted = DoseFormatter.amount(actualStock, unit: medication.unitKind)
+        let expected = DoseFormatter.amount(report.expectedStock, unit: medication.unitKind)
+        var detail = String(localized: "Counted \(counted), records expected \(expected).")
+        if backfilled > 0 { detail += " " + String(localized: "Recorded \(backfilled) missing doses as taken.") }
+        ActivityLogger.log(.supplyCheck, medication: medication, scheduledAt: nil, detail: detail,
+                           source: .reconciliation, in: context, at: now)
+        StockService.setStock(medication, count: actualStock, at: now, log: false)
         if context.hasChanges { try? context.save() }
     }
 }

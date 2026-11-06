@@ -191,7 +191,7 @@ Hotovo, když: stejný build běží na iPhone, iPadu (obě orientace) a Macu be
 
 ### Fáze 6 – Synchronizace (CloudKit)
 
-**Stav 6. 11. 2026: zapnuto pro tým vlastníka.** Podepsaný build pro zařízení s `-allowProvisioningUpdates` zaregistroval App ID s iCloud a profil „iOS Team Provisioning Profile: app.vzato“. Před prvním TestFlightem nasadit schéma do produkce v CloudKit Console (TestFlight používá produkční prostředí). Původní poznámka: Sync je volba při sestavení: `Config/Local.xcconfig` s `VZATO_CLOUDKIT = YES` a `VZATO_ENTITLEMENTS_VARIANT = CloudKit` zapne entitlements iCloud (`iCloud.app.vzato`) a `cloudKitContainerOptions`; výchozí build je jen lokální. `SyncMonitor` sleduje události kontejneru (poslední úspěch, chyba) pro Nastavení a po vzdálených změnách přeplánuje notifikace. Ladicí argument `--init-cloudkit-schema` nahraje schéma do vývojového prostředí CloudKitu. Kontejner musí jednou vytvořit vlastník účtu v Xcode (Signing & Capabilities › iCloud › CloudKit). Pravidlo „vzato má přednost před vynecháno“ zatím neřešeno; platí poslední zápis.
+**Stav 6. 11. 2026: zapnuto pro tým vlastníka.** Podepsaný build pro zařízení s `-allowProvisioningUpdates` zaregistroval App ID s iCloud a profil „iOS Team Provisioning Profile: app.vzato“. Před prvním TestFlightem nasadit schéma do produkce v CloudKit Console (TestFlight používá produkční prostředí). Původní poznámka: Sync je volba při sestavení: `Config/Local.xcconfig` s `VZATO_CLOUDKIT = YES` a `VZATO_ENTITLEMENTS_VARIANT = CloudKit` zapne entitlements iCloud (`iCloud.app.vzato`) a `cloudKitContainerOptions`; výchozí build je jen lokální. `SyncMonitor` sleduje události kontejneru (poslední úspěch, chyba) pro Nastavení a po vzdálených změnách přeplánuje notifikace. Ladicí argument `--init-cloudkit-schema` nahraje schéma do vývojového prostředí CloudKitu. Kontejner musí jednou vytvořit vlastník účtu v Xcode (Signing & Capabilities › iCloud › CloudKit). Pravidlo „vzato má přednost“ je od 7. 11. 2026 implementované (`DoseEvent.preferred`, `DuplicateResolver`, spouští se po každém sloučení cizích změn a při startu) a každá akce se zapisuje do `ActivityEntry` (model verze 3). End-to-end test na dvou zařízeních stále chybí.
 
 Úkoly:
 1. Entitlements iCloud + CloudKit container, `ModelConfiguration(cloudKitDatabase: .private(...))`.
@@ -204,6 +204,8 @@ Hotovo, když: stejný build běží na iPhone, iPadu (obě orientace) a Macu be
 Hotovo, když: dvě zařízení se stejným Apple ID, potvrzení na jednom se do minuty objeví na druhém a notifikace tam zmizí.
 
 ### Fáze 7 – Widgety
+
+**Stav 6. 11. 2026: hotovo v kódu, vzhled zatím neověřen na zařízení.** Cíl `VzatoWidgets` (iOS + macOS) překládá sdílené modely a služby. Databáze se přesunula do App Group `group.app.vzato` (jednorázová migrace z původního umístění, ověřena v simulátoru). Widget „Dnes“ (malý, střední) s tlačítkem „Vzato“ přes `MarkDoseTakenIntent`, widget zamčené obrazovky (obdélník, řádek, kruh). Časová osa má záznam pro každý okamžik změny stavu (čas dávky, konec lhůty), obnova o půlnoci. Aplikace slučuje zápisy widgetu přes persistent history (autor `widget`) a po každém uložení obnoví widgety (`WidgetBridge`). Widget sám nesynchronizuje; změny exportuje do CloudKitu aplikace. Lhůtu pro zmeškáno čte widget z App Group defaults.
 
 Úkoly: target `VzatoWidgets`, App Group, sdílený kontejner úložiště, `AppIntent` „Vzal jsem“, widget Dnes (malý/střední), widget zamykací obrazovky, Mac widget. Timeline se přegenerovává po změně, ne periodicky.
 

@@ -1,6 +1,50 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%@ %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %@"
+          }
+        }
+      }
+    },
+    "%@ at %@ on %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ v %@ na zařízení %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %@-kor ezen: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ o %@ na zariadení %@"
+          }
+        }
+      }
+    },
     "%@ capsule": {
       "localizations": {
         "cs": {
@@ -151,6 +195,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ ml"
+          }
+        }
+      }
+    },
+    "%@ on %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ na zařízení %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ezen: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ na zariadení %@"
           }
         }
       }
@@ -371,6 +437,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ lyžičky"
+          }
+        }
+      }
+    },
+    "%@, was %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, předtím %@."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, korábban %@."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, predtým %@."
           }
         }
       }
@@ -1463,6 +1551,50 @@
         }
       }
     },
+    "Activity": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Činnost"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tevékenység"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Činnosť"
+          }
+        }
+      }
+    },
+    "Activity log": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Záznam činností"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tevékenységnapló"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Záznam činností"
+          }
+        }
+      }
+    },
     "Add a medication in the Medications tab to get reminders.": {
       "localizations": {
         "cs": {
@@ -1727,6 +1859,28 @@
         }
       }
     },
+    "App": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikace"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alkalmazás"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikácia"
+          }
+        }
+      }
+    },
     "Appearance": {
       "localizations": {
         "cs": {
@@ -1859,6 +2013,28 @@
         }
       }
     },
+    "Caregiver": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pečovatel"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gondozó"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opatrovateľ"
+          }
+        }
+      }
+    },
     "Change it in System Settings › General › Language & Region › Applications.": {
       "localizations": {
         "cs": {
@@ -1987,6 +2163,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spočítajte, čo máte"
+          }
+        }
+      }
+    },
+    "Counted %@, records expected %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítáno %@, podle záznamů mělo být %@."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megszámolva %@, a bejegyzések szerint %@ kellett volna."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítané %@, podľa záznamov malo byť %@."
           }
         }
       }
@@ -2189,6 +2387,28 @@
         }
       }
     },
+    "Dose %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adag: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka %@"
+          }
+        }
+      }
+    },
     "Dose and supply": {
       "localizations": {
         "cs": {
@@ -2295,6 +2515,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kvapky"
+          }
+        }
+      }
+    },
+    "Duplicate merged": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicita sloučena"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ismétlődés összevonva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicita zlúčená"
           }
         }
       }
@@ -2453,6 +2695,28 @@
         }
       }
     },
+    "Every taken, skipped or corrected dose is recorded here with the device it came from. Entries are never changed.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každá vzatá, přeskočená nebo opravená dávka se tu zaznamená i se zařízením, ze kterého přišla. Záznamy se nikdy nemění."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden bevett, kihagyott vagy javított adag itt rögzül azzal az eszközzel együtt, amelyről érkezett. A bejegyzések soha nem változnak."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každá vzatá, preskočená alebo opravená dávka sa tu zaznamená aj so zariadením, z ktorého prišla. Záznamy sa nikdy nemenia."
+          }
+        }
+      }
+    },
     "Export CSV": {
       "localizations": {
         "cs": {
@@ -2471,6 +2735,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exportovať CSV"
+          }
+        }
+      }
+    },
+    "Export log": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovat záznam"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napló exportálása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovať záznam"
           }
         }
       }
@@ -2541,6 +2827,28 @@
         }
       }
     },
+    "Health": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdraví"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egészség"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdravie"
+          }
+        }
+      }
+    },
     "History": {
       "localizations": {
         "cs": {
@@ -2607,6 +2915,28 @@
         }
       }
     },
+    "Kept %@, removed %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ponecháno: %@, odstraněno: %@."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megtartva: %@, eltávolítva: %@."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ponechané: %@, odstránené: %@."
+          }
+        }
+      }
+    },
     "Language": {
       "localizations": {
         "cs": {
@@ -2669,6 +2999,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Naposledy synchronizované"
+          }
+        }
+      }
+    },
+    "Later": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Později"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Később"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neskôr"
           }
         }
       }
@@ -2801,6 +3153,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Označiť ako zmeškané po"
+          }
+        }
+      }
+    },
+    "Mark dose as taken": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Označit dávku jako vzatou"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adag megjelölése bevettként"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Označiť dávku ako vzatú"
           }
         }
       }
@@ -3025,6 +3399,28 @@
         }
       }
     },
+    "Next dose": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příští dávka"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Következő adag"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbližšia dávka"
+          }
+        }
+      }
+    },
     "Next month": {
       "localizations": {
         "cs": {
@@ -3043,6 +3439,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ďalší mesiac"
+          }
+        }
+      }
+    },
+    "No activity yet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatím žádná činnost"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Még nincs tevékenység"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatiaľ žiadna činnosť"
           }
         }
       }
@@ -3219,6 +3637,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Poznámka"
+          }
+        }
+      }
+    },
+    "Notification": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oznámení"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Értesítés"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornenie"
           }
         }
       }
@@ -3619,6 +4059,28 @@
         }
       }
     },
+    "Previously %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Předtím: %@."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korábban: %@."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predtým: %@."
+          }
+        }
+      }
+    },
     "Puffs": {
       "localizations": {
         "cs": {
@@ -3685,6 +4147,28 @@
         }
       }
     },
+    "Recorded %lld missing doses as taken.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doplněno %lld chybějících dávek jako vzatých."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld hiányzó adag rögzítve bevettként."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doplnených %lld chýbajúcich dávok ako vzatých."
+          }
+        }
+      }
+    },
     "Recorded as taken": {
       "localizations": {
         "cs": {
@@ -3703,6 +4187,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zaznamenané ako vzaté"
+          }
+        }
+      }
+    },
+    "Recorded later, taken at %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenáno později, vzato %@."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Később rögzítve, bevéve: %@."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenané neskôr, vzaté %@."
           }
         }
       }
@@ -4367,6 +4873,28 @@
         }
       }
     },
+    "Supply counted": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba spočítána"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készlet megszámolva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba spočítaná"
+          }
+        }
+      }
+    },
     "Supply of %@ is running out": {
       "localizations": {
         "cs": {
@@ -4627,6 +5155,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lyžičky"
+          }
+        }
+      }
+    },
+    "The next dose on the Lock Screen.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příští dávka na zamčené obrazovce."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A következő adag a zárolási képernyőn."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbližšia dávka na zamknutej obrazovke."
           }
         }
       }
@@ -5027,6 +5577,28 @@
         }
       }
     },
+    "Who recorded what and when, on which device.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kdo co zaznamenal, kdy a na kterém zařízení."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ki mit, mikor és melyik eszközön rögzített."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kto čo zaznamenal, kedy a na ktorom zariadení."
+          }
+        }
+      }
+    },
     "Whole day": {
       "localizations": {
         "cs": {
@@ -5045,6 +5617,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Celý deň"
+          }
+        }
+      }
+    },
+    "Widget": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget"
           }
         }
       }
@@ -5199,6 +5793,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vaše úložisko iCloud je plné. Uvoľnite miesto alebo navýšte plán iCloud; synchronizácia potom pokračuje sama."
+          }
+        }
+      }
+    },
+    "Your next dose with a Taken button.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příští dávka s tlačítkem Vzato."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A következő adag a Bevéve gombbal."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbližšia dávka s tlačidlom Vzaté."
+          }
+        }
+      }
+    },
+    "another device": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jiné zařízení"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "másik eszköz"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iné zariadenie"
           }
         }
       }

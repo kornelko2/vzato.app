@@ -49,7 +49,7 @@ struct DoseRow: View {
                 }
             }
             Spacer(minLength: 8)
-            if !compact, status == .pending || status == .missed {
+            if slot.isCurrent(now: now, grace: grace) || (!compact && (status == .pending || status == .missed)) {
                 Button(action: onTaken) {
                     Text("Taken").frame(minHeight: 36)
                 }

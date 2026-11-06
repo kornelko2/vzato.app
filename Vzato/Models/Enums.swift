@@ -10,6 +10,17 @@ enum DoseStatus: String, CaseIterable, Sendable {
 
 enum DoseSource: String, Sendable {
     case app, notification, widget, health, reconciliation, caregiver
+
+    var label: LocalizedStringResource {
+        switch self {
+        case .app: "App"
+        case .notification: "Notification"
+        case .widget: "Widget"
+        case .health: "Health"
+        case .reconciliation: "Supply check"
+        case .caregiver: "Caregiver"
+        }
+    }
 }
 
 enum MealRelation: String, CaseIterable, Identifiable, Sendable {
@@ -40,6 +51,16 @@ extension DoseStatus {
         }
     }
 
+    /// Merge priority across devices: a taken dose must never be hidden by a skip.
+    var mergeRank: Int {
+        switch self {
+        case .taken: 3
+        case .skipped: 2
+        case .missed: 1
+        case .pending: 0
+        }
+    }
+
     var symbolName: String {
         switch self {
         case .pending: "clock"
@@ -55,3 +76,4 @@ extension Profile: Identifiable {}
 extension Medication: Identifiable {}
 extension Schedule: Identifiable {}
 extension DoseEvent: Identifiable {}
+extension ActivityEntry: Identifiable {}

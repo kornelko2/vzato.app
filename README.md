@@ -38,14 +38,17 @@ can be half or quarter tablets; counts are shown as 10½.
 recorded. Catches doses you took without confirming, or confirmed without
 taking, and can backfill the records.
 
+**Widgets.** *Today* on the home screen, in Notification Centre or on the Mac
+desktop: the next dose, its amount and a *Vzato* button that confirms it without
+opening the app. *Next dose* on the Lock Screen.
+
 **Extra doses.** Log a painkiller or anything outside the plan; it shows in the
 history and lowers the supply.
 
 **Languages.** Czech, Slovak, English and Hungarian, following the language you
 choose for the app in system settings.
 
-Planned, in the order people ask for it: photos of the package, pill and
-leaflet, iCloud sync, widgets, Apple Health, profiles for children and pets,
+Planned, in the order people ask for it: Apple Health, profiles for children and pets,
 family sharing, hand-over of records by QR code or encrypted export, official
 leaflets from the Czech and Slovak medicines databases. The Czech design
 documents have the details: [specification.md](specification.md),
@@ -139,6 +142,7 @@ Vzato/App         app entry, root tabs, Core Data stack, settings keys
 Vzato/Models      Core Data model and NSManagedObject subclasses
 Vzato/Services    scheduling, dose logging, supply, supply check, notifications, CSV
 Vzato/Views       SwiftUI screens, shared by iPhone, iPad and Mac
+VzatoWidgets      widget extension (Today, Lock Screen) and the Taken intent
 Vzato/Resources   String Catalog (en, cs, sk, hu), assets, privacy manifest
 VzatoTests        Swift Testing unit tests
 Config            signing (local, gitignored), entitlements, export options

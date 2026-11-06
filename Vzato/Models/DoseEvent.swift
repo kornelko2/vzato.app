@@ -13,6 +13,8 @@ public final class DoseEvent: NSManagedObject {
     @NSManaged public var updatedAt: Date?
     @NSManaged public var sourceRaw: String
     @NSManaged public var isUnscheduled: Bool
+    /// Device that recorded the dose, e.g. "iPhone", "iPad", "MacBook".
+    @NSManaged public var deviceName: String?
     @NSManaged public var medication: Medication?
 
     public override func awakeFromInsert() {
@@ -33,5 +35,19 @@ public final class DoseEvent: NSManagedObject {
     var source: DoseSource {
         get { DoseSource(rawValue: sourceRaw) ?? .app }
         set { sourceRaw = newValue.rawValue }
+    }
+
+    /// When two devices recorded the same dose before syncing, this decides which record stays.
+    /// Must give the same answer on every device: taken beats skipped beats anything else, the
+    /// earliest intake wins, then the earliest write, then the record id.
+    static func preferred(_ events: [DoseEvent]) -> DoseEvent? {
+        events.min { a, b in
+            if a.status.mergeRank != b.status.mergeRank { return a.status.mergeRank > b.status.mergeRank }
+            let aTaken = a.takenAt ?? .distantFuture, bTaken = b.takenAt ?? .distantFuture
+            if aTaken != bTaken { return aTaken < bTaken }
+            let aUpdated = a.updatedAt ?? .distantFuture, bUpdated = b.updatedAt ?? .distantFuture
+            if aUpdated != bUpdated { return aUpdated < bUpdated }
+            return (a.id?.uuidString ?? "") < (b.id?.uuidString ?? "")
+        }
     }
 }

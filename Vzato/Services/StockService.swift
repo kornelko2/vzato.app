@@ -19,7 +19,13 @@ extension DoseNotifying {
 @MainActor
 enum StockService {
     /// The user counted (or bought) pills: this becomes the new baseline for the supply check.
-    static func setStock(_ medication: Medication, count: Double, at date: Date = Date()) {
+    static func setStock(_ medication: Medication, count: Double, at date: Date = Date(), log: Bool = true) {
+        if log, let context = medication.managedObjectContext {
+            let detail = medication.tracksStock
+                ? String(localized: "\(DoseFormatter.amount(max(0, count), unit: medication.unitKind)), was \(medication.stockAmountText).")
+                : DoseFormatter.amount(max(0, count), unit: medication.unitKind)
+            ActivityLogger.log(.stockCounted, medication: medication, scheduledAt: nil, detail: detail, in: context, at: date)
+        }
         medication.tracksStock = true
         medication.stockCount = max(0, count)
         medication.stockAtLastCount = medication.stockCount

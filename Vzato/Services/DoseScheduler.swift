@@ -18,11 +18,16 @@ struct DoseSlot: Identifiable {
 
     func status(now: Date, grace: TimeInterval) -> DoseStatus {
         if let event { return event.status }
-        return scheduledAt.addingTimeInterval(grace) < now ? .missed : .pending
+        return scheduledAt.addingTimeInterval(grace) <= now ? .missed : .pending
     }
 
     func isOverdue(now: Date, grace: TimeInterval) -> Bool {
         status(now: now, grace: grace) == .pending && scheduledAt <= now
+    }
+
+    /// Due now, overdue, or missed without a record: every place that shows the dose offers "Taken".
+    func isCurrent(now: Date, grace: TimeInterval) -> Bool {
+        event == nil && scheduledAt <= now
     }
 }
 
@@ -59,11 +64,14 @@ enum DoseScheduler {
                     for time in times(for: schedule, on: startOfDay, calendar: calendar) {
                         let key = Int(time.timeIntervalSince1970 / 60)
                         guard seenTimes.insert(key).inserted else { continue }
-                        let match = dayEvents.first { event in
+                        // Two devices may have recorded this dose before syncing: show the preferred
+                        // record and swallow the rest (DuplicateResolver deletes them later).
+                        let matches = dayEvents.filter { event in
                             guard !event.isUnscheduled, !used.contains(ObjectIdentifier(event)), let at = event.scheduledAt else { return false }
                             return calendar.isDate(at, equalTo: time, toGranularity: .minute)
                         }
-                        if let match { used.insert(ObjectIdentifier(match)) }
+                        let match = DoseEvent.preferred(matches)
+                        used.formUnion(matches.map(ObjectIdentifier.init))
                         result.append(DoseSlot(medication: medication, scheduledAt: time, event: match))
                     }
                 }

@@ -45,6 +45,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>VzatoAppGroup</key>
+	<string>$(VZATO_APP_GROUP)</string>
 	<key>VzatoCloudKit</key>
 	<string>$(VZATO_CLOUDKIT)</string>
 </dict>

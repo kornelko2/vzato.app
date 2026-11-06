@@ -31,6 +31,18 @@ All notable changes to Vzato are listed here. The format follows
   and iPad change the home-screen icon, the Mac changes its Dock icon.
 - Settings: appearance, snooze length, missed-after grace period, low-supply
   alerts, notification permission.
+- Widgets: *Today* on the home screen (iPhone, iPad) and in Notification Centre
+  or on the desktop (Mac) with the next dose and a *Vzato* button; *Next dose*
+  on the Lock Screen. The database moved into the App Group container so the
+  widget can read it; existing data is moved once on first launch.
+- Duplicate doses recorded on two devices before they synced are merged by one
+  rule that every device applies the same way: *taken* always wins, then the
+  earliest intake. The screen shows only the winning record even before the merge.
+- Activity log (Settings › Activity log, CSV export): every taken, skipped,
+  reset or extra dose, every supply count and supply check, and every automatic
+  merge, with time, device and source. Entries are never edited and sync.
+- The widget no longer migrates the database itself; after an update only the
+  app upgrades it, which avoids a crash when both open the old file at once.
 - Debug launch argument `--sample-data`.
 - Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),
   cancelled when the dose is confirmed or skipped.

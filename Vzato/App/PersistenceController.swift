@@ -6,6 +6,8 @@ import CoreData
 
 /// Owns the Core Data stack. iCloud sync is a build-time opt-in (`VzatoCloudKit` in Info.plist,
 /// set from `VZATO_CLOUDKIT` in Config/Local.xcconfig); without it the store is local only.
+/// The store lives in the App Group container so the widget extension opens the same file;
+/// the widget never syncs, the app exports its changes to CloudKit through persistent history.
 @MainActor
 final class PersistenceController {
     static let shared = PersistenceController()
@@ -35,7 +37,19 @@ final class PersistenceController {
 
     let container: NSPersistentCloudKitContainer
     let isCloudKitEnabled: Bool
+    /// False only in the widget when the store could not be opened (for example while the app is
+    /// still migrating it after an update). The widget then shows its empty state.
+    private(set) var isStoreLoaded = true
     var viewContext: NSManagedObjectContext { container.viewContext }
+
+    /// `Vzato.sqlite` in the App Group container, or nil when the entitlement is missing.
+    nonisolated static var sharedStoreURL: URL? {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppSettings.appGroupIdentifier)?
+            .appendingPathComponent("Vzato.sqlite")
+    }
+
+    private var historyObserver: (any NSObjectProtocol)?
+    private static let historyTokenKey = "persistentHistoryToken"
 
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "Vzato", managedObjectModel: Self.model)
@@ -44,8 +58,12 @@ final class PersistenceController {
         }
         if inMemory {
             description.url = URL(fileURLWithPath: "/dev/null")
+        } else if let shared = Self.sharedStoreURL,
+                  Self.moveLegacyStore(to: shared, coordinator: container.persistentStoreCoordinator) {
+            description.url = shared
         }
-        isCloudKitEnabled = !inMemory && Self.isCloudKitBuild
+        // The widget reads and writes the same file but never talks to CloudKit itself.
+        isCloudKitEnabled = !inMemory && Self.isCloudKitBuild && !AppSettings.isAppExtension
         if isCloudKitEnabled {
             description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: Self.cloudKitContainerIdentifier)
         } else {
@@ -54,13 +72,24 @@ final class PersistenceController {
         // History tracking and remote change notifications are what CloudKit sync builds on; harmless locally.
         description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
         description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-        description.shouldMigrateStoreAutomatically = true
-        description.shouldInferMappingModelAutomatically = true
+        // Only the app migrates the store to a new model version. If the widget migrated too, both
+        // processes could upgrade the same file at once after an update and one of them would fail.
+        let migrates = !AppSettings.isAppExtension
+        description.shouldMigrateStoreAutomatically = migrates
+        description.shouldInferMappingModelAutomatically = migrates
 
-        container.loadPersistentStores { _, error in
-            if let error {
-                fatalError("Could not load the data store: \(error)")
-            }
+        var loadError: (any Error)?
+        container.loadPersistentStores { _, error in loadError = error }
+        if loadError != nil, !inMemory, !AppSettings.isAppExtension {
+            // The widget may have held the file at the same moment; try once more.
+            Thread.sleep(forTimeInterval: 0.5)
+            loadError = nil
+            container.loadPersistentStores { _, error in loadError = error }
+        }
+        if let loadError {
+            guard AppSettings.isAppExtension else { fatalError("Could not load the data store: \(loadError)") }
+            print("Vzato widget: store not available yet: \(loadError)")
+            isStoreLoaded = false
         }
         #if DEBUG
         // `--init-cloudkit-schema` pushes the model to the CloudKit development environment once.
@@ -70,7 +99,69 @@ final class PersistenceController {
         #endif
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
-        ensureDefaultProfile()
+        container.viewContext.transactionAuthor = AppSettings.isAppExtension ? "widget" : "app"
+        if isStoreLoaded { ensureDefaultProfile() }
+    }
+
+    /// Builds before the widget kept the store in the app's own container. Copy it over once.
+    /// Returns false when the shared location cannot be used; the app then keeps the old store
+    /// (the widget shows nothing, but no data is lost and the app keeps working).
+    private static func moveLegacyStore(to shared: URL, coordinator: NSPersistentStoreCoordinator) -> Bool {
+        let legacy = NSPersistentCloudKitContainer.defaultDirectoryURL().appendingPathComponent("Vzato.sqlite")
+        let files = FileManager.default
+        guard legacy != shared, files.fileExists(atPath: legacy.path), !files.fileExists(atPath: shared.path) else { return true }
+        let options: [String: Any] = [NSPersistentHistoryTrackingKey: true as NSNumber]
+        do {
+            try coordinator.replacePersistentStore(at: shared, destinationOptions: options,
+                                                   withPersistentStoreFrom: legacy, sourceOptions: options, type: .sqlite)
+            try coordinator.destroyPersistentStore(at: legacy, type: .sqlite, options: options)
+            return true
+        } catch {
+            print("Vzato: moving the store to the App Group failed, keeping the old location: \(error)")
+            return false
+        }
+    }
+
+    // MARK: Changes from other processes (widget)
+
+    /// The app merges what the widget wrote. Core Data posts a remote-change notification for writes
+    /// from other processes; persistent history says what changed.
+    func startMergingExternalChanges() {
+        guard historyObserver == nil else { return }
+        if loadHistoryToken() == nil {
+            saveHistoryToken(container.persistentStoreCoordinator.currentPersistentHistoryToken(fromStores: nil))
+        }
+        historyObserver = NotificationCenter.default.addObserver(forName: .NSPersistentStoreRemoteChange,
+                                                                 object: container.persistentStoreCoordinator,
+                                                                 queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { self?.mergeExternalChanges() }
+        }
+    }
+
+    func mergeExternalChanges() {
+        let request = NSPersistentHistoryChangeRequest.fetchHistory(after: loadHistoryToken())
+        guard let result = try? viewContext.execute(request) as? NSPersistentHistoryResult,
+              let transactions = result.result as? [NSPersistentHistoryTransaction],
+              !transactions.isEmpty else { return }
+        let ownAuthor = viewContext.transactionAuthor
+        var foreign = 0
+        for transaction in transactions where transaction.author != ownAuthor {
+            viewContext.mergeChanges(fromContextDidSave: transaction.objectIDNotification())
+            foreign += 1
+        }
+        saveHistoryToken(transactions.last?.token)
+        // Changes from another device or the widget may duplicate a dose recorded here.
+        if foreign > 0 { DuplicateResolver.resolve(in: viewContext) }
+    }
+
+    private func loadHistoryToken() -> NSPersistentHistoryToken? {
+        guard let data = UserDefaults.standard.data(forKey: Self.historyTokenKey) else { return nil }
+        return try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSPersistentHistoryToken.self, from: data)
+    }
+
+    private func saveHistoryToken(_ token: NSPersistentHistoryToken?) {
+        guard let token, let data = try? NSKeyedArchiver.archivedData(withRootObject: token, requiringSecureCoding: true) else { return }
+        UserDefaults.standard.set(data, forKey: Self.historyTokenKey)
     }
 
     /// Phase 1 shows a single profile; the entity exists so profiles can be added later without migration.

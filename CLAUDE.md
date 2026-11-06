@@ -58,6 +58,15 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 
 ## Layout
 
+- **Shared sources.** The `VzatoWidgets` extension compiles `Vzato/Models`, `Vzato/Services`,
+  `App/PersistenceController.swift`, `App/AppSettings.swift`, `Views/Shared/Theme.swift` and the
+  String Catalog. Never use `UIApplication`/`NSApplication` or app-only types there; app-only code
+  goes to `Vzato/App` (e.g. `AppearanceAndIcon.swift`, `WidgetBridge.swift`, `SyncMonitor.swift`).
+- **Store location.** `Vzato.sqlite` lives in the App Group `group.app.vzato`. The widget writes with
+  transaction author `widget`; the app merges those writes from persistent history
+  (`startMergingExternalChanges`) and only the app talks to CloudKit. Never purge persistent history:
+  CloudKit export depends on it.
+
 - `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 2`) and
   `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`. Arrays are stored as comma-separated
   strings (`weekdaysRaw`, `minutesRaw`); enums as raw strings with computed accessors.
@@ -90,6 +99,12 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 - A scheduled dose has no `DoseEvent` until the user acts. Status for an unrecorded
   slot is derived (pending → missed after the grace period). Never pre-create events.
 - Stock changes only in `DoseLogger` (dose taken/reset) and `StockService.setStock`.
+- Every user-visible action on a dose or the supply goes through `DoseLogger`, `StockService` or
+  `ReconciliationService`, which write an `ActivityEntry`. Never edit or delete log entries, and
+  never record a dose by creating `DoseEvent`s directly in app code.
+- Duplicate records of one scheduled dose are resolved by `DoseEvent.preferred` (taken wins, then
+  earliest intake, earliest write, id). The rule must stay deterministic: every device runs it.
+- Only the app migrates the store (`shouldMigrateStoreAutomatically` is off in the widget).
 - Services that touch managed objects are `@MainActor`; the notification delegate is
   `nonisolated` and hops to the main actor with plain values (UUID, Int, Date).
 - Strings: English literal in code (`Text("Taken")`, `String(localized:)`), `cs`, `sk` and

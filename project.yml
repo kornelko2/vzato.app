@@ -40,6 +40,7 @@ targets:
         ITSAppUsesNonExemptEncryption: false
         NSCameraUsageDescription: Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.
         VzatoCloudKit: $(VZATO_CLOUDKIT)
+        VzatoAppGroup: $(VZATO_APP_GROUP)
         UIBackgroundModes: [remote-notification]
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
@@ -58,6 +59,37 @@ targets:
         "CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]": Config/iOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
         "CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]": Config/iOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
         "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": Config/macOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
+    dependencies:
+      - target: VzatoWidgets
+
+  # Home screen, Lock Screen and Notification Centre widgets. Compiles the shared model and
+  # services directly; those files must stay free of UIApplication / NSApplication.
+  VzatoWidgets:
+    type: app-extension
+    supportedDestinations: [iOS, macOS]
+    sources:
+      - path: VzatoWidgets
+      - path: Vzato/Models
+      - path: Vzato/Services
+      - path: Vzato/App/PersistenceController.swift
+      - path: Vzato/App/AppSettings.swift
+      - path: Vzato/Views/Shared/Theme.swift
+      - path: Vzato/Resources/Localizable.xcstrings
+    info:
+      path: VzatoWidgets/Info.plist
+      properties:
+        CFBundleDisplayName: Vzato
+        VzatoAppGroup: $(VZATO_APP_GROUP)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.vzato.widgets
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SKIP_INSTALL: YES
+        "CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]": Config/Widgets-iOS.entitlements
+        "CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]": Config/Widgets-iOS.entitlements
+        "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": Config/Widgets-macOS.entitlements
 
   VzatoTests:
     type: bundle.unit-test

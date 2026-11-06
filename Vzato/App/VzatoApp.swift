@@ -24,6 +24,10 @@ struct VzatoApp: App {
         #endif
         NotificationService.shared.configure(context: persistence.viewContext)
         SyncMonitor.shared.start(controller: persistence)
+        persistence.startMergingExternalChanges()
+        DuplicateResolver.resolve(in: persistence.viewContext)
+        WidgetBridge.shared.start(context: persistence.viewContext)
+        AppSettings.shareWithWidgets()
         AppIcon.stored.apply()
         Appearance.stored.apply()
     }
@@ -34,8 +38,14 @@ struct VzatoApp: App {
                 .environment(state)
                 .environment(\.managedObjectContext, persistence.viewContext)
                 .onChange(of: scenePhase) { _, phase in
-                    if phase == .active {
+                    switch phase {
+                    case .active:
+                        persistence.mergeExternalChanges()
                         Task { await NotificationService.shared.rescheduleAll() }
+                    case .background:
+                        WidgetBridge.shared.reloadNow()
+                    default:
+                        break
                     }
                 }
         }

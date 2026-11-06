@@ -26,8 +26,11 @@ struct DoseLogger {
     }
 
     /// Removes the record so the slot is pending again (or missed, once the grace period passed).
-    func reset(_ slot: DoseSlot) {
+    func reset(_ slot: DoseSlot, source: DoseSource = .app) {
         guard let event = slot.event else { return }
+        ActivityLogger.log(.reset, medication: event.medication, scheduledAt: event.scheduledAt,
+                           detail: String(localized: "Previously \(String(localized: event.status.label)).", locale: .current),
+                           source: source, in: context, at: now)
         adjustStock(for: event, newStatus: .pending)
         let medication = event.medication
         context.delete(event)
@@ -42,16 +45,23 @@ struct DoseLogger {
         event.isUnscheduled = true
         event.scheduledAt = date
         event.medication = medication
-        set(event, status: .taken, takenAt: date, source: source)
+        set(event, status: .taken, takenAt: date, source: source, kind: .extraDose)
         return event
     }
 
-    private func set(_ event: DoseEvent, status: DoseStatus, takenAt: Date?, source: DoseSource) {
+    private func set(_ event: DoseEvent, status: DoseStatus, takenAt: Date?, source: DoseSource, kind: ActivityKind? = nil) {
         adjustStock(for: event, newStatus: status)
         event.status = status
         event.takenAt = status == .taken ? takenAt : nil
         event.updatedAt = now
         event.source = source
+        event.deviceName = DeviceInfo.name
+        let logKind = kind ?? (status == .taken ? .taken : .skipped)
+        let detail = status == .taken && takenAt.map({ abs($0.timeIntervalSince(now)) > 60 }) == true
+            ? String(localized: "Recorded later, taken at \(takenAt!.formatted(date: .abbreviated, time: .shortened)).")
+            : ""
+        ActivityLogger.log(logKind, medication: event.medication, scheduledAt: event.scheduledAt,
+                           detail: detail, source: source, in: context, at: now)
         save()
         if let medication = event.medication {
             StockService.checkLowStock(medication, now: now, notifier: notifier)

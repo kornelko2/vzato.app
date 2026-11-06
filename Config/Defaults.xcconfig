@@ -3,4 +3,10 @@
 VZATO_CLOUDKIT = NO
 VZATO_ENTITLEMENTS_VARIANT = Local
 
+// App Group shared by the app and the widget. iOS uses the registered "group." form; macOS only
+// allows that when the provisioning profile lists it, so the Mac uses the team-prefixed form,
+// which any sandboxed app signed by the team may use.
+VZATO_APP_GROUP = group.app.vzato
+VZATO_APP_GROUP[sdk=macosx*] = $(DEVELOPMENT_TEAM).app.vzato
+
 #include? "Local.xcconfig"
