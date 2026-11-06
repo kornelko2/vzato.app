@@ -73,13 +73,13 @@ struct MedicationRow: View {
             Spacer()
             if medication.isLowStock {
                 Label {
-                    Text(DoseFormatter.units(medication.stockCount))
+                    Text(medication.stockAmountText)
                 } icon: {
                     Image(systemName: "exclamationmark.triangle")
                 }
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(Palette.overdue)
-                .accessibilityLabel(Text("Running low, \(DoseFormatter.units(medication.stockCount)) left"))
+                .accessibilityLabel(Text("Running low, \(medication.stockAmountText) left"))
             }
         }
         .padding(.vertical, 4)

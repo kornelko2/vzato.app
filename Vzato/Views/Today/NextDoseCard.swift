@@ -56,6 +56,8 @@ struct NextDoseCard: View {
                         .font(.system(size: 32, weight: .heavy))
                         .lineLimit(2)
                         .minimumScaleFactor(0.7)
+                    Text(slot.medication.doseAmountText)
+                        .font(.title2.weight(.bold))
                     HStack(spacing: 6) {
                         if !slot.medication.dosageText.isEmpty {
                             Text(slot.medication.dosageText)

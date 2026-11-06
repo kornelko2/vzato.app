@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština.
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…).
 
 ---
 
@@ -48,7 +48,7 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 
 ### 3.1 Léky a plán
 
-- Přidání léku: název, dávka (volný text, např. „500 mg“), počet kusů na dávku (výchozí 1; lze i půlka nebo čtvrtka tablety, krok ¼), barva/ikona, poznámka.
+- Přidání léku: název, síla (volný text, např. „500 mg“), **jednotka** (tablety, kapsle, kapky, ml, lžičky, vdechy, sáčky, injekce, kusy) a **množství na dávku** (výchozí 1 tableta; u tablet a kapslí lze půlka nebo čtvrtka, krok ¼; kapky a ml po celých), barva/ikona, poznámka. Množství se zobrazuje slovy s správným skloňováním ve všech jazycích („2 tablety“, „20 kapek“, „½ tablety“) na kartě Dnes, v časové ose i v notifikaci, aby uživatel vždy viděl, kolik si má vzít.
 - Plán: dny v týdnu, časy (více za den), volitelně „s jídlem / před jídlem / po jídle / bez ohledu“.
 - Začátek a konec léčby (volitelně), pauza.
 - Jednorázová dávka mimo plán (např. lék na bolest), zaznamená se do historie a odečte ze zásoby.
@@ -160,7 +160,8 @@ Medication
   profile: Profile             // od fáze 1, i když UI zatím ukazuje jen „Já“
   name: String
   dosageText: String?          // "500 mg"
-  unitsPerDose: Double         // kusů na dávku, výchozí 1, krok ¼
+  unitKind: enum               // tablet / capsule / drop / milliliter / teaspoon / puff / sachet / injection / piece
+  unitsPerDose: Double         // množství na dávku v dané jednotce, výchozí 1, krok ¼ u tablet
   notes: String?
   colorHex: String?
   createdAt: Date

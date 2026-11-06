@@ -58,3 +58,13 @@ final class SpyNotifier: DoseNotifying {
         lowStockNames.append(medication.name)
     }
 }
+
+/// The app bundle's `.lproj` folder for one language, so localized output can be asserted
+/// regardless of the simulator's language.
+func lproj(_ code: String) -> Bundle {
+    let main = Bundle(for: Medication.self)
+    guard let path = main.path(forResource: code, ofType: "lproj"), let bundle = Bundle(path: path) else {
+        fatalError("No \(code).lproj in the app bundle")
+    }
+    return bundle
+}

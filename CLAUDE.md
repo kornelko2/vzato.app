@@ -91,8 +91,9 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   `nonisolated` and hops to the main actor with plain values (UUID, Int, Date).
 - Strings: English literal in code (`Text("Taken")`, `String(localized:)`), `cs`, `sk` and
   `hu` added to the String Catalog in the same change; use `%lld` / `%@` format keys,
-  no sentence fragments. Tablet counts are `Double` and go through `DoseFormatter.units`
-  (½, ¼), so they appear in keys as `%@`. Button copy is "Taken" → cs "Vzato", sk "Vzaté" (neutral form,
+  no sentence fragments. Amounts are `Double` and go through `DoseFormatter.amount(_:unit:)`
+  ("2 tablets", "20 drops", "½ tablet"); unit words live in `DoseUnit` with plural
+  variations in the catalog (`%lld tablets`), fractions as `%@ tablet` / `%@ tablets`. Button copy is "Taken" → cs "Vzato", sk "Vzaté" (neutral form,
   decided by the user; do not change to "Vzal jsem").
 - Dates: always `Calendar` arithmetic and `Text(date, style:)` / `FormatStyle`; never
   manual seconds math or hard-coded formats.

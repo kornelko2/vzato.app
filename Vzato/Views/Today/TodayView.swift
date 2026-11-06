@@ -158,7 +158,7 @@ struct LowStockBanner: View {
         VStack(alignment: .leading, spacing: 6) {
             ForEach(medications) { medication in
                 Label {
-                    Text("\(medication.name): \(DoseFormatter.units(medication.stockCount)) left")
+                    Text("\(medication.name): \(medication.stockAmountText) left")
                 } icon: {
                     Image(systemName: "exclamationmark.triangle")
                 }

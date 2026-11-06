@@ -10,6 +10,7 @@ public final class Medication: NSManagedObject {
     @NSManaged public var name: String
     @NSManaged public var dosageText: String
     @NSManaged public var unitsPerDose: Double
+    @NSManaged public var unitKindRaw: String
     @NSManaged public var notes: String
     @NSManaged public var colorHex: String
     @NSManaged public var createdAt: Date?
@@ -65,7 +66,18 @@ public final class Medication: NSManagedObject {
     /// Smallest dose the app works with: a quarter tablet.
     static let minimumDoseUnits = 0.25
 
+    var unitKind: DoseUnit {
+        get { DoseUnit(rawValue: unitKindRaw) ?? .tablet }
+        set { unitKindRaw = newValue.rawValue }
+    }
+
     var effectiveUnitsPerDose: Double { max(Self.minimumDoseUnits, unitsPerDose) }
+
+    /// "2 tablets", "20 drops", "½ tablet": what the user has to take at each dose.
+    var doseAmountText: String { DoseFormatter.amount(effectiveUnitsPerDose, unit: unitKind) }
+
+    /// Stock in the medication's own unit ("4 tablets").
+    var stockAmountText: String { DoseFormatter.amount(stockCount, unit: unitKind) }
     var isLowStock: Bool { tracksStock && stockCount <= lowStockThreshold + 0.0001 }
     var isOutOfStock: Bool { tracksStock && stockCount + 0.0001 < effectiveUnitsPerDose }
     var dosesInStock: Int { tracksStock ? Int((stockCount / effectiveUnitsPerDose + 0.0001).rounded(.down)) : 0 }

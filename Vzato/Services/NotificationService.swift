@@ -187,8 +187,8 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         let content = UNMutableNotificationContent()
         content.title = medication.name
         content.body = medication.dosageText.isEmpty
-            ? String(localized: "Time to take your dose.")
-            : String(localized: "Time to take \(medication.dosageText).")
+            ? String(localized: "Time to take \(medication.doseAmountText).")
+            : String(localized: "Time to take \(medication.doseAmountText) (\(medication.dosageText)).")
         content.sound = .default
         content.categoryIdentifier = Category.dose
         content.threadIdentifier = medication.id?.uuidString ?? "dose"
@@ -209,7 +209,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         content.title = String(localized: "Running low: \(medication.name)")
         content.body = medication.isOutOfStock
             ? String(localized: "You are out. Get more as soon as you can.")
-            : String(localized: "Only \(DoseFormatter.units(medication.stockCount)) left. Time to get more.")
+            : String(localized: "Only \(medication.stockAmountText) left. Time to get more.")
         content.sound = .default
         content.categoryIdentifier = Category.lowStock
         content.threadIdentifier = "lowstock"

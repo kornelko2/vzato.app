@@ -40,7 +40,9 @@ struct DoseRow: View {
                     }
                 }
                 HStack(spacing: 6) {
+                    Text(slot.medication.doseAmountText).font(.subheadline).foregroundStyle(.secondary)
                     if !slot.medication.dosageText.isEmpty {
+                        Text(verbatim: "·").foregroundStyle(.secondary)
                         Text(slot.medication.dosageText).font(.subheadline).foregroundStyle(.secondary)
                     }
                     statusLine

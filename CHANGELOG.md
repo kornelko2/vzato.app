@@ -21,6 +21,10 @@ All notable changes to Vzato are listed here. The format follows
   missing records.
 - Extra doses outside the plan.
 - Czech, Slovak, English and Hungarian.
+- Dose units per medication (tablets, capsules, drops, ml, teaspoons, puffs,
+  sachets, injections, pieces) with correct plurals in all languages; the amount
+  to take ("2 tablets", "20 drops", "½ tablet") is shown on the Today card, in
+  the timeline and in the reminder text.
 - Doses in half or quarter tablets; supply counts can be fractional and are
   shown as 10½.
 - Settings: appearance, snooze length, missed-after grace period, low-supply

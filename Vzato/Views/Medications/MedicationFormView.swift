@@ -25,6 +25,7 @@ struct MedicationFormView: View {
     @State private var tracksStock = false
     @State private var stockCount: Double = 30
     @State private var unitsPerDose: Double = 1
+    @State private var unitKind = DoseUnit.tablet
     @State private var lowStockThreshold: Double = 5
 
     private let calendar = Calendar.current
@@ -44,6 +45,7 @@ struct MedicationFormView: View {
         _tracksStock = State(initialValue: medication.tracksStock)
         _stockCount = State(initialValue: medication.stockCount)
         _unitsPerDose = State(initialValue: medication.effectiveUnitsPerDose)
+        _unitKind = State(initialValue: medication.unitKind)
         _lowStockThreshold = State(initialValue: medication.lowStockThreshold)
         if let schedule = medication.allSchedules.first {
             _weekdays = State(initialValue: Set(schedule.weekdays))
@@ -94,25 +96,34 @@ struct MedicationFormView: View {
                 }
 
                 Section {
-                    Stepper(value: $unitsPerDose, in: Medication.minimumDoseUnits...10, step: 0.25) {
-                        LabeledContent("Units per dose") { Text(DoseFormatter.units(unitsPerDose)) }
+                    Picker("Unit", selection: $unitKind) {
+                        ForEach(DoseUnit.allCases) { unit in
+                            Text(unit.label).tag(unit)
+                        }
+                    }
+                    .onChange(of: unitKind) { _, unit in
+                        if !unit.allowsFractions { unitsPerDose = max(1, unitsPerDose.rounded()) }
+                        unitsPerDose = min(unitsPerDose, unit.maximumPerDose)
+                    }
+                    Stepper(value: $unitsPerDose, in: (unitKind.allowsFractions ? Medication.minimumDoseUnits : 1)...unitKind.maximumPerDose, step: unitKind.step) {
+                        LabeledContent("Amount per dose") { Text(DoseFormatter.amount(unitsPerDose, unit: unitKind)) }
                     }
                     Toggle("Track supply", isOn: $tracksStock)
                     if tracksStock {
-                        LabeledContent("Units at home") {
-                            TextField("Units at home", value: $stockCount, format: .number.precision(.fractionLength(0...2)))
+                        LabeledContent("Amount at home") {
+                            TextField("Amount at home", value: $stockCount, format: .number.precision(.fractionLength(0...2)))
                                 .multilineTextAlignment(.trailing)
                                 .decimalKeyboard()
                                 .labelsHidden()
                         }
-                        Stepper(value: $lowStockThreshold, in: 0...100, step: 1) {
-                            LabeledContent("Warn when below") { Text(DoseFormatter.units(lowStockThreshold)) }
+                        Stepper(value: $lowStockThreshold, in: 0...500, step: unitKind.allowsFractions ? 1 : 5) {
+                            LabeledContent("Warn when below") { Text(DoseFormatter.amount(lowStockThreshold, unit: unitKind)) }
                         }
                     }
                 } header: {
                     Text("Dose and supply")
                 } footer: {
-                    Text("Units are tablets or other pieces; a half or a quarter tablet works too. Each confirmed dose lowers the count. You get a notification when it runs low.")
+                    Text("Pick the unit: tablets, drops, millilitres and more. Half or quarter tablets work too. Each confirmed dose lowers the amount at home and you get a notification when it runs low.")
                 }
             }
             .formStyle(.grouped)
@@ -212,6 +223,7 @@ struct MedicationFormView: View {
         schedule.startDate = calendar.startOfDay(for: startDate)
         schedule.endDate = hasEndDate ? calendar.startOfDay(for: endDate) : nil
 
+        target.unitKind = unitKind
         target.unitsPerDose = max(Medication.minimumDoseUnits, unitsPerDose)
         if tracksStock {
             target.lowStockThreshold = max(0, lowStockThreshold)

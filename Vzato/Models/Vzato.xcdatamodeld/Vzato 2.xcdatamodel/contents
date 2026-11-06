@@ -25,6 +25,7 @@
         <attribute name="stockCount" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="stockCountedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="tracksStock" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="unitKindRaw" optional="YES" attributeType="String" defaultValueString="tablet"/>
         <attribute name="unitsPerDose" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
         <relationship name="doseEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DoseEvent" inverseName="medication" inverseEntity="DoseEvent"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MedicationPhoto" inverseName="medication" inverseEntity="MedicationPhoto"/>
