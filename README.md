@@ -11,6 +11,13 @@ and never checks interactions.
 *Vzato* means "taken" in Czech. That is the whole idea: one tap to say you took
 it, and the certainty that you did not take it twice.
 
+<p align="center">
+  <img src="Docs/screenshots/today.png" width="200" alt="Today: one large card for the overdue dose with a big Taken button, the rest of the day as a timeline">
+  <img src="Docs/screenshots/history.png" width="200" alt="History: month calendar with a status dot per day and the selected day's doses">
+  <img src="Docs/screenshots/medication.png" width="200" alt="Medication detail: schedule, supply with run-out date and the supply check">
+  <img src="Docs/screenshots/settings.png" width="200" alt="Settings: language, appearance, reminders">
+</p>
+
 ## Features
 
 **Today.** One large card for the dose that needs attention: overdue, missed, or
