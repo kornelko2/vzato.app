@@ -27,11 +27,16 @@ All notable changes to Vzato are listed here. The format follows
 - Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),
   cancelled when the dose is confirmed or skipped.
 - Early warning a configurable number of days before the supply runs out.
-- Unit tests for the scheduler, dose logging, supply, supply check, summaries and CSV.
+- Photos of the package, the pill and the leaflet (several pages): camera and
+  document scanner on iPhone and iPad, photo library and file import everywhere,
+  zoomable viewer, pill thumbnail on the Today card. Photos are downscaled to
+  2000 px and stored with the medication.
+- Unit tests for the scheduler, dose logging, supply, supply check, summaries,
+  photo store and CSV.
 
 ### Notes
-- Storage is Core Data with `NSPersistentCloudKitContainer`; iCloud sync is not
-  enabled yet.
+- Storage is Core Data with `NSPersistentCloudKitContainer` (model version 2);
+  iCloud sync is not enabled yet.
 - The app icon is a placeholder; the final design is pending.
 
 ## [0.1.0] - unreleased

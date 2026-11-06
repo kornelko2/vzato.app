@@ -37,6 +37,7 @@ targets:
         CFBundleDisplayName: Vzato
         LSApplicationCategoryType: public.app-category.medical
         ITSAppUsesNonExemptEncryption: false
+        NSCameraUsageDescription: Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait

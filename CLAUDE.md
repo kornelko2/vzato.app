@@ -58,15 +58,16 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 
 ## Layout
 
-- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off) and `NSManagedObject` subclasses
-  `Profile`, `Medication`, `Schedule`, `DoseEvent`. Arrays are stored as comma-separated
+- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 2`) and
+  `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`. Arrays are stored as comma-separated
   strings (`weekdaysRaw`, `minutesRaw`); enums as raw strings with computed accessors.
 - `Vzato/Services` – logic without SwiftUI: `DoseScheduler` (expected doses per day,
   merged with recorded events), `DoseLogger` (the only place stock changes because of a
   dose), `StockService`, `ReconciliationService` (supply check), `NotificationService`,
-  `CSVExport`.
+  `CSVExport`, `DoseSummary`, `PhotoStore` (ImageIO only, no UIKit/AppKit).
 - `Vzato/Views` – SwiftUI, shared by all platforms; platform differences only in small
-  `#if os(iOS)` blocks. `Today/` implements design direction C (one big card).
+  `#if os(iOS)` blocks. `Today/` implements design direction C (one big card). `Photos/` holds the photo section,
+  viewer and the iOS-only camera/scanner wrappers (`#if os(iOS)`).
 - `VzatoTests` – Swift Testing, in-memory store, fixed Europe/Prague calendar, dates
   start on Monday 2 Nov 2026. Use `TestStore` and `SpyNotifier` from `TestSupport.swift`.
 - `Design/icon` – icon drafts as SVG (final icon pending; the asset catalog holds a

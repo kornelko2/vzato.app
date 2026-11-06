@@ -24,6 +24,7 @@ public final class Medication: NSManagedObject {
     @NSManaged public var profile: Profile?
     @NSManaged public var schedules: NSSet?
     @NSManaged public var doseEvents: NSSet?
+    @NSManaged public var photos: NSSet?
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -46,6 +47,19 @@ public final class Medication: NSManagedObject {
 
     var eventList: [DoseEvent] {
         Array((doseEvents as? Set<DoseEvent>) ?? [])
+    }
+
+    /// Photos sorted by kind, page and creation time.
+    var photoList: [MedicationPhoto] {
+        ((photos as? Set<MedicationPhoto>) ?? []).sorted { a, b in
+            if a.kindRaw != b.kindRaw { return a.kindRaw < b.kindRaw }
+            if a.pageIndex != b.pageIndex { return a.pageIndex < b.pageIndex }
+            return (a.createdAt ?? .distantPast) < (b.createdAt ?? .distantPast)
+        }
+    }
+
+    func photos(of kind: PhotoKind) -> [MedicationPhoto] {
+        photoList.filter { $0.kind == kind }
     }
 
     var isLowStock: Bool { tracksStock && stockCount <= lowStockThreshold }

@@ -14,6 +14,8 @@ struct NextDoseCard: View {
     let onSnooze: () -> Void
     let onSkip: () -> Void
 
+    @State private var showingPill = false
+    private var pillPhotos: [MedicationPhoto] { slot.medication.photos(of: .pill) }
     private var isOverdue: Bool { slot.isOverdue(now: now, grace: grace) }
     private var isMissed: Bool { slot.status(now: now, grace: grace) == .missed }
     private var needsAttention: Bool { isOverdue || isMissed }
@@ -48,22 +50,34 @@ struct NextDoseCard: View {
                     .accessibilityHidden(true)
             }
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text(slot.medication.name)
-                    .font(.system(size: 32, weight: .heavy))
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.7)
-                HStack(spacing: 6) {
-                    if !slot.medication.dosageText.isEmpty {
-                        Text(slot.medication.dosageText)
+            HStack(alignment: .center, spacing: 14) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(slot.medication.name)
+                        .font(.system(size: 32, weight: .heavy))
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.7)
+                    HStack(spacing: 6) {
+                        if !slot.medication.dosageText.isEmpty {
+                            Text(slot.medication.dosageText)
+                        }
+                        if let mealRelation, mealRelation != .any {
+                            if !slot.medication.dosageText.isEmpty { Text(verbatim: "·") }
+                            Text(mealRelation.label)
+                        }
                     }
-                    if let mealRelation, mealRelation != .any {
-                        if !slot.medication.dosageText.isEmpty { Text(verbatim: "·") }
-                        Text(mealRelation.label)
-                    }
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
                 }
-                .font(.title3)
-                .foregroundStyle(.secondary)
+                if let pill = pillPhotos.first {
+                    Spacer(minLength: 0)
+                    Button {
+                        showingPill = true
+                    } label: {
+                        PhotoThumbnail(photo: pill, size: 72)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text("Show pill photo"))
+                }
             }
 
             Button(action: onTaken) {
@@ -94,5 +108,6 @@ struct NextDoseCard: View {
                 .strokeBorder(isMissed ? Palette.missed : (isOverdue ? Palette.overdue : Color.primary), lineWidth: 2)
         )
         .accessibilityElement(children: .contain)
+        .photoViewer(isPresented: $showingPill, photos: pillPhotos, title: Text("Pill photo"))
     }
 }

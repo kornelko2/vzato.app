@@ -161,6 +161,8 @@ Hotovo, když:
 
 ### Fáze 4 – Fotografie
 
+**Stav 6. 11. 2026: hotovo** (model verze 2, `PhotoStore` přes ImageIO, fotoaparát a skener VisionKit na iOS, knihovna a import souboru všude, prohlížeč se zoomem, miniatura tablety na kartě Dnes, 5 testů). `InfoPlist.xcstrings` s popisem oprávnění fotoaparátu ve třech jazycích.
+
 Úkoly:
 1. Model `MedicationPhoto`, `PhotoStore` (zmenšení na 2000 px, JPEG 0.8, miniatura 200 px v cache).
 2. Výběr z knihovny (`PhotosPicker`, všechny platformy), fotoaparát (iOS, `UIImagePickerController` ve `UIViewControllerRepresentable`), import souboru (macOS, `fileImporter`).

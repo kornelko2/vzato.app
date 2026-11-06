@@ -44,6 +44,8 @@ struct MedicationDetailView: View {
                 }
             }
 
+            MedicationPhotosSection(medication: medication)
+
             Section("Supply") {
                 if medication.tracksStock {
                     LabeledContent("Units at home") { Text(medication.stockCount, format: .number) }

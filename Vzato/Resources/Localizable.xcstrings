@@ -179,6 +179,22 @@
         }
       }
     },
+    "Add photo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidat fotografii"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridať fotografiu"
+          }
+        }
+      }
+    },
     "Add time": {
       "localizations": {
         "cs": {
@@ -371,6 +387,22 @@
         }
       }
     },
+    "Choose from library": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vybrat z knihovny"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vybrať z knižnice"
+          }
+        }
+      }
+    },
     "Color": {
       "localizations": {
         "cs": {
@@ -383,6 +415,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Farba"
+          }
+        }
+      }
+    },
+    "Could not read the image.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrázek se nepodařilo načíst."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrázok sa nepodarilo načítať."
           }
         }
       }
@@ -499,6 +547,22 @@
         }
       }
     },
+    "Delete photo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smazat fotografii"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať fotografiu"
+          }
+        }
+      }
+    },
     "Delete this medication and its history?": {
       "localizations": {
         "cs": {
@@ -511,6 +575,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vymazať tento liek a jeho históriu?"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hotovo"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hotovo"
           }
         }
       }
@@ -771,6 +851,22 @@
         }
       }
     },
+    "Import file": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importovat soubor"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importovať súbor"
+          }
+        }
+      }
+    },
     "Language": {
       "localizations": {
         "cs": {
@@ -799,6 +895,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Naposledy spočítané"
+          }
+        }
+      }
+    },
+    "Leaflet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příbalový leták"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Príbalový leták"
           }
         }
       }
@@ -1107,6 +1219,22 @@
         }
       }
     },
+    "No photos yet. Add the package, the pill or the leaflet so you always have them at hand.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatím žádné fotografie. Přidejte krabičku, tabletu nebo leták, ať je máte vždy po ruce."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatiaľ žiadne fotografie. Pridajte škatuľku, tabletu alebo leták, aby ste ich mali vždy poruke."
+          }
+        }
+      }
+    },
     "Not confirmed yet. Tap Taken when you have taken it.": {
       "localizations": {
         "cs": {
@@ -1235,6 +1363,38 @@
         }
       }
     },
+    "Package": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Krabička"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Škatuľka"
+          }
+        }
+      }
+    },
+    "Page %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strana %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strana %lld"
+          }
+        }
+      }
+    },
     "Pending": {
       "localizations": {
         "cs": {
@@ -1247,6 +1407,70 @@
           "stringUnit": {
             "state": "translated",
             "value": "Čaká"
+          }
+        }
+      }
+    },
+    "Photo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografie"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografia"
+          }
+        }
+      }
+    },
+    "Photos": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografie"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografie"
+          }
+        }
+      }
+    },
+    "Pill": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tableta"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tableta"
+          }
+        }
+      }
+    },
+    "Pill photo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografie tablety"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografia tablety"
           }
         }
       }
@@ -1507,6 +1731,22 @@
         }
       }
     },
+    "Scan leaflet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naskenovat leták"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naskenovať leták"
+          }
+        }
+      }
+    },
     "Schedule": {
       "localizations": {
         "cs": {
@@ -1583,6 +1823,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Malo by byť doma"
+          }
+        }
+      }
+    },
+    "Show pill photo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobrazit fotografii tablety"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobraziť fotografiu tablety"
           }
         }
       }
@@ -1775,6 +2031,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Podľa systému"
+          }
+        }
+      }
+    },
+    "Take photo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyfotit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odfotiť"
           }
         }
       }

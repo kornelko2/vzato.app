@@ -24,6 +24,8 @@
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.medical</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

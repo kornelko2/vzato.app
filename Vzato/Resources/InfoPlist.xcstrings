@@ -1,0 +1,29 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSCameraUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato používá fotoaparát k vyfocení léku, tablet a příbalových letáků. Fotografie zůstávají ve vašem zařízení."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato používa fotoaparát na odfotenie lieku, tabliet a príbalových letákov. Fotografie zostávajú vo vašom zariadení."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
