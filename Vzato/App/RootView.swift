@@ -29,7 +29,11 @@ struct RootView: View {
                 tabLayout
             }
         }
+        #if os(iOS)
         .preferredColorScheme(appearance.colorScheme)
+        #else
+        .onChange(of: appearance) { _, value in value.apply() }
+        #endif
         .sheet(isPresented: $state.showingNewMedication) {
             MedicationFormView(medication: nil)
         }

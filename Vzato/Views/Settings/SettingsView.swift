@@ -43,35 +43,7 @@ struct SettingsView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    #if os(iOS)
-                    if UIApplication.shared.supportsAlternateIcons {
-                        HStack(spacing: 20) {
-                            ForEach(AppIcon.allCases) { icon in
-                                Button {
-                                    appIcon = icon
-                                } label: {
-                                    VStack(spacing: 6) {
-                                        Image(icon.previewAssetName)
-                                            .resizable()
-                                            .frame(width: 64, height: 64)
-                                            .clipShape(RoundedRectangle(cornerRadius: 14))
-                                            .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(appIcon == icon ? Color.accentColor : .clear, lineWidth: 3))
-                                        Text(icon.label).font(.caption)
-                                    }
-                                }
-                                .buttonStyle(.plain)
-                                .accessibilityLabel(Text(icon.label))
-                                .accessibilityAddTraits(appIcon == icon ? .isSelected : [])
-                            }
-                            Spacer()
-                        }
-                        .padding(.vertical, 4)
-                        .onChange(of: appIcon) { _, icon in
-                            guard UIApplication.shared.alternateIconName != icon.alternateIconName else { return }
-                            UIApplication.shared.setAlternateIconName(icon.alternateIconName)
-                        }
-                    }
-                    #endif
+                    iconPicker
                 }
 
                 Section {
@@ -135,6 +107,32 @@ struct SettingsView: View {
             .navigationTitle(Text("Settings"))
             .task { await notifications.refreshAuthorizationStatus() }
         }
+    }
+
+    /// Pill or organizer. On iOS this swaps the home-screen icon, on the Mac the Dock icon.
+    private var iconPicker: some View {
+        HStack(spacing: 20) {
+            ForEach(AppIcon.allCases) { icon in
+                Button {
+                    appIcon = icon
+                } label: {
+                    VStack(spacing: 6) {
+                        Image(icon.previewAssetName)
+                            .resizable()
+                            .frame(width: 64, height: 64)
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                            .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(appIcon == icon ? Color.accentColor : .clear, lineWidth: 3))
+                        Text(icon.label).font(.caption)
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(icon.label))
+                .accessibilityAddTraits(appIcon == icon ? .isSelected : [])
+            }
+            Spacer()
+        }
+        .padding(.vertical, 4)
+        .onChange(of: appIcon) { _, icon in icon.apply() }
     }
 
     @ViewBuilder

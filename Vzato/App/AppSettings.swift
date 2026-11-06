@@ -3,6 +3,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import SwiftUI
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 enum Appearance: String, CaseIterable, Identifiable {
     case system, light, dark
@@ -22,6 +27,23 @@ enum Appearance: String, CaseIterable, Identifiable {
         case .light: "Light"
         case .dark: "Dark"
         }
+    }
+
+    static var stored: Appearance {
+        Appearance(rawValue: UserDefaults.standard.string(forKey: AppSettings.appearanceKey) ?? "") ?? .system
+    }
+
+    /// macOS: set the application appearance so every window (main and Settings) matches.
+    /// iOS uses `preferredColorScheme` on the root view instead.
+    @MainActor
+    func apply() {
+        #if os(macOS)
+        switch self {
+        case .system: NSApplication.shared.appearance = nil
+        case .light: NSApplication.shared.appearance = NSAppearance(named: .aqua)
+        case .dark: NSApplication.shared.appearance = NSAppearance(named: .darkAqua)
+        }
+        #endif
     }
 }
 
@@ -116,5 +138,25 @@ enum AppIcon: String, CaseIterable, Identifiable {
         case .pill: nil
         case .organizer: "AppIcon-Organizer"
         }
+    }
+
+    static var stored: AppIcon {
+        AppIcon(rawValue: UserDefaults.standard.string(forKey: AppSettings.appIconKey) ?? "") ?? .pill
+    }
+
+    /// Applies the choice. iOS swaps the home-screen icon; macOS swaps the Dock icon of the
+    /// running app (Finder keeps the bundled icon, which the app may not rewrite).
+    @MainActor
+    func apply() {
+        #if os(iOS)
+        guard UIApplication.shared.supportsAlternateIcons,
+              UIApplication.shared.alternateIconName != alternateIconName else { return }
+        UIApplication.shared.setAlternateIconName(alternateIconName)
+        #elseif os(macOS)
+        switch self {
+        case .pill: NSApplication.shared.applicationIconImage = nil
+        case .organizer: NSApplication.shared.applicationIconImage = NSImage(named: "IconDockOrganizer")
+        }
+        #endif
     }
 }

@@ -24,6 +24,8 @@ struct VzatoApp: App {
         #endif
         NotificationService.shared.configure(context: persistence.viewContext)
         SyncMonitor.shared.start(controller: persistence)
+        AppIcon.stored.apply()
+        Appearance.stored.apply()
     }
 
     var body: some Scene {

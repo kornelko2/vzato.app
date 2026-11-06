@@ -21,4 +21,16 @@ render() {  # render <svg> <appiconset dir> <preview imageset dir>
 }
 render Design/icon/E-pulena-tableta-fajfka.svg "$CATALOG/AppIcon.appiconset" "$CATALOG/IconPreviewPill.imageset"
 render Design/icon/F-davkovac-fajfka.svg "$CATALOG/AppIcon-Organizer.appiconset" "$CATALOG/IconPreviewOrganizer.imageset"
+# Full-size organizer icon for the Mac Dock (set at runtime with applicationIconImage). A runtime
+# image gets no system mask, so it is rendered in the macOS icon shape: inset, rounded corners.
+mkdir -p "$CATALOG/IconDockOrganizer.imageset"
+wrapper="$(mktemp -d)/dock.svg"
+cat > "$wrapper" <<SVG
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs><clipPath id="shape"><rect x="100" y="100" width="824" height="824" rx="185"/></clipPath></defs>
+  <image x="100" y="100" width="824" height="824" clip-path="url(#shape)" xlink:href="$(pwd)/Design/icon/F-davkovac-fajfka.svg"/>
+</svg>
+SVG
+inkscape "$wrapper" --export-type=png --export-filename="$CATALOG/IconDockOrganizer.imageset/icon-512.png" -w 512 -h 512 2>/dev/null
+rm -rf "$(dirname "$wrapper")"
 echo "icons rendered"
