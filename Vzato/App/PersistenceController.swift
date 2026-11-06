@@ -4,8 +4,8 @@
 
 import CoreData
 
-/// Owns the Core Data stack. CloudKit sync is not enabled yet (phase 6); the container is
-/// already an NSPersistentCloudKitContainer so turning it on later is a configuration change.
+/// Owns the Core Data stack. iCloud sync is a build-time opt-in (`VzatoCloudKit` in Info.plist,
+/// set from `VZATO_CLOUDKIT` in Config/Local.xcconfig); without it the store is local only.
 @MainActor
 final class PersistenceController {
     static let shared = PersistenceController()
@@ -26,7 +26,15 @@ final class PersistenceController {
         return model
     }()
 
+    static let cloudKitContainerIdentifier = "iCloud.app.vzato"
+
+    /// True when this build was made with `VZATO_CLOUDKIT = YES` and the iCloud entitlements.
+    nonisolated static var isCloudKitBuild: Bool {
+        (Bundle.main.object(forInfoDictionaryKey: "VzatoCloudKit") as? String)?.uppercased() == "YES"
+    }
+
     let container: NSPersistentCloudKitContainer
+    let isCloudKitEnabled: Bool
     var viewContext: NSManagedObjectContext { container.viewContext }
 
     init(inMemory: Bool = false) {
@@ -37,8 +45,15 @@ final class PersistenceController {
         if inMemory {
             description.url = URL(fileURLWithPath: "/dev/null")
         }
-        // Phase 1: local only. Phase 6 sets cloudKitContainerOptions here.
-        description.cloudKitContainerOptions = nil
+        isCloudKitEnabled = !inMemory && Self.isCloudKitBuild
+        if isCloudKitEnabled {
+            description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: Self.cloudKitContainerIdentifier)
+        } else {
+            description.cloudKitContainerOptions = nil
+        }
+        // History tracking and remote change notifications are what CloudKit sync builds on; harmless locally.
+        description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         description.shouldMigrateStoreAutomatically = true
         description.shouldInferMappingModelAutomatically = true
 
@@ -47,6 +62,12 @@ final class PersistenceController {
                 fatalError("Could not load the data store: \(error)")
             }
         }
+        #if DEBUG
+        // `--init-cloudkit-schema` pushes the model to the CloudKit development environment once.
+        if isCloudKitEnabled, CommandLine.arguments.contains("--init-cloudkit-schema") {
+            do { try container.initializeCloudKitSchema(options: []) } catch { print("CloudKit schema: \(error)") }
+        }
+        #endif
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergePolicy(merge: .mergeByPropertyObjectTrumpMergePolicyType)
         ensureDefaultProfile()

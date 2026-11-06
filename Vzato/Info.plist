@@ -26,6 +26,10 @@
 	<string>public.app-category.medical</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>
@@ -41,5 +45,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>VzatoCloudKit</key>
+	<string>$(VZATO_CLOUDKIT)</string>
 </dict>
 </plist>

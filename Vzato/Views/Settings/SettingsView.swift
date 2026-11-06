@@ -80,6 +80,14 @@ struct SettingsView: View {
                     }
                 }
 
+                Section {
+                    syncStatus
+                } header: {
+                    Text("iCloud sync")
+                } footer: {
+                    Text("Syncs between your own devices through your iCloud account. Nobody else, not even the developer, can read the data.")
+                }
+
                 Section("About") {
                     LabeledContent("Version") {
                         Text(verbatim: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")
@@ -96,6 +104,30 @@ struct SettingsView: View {
             .formStyle(.grouped)
             .navigationTitle(Text("Settings"))
             .task { await notifications.refreshAuthorizationStatus() }
+        }
+    }
+
+    @ViewBuilder
+    private var syncStatus: some View {
+        let monitor = SyncMonitor.shared
+        if !monitor.isEnabled {
+            Label("Not available in this build.", systemImage: "icloud.slash")
+                .foregroundStyle(.secondary)
+        } else if let error = monitor.lastError {
+            VStack(alignment: .leading, spacing: 4) {
+                Label("Sync error", systemImage: "exclamationmark.icloud")
+                    .foregroundStyle(Palette.missed)
+                Text(error).font(.caption).foregroundStyle(.secondary)
+            }
+        } else if let last = monitor.lastSuccess {
+            LabeledContent {
+                Text(last, format: .dateTime.hour().minute())
+            } label: {
+                Label("Last sync", systemImage: "checkmark.icloud")
+            }
+        } else {
+            Label("Waiting for the first sync", systemImage: "arrow.triangle.2.circlepath.icloud")
+                .foregroundStyle(.secondary)
         }
     }
 

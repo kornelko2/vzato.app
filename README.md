@@ -81,6 +81,21 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato \
 Debug builds accept the launch argument `--sample-data`, which fills an empty
 store with demo medications.
 
+## iCloud sync (optional)
+
+Sync is off in a default build. To enable it for your own team:
+
+1. Open `Vzato.xcodeproj` in Xcode once, Signing & Capabilities › + Capability ›
+   iCloud › CloudKit, and pick the container `iCloud.app.vzato`. Xcode registers
+   it for your team.
+2. In `Config/Local.xcconfig` set `VZATO_CLOUDKIT = YES` and
+   `VZATO_ENTITLEMENTS_VARIANT = CloudKit`, then `xcodegen generate`.
+3. Run a debug build once with the launch argument `--init-cloudkit-schema` to
+   push the schema to the CloudKit development environment.
+
+Settings shows the sync state. Data goes only to the user's private iCloud
+database.
+
 ## TestFlight
 
 1. In App Store Connect create the app record once: name *Vzato*, bundle ID

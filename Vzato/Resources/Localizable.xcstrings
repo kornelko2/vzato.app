@@ -1245,6 +1245,28 @@
         }
       }
     },
+    "Last sync": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naposledy synchronizováno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utolsó szinkronizálás"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naposledy synchronizované"
+          }
+        }
+      }
+    },
     "Leaflet": {
       "localizations": {
         "cs": {
@@ -1703,6 +1725,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zatiaľ žiadne fotografie. Pridajte škatuľku, tabletu alebo leták, aby ste ich mali vždy poruke."
+          }
+        }
+      }
+    },
+    "Not available in this build.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V tomto sestavení není k dispozici."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebben a buildben nem érhető el."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V tomto zostavení nie je k dispozícii."
           }
         }
       }
@@ -2785,6 +2829,50 @@
         }
       }
     },
+    "Sync error": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chyba synchronizace"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szinkronizálási hiba"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chyba synchronizácie"
+          }
+        }
+      }
+    },
+    "Syncs between your own devices through your iCloud account. Nobody else, not even the developer, can read the data.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronizuje mezi vašimi zařízeními přes váš účet iCloud. Nikdo jiný, ani vývojář, data nepřečte."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ön eszközei között szinkronizál az iCloud-fiókján keresztül. Senki más, a fejlesztő sem olvashatja az adatokat."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronizuje medzi vašimi zariadeniami cez váš účet iCloud. Nikto iný, ani vývojár, údaje neprečíta."
+          }
+        }
+      }
+    },
     "System": {
       "localizations": {
         "cs": {
@@ -3313,6 +3401,28 @@
         }
       }
     },
+    "Waiting for the first sync": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čeká na první synchronizaci"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Várakozás az első szinkronizálásra"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čaká na prvú synchronizáciu"
+          }
+        }
+      }
+    },
     "Warn before running out": {
       "localizations": {
         "cs": {
@@ -3507,6 +3617,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "navyše"
+          }
+        }
+      }
+    },
+    "iCloud sync": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronizace iCloud"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud szinkronizálás"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronizácia iCloud"
           }
         }
       }

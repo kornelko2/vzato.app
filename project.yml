@@ -16,6 +16,10 @@ configFiles:
 
 settings:
   base:
+    # iCloud sync is opt-in per machine: Config/Local.xcconfig sets VZATO_CLOUDKIT = YES and
+    # VZATO_ENTITLEMENTS_VARIANT = CloudKit once the iCloud container exists for your team.
+    VZATO_CLOUDKIT: "NO"
+    VZATO_ENTITLEMENTS_VARIANT: Local
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     SWIFT_EMIT_LOC_STRINGS: YES
@@ -38,6 +42,8 @@ targets:
         LSApplicationCategoryType: public.app-category.medical
         ITSAppUsesNonExemptEncryption: false
         NSCameraUsageDescription: Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.
+        VzatoCloudKit: $(VZATO_CLOUDKIT)
+        UIBackgroundModes: [remote-notification]
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
@@ -52,7 +58,9 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: app.vzato
         TARGETED_DEVICE_FAMILY: "1,2"
-        "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": Config/Vzato-macOS.entitlements
+        "CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]": Config/iOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
+        "CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]": Config/iOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
+        "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": Config/macOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
 
   VzatoTests:
     type: bundle.unit-test

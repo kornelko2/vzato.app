@@ -1,8 +1,8 @@
 # Vzato – instructions for Claude Code
 
 Vzato is a free, open source medication reminder: SwiftUI universal app (iOS 17+,
-iPadOS 17+, macOS 14+), Core Data with `NSPersistentCloudKitContainer` (CloudKit not
-enabled yet), local notifications, Swift 6 strict concurrency, zero dependencies.
+iPadOS 17+, macOS 14+), Core Data with `NSPersistentCloudKitContainer` (iCloud sync is a
+build-time opt-in via `VZATO_CLOUDKIT`, see README), local notifications, Swift 6 strict concurrency, zero dependencies.
 Czech, Slovak, English and Hungarian via `Vzato/Resources/Localizable.xcstrings`.
 
 Design documents are in Czech and are the source of truth: `specification.md` (what),
@@ -65,6 +65,9 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   merged with recorded events), `DoseLogger` (the only place stock changes because of a
   dose), `StockService`, `ReconciliationService` (supply check), `NotificationService`,
   `CSVExport`, `DoseSummary`, `PhotoStore` (ImageIO only, no UIKit/AppKit).
+- `Vzato/App/SyncMonitor.swift` – observes CloudKit container events (last success, last
+  error) and reschedules notifications after remote changes. Entitlement variants live in
+  `Config/{iOS,macOS}-{Local,CloudKit}.entitlements`, selected by `VZATO_ENTITLEMENTS_VARIANT`.
 - `Vzato/App/AppState.swift` – `@Observable` navigation state (section, sheets) shared by the
   root view and the Mac menu commands; present app-wide sheets from `RootView`, not from tabs.
 - `Vzato/Views` – SwiftUI, shared by all platforms; platform differences only in small

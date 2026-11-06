@@ -23,6 +23,7 @@ struct VzatoApp: App {
         }
         #endif
         NotificationService.shared.configure(context: persistence.viewContext)
+        SyncMonitor.shared.start(controller: persistence)
     }
 
     var body: some Scene {

@@ -4,3 +4,9 @@ DEVELOPMENT_TEAM = ABCDE12345
 
 // Without a paid team, uncomment the next line so macOS builds are signed to run locally only.
 // CODE_SIGN_IDENTITY[sdk=macosx*] = -
+
+// iCloud sync (phase 6). Enable only after the iCloud container "iCloud.app.vzato" exists for your
+// team: open the project in Xcode once, Signing & Capabilities › + iCloud › CloudKit, pick the
+// container; Xcode registers it. Then uncomment both lines.
+// VZATO_CLOUDKIT = YES
+// VZATO_ENTITLEMENTS_VARIANT = CloudKit

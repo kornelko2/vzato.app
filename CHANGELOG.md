@@ -39,9 +39,12 @@ All notable changes to Vzato are listed here. The format follows
 - Unit tests for the scheduler, dose logging, supply, supply check, summaries,
   photo store and CSV.
 
+### Added (behind a build flag)
+- iCloud sync through the user's private CloudKit database, with sync status in
+  Settings. Off unless the build sets `VZATO_CLOUDKIT = YES`.
+
 ### Notes
-- Storage is Core Data with `NSPersistentCloudKitContainer` (model version 2);
-  iCloud sync is not enabled yet.
+- Storage is Core Data with `NSPersistentCloudKitContainer` (model version 2).
 - The app icon is a placeholder; the final design is pending.
 
 ## [0.1.0] - unreleased

@@ -191,6 +191,8 @@ Hotovo, když: stejný build běží na iPhone, iPadu (obě orientace) a Macu be
 
 ### Fáze 6 – Synchronizace (CloudKit)
 
+**Stav 6. 11. 2026: kód připraven, čeká na kontejner.** Sync je volba při sestavení: `Config/Local.xcconfig` s `VZATO_CLOUDKIT = YES` a `VZATO_ENTITLEMENTS_VARIANT = CloudKit` zapne entitlements iCloud (`iCloud.app.vzato`) a `cloudKitContainerOptions`; výchozí build je jen lokální. `SyncMonitor` sleduje události kontejneru (poslední úspěch, chyba) pro Nastavení a po vzdálených změnách přeplánuje notifikace. Ladicí argument `--init-cloudkit-schema` nahraje schéma do vývojového prostředí CloudKitu. Kontejner musí jednou vytvořit vlastník účtu v Xcode (Signing & Capabilities › iCloud › CloudKit). Pravidlo „vzato má přednost před vynecháno“ zatím neřešeno; platí poslední zápis.
+
 Úkoly:
 1. Entitlements iCloud + CloudKit container, `ModelConfiguration(cloudKitDatabase: .private(...))`.
 2. Audit modelu podle pravidel CloudKitu (výchozí hodnoty, volitelné vztahy).
