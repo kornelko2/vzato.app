@@ -47,6 +47,26 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 Debug builds accept `--sample-data` as a launch argument to fill an empty store
 with demo medications.
 
+## TestFlight
+
+1. In App Store Connect create the app record once: name *Vzato*, bundle ID
+   `app.vzato`, primary language Czech.
+2. Make sure `Config/Local.xcconfig` contains your `DEVELOPMENT_TEAM`.
+3. In Xcode: Product › Archive (scheme *Vzato*, destination *Any iOS Device*),
+   then Distribute App › TestFlight & App Store. Automatic signing registers the
+   App ID and creates the profiles.
+4. In App Store Connect add yourself (and testers) to the internal group; the
+   build appears in the TestFlight app within minutes.
+
+Command line equivalent:
+
+```bash
+xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'generic/platform=iOS' \
+  -archivePath build/Vzato.xcarchive archive
+xcodebuild -exportArchive -archivePath build/Vzato.xcarchive \
+  -exportOptionsPlist Config/ExportOptions.plist -exportPath build/export
+```
+
 ## Privacy
 
 No analytics, no ads, no third parties, no server. Everything is stored in the

@@ -27,10 +27,14 @@ struct TodayView: View {
         return DoseScheduler.slots(for: Array(medications), on: now)
     }
 
-    /// Oldest overdue dose, otherwise the next upcoming one.
+    /// Oldest overdue dose, else the oldest missed dose without a record (it can still be confirmed late),
+    /// else the next upcoming one.
     private var featured: DoseSlot? {
-        let pending = slots.filter { $0.status(now: now, grace: grace) == .pending }
-        return pending.first { $0.scheduledAt <= now } ?? pending.first
+        let open = slots.filter { $0.event == nil }
+        let overdue = open.first { $0.status(now: now, grace: grace) == .pending && $0.scheduledAt <= now }
+        let missed = open.first { $0.status(now: now, grace: grace) == .missed }
+        let upcoming = open.first { $0.scheduledAt > now }
+        return overdue ?? missed ?? upcoming
     }
 
     private var takenCount: Int { slots.filter { $0.status(now: now, grace: grace) == .taken }.count }
@@ -73,10 +77,9 @@ struct TodayView: View {
                 }
                 ToolbarItem(placement: .automatic) {
                     if !slots.isEmpty {
-                        Label {
-                            Text(verbatim: "\(takenCount) / \(slots.count)")
-                        } icon: {
+                        HStack(spacing: 4) {
                             Image(systemName: "checkmark")
+                            Text(verbatim: "\(takenCount) / \(slots.count)")
                         }
                         .font(.headline)
                         .foregroundStyle(Palette.taken)

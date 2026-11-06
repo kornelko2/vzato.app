@@ -15,6 +15,8 @@ struct NextDoseCard: View {
     let onSkip: () -> Void
 
     private var isOverdue: Bool { slot.isOverdue(now: now, grace: grace) }
+    private var isMissed: Bool { slot.status(now: now, grace: grace) == .missed }
+    private var needsAttention: Bool { isOverdue || isMissed }
     private var mealRelation: MealRelation? {
         slot.medication.activeSchedules.first { schedule in
             DoseScheduler.times(for: schedule, on: slot.scheduledAt, calendar: .current)
@@ -28,11 +30,17 @@ struct NextDoseCard: View {
                 HStack(spacing: 6) {
                     Text(slot.scheduledAt, style: .time)
                     Text(verbatim: "·")
-                    Text(isOverdue ? "Overdue" : "Next")
+                    if isMissed {
+                        Text("Missed")
+                    } else if isOverdue {
+                        Text("Overdue")
+                    } else {
+                        Text("Next")
+                    }
                 }
                 .font(.subheadline.weight(.bold))
                 .textCase(.uppercase)
-                .foregroundStyle(isOverdue ? Palette.overdue : .secondary)
+                .foregroundStyle(isMissed ? Palette.missed : (isOverdue ? Palette.overdue : .secondary))
                 Spacer()
                 Circle()
                     .fill(Color(hex: slot.medication.colorHex))
@@ -83,7 +91,7 @@ struct NextDoseCard: View {
         .padding(18)
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .strokeBorder(isOverdue ? Palette.overdue : Color.primary, lineWidth: 2)
+                .strokeBorder(isMissed ? Palette.missed : (isOverdue ? Palette.overdue : Color.primary), lineWidth: 2)
         )
         .accessibilityElement(children: .contain)
     }
