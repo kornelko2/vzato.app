@@ -1,27 +1,34 @@
 # Název a designové směry
 
-Doplněk ke `specification.md`. Kapitola 1 nabízí alternativy k pracovnímu názvu MedRemind, kapitola 2 čtyři směry vizuálního a interakčního designu. Na konci je doporučení.
+Doplněk ke `specification.md`. Kapitola 1 řeší název (původní pracovní název byl MedRemind), kapitola 2 čtyři směry vizuálního a interakčního designu. Na konci je doporučení.
 
 ---
 
 ## 1. Název aplikace
 
-Kritéria: krátký, vyslovitelný česky i anglicky, bez diakritiky v bundle ID, nepůsobí jako „zdravotnický prostředek“, dá se najít v App Store. Dostupnost názvu v App Store a domény je nutné ověřit ručně před rozhodnutím.
+Kritéria: krátký, srozumitelný česky i slovensky (primární trh), bez diakritiky v bundle ID, nepůsobí jako „zdravotnický prostředek“, a hlavně **volný v App Store**. Apple odmítne název, který už má jiná aplikace na stejném storefrontu, a reaguje i na názvy zaměnitelné s existujícími. Kontrola provedena 6. 11. 2026 přes vyhledávání App Storu (storefronty CZ, SK, US, GB, DE), Google Play a web.
 
-| Název | Význam | Pro | Proti |
+| Název | Význam | Stav v App Store | Poznámka |
 |---|---|---|---|
-| **Dóza** | Česky „dóza“ = nádobka na léky; zní jako anglické *dose* | Krátké, dvojjazyčná hra se slovy, přátelské, snadná ikona (dóza s tabletami). Bundle ID `doza`. | V angličtině se píše bez čárky („Doza“), nutné ověřit kolize v App Store. |
-| **Vzato** | Česky „vzato“ = hlavní akce aplikace | Přesně popisuje, k čemu aplikace je: potvrdit, že dávka je vzata. Krátké, neotřelé. | Pro anglické uživatele bez významu; je to spíš české jméno s anglickým překladem. |
-| **Pillar** | *Pill* + *pillar* (opora); česky „pilíř“ | Mezinárodní, evokuje spolehlivost, čisté logo (sloup / tableta). | Pravděpodobně už použité v App Store, nutno ověřit. |
-| **Lékovka** | Česky lahvička na léky | Domácké, jednoznačně o lécích, dobře se skloňuje. | Jen české, cizinci nevysloví („Lekovka“). |
-| **DoseDay** | Anglicky „dávka / den“ | Popisné, ukazuje denní přehled, snadná zkratka DD. | Generické, podobných názvů je hodně. |
-| **Tabletka** | Česky malá tableta | Milé, srozumitelné, dobře zní. | Jen české; v angličtině „Tabletka“ matoucí vedle slova *tablet* (zařízení). |
-| **Užito** | Česky „užito“ (lék byl užit) | Formálnější varianta Vzato, správný lékárenský výraz. | Hůř vyslovitelné pro cizince, příliš úřední. |
-| **MedRemind** (stávající) | Popisný pracovní název | Každý hned ví, co to je. | Generické, mnoho podobných aplikací, špatně se hledá, nemá osobnost. |
+| **Vzato** | Česky „vzato“ = hlavní akce aplikace; Slovák rozumí (sk „vzaté“) | **Volný** (CZ, SK, US, GB, DE; nic na Google Play ani na webu) | Nejsilnější kandidát. Krátké, neotřelé, přesně o tom, co aplikace dělá. |
+| **Vezmi** | Rozkaz „vezmi (si lék)“, slovo je stejné v češtině i slovenštině | Volný podle webu, přes API nedoověřeno | Aktivní, trochu naléhavé. Výborně funguje v notifikaci („Vezmi: Letrox“). |
+| **Dávka** | Dávka léku, stejné slovo v obou jazycích | Žádná shoda na webu, přes API nedoověřeno | Obecné slovo, hůř se hledá, slabá ochranná známka. |
+| **Včas** | „Včas“, stejné v obou jazycích | Žádná shoda na webu | Hezké heslo („léky včas“), ale jako název příliš obecné. Spíš podtitul. |
+| Lékovka | Lahvička na léky | **Obsazeno** – česká aplikace Lékovka (aplikacelekovka.cz, App Store i Google Play) | Vyřazeno. |
+| Dóza / Doza | Nádobka na léky, zní jako *dose* | **Obsazeno** – „Doza – Medication Reminder“ a další čtyři Doza | Vyřazeno. |
+| Pillar | *Pill* + pilíř | **Obsazeno** – „Pillar: Medicine Reminder“ | Vyřazeno. |
+| DoseDay | Dávka / den | **Obsazeno** – tři aplikace DoseDay | Vyřazeno. |
+| TookIt | „Took it“ | **Obsazeno** – TookIt, plánování léků | Vyřazeno. |
+| Tabletka | Malá tableta | Lékárenské aplikace Tabletka.by, Tabletki.ua; riziko zaměnitelnosti | Vyřazeno. |
+| Užito | Správný lékárenský výraz | Apple ho používá jako popisek tlačítka v aplikaci Zdraví (Léky → „Užito“) | Vyřazeno kvůli zaměnitelnosti s Apple. |
+| MedRemind (pracovní) | Popisný název | **Obsazeno** – MedRemind+, MedRemind – Pill Reminder, MedRemind (Android, iOS ohlášen) | Vyřazeno. |
 
-**Doporučení:** **Dóza** (v App Store jako *Dóza* pro češtinu, *Doza* pro angličtinu, bundle ID `cz.kornelko.doza`). Záloha: **Vzato**, pokud má být aplikace především česká, nebo **Pillar**, pokud má být především mezinárodní.
+**Rozhodnuto 6. 11. 2026: Vzato, projekt vzato.app.** V App Store jako „Vzato – léky včas“ (CZ), „Vzato – lieky včas“ (SK), „Vzato – Medication Reminder“ (EN); název samotný je stejný všude. Bundle ID `app.vzato` (podle domény vzato.app). Záloha: **Vezmi**.
 
----
+Před konečným rozhodnutím ověřit ručně (vyhledávání webem tyto databáze nepokrývá):
+- ochranné známky: ÚPV ČR (isdv.upv.gov.cz), ÚPV SR (indprop.gov.sk), EUIPO eSearch / TMview, třída 9 (software) a 44 (zdravotní služby);
+- vyhledávání přímo v aplikaci App Store na iPhonu s CZ a SK účtem (API Apple vyhledává jen název a klíčová slova, ne podtitul);
+- ~~domény `vzato.cz`, `vzato.sk`, `vzato.app`~~ – ověřeno whois/RDAP 6. 11. 2026: všechny tři volné (`vezmi.cz` a `davka.cz` jsou obsazené).
 
 ## 2. Designové směry
 
@@ -202,4 +209,4 @@ Domovská obrazovka je den na časové ose s týdenním pruhem nahoře. Dnes, hi
 
 **Směr C „Jistota“ na nativním základu směru A.** Obrazovka Dnes dostane velkou kartu nejbližší dávky s obřím tlačítkem a miniaturou tablety; Historie, Léky a Nastavení zůstanou systémové seznamy. Tím se nejlépe pokryje hlavní cíl ze specifikace (uživatel má vždy jistotu, že dávku vzal) za malou cenu, a stejná karta poslouží jako widget ve fázi 7. Pokud se později ukáže, že aplikace potřebuje víc osobnosti pro App Store, dá se na kartu a ikonu přidat teplejší paleta ze směru B, aniž by se měnila struktura.
 
-Zbývá rozhodnout název (kapitola 1).
+Název: Vzato / vzato.app (kapitola 1), čeká jen na kontrolu ochranných známek.
