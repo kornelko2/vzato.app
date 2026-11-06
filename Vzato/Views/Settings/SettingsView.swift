@@ -1,0 +1,110 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+import SwiftUI
+
+struct SettingsView: View {
+    @AppStorage(AppSettings.appearanceKey) private var appearance = Appearance.system
+    @AppStorage(AppSettings.snoozeMinutesKey) private var snoozeMinutes = AppSettings.defaultSnoozeMinutes
+    @AppStorage(AppSettings.missedAfterMinutesKey) private var missedAfterMinutes = AppSettings.defaultMissedAfterMinutes
+    @AppStorage(AppSettings.lowStockNotificationsKey) private var lowStockNotifications = true
+
+    private var notifications: NotificationService { NotificationService.shared }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Text("Vzato follows the language you set for it in the system settings. Czech, Slovak and English are available.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    #if os(iOS)
+                    Button("Open system settings") {
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    #else
+                    Text("Change it in System Settings › General › Language & Region › Applications.")
+                        .font(.subheadline)
+                    #endif
+                } header: {
+                    Text("Language")
+                }
+
+                Section("Appearance") {
+                    Picker("Appearance", selection: $appearance) {
+                        ForEach(Appearance.allCases) { option in
+                            Text(option.label).tag(option)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+
+                Section {
+                    notificationStatus
+                    Stepper(value: $snoozeMinutes, in: 5...60, step: 5) {
+                        LabeledContent("Snooze") { Text("\(snoozeMinutes) min") }
+                    }
+                    Stepper(value: $missedAfterMinutes, in: 30...360, step: 30) {
+                        LabeledContent("Mark as missed after") { Text("\(missedAfterMinutes) min") }
+                    }
+                    Toggle("Low supply alerts", isOn: $lowStockNotifications)
+                    Button("Refresh reminders") {
+                        Task { await notifications.rescheduleAll() }
+                    }
+                } header: {
+                    Text("Reminders")
+                } footer: {
+                    if notifications.hitLimit {
+                        Text("iOS allows at most 64 scheduled reminders. Some times were not scheduled.")
+                    } else {
+                        Text("Scheduled reminders: \(notifications.scheduledCount)")
+                    }
+                }
+
+                Section("About") {
+                    LabeledContent("Version") {
+                        Text(verbatim: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")
+                    }
+                    Text("Vzato is not a medical device and does not replace your doctor or pharmacist. It only reminds you and keeps your own notes.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    Text("Your data stays on this device and in your iCloud. Nothing is collected.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    Link("Source code and license (MPL-2.0)", destination: URL(string: "https://github.com/kornelko2/vzato.app")!)
+                }
+            }
+            .formStyle(.grouped)
+            .navigationTitle(Text("Settings"))
+            .task { await notifications.refreshAuthorizationStatus() }
+        }
+    }
+
+    @ViewBuilder
+    private var notificationStatus: some View {
+        switch notifications.authorizationStatus {
+        case .authorized, .provisional, .ephemeral:
+            Label("Notifications are allowed", systemImage: "bell.badge")
+        case .denied:
+            VStack(alignment: .leading, spacing: 4) {
+                Label("Notifications are turned off", systemImage: "bell.slash")
+                    .foregroundStyle(Palette.missed)
+                Text("Turn them on in the system settings to get reminders.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+        default:
+            Button {
+                Task { await notifications.requestAuthorization() }
+            } label: {
+                Label("Allow notifications", systemImage: "bell")
+            }
+        }
+    }
+}
+
+#Preview {
+    SettingsView()
+}

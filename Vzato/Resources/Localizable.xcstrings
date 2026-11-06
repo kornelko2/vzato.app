@@ -1,0 +1,2086 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@: %lld left": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: zbývá %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: zostáva %lld"
+          }
+        }
+      }
+    },
+    "%lld min": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O aplikaci"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O aplikácii"
+          }
+        }
+      }
+    },
+    "Add a medication in the Medications tab to get reminders.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidejte lék na záložce Léky a dostanete připomínky."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridajte liek na karte Lieky a dostanete pripomienky."
+          }
+        }
+      }
+    },
+    "Add medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidat lék"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridať liek"
+          }
+        }
+      }
+    },
+    "Add time": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidat čas"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridať čas"
+          }
+        }
+      }
+    },
+    "Adherence": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodržení"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodržiavanie"
+          }
+        }
+      }
+    },
+    "After a meal": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po jídle"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po jedle"
+          }
+        }
+      }
+    },
+    "All done for today": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes máte hotovo"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes máte hotovo"
+          }
+        }
+      }
+    },
+    "Allow notifications": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Povolit oznámení"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Povoliť upozornenia"
+          }
+        }
+      }
+    },
+    "Any time": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kdykoli"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kedykoľvek"
+          }
+        }
+      }
+    },
+    "Appearance": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzhled"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzhľad"
+          }
+        }
+      }
+    },
+    "Archive medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivovat lék"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivovať liek"
+          }
+        }
+      }
+    },
+    "Archiving keeps the history. Deleting removes the medication and all its records.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivace zachová historii. Smazání odstraní lék i všechny jeho záznamy."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivácia zachová históriu. Vymazanie odstráni liek aj všetky jeho záznamy."
+          }
+        }
+      }
+    },
+    "Before a meal": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Před jídlem"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pred jedlom"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zrušit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zrušiť"
+          }
+        }
+      }
+    },
+    "Change it in System Settings › General › Language & Region › Applications.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Změníte ho v Nastavení systému › Obecné › Jazyk a oblast › Aplikace."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmeníte ho v Systémových nastaveniach › Všeobecné › Jazyk a región › Aplikácie."
+          }
+        }
+      }
+    },
+    "Color": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farba"
+          }
+        }
+      }
+    },
+    "Count and check supply": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítat a zkontrolovat zásobu"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítať a skontrolovať zásobu"
+          }
+        }
+      }
+    },
+    "Count what you have": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítejte, co máte"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítajte, čo máte"
+          }
+        }
+      }
+    },
+    "Counted on": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítáno"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spočítané"
+          }
+        }
+      }
+    },
+    "Dark": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tmavý"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tmavý"
+          }
+        }
+      }
+    },
+    "Days": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dny"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dni"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smazat"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať"
+          }
+        }
+      }
+    },
+    "Delete medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smazat lék"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať liek"
+          }
+        }
+      }
+    },
+    "Delete this medication and its history?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smazat tento lék a jeho historii?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať tento liek a jeho históriu?"
+          }
+        }
+      }
+    },
+    "Dose": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka"
+          }
+        }
+      }
+    },
+    "Dose history": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historie dávek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "História dávok"
+          }
+        }
+      }
+    },
+    "Dose, e.g. 400 mg": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka, např. 400 mg"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka, napr. 400 mg"
+          }
+        }
+      }
+    },
+    "Doses left": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zbývá dávek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zostáva dávok"
+          }
+        }
+      }
+    },
+    "Each confirmed dose lowers the count. You get a notification when it runs low.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každá potvrzená dávka počet sníží. Když zásoba dochází, dostanete oznámení."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každá potvrdená dávka počet zníži. Keď zásoba dochádza, dostanete upozornenie."
+          }
+        }
+      }
+    },
+    "Edit": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upravit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upraviť"
+          }
+        }
+      }
+    },
+    "Edit medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upravit lék"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upraviť liek"
+          }
+        }
+      }
+    },
+    "End": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konec"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koniec"
+          }
+        }
+      }
+    },
+    "End date": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datum konce"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dátum konca"
+          }
+        }
+      }
+    },
+    "Enter the number of units to start tracking this medication's supply.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadejte počet kusů a začněte sledovat zásobu tohoto léku."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadajte počet kusov a začnite sledovať zásobu tohto lieku."
+          }
+        }
+      }
+    },
+    "Every day": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý den"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý deň"
+          }
+        }
+      }
+    },
+    "Every scheduled dose is recorded.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všechny plánované dávky jsou zaznamenané."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všetky plánované dávky sú zaznamenané."
+          }
+        }
+      }
+    },
+    "Export CSV": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovat CSV"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovať CSV"
+          }
+        }
+      }
+    },
+    "Extra dose": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka navíc"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka navyše"
+          }
+        }
+      }
+    },
+    "Fewer units than the records expect.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Méně kusů, než odpovídá záznamům."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menej kusov, než zodpovedá záznamom."
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historie"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "História"
+          }
+        }
+      }
+    },
+    "Language": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jazyk"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jazyk"
+          }
+        }
+      }
+    },
+    "Last counted": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naposledy spočítáno"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naposledy spočítané"
+          }
+        }
+      }
+    },
+    "Light": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Světlý"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Svetlý"
+          }
+        }
+      }
+    },
+    "Log": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenat"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenať"
+          }
+        }
+      }
+    },
+    "Log extra dose": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenat dávku navíc"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenať dávku navyše"
+          }
+        }
+      }
+    },
+    "Low supply alerts": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornění na docházející zásobu"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornenia na dochádzajúcu zásobu"
+          }
+        }
+      }
+    },
+    "Mark as missed after": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Označit jako zmeškané po"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Označiť ako zmeškané po"
+          }
+        }
+      }
+    },
+    "Me": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ja"
+          }
+        }
+      }
+    },
+    "Meals": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jídlo"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedlo"
+          }
+        }
+      }
+    },
+    "Medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lék"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liek"
+          }
+        }
+      }
+    },
+    "Medications": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Léky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieky"
+          }
+        }
+      }
+    },
+    "Missed": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmeškáno"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmeškané"
+          }
+        }
+      }
+    },
+    "More units than the records expect.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Více kusů, než odpovídá záznamům."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viac kusov, než zodpovedá záznamom."
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Název"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Názov"
+          }
+        }
+      }
+    },
+    "New medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nový lék"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nový liek"
+          }
+        }
+      }
+    },
+    "Next": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příští"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbližšia"
+          }
+        }
+      }
+    },
+    "Next month": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Další měsíc"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ďalší mesiac"
+          }
+        }
+      }
+    },
+    "No doses on this day": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V tento den žádné dávky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V tento deň žiadne dávky"
+          }
+        }
+      }
+    },
+    "No doses recorded yet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatím žádné zaznamenané dávky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatiaľ žiadne zaznamenané dávky"
+          }
+        }
+      }
+    },
+    "No doses today": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes žádné dávky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes žiadne dávky"
+          }
+        }
+      }
+    },
+    "No medications": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žádné léky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žiadne lieky"
+          }
+        }
+      }
+    },
+    "Notes": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poznámka"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poznámka"
+          }
+        }
+      }
+    },
+    "Notifications are allowed": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oznámení jsou povolena"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornenia sú povolené"
+          }
+        }
+      }
+    },
+    "Notifications are turned off": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oznámení jsou vypnutá"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornenia sú vypnuté"
+          }
+        }
+      }
+    },
+    "Only %lld left. Time to get more.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zbývá jen %lld. Je čas zajít pro další."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zostáva len %lld. Je čas zájsť po ďalšie."
+          }
+        }
+      }
+    },
+    "Open system settings": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřít nastavení systému"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvoriť nastavenia systému"
+          }
+        }
+      }
+    },
+    "Overdue": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po termínu"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po termíne"
+          }
+        }
+      }
+    },
+    "Pending": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čeká"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čaká"
+          }
+        }
+      }
+    },
+    "Previous month": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Předchozí měsíc"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predchádzajúci mesiac"
+          }
+        }
+      }
+    },
+    "Recent doses": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poslední dávky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posledné dávky"
+          }
+        }
+      }
+    },
+    "Record the missing doses as taken": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doplnit chybějící dávky jako vzaté"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doplniť chýbajúce dávky ako vzaté"
+          }
+        }
+      }
+    },
+    "Recorded as taken": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenáno jako vzaté"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenané ako vzaté"
+          }
+        }
+      }
+    },
+    "Records this dose as taken now": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamená tuto dávku jako právě vzatou"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamená túto dávku ako práve vzatú"
+          }
+        }
+      }
+    },
+    "Refresh reminders": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obnovit připomínky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obnoviť pripomienky"
+          }
+        }
+      }
+    },
+    "Reminders": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky"
+          }
+        }
+      }
+    },
+    "Reset": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrátit zpět"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrátiť späť"
+          }
+        }
+      }
+    },
+    "Result": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Výsledek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Výsledok"
+          }
+        }
+      }
+    },
+    "Running low, %lld left": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dochází, zbývá %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dochádza, zostáva %lld"
+          }
+        }
+      }
+    },
+    "Running low. Time to get more.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dochází. Je čas zajít pro další."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dochádza. Je čas zájsť po ďalšie."
+          }
+        }
+      }
+    },
+    "Running low: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dochází: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dochádza: %@"
+          }
+        }
+      }
+    },
+    "Runs out": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dojde"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dôjde"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uložit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uložiť"
+          }
+        }
+      }
+    },
+    "Schedule": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plán"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plán"
+          }
+        }
+      }
+    },
+    "Scheduled doses": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plánované dávky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plánované dávky"
+          }
+        }
+      }
+    },
+    "Scheduled reminders: %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naplánované připomínky: %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naplánované pripomienky: %lld"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavení"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavenia"
+          }
+        }
+      }
+    },
+    "Should be at home": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mělo by být doma"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Malo by byť doma"
+          }
+        }
+      }
+    },
+    "Since the last count": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Od posledního spočítání"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Od posledného spočítania"
+          }
+        }
+      }
+    },
+    "Skip": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přeskočit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preskočiť"
+          }
+        }
+      }
+    },
+    "Skipped": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přeskočeno"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preskočené"
+          }
+        }
+      }
+    },
+    "Snooze": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odložit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odložiť"
+          }
+        }
+      }
+    },
+    "Snooze %lld min": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odložit o %lld min"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odložiť o %lld min"
+          }
+        }
+      }
+    },
+    "Source code and license (MPL-2.0)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdrojový kód a licence (MPL-2.0)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdrojový kód a licencia (MPL-2.0)"
+          }
+        }
+      }
+    },
+    "Start": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Začátek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Začiatok"
+          }
+        }
+      }
+    },
+    "Supply": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba"
+          }
+        }
+      }
+    },
+    "Supply check": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontrola zásoby"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontrola zásoby"
+          }
+        }
+      }
+    },
+    "Supply tracking starts with this count.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sledování zásoby začíná tímto počtem."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sledovanie zásoby začína týmto počtom."
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podle systému"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podľa systému"
+          }
+        }
+      }
+    },
+    "Taken": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté"
+          }
+        }
+      }
+    },
+    "Taken %lld of %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato %lld z %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté %lld z %lld"
+          }
+        }
+      }
+    },
+    "Taken at": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato v"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté o"
+          }
+        }
+      }
+    },
+    "Tap + to add your first medication.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klepněte na + a přidejte první lék."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klepnite na + a pridajte prvý liek."
+          }
+        }
+      }
+    },
+    "This month": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tento měsíc"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tento mesiac"
+          }
+        }
+      }
+    },
+    "Time": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čas"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čas"
+          }
+        }
+      }
+    },
+    "Time to take %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je čas vzít si %@."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je čas vziať si %@."
+          }
+        }
+      }
+    },
+    "Time to take your dose.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je čas vzít si dávku."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je čas vziať si dávku."
+          }
+        }
+      }
+    },
+    "Times": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Časy"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Časy"
+          }
+        }
+      }
+    },
+    "Today": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes"
+          }
+        }
+      }
+    },
+    "Track supply": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sledovat zásobu"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sledovať zásobu"
+          }
+        }
+      }
+    },
+    "Turn them on in the system settings to get reminders.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapněte je v nastavení systému, abyste dostávali připomínky."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapnite ich v nastaveniach systému, aby ste dostávali pripomienky."
+          }
+        }
+      }
+    },
+    "Units at home": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusů doma"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusov doma"
+          }
+        }
+      }
+    },
+    "Units extra: %lld. About %lld recorded doses may not have been taken. Review them in History.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusů navíc: %lld. Asi %lld zaznamenaných dávek možná nebylo vzato. Zkontrolujte je v Historii."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusov navyše: %lld. Asi %lld zaznamenaných dávok možno nebolo vzatých. Skontrolujte ich v Histórii."
+          }
+        }
+      }
+    },
+    "Units missing: %lld. That is about %lld doses taken without being recorded.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chybí kusů: %lld. To odpovídá asi %lld dávkám vzatým bez záznamu."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chýba kusov: %lld. To zodpovedá asi %lld dávkam vzatým bez záznamu."
+          }
+        }
+      }
+    },
+    "Units per dose": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusů na dávku"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusov na dávku"
+          }
+        }
+      }
+    },
+    "Units you have at home": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusů, které máte doma"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusov, ktoré máte doma"
+          }
+        }
+      }
+    },
+    "Until": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do"
+          }
+        }
+      }
+    },
+    "Version": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verze"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzia"
+          }
+        }
+      }
+    },
+    "Vzato follows the language you set for it in the system settings. Czech, Slovak and English are available.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato se řídí jazykem, který mu nastavíte v nastavení systému. K dispozici je čeština, slovenština a angličtina."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato sa riadi jazykom, ktorý mu nastavíte v nastaveniach systému. K dispozícii je čeština, slovenčina a angličtina."
+          }
+        }
+      }
+    },
+    "Vzato is not a medical device and does not replace your doctor or pharmacist. It only reminds you and keeps your own notes.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato není zdravotnický prostředek a nenahrazuje lékaře ani lékárníka. Jen připomíná a vede vaše vlastní záznamy."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato nie je zdravotnícka pomôcka a nenahrádza lekára ani lekárnika. Len pripomína a vedie vaše vlastné záznamy."
+          }
+        }
+      }
+    },
+    "Warn when below": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornit pod"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozorniť pod"
+          }
+        }
+      }
+    },
+    "Whole day": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celý den"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celý deň"
+          }
+        }
+      }
+    },
+    "With a meal": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S jídlem"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "S jedlom"
+          }
+        }
+      }
+    },
+    "Without a record": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez záznamu"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez záznamu"
+          }
+        }
+      }
+    },
+    "You are out. Get more as soon as you can.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Došlo. Zajděte pro další co nejdřív."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Došlo. Zájdite po ďalšie čo najskôr."
+          }
+        }
+      }
+    },
+    "Your count matches the records.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Váš počet odpovídá záznamům."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Váš počet zodpovedá záznamom."
+          }
+        }
+      }
+    },
+    "Your data stays on this device and in your iCloud. Nothing is collected.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaše data zůstávají v tomto zařízení a ve vašem iCloudu. Nic se nesbírá."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaše údaje zostávajú v tomto zariadení a vo vašom iCloude. Nič sa nezbiera."
+          }
+        }
+      }
+    },
+    "extra": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "navíc"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "navyše"
+          }
+        }
+      }
+    },
+    "iOS allows at most 64 scheduled reminders. Some times were not scheduled.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS dovolí nejvýše 64 naplánovaných připomínek. Některé časy nebyly naplánovány."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS dovolí najviac 64 naplánovaných pripomienok. Niektoré časy neboli naplánované."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

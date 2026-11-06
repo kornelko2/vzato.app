@@ -1,0 +1,6 @@
+// Copy this file to Config/Local.xcconfig (gitignored) and fill in your own values.
+// Simulator builds work without a team. Device builds, TestFlight and macOS need one.
+DEVELOPMENT_TEAM = ABCDE12345
+
+// Without a paid team, uncomment the next line so macOS builds are signed to run locally only.
+// CODE_SIGN_IDENTITY[sdk=macosx*] = -
