@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026).
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15).
 
 ---
 
@@ -404,3 +404,22 @@ Alternativa k živému sdílení z kapitoly 10: data se nepředávají průběž
 - **Pracnost:** souhrn + PDF malá; `.vzato` balíček a import střední; QR sekvence střední; šifrování malé. Celkově menší než kapitola 10 a bez jejích rizik.
 
 Doporučení: pokud se někdy bude řešit „jak dát data lékaři nebo rodině“, začít tady (souhrn, PDF, `.vzato` balíček přes sdílení), a kapitolu 10 nechat až na případ, kdy je nutné průběžné sledování na dálku.
+
+## 15. Možné rozšíření (mimo v1): pomocník pro týdenní dávkovač
+
+Hodně lidí si léky na týden dopředu rozdělí do plastového dávkovače (7 dní × ráno/poledne/večer/noc). Vzato může s plněním pomoci a potom potvrzovat celý díl najednou, protože „vzal jsem obsah ranní přihrádky“ je jedna akce, ne tři.
+
+### 15.1 Co by uživatel dostal
+
+- **Rozložení dávkovače:** uživatel vybere typ ze seznamu běžných: 7 × 1 (jen ráno), 7 × 2 (ráno/večer), 7 × 3 (ráno/poledne/večer), 7 × 4 (ráno/poledne/večer/noc), 1 × 4 (denní). Hranice dílů jsou časová okna (výchozí: ráno do 10:00, poledne 10–15, večer 15–20, noc po 20:00), která lze upravit. Každý čas v plánu léku tak spadne do jednoho dílu.
+- **Průvodce plněním:** obrazovka „Naplnit dávkovač“ na příští týden: mřížka den × díl, v každé buňce léky s počtem kusů a miniaturou tablety (z kapitoly 3.7), aby se nepletly. Při plnění se buňky odškrtávají. Nahoře součet kusů na týden pro každý lék a porovnání se zásobou: „Ibuprofen: potřeba 14, doma 4“ s odkazem na kontrolu zásoby. Plnění dávkovače je zároveň přesný okamžik pro spočítání zásoby (kapitola 3.6).
+- **Potvrzení celého dílu:** na obrazovce Dnes jsou dávky seskupené po dílech a u každého je tlačítko „Vzato: ráno“, které potvrdí všechny dávky dílu najednou. Jednotlivé dávky jdou stále potvrdit zvlášť. Velká karta směru C ukazuje místo jednoho léku celý díl („Ráno · 3 léky“), pokud je dávkovač zapnutý.
+- **Notifikace po dílech:** místo tří notifikací v 8:00 jedna „Ráno: Letrox, Ibuprofen, Vitamin D“ s akcí „Vzato“ pro celý díl. Šetří limit 64 notifikací a je to pro uživatele dávkovače přirozenější.
+- **Nic se neplánuje dvakrát:** dávkovač nemění plán léků, jen jeho zobrazení a způsob potvrzení. Léky mimo rozložení (např. „každé 2 dny“, kapky) zůstávají jako samostatné dávky.
+
+### 15.2 Co by to znamenalo
+
+- **Model:** entita `Organizer` na profil: typ rozložení, hranice časových oken, `isEnabled`. Nic v záznamech dávek se nemění; seskupení se dopočítává z časů. Žádná migrace stávajících dat.
+- **Logika:** `OrganizerService.slot(for: Date) -> OrganizerSlot`, seskupení `DoseSlot` po dílech, souhrn kusů na týden, porovnání se zásobou. Testovatelné bez UI.
+- **UI:** výběr rozložení v Nastavení, obrazovka Naplnit dávkovač, seskupení a hromadné tlačítko na Dnes, varianta velké karty, hromadná notifikace.
+- **Pracnost:** střední, zhruba jako fáze 3. Závisí na fotografiích (3.7) jen pro miniatury, jinak na ničem.

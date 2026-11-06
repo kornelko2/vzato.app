@@ -88,6 +88,7 @@ struct NextDoseCard: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(Palette.taken)
+            .keyboardShortcut(.defaultAction)
             .accessibilityHint(Text("Records this dose as taken now"))
 
             HStack(spacing: 10) {

@@ -7,6 +7,7 @@ import SwiftUI
 @main
 struct VzatoApp: App {
     private let persistence: PersistenceController
+    @State private var state = AppState()
     @Environment(\.scenePhase) private var scenePhase
 
     init() {
@@ -27,6 +28,7 @@ struct VzatoApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(state)
                 .environment(\.managedObjectContext, persistence.viewContext)
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active {
@@ -34,5 +36,30 @@ struct VzatoApp: App {
                     }
                 }
         }
+        #if os(macOS)
+        .defaultSize(width: 1000, height: 720)
+        #endif
+        .commands {
+            CommandGroup(replacing: .newItem) {
+                Button("New medication") { state.showingNewMedication = true }
+                    .keyboardShortcut("n", modifiers: .command)
+                Button("Log extra dose") { state.showingExtraDose = true }
+                    .keyboardShortcut("n", modifiers: [.command, .shift])
+            }
+            CommandMenu(Text("Go")) {
+                ForEach(Array(AppTab.visible.enumerated()), id: \.element) { index, tab in
+                    Button { state.section = tab } label: { Text(tab.label) }
+                        .keyboardShortcut(KeyEquivalent(Character(String(index + 1))), modifiers: .command)
+                }
+            }
+        }
+
+        #if os(macOS)
+        Settings {
+            SettingsView()
+                .environment(\.managedObjectContext, persistence.viewContext)
+                .frame(minWidth: 480, minHeight: 560)
+        }
+        #endif
     }
 }

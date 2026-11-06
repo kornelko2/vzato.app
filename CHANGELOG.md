@@ -31,6 +31,9 @@ All notable changes to Vzato are listed here. The format follows
   document scanner on iPhone and iPad, photo library and file import everywhere,
   zoomable viewer, pill thumbnail on the Today card. Photos are downscaled to
   2000 px and stored with the medication.
+- iPad and Mac layout: sidebar split view on wide screens, tabs on the iPhone.
+  On the Mac: Settings window, menu commands (New medication ⌘N, Log extra dose
+  ⇧⌘N, Go ⌘1–⌘3) and Return to confirm the featured dose.
 - Unit tests for the scheduler, dose logging, supply, supply check, summaries,
   photo store and CSV.
 

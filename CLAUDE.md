@@ -65,6 +65,8 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   merged with recorded events), `DoseLogger` (the only place stock changes because of a
   dose), `StockService`, `ReconciliationService` (supply check), `NotificationService`,
   `CSVExport`, `DoseSummary`, `PhotoStore` (ImageIO only, no UIKit/AppKit).
+- `Vzato/App/AppState.swift` – `@Observable` navigation state (section, sheets) shared by the
+  root view and the Mac menu commands; present app-wide sheets from `RootView`, not from tabs.
 - `Vzato/Views` – SwiftUI, shared by all platforms; platform differences only in small
   `#if os(iOS)` blocks. `Today/` implements design direction C (one big card). `Photos/` holds the photo section,
   viewer and the iOS-only camera/scanner wrappers (`#if os(iOS)`).

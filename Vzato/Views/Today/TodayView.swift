@@ -8,6 +8,7 @@ import SwiftUI
 /// Direction C: one large card for the dose that needs attention, the rest of the day as a timeline.
 struct TodayView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(AppState.self) private var state
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == NO"))
     private var medications: FetchedResults<Medication>
     // Observed only so the view refreshes when a dose is recorded or reset.
@@ -17,7 +18,6 @@ struct TodayView: View {
     @AppStorage(AppSettings.missedAfterMinutesKey) private var missedAfterMinutes = AppSettings.defaultMissedAfterMinutes
     @AppStorage(AppSettings.snoozeMinutesKey) private var snoozeMinutes = AppSettings.defaultSnoozeMinutes
     @State private var now = Date()
-    @State private var showingExtraDose = false
     private let clock = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
 
     private var grace: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
@@ -69,7 +69,7 @@ struct TodayView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        showingExtraDose = true
+                        state.showingExtraDose = true
                     } label: {
                         Label("Log extra dose", systemImage: "plus")
                     }
@@ -86,9 +86,6 @@ struct TodayView: View {
                         .accessibilityLabel(Text("Taken \(takenCount) of \(slots.count)"))
                     }
                 }
-            }
-            .sheet(isPresented: $showingExtraDose) {
-                ExtraDoseView(medications: Array(medications))
             }
             .onReceive(clock) { now = $0 }
             .onAppear { now = Date() }
@@ -177,5 +174,6 @@ struct LowStockBanner: View {
 
 #Preview {
     TodayView()
+        .environment(AppState())
         .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
 }

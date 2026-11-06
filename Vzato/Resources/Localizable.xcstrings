@@ -835,6 +835,22 @@
         }
       }
     },
+    "Go": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přejít"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prejsť"
+          }
+        }
+      }
+    },
     "History": {
       "localizations": {
         "cs": {

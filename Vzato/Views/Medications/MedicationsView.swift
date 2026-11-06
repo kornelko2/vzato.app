@@ -7,9 +7,9 @@ import SwiftUI
 
 struct MedicationsView: View {
     @Environment(\.managedObjectContext) private var context
+    @Environment(AppState.self) private var state
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == NO"))
     private var medications: FetchedResults<Medication>
-    @State private var showingForm = false
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -36,11 +36,8 @@ struct MedicationsView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button { showingForm = true } label: { Label("Add medication", systemImage: "plus") }
+                    Button { state.showingNewMedication = true } label: { Label("Add medication", systemImage: "plus") }
                 }
-            }
-            .sheet(isPresented: $showingForm) {
-                MedicationFormView(medication: nil)
             }
             .onAppear {
                 if LaunchArguments.opensFirstMedication, path.isEmpty, let first = medications.first {
@@ -95,5 +92,6 @@ struct MedicationRow: View {
 
 #Preview {
     MedicationsView()
+        .environment(AppState())
         .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
 }

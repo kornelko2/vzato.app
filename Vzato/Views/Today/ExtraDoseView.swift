@@ -2,13 +2,15 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import CoreData
 import SwiftUI
 
 /// Logs a dose outside the plan, e.g. a painkiller taken as needed.
 struct ExtraDoseView: View {
     @Environment(\.managedObjectContext) private var context
     @Environment(\.dismiss) private var dismiss
-    let medications: [Medication]
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == NO"))
+    private var medications: FetchedResults<Medication>
     @State private var selected: Medication?
     @State private var date = Date()
 

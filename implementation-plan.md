@@ -178,6 +178,8 @@ Hotovo, když:
 
 ### Fáze 5 – iPad a Mac
 
+**Stav 6. 11. 2026: hotovo v základu** (`NavigationSplitView` se sidebarem na iPadu a Macu, `TabView` na iPhonu, okno Nastavení na Macu, menu Soubor › Nový lék ⌘N / Dávka navíc ⇧⌘N, menu Přejít ⌘1–⌘3, Return potvrdí dávku na kartě). Zbývá ruční kontrola Dynamic Type a rozměrů na fyzických zařízeních.
+
 Úkoly:
 1. `NavigationSplitView` pro široké obrazovky (seznam léků / detail), `TabView` zůstává na iPhone.
 2. Mac: menu příkazy (Nový lék ⌘N, Export), klávesové zkratky, `Settings` scéna místo záložky.
@@ -258,6 +260,10 @@ Podle specifikace, kapitola 12. Model už profil má; přibude správa profilů 
 ### Volitelná fáze 13 – Předání dat při setkání
 
 Podle specifikace, kapitola 14. Pořadí uvnitř fáze: (1) obrazovka Souhrn pro lékaře + PDF přes `ImageRenderer`/`ShareLink`, (2) formát `.vzato` (JSON, verze schématu) s exportem a importem s náhledem, (3) QR kód z balíčku (komprese, sekvence QR pro delší období, čtečka přes `DataScannerViewController` / AVFoundation), (4) šifrovaný balíček heslem (CryptoKit AES‑GCM), (5) „Poslat denní souhrn“ jako jedno klepnutí a Zkratky. Bez serveru, bez nové závislosti.
+
+### Volitelná fáze 14 – Pomocník pro týdenní dávkovač
+
+Podle specifikace, kapitola 15. Pořadí: (1) `Organizer` + `OrganizerService` (rozložení, časová okna, seskupení dávek, týdenní součet kusů) s testy, (2) výběr rozložení v Nastavení, (3) seskupení a tlačítko „Vzato: ráno“ na Dnes a varianta velké karty, (4) obrazovka Naplnit dávkovač s miniaturami a porovnáním se zásobou, (5) hromadná notifikace po dílech. Žádná migrace dat, žádná závislost.
 
 ## 6. Co se rozhodne až po prototypu
 
