@@ -61,13 +61,14 @@ documents have the details: [specification.md](specification.md),
 
 ```bash
 brew install xcodegen
-cp Config/Local.xcconfig.example Config/Local.xcconfig   # add your team, or keep the placeholder
+cp Config/Local.xcconfig.example Config/Local.xcconfig   # optional: your team and CloudKit switches
 xcodegen generate
 open Vzato.xcodeproj
 ```
 
 Simulator builds need no Apple developer team. Device builds, TestFlight and
-macOS do: set `DEVELOPMENT_TEAM` in `Config/Local.xcconfig`, which is gitignored.
+macOS do: set `DEVELOPMENT_TEAM` in `Config/Local.xcconfig`, which is gitignored
+and included by `Config/Defaults.xcconfig` when present.
 
 Command line:
 
@@ -85,13 +86,19 @@ store with demo medications.
 
 Sync is off in a default build. To enable it for your own team:
 
-1. Open `Vzato.xcodeproj` in Xcode once, Signing & Capabilities › + Capability ›
-   iCloud › CloudKit, and pick the container `iCloud.app.vzato`. Xcode registers
-   it for your team.
-2. In `Config/Local.xcconfig` set `VZATO_CLOUDKIT = YES` and
+1. In `Config/Local.xcconfig` set `VZATO_CLOUDKIT = YES` and
    `VZATO_ENTITLEMENTS_VARIANT = CloudKit`, then `xcodegen generate`.
-3. Run a debug build once with the launch argument `--init-cloudkit-schema` to
-   push the schema to the CloudKit development environment.
+2. Build once for a device with automatic signing (Xcode, or
+   `xcodebuild … -destination 'generic/platform=iOS' -allowProvisioningUpdates build`).
+   Automatic signing registers the App ID with iCloud and creates the container
+   `iCloud.app.vzato` for your team.
+3. Run the app on a device signed into iCloud. In the CloudKit development
+   environment the record types are created on first use; the debug launch
+   argument `--init-cloudkit-schema` creates them all at once.
+4. Before the first TestFlight build, open the container in the
+   [CloudKit Console](https://icloud.developer.apple.com/) and *Deploy Schema
+   Changes* to Production. TestFlight and App Store builds use the production
+   environment and will not sync until the schema is there.
 
 Settings shows the sync state. Data goes only to the user's private iCloud
 database.

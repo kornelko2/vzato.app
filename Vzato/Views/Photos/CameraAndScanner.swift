@@ -66,7 +66,7 @@ struct DocumentScannerView: UIViewControllerRepresentable {
 
         nonisolated func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             let pages = (0..<scan.pageCount).compactMap { scan.imageOfPage(at: $0).jpegData(compressionQuality: 0.9) }
-            nonisolated(unsafe) let parent = parent
+            let parent = parent
             MainActor.assumeIsolated {
                 parent.onPages(pages)
                 parent.dismiss()
@@ -74,12 +74,12 @@ struct DocumentScannerView: UIViewControllerRepresentable {
         }
 
         nonisolated func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-            nonisolated(unsafe) let parent = parent
+            let parent = parent
             MainActor.assumeIsolated { parent.dismiss() }
         }
 
         nonisolated func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: any Error) {
-            nonisolated(unsafe) let parent = parent
+            let parent = parent
             MainActor.assumeIsolated { parent.dismiss() }
         }
     }

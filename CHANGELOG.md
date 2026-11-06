@@ -45,7 +45,8 @@ All notable changes to Vzato are listed here. The format follows
 
 ### Added (behind a build flag)
 - iCloud sync through the user's private CloudKit database, with sync status in
-  Settings. Off unless the build sets `VZATO_CLOUDKIT = YES`.
+  Settings. Off unless `Config/Local.xcconfig` sets `VZATO_CLOUDKIT = YES`; the
+  maintainer's builds have it on.
 
 ### Notes
 - Storage is Core Data with `NSPersistentCloudKitContainer` (model version 2).

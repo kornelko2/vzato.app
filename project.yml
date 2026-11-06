@@ -8,18 +8,14 @@ options:
   createIntermediateGroups: true
   xcodeVersion: "16.0"
 
-# Machine-specific signing (DEVELOPMENT_TEAM) lives in Config/Local.xcconfig, which is
-# gitignored. Copy Config/Local.xcconfig.example to Config/Local.xcconfig first.
+# Config/Defaults.xcconfig holds project defaults and includes the gitignored
+# Config/Local.xcconfig (DEVELOPMENT_TEAM, optional CloudKit switches) when present.
 configFiles:
-  Debug: Config/Local.xcconfig
-  Release: Config/Local.xcconfig
+  Debug: Config/Defaults.xcconfig
+  Release: Config/Defaults.xcconfig
 
 settings:
   base:
-    # iCloud sync is opt-in per machine: Config/Local.xcconfig sets VZATO_CLOUDKIT = YES and
-    # VZATO_ENTITLEMENTS_VARIANT = CloudKit once the iCloud container exists for your team.
-    VZATO_CLOUDKIT: "NO"
-    VZATO_ENTITLEMENTS_VARIANT: Local
     SWIFT_VERSION: "6.0"
     SWIFT_STRICT_CONCURRENCY: complete
     SWIFT_EMIT_LOC_STRINGS: YES

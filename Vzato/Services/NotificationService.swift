@@ -218,9 +218,10 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
     }
 
     func clearDelivered(for medication: Medication) {
+        let medicationID = medication.id?.uuidString
         center.getDeliveredNotifications { notifications in
             let ids = notifications
-                .filter { ($0.request.content.userInfo["medicationID"] as? String) == medication.id?.uuidString }
+                .filter { ($0.request.content.userInfo["medicationID"] as? String) == medicationID }
                 .map(\.request.identifier)
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ids)
         }

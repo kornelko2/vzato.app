@@ -37,7 +37,7 @@ visual direction C). Public docs in English: `README.md`, `CHANGELOG.md`,
 The Xcode project is generated and not committed.
 
 ```bash
-cp Config/Local.xcconfig.example Config/Local.xcconfig   # once per clone
+cp Config/Local.xcconfig.example Config/Local.xcconfig   # optional, once per clone
 xcodegen generate                                        # after project.yml or file-tree changes
 xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
@@ -68,6 +68,8 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 - `Vzato/App/SyncMonitor.swift` – observes CloudKit container events (last success, last
   error) and reschedules notifications after remote changes. Entitlement variants live in
   `Config/{iOS,macOS}-{Local,CloudKit}.entitlements`, selected by `VZATO_ENTITLEMENTS_VARIANT`.
+  Build-setting defaults belong in `Config/Defaults.xcconfig`, never in `project.yml` settings,
+  otherwise `Local.xcconfig` cannot override them (project settings beat project xcconfigs).
 - `Vzato/App/AppState.swift` – `@Observable` navigation state (section, sheets) shared by the
   root view and the Mac menu commands; present app-wide sheets from `RootView`, not from tabs.
 - `Vzato/Views` – SwiftUI, shared by all platforms; platform differences only in small

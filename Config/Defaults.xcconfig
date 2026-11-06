@@ -1,0 +1,6 @@
+// Project defaults. Machine-specific overrides go to Config/Local.xcconfig (gitignored),
+// which is included below when present and wins over the defaults.
+VZATO_CLOUDKIT = NO
+VZATO_ENTITLEMENTS_VARIANT = Local
+
+#include? "Local.xcconfig"
