@@ -17,6 +17,88 @@
         }
       }
     },
+    "%lld days": {
+      "localizations": {
+        "cs": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dny"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dne"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld den"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dní"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld day"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld days"
+                }
+              }
+            }
+          }
+        },
+        "sk": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dni"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dňa"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld deň"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dní"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld min": {
       "localizations": {
         "cs": {
@@ -29,6 +111,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld min"
+          }
+        }
+      }
+    },
+    "%lld×": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld×"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld×"
           }
         }
       }
@@ -1009,6 +1107,22 @@
         }
       }
     },
+    "Not confirmed yet. Tap Taken when you have taken it.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatím nepotvrzeno. Až lék vezmete, klepněte na Vzato."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatiaľ nepotvrdené. Keď liek vezmete, klepnite na Vzaté."
+          }
+        }
+      }
+    },
     "Notes": {
       "localizations": {
         "cs": {
@@ -1053,6 +1167,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Upozornenia sú vypnuté"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vypnuto"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vypnuté"
           }
         }
       }
@@ -1233,6 +1363,22 @@
         }
       }
     },
+    "Repeat unconfirmed reminders": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opakovat nepotvrzené připomínky"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opakovať nepotvrdené pripomienky"
+          }
+        }
+      }
+    },
     "Reset": {
       "localizations": {
         "cs": {
@@ -1325,6 +1471,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dôjde"
+          }
+        }
+      }
+    },
+    "Runs out on %@. Time to get more.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dojde %@. Je čas zajít pro další."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dôjde %@. Je čas zájsť po ďalšie."
           }
         }
       }
@@ -1565,6 +1727,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kontrola zásoby"
+          }
+        }
+      }
+    },
+    "Supply of %@ is running out": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba léku %@ dochází"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba lieku %@ dochádza"
           }
         }
       }
@@ -1933,6 +2111,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vzato nie je zdravotnícka pomôcka a nenahrádza lekára ani lekárnika. Len pripomína a vedie vaše vlastné záznamy."
+          }
+        }
+      }
+    },
+    "Warn before running out": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornit před dojitím zásoby"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozorniť pred minutím zásoby"
           }
         }
       }

@@ -81,8 +81,11 @@ final class PersistenceController {
 }
 
 enum SampleData {
+    /// Demo content for simulator screenshots and previews. Times are relative to now so the Today
+    /// screen always shows one taken dose, one overdue dose and upcoming ones.
     @MainActor
-    static func populate(in context: NSManagedObjectContext) {
+    static func populate(in context: NSManagedObjectContext, now: Date = Date()) {
+        let calendar = Calendar.current
         let profileRequest = Profile.fetchRequest()
         profileRequest.predicate = NSPredicate(format: "isDefault == YES")
         let profile = (try? context.fetch(profileRequest).first) ?? {
@@ -91,33 +94,56 @@ enum SampleData {
             profile.isDefault = true
             return profile
         }()
+        let minutesNow = calendar.component(.hour, from: now) * 60 + calendar.component(.minute, from: now)
+        func clamp(_ minutes: Int) -> Int { min(max(minutes, 0), 23 * 60 + 59) }
+        let monthAgo = calendar.date(byAdding: .day, value: -30, to: now)
 
-        let ibuprofen = Medication(context: context)
-        ibuprofen.name = "Ibuprofen"
-        ibuprofen.dosageText = "400 mg"
-        ibuprofen.colorHex = "D9534F"
+        func make(_ name: String, _ dosage: String, _ hex: String, times: [Int], meal: MealRelation = .any) -> Medication {
+            let medication = Medication(context: context)
+            medication.name = name
+            medication.dosageText = dosage
+            medication.colorHex = hex
+            medication.profile = profile
+            let schedule = Schedule(context: context)
+            schedule.minutesOfDay = times.map(clamp)
+            schedule.mealRelation = meal
+            schedule.startDate = monthAgo
+            schedule.medication = medication
+            return medication
+        }
+
+        let letrox = make("Letrox", "50 µg", "3B7DD8", times: [clamp(minutesNow - 150), clamp(minutesNow + 300)], meal: .before)
+        let ibuprofen = make("Ibuprofen", "400 mg", "D9534F", times: [clamp(minutesNow - 25), clamp(minutesNow + 180)], meal: .after)
+        _ = make("Vitamin D", "1 drop", "E0A526", times: [clamp(minutesNow + 60)])
+
         ibuprofen.tracksStock = true
-        ibuprofen.stockCount = 4
+        ibuprofen.unitsPerDose = 1
         ibuprofen.lowStockThreshold = 5
+        ibuprofen.stockCount = 4
         ibuprofen.stockAtLastCount = 10
-        ibuprofen.stockCountedAt = Calendar.current.date(byAdding: .day, value: -3, to: Date())
-        ibuprofen.profile = profile
-        let s1 = Schedule(context: context)
-        s1.minutesOfDay = [8 * 60, 20 * 60]
-        s1.mealRelation = .after
-        s1.startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date())
-        s1.medication = ibuprofen
+        ibuprofen.stockCountedAt = calendar.date(byAdding: .day, value: -3, to: now)
 
-        let vitamin = Medication(context: context)
-        vitamin.name = "Vitamin D"
-        vitamin.dosageText = "1 drop"
-        vitamin.colorHex = "E0A526"
-        vitamin.profile = profile
-        let s2 = Schedule(context: context)
-        s2.minutesOfDay = [12 * 60]
-        s2.startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date())
-        s2.medication = vitamin
-
+        // Letrox was taken this morning, a few minutes late.
+        if let scheduled = calendar.date(bySettingHour: clamp(minutesNow - 150) / 60, minute: clamp(minutesNow - 150) % 60, second: 0, of: now) {
+            let event = DoseEvent(context: context)
+            event.scheduledAt = scheduled
+            event.status = .taken
+            event.takenAt = scheduled.addingTimeInterval(4 * 60)
+            event.medication = letrox
+        }
+        // Some history for the calendar: last week fully taken except one missed dose.
+        for dayOffset in 1...7 {
+            guard let day = calendar.date(byAdding: .day, value: -dayOffset, to: now) else { continue }
+            for (medication, minutes) in [(letrox, clamp(minutesNow - 150)), (ibuprofen, clamp(minutesNow - 25))] {
+                if dayOffset == 3 && medication == ibuprofen { continue }
+                guard let scheduled = calendar.date(bySettingHour: minutes / 60, minute: minutes % 60, second: 0, of: day) else { continue }
+                let event = DoseEvent(context: context)
+                event.scheduledAt = scheduled
+                event.status = .taken
+                event.takenAt = scheduled.addingTimeInterval(120)
+                event.medication = medication
+            }
+        }
         try? context.save()
     }
 }

@@ -31,9 +31,13 @@ enum AppSettings {
     static let snoozeMinutesKey = "snoozeMinutes"
     static let missedAfterMinutesKey = "missedAfterMinutes"
     static let lowStockNotificationsKey = "lowStockNotifications"
+    static let repeatCountKey = "repeatCount"
+    static let runOutWarningDaysKey = "runOutWarningDays"
 
     static let defaultSnoozeMinutes = 10
     static let defaultMissedAfterMinutes = 120
+    static let defaultRepeatCount = 2
+    static let defaultRunOutWarningDays = 7
 
     static var snoozeMinutes: Int {
         let value = UserDefaults.standard.integer(forKey: snoozeMinutesKey)
@@ -47,8 +51,41 @@ enum AppSettings {
 
     static var missedAfterInterval: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
 
+    /// Follow-up reminders after an unconfirmed dose (0 = off).
+    static var repeatCount: Int {
+        guard UserDefaults.standard.object(forKey: repeatCountKey) != nil else { return defaultRepeatCount }
+        return max(0, min(3, UserDefaults.standard.integer(forKey: repeatCountKey)))
+    }
+
+    /// Days before the projected run-out date to warn (0 = off).
+    static var runOutWarningDays: Int {
+        guard UserDefaults.standard.object(forKey: runOutWarningDaysKey) != nil else { return defaultRunOutWarningDays }
+        return max(0, min(30, UserDefaults.standard.integer(forKey: runOutWarningDaysKey)))
+    }
+
     static var lowStockNotificationsEnabled: Bool {
         guard UserDefaults.standard.object(forKey: lowStockNotificationsKey) != nil else { return true }
         return UserDefaults.standard.bool(forKey: lowStockNotificationsKey)
+    }
+}
+
+/// Debug-only launch arguments used for simulator screenshots and UI work.
+enum LaunchArguments {
+    static var initialTab: String? {
+        #if DEBUG
+        let args = CommandLine.arguments
+        guard let index = args.firstIndex(of: "--tab"), index + 1 < args.count else { return nil }
+        return args[index + 1]
+        #else
+        return nil
+        #endif
+    }
+
+    static var opensFirstMedication: Bool {
+        #if DEBUG
+        return CommandLine.arguments.contains("--open-first-medication")
+        #else
+        return false
+        #endif
     }
 }

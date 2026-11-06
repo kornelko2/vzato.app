@@ -77,7 +77,7 @@ enum ReconciliationService {
 
     /// Saves the counted stock. Optionally marks the oldest unaccounted scheduled doses as taken
     /// (source: reconciliation) to match the count. Never removes records.
-    static func apply(_ report: ReconciliationReport, actualStock: Int, recordMissingDoses: Bool, context: NSManagedObjectContext, now: Date = Date(), calendar: Calendar = .current, notifier: any LowStockNotifying) {
+    static func apply(_ report: ReconciliationReport, actualStock: Int, recordMissingDoses: Bool, context: NSManagedObjectContext, now: Date = Date(), calendar: Calendar = .current, notifier: any DoseNotifying) {
         let medication = report.medication
         if recordMissingDoses, case .unrecordedDoses(let count) = ReconciliationReport(
             medication: medication, since: report.since, scheduledDoses: report.scheduledDoses,

@@ -10,9 +10,10 @@ struct MedicationsView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == NO"))
     private var medications: FetchedResults<Medication>
     @State private var showingForm = false
+    @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List {
                 ForEach(medications) { medication in
                     NavigationLink(value: medication) {
@@ -40,6 +41,11 @@ struct MedicationsView: View {
             }
             .sheet(isPresented: $showingForm) {
                 MedicationFormView(medication: nil)
+            }
+            .onAppear {
+                if LaunchArguments.opensFirstMedication, path.isEmpty, let first = medications.first {
+                    path.append(first)
+                }
             }
         }
     }

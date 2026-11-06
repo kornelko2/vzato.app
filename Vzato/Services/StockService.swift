@@ -4,9 +4,16 @@
 
 import Foundation
 
+/// What the services need from the notification layer. Kept small so tests can use a spy.
 @MainActor
-protocol LowStockNotifying: AnyObject {
+protocol DoseNotifying: AnyObject {
     func notifyLowStock(_ medication: Medication)
+    /// A dose was confirmed or skipped: pending follow-up reminders for it can go.
+    func doseResolved(medicationID: UUID?, scheduledAt: Date)
+}
+
+extension DoseNotifying {
+    func doseResolved(medicationID: UUID?, scheduledAt: Date) {}
 }
 
 @MainActor
@@ -23,7 +30,7 @@ enum StockService {
     }
 
     /// Sends one low-stock notification per drop below the threshold.
-    static func checkLowStock(_ medication: Medication, now: Date = Date(), notifier: any LowStockNotifying) {
+    static func checkLowStock(_ medication: Medication, now: Date = Date(), notifier: any DoseNotifying) {
         guard medication.isLowStock else {
             medication.lowStockNotifiedAt = nil
             return

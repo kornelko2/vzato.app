@@ -52,7 +52,7 @@ final class TestStore {
 }
 
 @MainActor
-final class SpyNotifier: LowStockNotifying {
+final class SpyNotifier: DoseNotifying {
     var lowStockNames: [String] = []
     func notifyLowStock(_ medication: Medication) {
         lowStockNames.append(medication.name)

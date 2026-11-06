@@ -7,6 +7,7 @@ import SwiftUI
 @main
 struct VzatoApp: App {
     private let persistence: PersistenceController
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         persistence = PersistenceController.shared
@@ -27,6 +28,11 @@ struct VzatoApp: App {
         WindowGroup {
             RootView()
                 .environment(\.managedObjectContext, persistence.viewContext)
+                .onChange(of: scenePhase) { _, phase in
+                    if phase == .active {
+                        Task { await NotificationService.shared.rescheduleAll() }
+                    }
+                }
         }
     }
 }

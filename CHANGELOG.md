@@ -24,7 +24,10 @@ All notable changes to Vzato are listed here. The format follows
 - Settings: appearance, snooze length, missed-after grace period, low-supply
   alerts, notification permission.
 - Debug launch argument `--sample-data`.
-- Unit tests for the scheduler, dose logging, supply, supply check and CSV.
+- Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),
+  cancelled when the dose is confirmed or skipped.
+- Early warning a configurable number of days before the supply runs out.
+- Unit tests for the scheduler, dose logging, supply, supply check, summaries and CSV.
 
 ### Notes
 - Storage is Core Data with `NSPersistentCloudKitContainer`; iCloud sync is not

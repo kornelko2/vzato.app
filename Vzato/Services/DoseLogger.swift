@@ -9,7 +9,7 @@ import CoreData
 struct DoseLogger {
     let context: NSManagedObjectContext
     var now: Date = Date()
-    var notifier: any LowStockNotifying = NotificationService.shared
+    var notifier: any DoseNotifying = NotificationService.shared
 
     @discardableResult
     func markTaken(_ slot: DoseSlot, at takenAt: Date? = nil, source: DoseSource = .app) -> DoseEvent {
@@ -55,6 +55,9 @@ struct DoseLogger {
         save()
         if let medication = event.medication {
             StockService.checkLowStock(medication, now: now, notifier: notifier)
+        }
+        if status != .pending, let scheduledAt = event.scheduledAt {
+            notifier.doseResolved(medicationID: event.medication?.id, scheduledAt: scheduledAt)
         }
     }
 

@@ -5,14 +5,6 @@
 import CoreData
 import SwiftUI
 
-struct DaySummary {
-    var total = 0
-    var taken = 0
-    var skipped = 0
-    var missed = 0
-    var pending = 0
-}
-
 struct HistoryView: View {
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)])
@@ -35,30 +27,10 @@ struct HistoryView: View {
 
     private var monthSummaries: [Date: DaySummary] {
         _ = events.count
-        guard let range = calendar.range(of: .day, in: .month, for: monthStart) else { return [:] }
-        var result: [Date: DaySummary] = [:]
-        for offset in 0..<range.count {
-            guard let day = calendar.date(byAdding: .day, value: offset, to: monthStart) else { continue }
-            var summary = DaySummary()
-            for slot in DoseScheduler.slots(for: Array(medications), on: day, calendar: calendar) {
-                summary.total += 1
-                switch slot.status(now: now, grace: grace) {
-                case .taken: summary.taken += 1
-                case .skipped: summary.skipped += 1
-                case .missed: summary.missed += 1
-                case .pending: summary.pending += 1
-                }
-            }
-            if summary.total > 0 { result[day] = summary }
-        }
-        return result
+        return DoseSummary.byDay(medications: Array(medications), monthStart: monthStart, now: now, grace: grace, calendar: calendar)
     }
 
-    private var monthTotals: DaySummary {
-        monthSummaries.values.reduce(into: DaySummary()) { acc, s in
-            acc.total += s.total; acc.taken += s.taken; acc.skipped += s.skipped; acc.missed += s.missed; acc.pending += s.pending
-        }
-    }
+    private var monthTotals: DaySummary { DoseSummary.total(Array(monthSummaries.values)) }
 
     var body: some View {
         NavigationStack {
@@ -88,10 +60,9 @@ struct HistoryView: View {
                     LabeledContent("Taken") { Text(totals.taken, format: .number) }
                     LabeledContent("Missed") { Text(totals.missed, format: .number) }
                     LabeledContent("Skipped") { Text(totals.skipped, format: .number) }
-                    let decided = totals.taken + totals.missed + totals.skipped
-                    if decided > 0 {
+                    if let adherence = totals.adherence {
                         LabeledContent("Adherence") {
-                            Text(Double(totals.taken) / Double(decided), format: .percent.precision(.fractionLength(0)))
+                            Text(adherence, format: .percent.precision(.fractionLength(0)))
                         }
                     }
                 }

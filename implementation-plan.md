@@ -111,7 +111,7 @@ Každá fáze končí buildem, který jde pustit a používat. Nic se neodklád�
 
 ### Fáze 1 – Prototyp na iPhone (jistota, že dávka byla vzata)
 
-**Stav 6. 11. 2026: hotovo** včetně základů fází 2 a 3 (kalendář, export CSV, zásoby, kontrola zásoby), 16 unit testů, archiv pro TestFlight prošel. Zbývá ověřit notifikace na fyzickém zařízení a doladit Mac/iPad layout.
+**Stav 6. 11. 2026: fáze 1–3 hotové** (v1): kalendář, export CSV, zásoby, kontrola zásoby, opakování nepotvrzených připomínek, včasné upozornění před dojitím zásoby, 20 unit testů, build pro iOS i macOS, archiv pro TestFlight prošel. Zbývá ověřit notifikace na fyzickém zařízení a doladit Mac/iPad layout (fáze 5).
 
 Cíl: jeden lék, jeden plán, notifikace, přehled dneška, tři jazyky. Jeden univerzální target od začátku; Mac a iPad se jen ověřují, že se spustí, layout se dotahuje ve fázi 5.
 

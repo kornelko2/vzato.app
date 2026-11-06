@@ -9,6 +9,8 @@ struct SettingsView: View {
     @AppStorage(AppSettings.snoozeMinutesKey) private var snoozeMinutes = AppSettings.defaultSnoozeMinutes
     @AppStorage(AppSettings.missedAfterMinutesKey) private var missedAfterMinutes = AppSettings.defaultMissedAfterMinutes
     @AppStorage(AppSettings.lowStockNotificationsKey) private var lowStockNotifications = true
+    @AppStorage(AppSettings.repeatCountKey) private var repeatCount = AppSettings.defaultRepeatCount
+    @AppStorage(AppSettings.runOutWarningDaysKey) private var runOutWarningDays = AppSettings.defaultRunOutWarningDays
 
     private var notifications: NotificationService { NotificationService.shared }
 
@@ -50,10 +52,24 @@ struct SettingsView: View {
                     Stepper(value: $missedAfterMinutes, in: 30...360, step: 30) {
                         LabeledContent("Mark as missed after") { Text("\(missedAfterMinutes) min") }
                     }
+                    Stepper(value: $repeatCount, in: 0...3) {
+                        LabeledContent("Repeat unconfirmed reminders") {
+                            if repeatCount == 0 { Text("Off") } else { Text("\(repeatCount)×") }
+                        }
+                    }
                     Toggle("Low supply alerts", isOn: $lowStockNotifications)
+                    Stepper(value: $runOutWarningDays, in: 0...30) {
+                        LabeledContent("Warn before running out") {
+                            if runOutWarningDays == 0 { Text("Off") } else { Text("\(runOutWarningDays) days") }
+                        }
+                    }
+                    .disabled(!lowStockNotifications)
                     Button("Refresh reminders") {
                         Task { await notifications.rescheduleAll() }
                     }
+                    .onChange(of: repeatCount) { Task { await notifications.rescheduleAll() } }
+                    .onChange(of: runOutWarningDays) { Task { await notifications.rescheduleAll() } }
+                    .onChange(of: snoozeMinutes) { Task { await notifications.rescheduleAll() } }
                 } header: {
                     Text("Reminders")
                 } footer: {

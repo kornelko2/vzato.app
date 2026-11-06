@@ -10,7 +10,7 @@ import UserNotifications
 /// Local notifications for scheduled doses and low stock. No push server; everything is scheduled on device.
 @MainActor
 @Observable
-final class NotificationService: NSObject, UNUserNotificationCenterDelegate, LowStockNotifying {
+final class NotificationService: NSObject, UNUserNotificationCenterDelegate, DoseNotifying {
     static let shared = NotificationService()
 
     enum Category {
@@ -108,8 +108,74 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Low
                 }
             }
         }
+        if !limited {
+            limited = scheduleFollowUps(for: medications, now: now, count: &count)
+        }
+        if !limited {
+            limited = scheduleRunOutWarnings(for: medications, now: now, count: &count)
+        }
         scheduledCount = count
         hitLimit = limited
+    }
+
+    /// One-off reminders after each unconfirmed dose in the next 48 hours, `repeatCount` times,
+    /// `snoozeMinutes` apart. Cancelled when the dose is confirmed or skipped.
+    private func scheduleFollowUps(for medications: [Medication], now: Date, count: inout Int) -> Bool {
+        let repeats = AppSettings.repeatCount
+        guard repeats > 0 else { return false }
+        let calendar = Calendar.current
+        let window = DateInterval(start: now, end: now.addingTimeInterval(48 * 60 * 60))
+        let slots = DoseScheduler.slots(for: medications, in: window, calendar: calendar)
+            .filter { $0.event == nil && !$0.isUnscheduled && $0.scheduledAt > now }
+        for slot in slots {
+            let minutesOfDay = calendar.component(.hour, from: slot.scheduledAt) * 60 + calendar.component(.minute, from: slot.scheduledAt)
+            for attempt in 1...repeats {
+                if count >= Self.pendingLimit { return true }
+                let fire = slot.scheduledAt.addingTimeInterval(TimeInterval(attempt * AppSettings.snoozeMinutes * 60))
+                let content = doseContent(for: slot.medication, minutesOfDay: minutesOfDay)
+                content.body = String(localized: "Not confirmed yet. Tap Taken when you have taken it.")
+                let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                let id = Self.followUpID(medicationID: slot.medication.id, scheduledAt: slot.scheduledAt, attempt: attempt)
+                center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger)) { _ in }
+                count += 1
+            }
+        }
+        return false
+    }
+
+    /// One notification per tracked medication, `runOutWarningDays` before the projected run-out, at 9:00.
+    private func scheduleRunOutWarnings(for medications: [Medication], now: Date, count: inout Int) -> Bool {
+        let days = AppSettings.runOutWarningDays
+        guard days > 0, AppSettings.lowStockNotificationsEnabled else { return false }
+        let calendar = Calendar.current
+        for medication in medications where medication.tracksStock {
+            guard let runOut = StockService.projectedRunOutDate(for: medication, from: now, calendar: calendar),
+                  let warnDay = calendar.date(byAdding: .day, value: -days, to: calendar.startOfDay(for: runOut)),
+                  let fire = calendar.date(bySettingHour: 9, minute: 0, second: 0, of: warnDay),
+                  fire > now else { continue }
+            if count >= Self.pendingLimit { return true }
+            let content = UNMutableNotificationContent()
+            content.title = String(localized: "Supply of \(medication.name) is running out")
+            content.body = String(localized: "Runs out on \(runOut.formatted(date: .long, time: .omitted)). Time to get more.")
+            content.sound = .default
+            content.categoryIdentifier = Category.lowStock
+            content.threadIdentifier = "lowstock"
+            let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            center.add(UNNotificationRequest(identifier: "runout|\(medication.id?.uuidString ?? "")", content: content, trigger: trigger)) { _ in }
+            count += 1
+        }
+        return false
+    }
+
+    static func followUpID(medicationID: UUID?, scheduledAt: Date, attempt: Int) -> String {
+        "repeat|\(medicationID?.uuidString ?? "")|\(Int(scheduledAt.timeIntervalSince1970))|\(attempt)"
+    }
+
+    func doseResolved(medicationID: UUID?, scheduledAt: Date) {
+        let ids = (1...3).map { Self.followUpID(medicationID: medicationID, scheduledAt: scheduledAt, attempt: $0) }
+        center.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
     private func add(id: String, content: UNNotificationContent, components: DateComponents) {
