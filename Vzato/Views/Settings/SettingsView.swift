@@ -11,6 +11,7 @@ struct SettingsView: View {
     @AppStorage(AppSettings.lowStockNotificationsKey) private var lowStockNotifications = true
     @AppStorage(AppSettings.repeatCountKey) private var repeatCount = AppSettings.defaultRepeatCount
     @AppStorage(AppSettings.runOutWarningDaysKey) private var runOutWarningDays = AppSettings.defaultRunOutWarningDays
+    @AppStorage(AppSettings.appIconKey) private var appIcon = AppIcon.pill
 
     private var notifications: NotificationService { NotificationService.shared }
 
@@ -42,6 +43,35 @@ struct SettingsView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    #if os(iOS)
+                    if UIApplication.shared.supportsAlternateIcons {
+                        HStack(spacing: 20) {
+                            ForEach(AppIcon.allCases) { icon in
+                                Button {
+                                    appIcon = icon
+                                } label: {
+                                    VStack(spacing: 6) {
+                                        Image(icon.previewAssetName)
+                                            .resizable()
+                                            .frame(width: 64, height: 64)
+                                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                                            .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(appIcon == icon ? Color.accentColor : .clear, lineWidth: 3))
+                                        Text(icon.label).font(.caption)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel(Text(icon.label))
+                                .accessibilityAddTraits(appIcon == icon ? .isSelected : [])
+                            }
+                            Spacer()
+                        }
+                        .padding(.vertical, 4)
+                        .onChange(of: appIcon) { _, icon in
+                            guard UIApplication.shared.alternateIconName != icon.alternateIconName else { return }
+                            UIApplication.shared.setAlternateIconName(icon.alternateIconName)
+                        }
+                    }
+                    #endif
                 }
 
                 Section {

@@ -27,6 +27,8 @@ All notable changes to Vzato are listed here. The format follows
   the timeline and in the reminder text.
 - Doses in half or quarter tablets; supply counts can be fractional and are
   shown as 10½.
+- App icon: pill (default) or weekly organizer, selectable in Settings on
+  iPhone and iPad.
 - Settings: appearance, snooze length, missed-after grace period, low-supply
   alerts, notification permission.
 - Debug launch argument `--sample-data`.
@@ -50,7 +52,6 @@ All notable changes to Vzato are listed here. The format follows
 
 ### Notes
 - Storage is Core Data with `NSPersistentCloudKitContainer` (model version 2).
-- The app icon is a placeholder; the final design is pending.
 
 ## [0.1.0] - unreleased
 

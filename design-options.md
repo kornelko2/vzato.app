@@ -210,3 +210,5 @@ Domovská obrazovka je den na časové ose s týdenním pruhem nahoře. Dnes, hi
 **Směr C „Jistota“ na nativním základu směru A.** Obrazovka Dnes dostane velkou kartu nejbližší dávky s obřím tlačítkem a miniaturou tablety; Historie, Léky a Nastavení zůstanou systémové seznamy. Tím se nejlépe pokryje hlavní cíl ze specifikace (uživatel má vždy jistotu, že dávku vzal) za malou cenu, a stejná karta poslouží jako widget ve fázi 7. Pokud se později ukáže, že aplikace potřebuje víc osobnosti pro App Store, dá se na kartu a ikonu přidat teplejší paleta ze směru B, aniž by se měnila struktura.
 
 Název: Vzato / vzato.app (kapitola 1), čeká jen na kontrolu ochranných známek.
+
+**Ikona, rozhodnuto 6. 11. 2026:** návrh E (`Design/icon/E-pulena-tableta-fajfka.svg`, rozpůlená tableta bílá / červený proužek / světle modrá, červená fajfka vlevo dole) jako výchozí, návrh F (`F-davkovac-fajfka.svg`, dávkovač ve stejném stylu) jako volitelná alternativní ikona v Nastavení na iOS. Obě se renderují skriptem `Scripts/render-icons.sh`. Dřívější návrhy A–D zůstávají v adresáři jako historie.

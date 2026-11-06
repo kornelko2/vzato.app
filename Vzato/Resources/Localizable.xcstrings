@@ -3333,6 +3333,28 @@
         }
       }
     },
+    "Organizer": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávkovač"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszeradagoló"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávkovač"
+          }
+        }
+      }
+    },
     "Overdue": {
       "localizations": {
         "cs": {
@@ -4121,6 +4143,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zobraziť fotografiu tablety"
+          }
+        }
+      }
+    },
+    "Sign in to iCloud in the system settings to sync.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro synchronizaci se přihlaste k iCloudu v nastavení systému."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A szinkronizáláshoz jelentkezzen be az iCloudba a rendszerbeállításokban."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na synchronizáciu sa prihláste do iCloudu v nastaveniach systému."
           }
         }
       }
@@ -5115,6 +5159,50 @@
         }
       }
     },
+    "Your iCloud account needs attention in the system settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Váš účet iCloud vyžaduje pozornost v nastavení systému."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az iCloud-fiókja figyelmet igényel a rendszerbeállításokban."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Váš účet iCloud vyžaduje pozornosť v nastaveniach systému."
+          }
+        }
+      }
+    },
+    "Your iCloud storage is full. Free up space or upgrade your iCloud plan; sync continues automatically afterwards.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaše úložiště iCloud je plné. Uvolněte místo nebo navyšte tarif iCloud; synchronizace pak pokračuje sama."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az iCloud-tárhelye megtelt. Szabadítson fel helyet vagy bővítse az iCloud-csomagot; a szinkronizálás utána magától folytatódik."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaše úložisko iCloud je plné. Uvoľnite miesto alebo navýšte plán iCloud; synchronizácia potom pokračuje sama."
+          }
+        }
+      }
+    },
     "extra": {
       "localizations": {
         "cs": {
@@ -5133,6 +5221,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "navyše"
+          }
+        }
+      }
+    },
+    "iCloud is not reachable right now. Sync will retry on its own.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud teď není dostupný. Synchronizace to zkusí znovu sama."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az iCloud most nem érhető el. A szinkronizálás magától újrapróbálkozik."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud teraz nie je dostupný. Synchronizácia to skúsi znova sama."
           }
         }
       }

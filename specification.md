@@ -139,7 +139,7 @@ Uživatel si občas není jistý, zda lék vzal a jen zapomněl potvrdit, nebo p
 ### 3.11 Nastavení
 
 - Jazyk: čeština, slovenština, angličtina a maďarština. Aplikace se řídí jazykem systému, resp. jazykem nastaveným pro aplikaci v Nastavení systému. V aplikaci je odkaz, jak jazyk změnit.
-- Vzhled: světlý, tmavý, podle systému.
+- Vzhled: světlý, tmavý, podle systému. Ikona aplikace: tableta (výchozí) nebo dávkovač (iOS, iPadOS; Mac má vždy tabletu).
 - Výchozí odklad notifikace, počet opakování, lhůta pro „zmeškáno“.
 - Upozornění na zásoby: zapnout/vypnout, kolik dní předem.
 - Správa oprávnění (notifikace, fotoaparát, Health).

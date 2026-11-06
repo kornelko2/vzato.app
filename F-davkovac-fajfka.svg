@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Vzato icon draft F: weekly pill organizer in the E palette, red check mark bottom left -->
+  <rect width="1024" height="1024" fill="#3F8A5C"/>
+  <!-- organizer body -->
+  <rect x="132" y="190" width="760" height="430" rx="64" fill="#FFFFFF"/>
+  <!-- lids: 3 columns x 2 rows, light blue; red stripe separates the rows -->
+  <g fill="#BFDCF5">
+    <rect x="170" y="228" width="218" height="160" rx="28"/>
+    <rect x="403" y="228" width="218" height="160" rx="28"/>
+    <rect x="636" y="228" width="218" height="160" rx="28"/>
+    <rect x="170" y="422" width="218" height="160" rx="28"/>
+    <rect x="403" y="422" width="218" height="160" rx="28"/>
+    <rect x="636" y="422" width="218" height="160" rx="28"/>
+  </g>
+  <rect x="170" y="398" width="684" height="14" rx="7" fill="#E0453A"/>
+  <!-- pills inside the first compartments -->
+  <g fill="#FFFFFF">
+    <circle cx="279" cy="308" r="34"/>
+    <circle cx="512" cy="308" r="34"/>
+    <circle cx="745" cy="308" r="34"/>
+    <circle cx="279" cy="502" r="34"/>
+  </g>
+  <!-- red check mark, bottom left -->
+  <circle cx="236" cy="796" r="138" fill="#FFFFFF"/>
+  <path d="M 168 800 L 218 850 L 308 740" fill="none" stroke="#E0453A" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

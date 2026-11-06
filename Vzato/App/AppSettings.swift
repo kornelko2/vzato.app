@@ -33,6 +33,7 @@ enum AppSettings {
     static let lowStockNotificationsKey = "lowStockNotifications"
     static let repeatCountKey = "repeatCount"
     static let runOutWarningDaysKey = "runOutWarningDays"
+    static let appIconKey = "appIcon"
 
     static let defaultSnoozeMinutes = 10
     static let defaultMissedAfterMinutes = 120
@@ -87,5 +88,33 @@ enum LaunchArguments {
         #else
         return false
         #endif
+    }
+}
+
+/// Home screen icon. The organizer variant is an alternate icon on iOS; the Mac always shows the pill.
+enum AppIcon: String, CaseIterable, Identifiable {
+    case pill, organizer
+    var id: String { rawValue }
+
+    var label: LocalizedStringResource {
+        switch self {
+        case .pill: "Pill"
+        case .organizer: "Organizer"
+        }
+    }
+
+    var previewAssetName: String {
+        switch self {
+        case .pill: "IconPreviewPill"
+        case .organizer: "IconPreviewOrganizer"
+        }
+    }
+
+    /// nil means the primary icon.
+    var alternateIconName: String? {
+        switch self {
+        case .pill: nil
+        case .organizer: "AppIcon-Organizer"
+        }
     }
 }

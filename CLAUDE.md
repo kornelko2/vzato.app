@@ -77,8 +77,9 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   viewer and the iOS-only camera/scanner wrappers (`#if os(iOS)`).
 - `VzatoTests` – Swift Testing, in-memory store, fixed Europe/Prague calendar, dates
   start on Monday 2 Nov 2026. Use `TestStore` and `SpyNotifier` from `TestSupport.swift`.
-- `Design/icon` – icon drafts as SVG (final icon pending; the asset catalog holds a
-  placeholder rendered by `Scripts/make-app-icon.swift`).
+- `Design/icon` – icon sources as SVG. E (pill) is the primary icon, F (organizer) the iOS
+  alternate icon; `Scripts/render-icons.sh` renders both into the asset catalog (needs
+  Inkscape). Never edit the PNGs by hand; change the SVG and re-run the script.
 
 ## Conventions
 
