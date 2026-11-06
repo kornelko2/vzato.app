@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac.
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena.
 
 ---
 
@@ -71,7 +71,7 @@ Potvrzení „vzal jsem“ je hlavní akce aplikace. Musí být vždy na jedno k
 Design: zvolen směr C „Jistota“ (viz `design-options.md`). Obrazovka Dnes má nahoře jednu velkou kartu s nejbližší nebo nejstarší nepotvrzenou dávkou, miniaturou tablety a obřím tlačítkem „Vzal jsem“, pod ní „Odložit“ a „Přeskočit“, a dále celý den jako časovou osu. Ostatní obrazovky jsou systémové seznamy.
 
 - Přehled dneška: seznam dávek rozdělený na „Teď“ (čeká nebo po termínu), „Později“ a „Hotovo“. Stav: čeká / vzato / vynecháno / zmeškáno.
-- Velké tlačítko „Vzal jsem“ u každé čekající dávky. Potvrzení lze udělat z aplikace, z notifikace i z widgetu.
+- Velké tlačítko „Vzato“ (rodově neutrální, shodné s názvem aplikace; rozhodnuto 6. 11. 2026) u každé čekající dávky. Potvrzení lze udělat z aplikace, z notifikace i z widgetu.
 - U vzaté dávky je vidět čas potvrzení („Vzato v 8:05“), aby uživatel věděl, že ji nevzal dvakrát.
 - Dávka po termínu je označena „Po termínu“ a zůstává nahoře v přehledu, dokud ji uživatel nepotvrdí nebo nepřeskočí.
 - Dávka, která není potvrzena ani přeskočena do nastavené lhůty (výchozí 2 hodiny, nastavitelné), se zobrazí jako „Zmeškaná“. Zmeškanou dávku lze dodatečně potvrdit (s původním časem nebo skutečným časem).
@@ -380,3 +380,27 @@ Zvažovaná varianta: vlastní server, který vidí jen šifrované bloby (end-t
 Server by dával smysl jen tehdy, když CloudKit nestačí: **klient pro Android nebo web** (rodič se starým Androidem, pečovatel bez iPhonu) nebo uživatel bez iCloudu. Pro sdílení s rodinou uvnitř světa Apple server potřeba není, to řeší CKShare. Až bude Android na stole, bude to samostatné rozhodnutí s rozpočtem, a i pak je lepší začít u otázky, zda stačí export/odkaz než plnohodnotný server.
 
 Zkratka: jádro ve fázích 1–3 je malá aplikace a má zůstat malá. Rozšíření v kapitolách 10–12 nejsou „velká aplikace“, jsou to další fáze stejné malé aplikace. Horké to není, pokud se nepostaví server. **Rozhodnuto 6. 11. 2026: server se nestaví.**
+
+## 14. Možné rozšíření (mimo v1): předání dat při setkání (QR kód, export, souhrn)
+
+Alternativa k živému sdílení z kapitoly 10: data se nepředávají průběžně, ale **jednorázově a vědomě**, když se lidé potkají nebo když uživatel klepne na „poslat“. Lékař v ordinaci, synovec na návštěvě. Žádný přístup na dálku, žádné pozvánky, žádný stav „kdo co vidí“. Soukromí je triviální: uživatel ukáže nebo pošle přesně to, co chce, a tím to končí.
+
+### 14.1 Varianty
+
+| Varianta | Jak | Hodí se na | Omezení |
+|---|---|---|---|
+| **Ukázat obrazovku** | Souhrn za období (léky, dodržení, zmeškané dávky, zásoby) jako jedna přehledná obrazovka, velké písmo | lékař, 2 minuty v ordinaci | nic se nepřenáší, jen se ukáže |
+| **QR kód na displeji** | Aplikace zobrazí QR, druhý telefon ho naskenuje (Vzato nebo fotoaparát). Obsah: kompaktní JSON, komprimovaný; jeden QR unese cca 2–3 KB, tj. zhruba měsíc dávek pro několik léků; delší období jako série QR kódů (animovaná sekvence) | synovec s Vzato, předání seznamu léků novému zařízení | kapacita; přijímající strana potřebuje Vzato pro import, fotoaparát přečte jen text |
+| **AirDrop / sdílení souboru** | Export (CSV, PDF souhrn, nebo `.vzato` JSON balíček) přes systémové sdílení | kdokoli s iPhonem/Macem vedle vás | vyžaduje blízkost nebo jiný kanál |
+| **Šifrovaný soubor e‑mailem** | `.vzato` balíček zašifrovaný heslem (AES‑GCM, heslo sdělené jinou cestou), příjemce otevře ve Vzato nebo zadá heslo v aplikaci | lékař před kontrolou, rodina na dálku | heslo se musí předat zvlášť; e‑mail odesílá uživatel ručně (iOS nedovolí aplikaci posílat e‑maily samo) |
+| **Denní souhrn SMS / e‑mailem** | Jednou denně text „Dnes 3 ze 3 dávek, zásoba Letrox 12 dní“ | pečující osoba bez iPhonu, i na Androidu | iOS nedovolí aplikaci odeslat SMS ani e‑mail bez klepnutí uživatele; **automaticky** to bez serveru nejde. Jde to přes Zkratky (automatizace v daný čas otevře Vzato a nabídne odeslání) nebo jako „jedno klepnutí ráno“ |
+
+### 14.2 Co by to znamenalo
+
+- **Formát balíčku `.vzato`:** JSON s verzí schématu, profily, léky, plány, záznamy za zvolené období, volitelně fotografie; stejný formát pro QR (bez fotografií, komprimovaný) i pro soubor. Import s náhledem „co se přidá“, sloučení podle `id`, nic se nepřepisuje bez potvrzení.
+- **Souhrn pro lékaře:** nová obrazovka a PDF export (fáze 2 má CSV, PDF je nad rámec). Obsah: seznam léků s dávkováním, dodržení za období, zmeškané dávky, dávky mimo plán, zásoby.
+- **Bez serveru:** všechno probíhá na zařízení nebo přes systémové sdílení. Šifrování přes CryptoKit. Žádný nový vztah k GDPR, uživatel data předává sám.
+- **Vazba na Android:** souhrn e‑mailem/SMS a čitelný QR (prostý text) jsou jediné cesty, jak dostat informace k někomu bez zařízení Apple, aniž by vznikl server. To je silný argument pro tuto kapitolu oproti kapitole 10.
+- **Pracnost:** souhrn + PDF malá; `.vzato` balíček a import střední; QR sekvence střední; šifrování malé. Celkově menší než kapitola 10 a bez jejích rizik.
+
+Doporučení: pokud se někdy bude řešit „jak dát data lékaři nebo rodině“, začít tady (souhrn, PDF, `.vzato` balíček přes sdílení), a kapitolu 10 nechat až na případ, kdy je nutné průběžné sledování na dálku.

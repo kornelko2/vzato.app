@@ -253,6 +253,10 @@ Podle specifikace, kapitola 11. Skript nad otevřenými daty SÚKL a ŠÚKL vytv
 
 Podle specifikace, kapitola 12. Model už profil má; přibude správa profilů v Nastavení, výběr profilu ve formuláři léku, jméno a ikona v řádku dávky, ve velké kartě a v notifikaci, filtr v Dnes a Historii, export per profil. Odhad: menší než fáze 2.
 
+### Volitelná fáze 13 – Předání dat při setkání
+
+Podle specifikace, kapitola 14. Pořadí uvnitř fáze: (1) obrazovka Souhrn pro lékaře + PDF přes `ImageRenderer`/`ShareLink`, (2) formát `.vzato` (JSON, verze schématu) s exportem a importem s náhledem, (3) QR kód z balíčku (komprese, sekvence QR pro delší období, čtečka přes `DataScannerViewController` / AVFoundation), (4) šifrovaný balíček heslem (CryptoKit AES‑GCM), (5) „Poslat denní souhrn“ jako jedno klepnutí a Zkratky. Bez serveru, bez nové závislosti.
+
 ## 6. Co se rozhodne až po prototypu
 
 - Zda zvednout minimum na iOS 18 / macOS 15 kvůli HealthKit API pro léky.
