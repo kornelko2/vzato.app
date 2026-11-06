@@ -59,6 +59,17 @@ struct RootView: View {
             .navigationTitle(Text(verbatim: "Vzato"))
             #if os(macOS)
             .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 260)
+            .safeAreaInset(edge: .bottom) {
+                // The Mac keeps Settings in its own window (Vzato › Settings…, ⌘,); this makes it findable.
+                SettingsLink {
+                    Label("Settings", systemImage: "gear")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                }
+                .buttonStyle(.plain)
+                .padding(8)
+            }
             #endif
         } detail: {
             content(for: state.section)
