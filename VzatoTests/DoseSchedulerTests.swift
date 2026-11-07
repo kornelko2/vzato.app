@@ -77,4 +77,25 @@ struct DoseSchedulerTests {
         let slots = DoseScheduler.slots(for: [medication], in: interval, calendar: testCalendar)
         #expect(slots.count == 5)
     }
+
+    @Test func dosesBeforeTheMedicationWasAddedAreNotMissed() {
+        let store = TestStore()
+        let medication = store.medication(times: [7 * 60, 12 * 60, 19 * 60])
+        medication.createdAt = at(monday, 9, 35)          // added mid-morning
+        let slots = DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)
+        #expect(slots.map(\.scheduledAt) == [at(monday, 12), at(monday, 19)])
+        // Tomorrow everything counts.
+        #expect(DoseScheduler.slots(for: [medication], on: days(1, after: monday), calendar: testCalendar).count == 3)
+    }
+
+    @Test func aDoseRecordedBeforeAddingStillShows() {
+        let store = TestStore()
+        let medication = store.medication(times: [7 * 60, 12 * 60])
+        let morning = DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)[0]
+        DoseLogger(context: store.context, now: at(monday, 9, 40), notifier: SpyNotifier()).markTaken(morning, at: at(monday, 7))
+        medication.createdAt = at(monday, 9, 35)
+        let slots = DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)
+        #expect(slots.first?.scheduledAt == at(monday, 7))
+        #expect(slots.first?.event?.status == .taken)
+    }
 }

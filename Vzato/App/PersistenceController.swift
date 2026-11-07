@@ -212,6 +212,7 @@ enum SampleData {
 
         func make(_ name: String, _ dosage: String, _ hex: String, times: [Int], meal: MealRelation = .any) -> Medication {
             let medication = Medication(context: context)
+            medication.createdAt = monthAgo
             medication.name = name
             medication.dosageText = dosage
             medication.colorHex = hex

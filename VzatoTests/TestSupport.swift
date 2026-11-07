@@ -36,6 +36,7 @@ final class TestStore {
         let medication = Medication(context: context)
         medication.name = name
         medication.profile = controller.ensureDefaultProfile()
+        medication.createdAt = start
         let schedule = Schedule(context: context)
         schedule.minutesOfDay = times
         schedule.weekdays = weekdays

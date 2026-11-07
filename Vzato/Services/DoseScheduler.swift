@@ -89,6 +89,9 @@ enum DoseScheduler {
                         }
                         let match = DoseEvent.preferred(matches)
                         used.formUnion(matches.map(ObjectIdentifier.init))
+                        // A dose from before the medication was added is not "missed": it was never
+                        // asked for. It only shows up when the person recorded it themselves.
+                        if match == nil, let created = medication.createdAt, time < created { continue }
                         result.append(DoseSlot(medication: medication, scheduledAt: time, event: match))
                     }
                 }
