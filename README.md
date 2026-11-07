@@ -146,7 +146,9 @@ VzatoWidgets      widget extension (Today, Lock Screen) and the Taken intent
 Vzato/Resources   String Catalog (en, cs, sk, hu), assets, privacy manifest
 VzatoTests        Swift Testing unit tests
 Config            signing (local, gitignored), entitlements, export options
-Design/icon       app icon drafts (SVG)
+Design/icon       app icon sources (SVG)
+website           marketing page and privacy policy (static, four languages)
+Docs/app-store    App Store texts in four languages
 Scripts           helper scripts
 ```
 

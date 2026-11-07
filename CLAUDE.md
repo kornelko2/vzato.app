@@ -86,6 +86,11 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   viewer and the iOS-only camera/scanner wrappers (`#if os(iOS)`).
 - `VzatoTests` – Swift Testing, in-memory store, fixed Europe/Prague calendar, dates
   start on Monday 2 Nov 2026. Use `TestStore` and `SpyNotifier` from `TestSupport.swift`.
+- `website/` – static marketing page and privacy policy (cs, sk, en, hu in one file each, no
+  JavaScript, no cookies, no external requests). The privacy policy must stay true to the app:
+  any change that stores, sends or syncs new data updates `website/privacy.html` in the same change.
+- `Docs/app-store/metadata.md` – App Store texts; `Scripts/asc.py metadata` uploads them through the
+  App Store Connect API (`ASC_ISSUER_ID` required; the key lives in `~/.appstoreconnect/private_keys`).
 - `Design/icon` – icon sources as SVG. E (pill) is the primary icon, F (organizer) the iOS
   alternate icon; `Scripts/render-icons.sh` renders both into the asset catalog (needs
   Inkscape). Never edit the PNGs by hand; change the SVG and re-run the script.

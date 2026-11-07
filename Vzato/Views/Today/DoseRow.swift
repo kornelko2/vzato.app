@@ -15,6 +15,11 @@ struct DoseRow: View {
     let onReset: () -> Void
 
     private var status: DoseStatus { slot.status(now: now, grace: grace) }
+
+    private var detailText: String {
+        let strength = slot.medication.dosageText
+        return strength.isEmpty ? slot.medication.doseAmountText : "\(slot.medication.doseAmountText) · \(strength)"
+    }
     private var isOverdue: Bool { slot.isOverdue(now: now, grace: grace) }
 
     var body: some View {
@@ -39,14 +44,14 @@ struct DoseRow: View {
                         Text("extra").font(.caption).foregroundStyle(.secondary)
                     }
                 }
-                HStack(spacing: 6) {
-                    Text(slot.medication.doseAmountText).font(.subheadline).foregroundStyle(.secondary)
-                    if !slot.medication.dosageText.isEmpty {
-                        Text(verbatim: "·").foregroundStyle(.secondary)
-                        Text(slot.medication.dosageText).font(.subheadline).foregroundStyle(.secondary)
-                    }
-                    statusLine
-                }
+                // Amount and strength on one line; the state gets its own line so a Taken button
+                // next to the row never squeezes the amount into broken pieces.
+                Text(detailText)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
+                statusLine
             }
             Spacer(minLength: 8)
             if slot.isCurrent(now: now, grace: grace) || (!compact && (status == .pending || status == .missed)) {

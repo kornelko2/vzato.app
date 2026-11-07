@@ -65,6 +65,6 @@ All notable changes to Vzato are listed here. The format follows
 ### Notes
 - Storage is Core Data with `NSPersistentCloudKitContainer` (model version 2).
 
-## [0.1.0] - unreleased
+## [1.0] - unreleased
 
-First TestFlight build (phase 1 of the implementation plan).
+First TestFlight build.
