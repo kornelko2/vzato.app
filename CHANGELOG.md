@@ -50,6 +50,9 @@ All notable changes to Vzato are listed here. The format follows
   six gentle ones for "you can eat now", selectable in Settings › Sounds with a
   preview (choosing a sound plays it). The
   sounds are synthesized by `Scripts/make-sounds.py`.
+- Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
+  because the number pad has no Return key; they now count on every keystroke and
+  accept a decimal comma (10,5).
 - Empty Medications and Today screens offer a large *Add medication* button.
 - Debug launch arguments `--sample-data`, `--tab`, `--open-medication <name>`, `--edit`.
 - Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),

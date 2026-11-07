@@ -33,8 +33,7 @@ struct ReconciliationView: View {
                 }
 
                 Section {
-                    TextField("Amount you have at home", value: $actual, format: .number.precision(.fractionLength(0...2)))
-                        .decimalKeyboard()
+                    AmountField("Amount you have at home", value: $actual)
                 } header: {
                     Text("Count what you have")
                 } footer: {

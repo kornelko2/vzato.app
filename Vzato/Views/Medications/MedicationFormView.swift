@@ -118,9 +118,8 @@ struct MedicationFormView: View {
                     Toggle("Track supply", isOn: $tracksStock)
                     if tracksStock {
                         LabeledContent("Amount at home") {
-                            TextField("Amount at home", value: $stockCount, format: .number.precision(.fractionLength(0...2)))
+                            AmountField("Amount at home", value: $stockCount.optional)
                                 .multilineTextAlignment(.trailing)
-                                .decimalKeyboard()
                                 .labelsHidden()
                         }
                         Stepper(value: $lowStockThreshold, in: 0...500, step: unitKind.allowsFractions ? 1 : 5) {
