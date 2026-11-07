@@ -43,6 +43,12 @@ All notable changes to Vzato are listed here. The format follows
   merge, with time, device and source. Entries are never edited and sync.
 - The widget no longer migrates the database itself; after an update only the
   app upgrades it, which avoids a crash when both open the old file at once.
+- "You can eat now": for medications taken before a meal, a reminder after a
+  configurable waiting time (default 30 minutes) once the dose is confirmed, and
+  an "Eat from 7:05" countdown on the Today screen. Model version 4.
+- Own notification sounds: a chime for medication reminders and a soft melody for
+  "you can eat now", each selectable in Settings › Sounds with a preview. The
+  sounds are synthesized by `Scripts/make-sounds.py`.
 - Debug launch argument `--sample-data`.
 - Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),
   cancelled when the dose is confirmed or skipped.

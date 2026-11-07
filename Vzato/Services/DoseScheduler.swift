@@ -32,6 +32,23 @@ struct DoseSlot: Identifiable {
 }
 
 enum DoseScheduler {
+    /// The schedule that produced a dose at this time, if any.
+    static func schedule(of medication: Medication, at time: Date, calendar: Calendar = .current) -> Schedule? {
+        medication.activeSchedules.first { schedule in
+            times(for: schedule, on: time, calendar: calendar)
+                .contains { calendar.isDate($0, equalTo: time, toGranularity: .minute) }
+        }
+    }
+
+    /// When the person may eat after a "before a meal" dose taken at `takenAt`, or nil.
+    static func mealReadyTime(for event: DoseEvent, calendar: Calendar = .current) -> Date? {
+        guard event.status == .taken, !event.isUnscheduled, let medication = event.medication,
+              let scheduledAt = event.scheduledAt, let takenAt = event.takenAt,
+              let schedule = schedule(of: medication, at: scheduledAt, calendar: calendar),
+              schedule.mealRelation == .before else { return nil }
+        return takenAt.addingTimeInterval(TimeInterval(max(1, schedule.mealWaitMinutes) * 60))
+    }
+
     /// Scheduled times of one schedule on one day, or empty if the schedule does not apply.
     static func times(for schedule: Schedule, on day: Date, calendar: Calendar) -> [Date] {
         guard !schedule.isPaused else { return [] }

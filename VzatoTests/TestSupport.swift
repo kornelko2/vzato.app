@@ -54,8 +54,16 @@ final class TestStore {
 @MainActor
 final class SpyNotifier: DoseNotifying {
     var lowStockNames: [String] = []
+    var mealReady: [(name: String, at: Date)] = []
+    var mealCancelled: [Date] = []
     func notifyLowStock(_ medication: Medication) {
         lowStockNames.append(medication.name)
+    }
+    func scheduleMealReady(medicationID: UUID?, name: String, scheduledAt: Date, at readyAt: Date, waitMinutes: Int) {
+        mealReady.append((name, readyAt))
+    }
+    func cancelMealReady(medicationID: UUID?, scheduledAt: Date) {
+        mealCancelled.append(scheduledAt)
     }
 }
 

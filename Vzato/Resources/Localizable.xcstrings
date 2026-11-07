@@ -907,6 +907,28 @@
         }
       }
     },
+    "%lld minutes have passed since %@.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Od užití léku %2$@ uplynulo %1$lld minut."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld perc telt el a(z) %2$@ bevétele óta."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Od užitia lieku %2$@ uplynulo %1$lld minút."
+          }
+        }
+      }
+    },
     "%lld ml": {
       "localizations": {
         "cs": {
@@ -2343,6 +2365,28 @@
         }
       }
     },
+    "Different sounds tell you at a glance whether it is time for a medication or time to eat.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podle zvuku hned poznáte, jestli je čas na lék, nebo na jídlo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hangból azonnal tudja, hogy gyógyszer vagy étkezés ideje van."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podľa zvuku hneď spoznáte, či je čas na liek, alebo na jedlo."
+          }
+        }
+      }
+    },
     "Done": {
       "localizations": {
         "cs": {
@@ -2537,6 +2581,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Duplicita zlúčená"
+          }
+        }
+      }
+    },
+    "Eat after": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jíst po"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evés ennyi idő után"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jesť po"
+          }
+        }
+      }
+    },
+    "Eat from %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jíst od %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evés ettől: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jesť od %@"
           }
         }
       }
@@ -3241,6 +3329,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Liek"
+          }
+        }
+      }
+    },
+    "Medication reminders": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky léků"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer-emlékeztetők"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky liekov"
           }
         }
       }
@@ -4037,6 +4147,28 @@
         }
       }
     },
+    "Play": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přehrát"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lejátszás"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prehrať"
+          }
+        }
+      }
+    },
     "Previous month": {
       "localizations": {
         "cs": {
@@ -4785,6 +4917,28 @@
         }
       }
     },
+    "Sounds": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvuky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hangok"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvuky"
+          }
+        }
+      }
+    },
     "Source code and license (MPL-2.0)": {
       "localizations": {
         "cs": {
@@ -5001,6 +5155,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Podľa systému"
+          }
+        }
+      }
+    },
+    "System sound": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvuk systému"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendszerhang"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvuk systému"
           }
         }
       }
@@ -5467,6 +5643,28 @@
         }
       }
     },
+    "Vzato chime": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvonek Vzato"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato csengő"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvonček Vzato"
+          }
+        }
+      }
+    },
     "Vzato follows the language you set for it in the system settings. Czech, Slovak, English and Hungarian are available.": {
       "localizations": {
         "cs": {
@@ -5507,6 +5705,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vzato nie je zdravotnícka pomôcka a nenahrádza lekára ani lekárnika. Len pripomína a vedie vaše vlastné záznamy."
+          }
+        }
+      }
+    },
+    "Vzato soft melody": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jemná melodie Vzato"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato lágy dallam"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jemná melódia Vzato"
           }
         }
       }
@@ -5705,6 +5925,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Došlo. Zájdite po ďalšie čo najskôr."
+          }
+        }
+      }
+    },
+    "You can eat now": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Už můžete jíst"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most már ehet"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Už môžete jesť"
           }
         }
       }
@@ -5925,6 +6167,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS dovolí najviac 64 naplánovaných pripomienok. Niektoré časy neboli naplánované."
+          }
+        }
+      }
+    },
+    "„You can eat now“": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Už můžete jíst“"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Most már ehet”"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Už môžete jesť“"
           }
         }
       }

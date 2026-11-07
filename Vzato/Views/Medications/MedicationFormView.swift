@@ -19,6 +19,7 @@ struct MedicationFormView: View {
     @State private var weekdays: Set<Int> = Set(1...7)
     @State private var times: [TimeEntry] = [TimeEntry(minutes: 8 * 60)]
     @State private var mealRelation = MealRelation.any
+    @State private var mealWaitMinutes = 30
     @State private var startDate = Calendar.current.startOfDay(for: Date())
     @State private var hasEndDate = false
     @State private var endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date()) ?? Date()
@@ -51,6 +52,7 @@ struct MedicationFormView: View {
             _weekdays = State(initialValue: Set(schedule.weekdays))
             _times = State(initialValue: schedule.minutesOfDay.sorted().map { TimeEntry(minutes: $0) })
             _mealRelation = State(initialValue: schedule.mealRelation)
+            _mealWaitMinutes = State(initialValue: max(15, schedule.mealWaitMinutes))
             _startDate = State(initialValue: schedule.startDate ?? Date())
             _hasEndDate = State(initialValue: schedule.endDate != nil)
             if let end = schedule.endDate { _endDate = State(initialValue: end) }
@@ -87,6 +89,11 @@ struct MedicationFormView: View {
                         ForEach(MealRelation.allCases) { relation in
                             Text(relation.label).tag(relation)
                         }
+                    if mealRelation == .before {
+                        Stepper(value: $mealWaitMinutes, in: 15...120, step: 15) {
+                            LabeledContent("Eat after") { Text("\(mealWaitMinutes) min") }
+                        }
+                    }
                     }
                     DatePicker("Start", selection: $startDate, displayedComponents: .date)
                     Toggle("End date", isOn: $hasEndDate)
@@ -220,6 +227,7 @@ struct MedicationFormView: View {
         schedule.weekdays = Array(weekdays)
         schedule.minutesOfDay = times.map(\.minutes)
         schedule.mealRelation = mealRelation
+        schedule.mealWaitMinutes = mealWaitMinutes
         schedule.startDate = calendar.startOfDay(for: startDate)
         schedule.endDate = hasEndDate ? calendar.startOfDay(for: endDate) : nil
 

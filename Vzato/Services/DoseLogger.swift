@@ -33,6 +33,9 @@ struct DoseLogger {
                            source: source, in: context, at: now)
         adjustStock(for: event, newStatus: .pending)
         let medication = event.medication
+        if let scheduledAt = event.scheduledAt {
+            notifier.cancelMealReady(medicationID: medication?.id, scheduledAt: scheduledAt)
+        }
         context.delete(event)
         save()
         if let medication { StockService.checkLowStock(medication, now: now, notifier: notifier) }
@@ -68,6 +71,14 @@ struct DoseLogger {
         }
         if status != .pending, let scheduledAt = event.scheduledAt {
             notifier.doseResolved(medicationID: event.medication?.id, scheduledAt: scheduledAt)
+            notifier.cancelMealReady(medicationID: event.medication?.id, scheduledAt: scheduledAt)
+            // Before a meal: remind when eating is fine. Skipped for doses recorded too late to matter.
+            if let readyAt = DoseScheduler.mealReadyTime(for: event), readyAt > now,
+               let medication = event.medication,
+               let wait = DoseScheduler.schedule(of: medication, at: scheduledAt)?.mealWaitMinutes {
+                notifier.scheduleMealReady(medicationID: medication.id, name: medication.name,
+                                           scheduledAt: scheduledAt, at: readyAt, waitMinutes: wait)
+            }
         }
     }
 

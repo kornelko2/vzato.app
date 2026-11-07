@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import AudioToolbox
 import SwiftUI
 
 struct SettingsView: View {
@@ -12,6 +13,8 @@ struct SettingsView: View {
     @AppStorage(AppSettings.repeatCountKey) private var repeatCount = AppSettings.defaultRepeatCount
     @AppStorage(AppSettings.runOutWarningDaysKey) private var runOutWarningDays = AppSettings.defaultRunOutWarningDays
     @AppStorage(AppSettings.appIconKey) private var appIcon = AppIcon.pill
+    @AppStorage(AppSettings.doseSoundKey) private var doseSound = ReminderSound.chime
+    @AppStorage(AppSettings.mealSoundKey) private var mealSound = ReminderSound.soft
 
     private var notifications: NotificationService { NotificationService.shared }
 
@@ -87,6 +90,20 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    soundPicker(Text("Medication reminders"), selection: $doseSound)
+                    soundPicker(Text("\u{201E}You can eat now\u{201C}"), selection: $mealSound)
+                } header: {
+                    Text("Sounds")
+                } footer: {
+                    Text("Different sounds tell you at a glance whether it is time for a medication or time to eat.")
+                }
+                .onChange(of: doseSound) {
+                    AppSettings.shareWithWidgets()
+                    Task { await notifications.rescheduleAll() }
+                }
+                .onChange(of: mealSound) { AppSettings.shareWithWidgets() }
+
+                Section {
                     NavigationLink {
                         ActivityLogView()
                     } label: {
@@ -122,6 +139,27 @@ struct SettingsView: View {
             .formStyle(.grouped)
             .navigationTitle(Text("Settings"))
             .task { await notifications.refreshAuthorizationStatus() }
+        }
+    }
+
+    private func soundPicker(_ title: Text, selection: Binding<ReminderSound>) -> some View {
+        HStack {
+            Picker(selection: selection) {
+                ForEach(ReminderSound.allCases) { sound in
+                    Text(sound.label).tag(sound)
+                }
+            } label: {
+                title
+            }
+            Button {
+                SoundPreview.play(selection.wrappedValue)
+            } label: {
+                Image(systemName: "play.circle")
+                    .font(.title3)
+            }
+            .buttonStyle(.borderless)
+            .disabled(selection.wrappedValue.fileName == nil)
+            .accessibilityLabel(Text("Play"))
         }
     }
 
@@ -199,4 +237,24 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
+}
+
+/// Plays a notification sound in Settings so the choice can be heard.
+@MainActor
+enum SoundPreview {
+    private static var ids: [String: SystemSoundID] = [:]
+
+    static func play(_ sound: ReminderSound) {
+        guard let fileName = sound.fileName else { return }
+        if let id = ids[fileName] {
+            AudioServicesPlaySystemSound(id)
+            return
+        }
+        let name = (fileName as NSString).deletingPathExtension
+        guard let url = Bundle.main.url(forResource: name, withExtension: "caf") else { return }
+        var id: SystemSoundID = 0
+        guard AudioServicesCreateSystemSoundID(url as CFURL, &id) == kAudioServicesNoError else { return }
+        ids[fileName] = id
+        AudioServicesPlaySystemSound(id)
+    }
 }

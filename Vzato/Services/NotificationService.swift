@@ -77,7 +77,9 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
     /// Called at launch and after any change to medications or schedules.
     func rescheduleAll() async {
         guard let context else { return }
-        center.removeAllPendingNotificationRequests()
+        // Rebuild dose reminders; meal reminders belong to doses already taken and stay.
+        let pending = await center.pendingNotificationRequests()
+        center.removePendingNotificationRequests(withIdentifiers: pending.map(\.identifier).filter { !$0.hasPrefix("meal|") })
         let request = Medication.fetchRequest()
         request.predicate = NSPredicate(format: "isArchived == NO")
         let medications = (try? context.fetch(request)) ?? []
@@ -173,6 +175,26 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         "repeat|\(medicationID?.uuidString ?? "")|\(Int(scheduledAt.timeIntervalSince1970))|\(attempt)"
     }
 
+    static func mealReadyID(medicationID: UUID?, scheduledAt: Date) -> String {
+        "meal|\(medicationID?.uuidString ?? "")|\(Int(scheduledAt.timeIntervalSince1970))"
+    }
+
+    func scheduleMealReady(medicationID: UUID?, name: String, scheduledAt: Date, at readyAt: Date, waitMinutes: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "You can eat now")
+        content.body = String(localized: "\(waitMinutes) minutes have passed since \(name).")
+        content.sound = AppSettings.mealSound.notificationSound
+        content.threadIdentifier = "meal"
+        let interval = max(1, readyAt.timeIntervalSinceNow)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        center.add(UNNotificationRequest(identifier: Self.mealReadyID(medicationID: medicationID, scheduledAt: scheduledAt),
+                                         content: content, trigger: trigger)) { _ in }
+    }
+
+    func cancelMealReady(medicationID: UUID?, scheduledAt: Date) {
+        center.removePendingNotificationRequests(withIdentifiers: [Self.mealReadyID(medicationID: medicationID, scheduledAt: scheduledAt)])
+    }
+
     func doseResolved(medicationID: UUID?, scheduledAt: Date) {
         let ids = (1...3).map { Self.followUpID(medicationID: medicationID, scheduledAt: scheduledAt, attempt: $0) }
         center.removePendingNotificationRequests(withIdentifiers: ids)
@@ -190,6 +212,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             ? String(localized: "Time to take \(medication.doseAmountText).")
             : String(localized: "Time to take \(medication.doseAmountText) (\(medication.dosageText)).")
         content.sound = .default
+        content.sound = AppSettings.doseSound.notificationSound
         content.categoryIdentifier = Category.dose
         content.threadIdentifier = medication.id?.uuidString ?? "dose"
         content.userInfo = ["medicationID": medication.id?.uuidString ?? "", "minutesOfDay": minutesOfDay]
@@ -271,5 +294,12 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             self.handle(action: action, medicationID: medicationID, minutesOfDay: minutesOfDay, fireDate: fireDate)
             completion()
         }
+    }
+}
+
+extension ReminderSound {
+    var notificationSound: UNNotificationSound {
+        guard let fileName else { return .default }
+        return UNNotificationSound(named: UNNotificationSoundName(fileName))
     }
 }

@@ -63,6 +63,7 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 - Tichý režim / Focus: uživatel může povolit „Time Sensitive“ notifikace.
 - Notifikace se při potvrzení na jednom zařízení zruší i na ostatních (přes sync).
 - Upozornění na docházející zásobu, viz 3.5.
+- **„Už můžete jíst“:** u léku užívaného před jídlem (např. Letrox) se nastaví čekací doba (výchozí 30 min, krok 15 min). Po potvrzení dávky přijde v daný čas notifikace „Už můžete jíst“ a na obrazovce Dnes běží odpočet „Jíst od 7:05“. Připomínky léků a „Už můžete jíst“ mají každá jiný zvuk (zvonek Vzato / jemná melodie Vzato / zvuk systému, volba v Nastavení › Zvuky s přehráním). Vrácení dávky upomínku zruší; u dávky zaznamenané dodatečně, kdy už čekací doba uplynula, se nic neplánuje.
 
 ### 3.3 Potvrzení a záznam dávek
 

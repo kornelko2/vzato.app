@@ -10,6 +10,8 @@ public final class Schedule: NSManagedObject {
     @NSManaged public var weekdaysRaw: String
     @NSManaged public var minutesRaw: String
     @NSManaged public var mealRelationRaw: String
+    /// For "before a meal": minutes to wait after the dose before eating.
+    @NSManaged public var mealWaitMinutes: Int
     @NSManaged public var startDate: Date?
     @NSManaged public var endDate: Date?
     @NSManaged public var isPaused: Bool

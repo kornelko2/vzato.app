@@ -41,6 +41,15 @@ struct TodayView: View {
     private var takenCount: Int { slots.filter { $0.status(now: now, grace: grace) == .taken }.count }
     private var lowStock: [Medication] { medications.filter(\.isLowStock) }
 
+    /// "Before a meal" doses taken today whose waiting time is still running.
+    private var mealWaits: [(name: String, readyAt: Date)] {
+        slots.compactMap { slot in
+            guard let event = slot.event, let readyAt = DoseScheduler.mealReadyTime(for: event), readyAt > now else { return nil }
+            return (slot.medication.name, readyAt)
+        }
+        .sorted { $0.readyAt < $1.readyAt }
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -54,6 +63,10 @@ struct TodayView: View {
                         emptyState
                     } else {
                         allDoneCard
+                    }
+
+                    if let last = mealWaits.last {
+                        MealWaitBanner(readyAt: last.readyAt, names: mealWaits.map(\.name))
                     }
 
                     if !lowStock.isEmpty {
@@ -149,6 +162,34 @@ struct TodayView: View {
         let minutesOfDay = (components.hour ?? 0) * 60 + (components.minute ?? 0)
         NotificationService.shared.snooze(medication: slot.medication, minutesOfDay: minutesOfDay, after: snoozeMinutes)
         NotificationService.shared.clearDelivered(for: slot.medication)
+    }
+}
+
+/// Shown while the waiting time after a "before a meal" dose runs.
+struct MealWaitBanner: View {
+    let readyAt: Date
+    let names: [String]
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "fork.knife")
+                .font(.title3)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Eat from \(readyAt.formatted(date: .omitted, time: .shortened))")
+                    .font(.subheadline.weight(.semibold))
+                Text(names.joined(separator: ", "))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+            Text(readyAt, style: .timer)
+                .font(.subheadline.monospacedDigit().weight(.semibold))
+        }
+        .foregroundStyle(Color(hex: "2E5FA3"))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(Color(hex: "3B7DD8").opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+        .accessibilityElement(children: .combine)
     }
 }
 

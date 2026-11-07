@@ -10,10 +10,16 @@ protocol DoseNotifying: AnyObject {
     func notifyLowStock(_ medication: Medication)
     /// A dose was confirmed or skipped: pending follow-up reminders for it can go.
     func doseResolved(medicationID: UUID?, scheduledAt: Date)
+    /// A "before a meal" dose was taken: tell the person when they may eat.
+    func scheduleMealReady(medicationID: UUID?, name: String, scheduledAt: Date, at readyAt: Date, waitMinutes: Int)
+    /// The dose was reset or skipped after all: the meal reminder for it goes away.
+    func cancelMealReady(medicationID: UUID?, scheduledAt: Date)
 }
 
 extension DoseNotifying {
     func doseResolved(medicationID: UUID?, scheduledAt: Date) {}
+    func scheduleMealReady(medicationID: UUID?, name: String, scheduledAt: Date, at readyAt: Date, waitMinutes: Int) {}
+    func cancelMealReady(medicationID: UUID?, scheduledAt: Date) {}
 }
 
 @MainActor
