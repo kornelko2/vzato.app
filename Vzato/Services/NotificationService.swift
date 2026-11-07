@@ -31,8 +31,12 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
     private(set) var scheduledCount = 0
     private(set) var hitLimit = false
 
+    /// True when reminders cannot reach the user: permission refused, or never asked yet.
+    var remindersOff: Bool { authorizationStatus == .denied || authorizationStatus == .notDetermined }
+
     private var context: NSManagedObjectContext?
     private let center = UNUserNotificationCenter.current()
+    private var rescheduling: Task<Void, Never>?
 
     private override init() {
         super.init()
@@ -74,8 +78,19 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
     // MARK: Scheduling
 
     /// Drops every pending request and schedules repeating reminders for all active medications.
-    /// Called at launch and after any change to medications or schedules.
+    /// Called at launch and after any change to medications or schedules. Calls run one after another,
+    /// so two overlapping rebuilds cannot remove each other's requests.
     func rescheduleAll() async {
+        let previous = rescheduling
+        let task = Task { @MainActor in
+            await previous?.value
+            await performReschedule()
+        }
+        rescheduling = task
+        await task.value
+    }
+
+    private func performReschedule() async {
         guard let context else { return }
         // Rebuild dose reminders; meal reminders belong to doses already taken and stay.
         let pending = await center.pendingNotificationRequests()
@@ -83,6 +98,14 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         let request = Medication.fetchRequest()
         request.predicate = NSPredicate(format: "isArchived == NO")
         let medications = (try? context.fetch(request)) ?? []
+
+        // Without permission iOS accepts the requests but never shows them. Ask as soon as there is
+        // something to remind of; the system shows its prompt only once.
+        await refreshAuthorizationStatus()
+        if authorizationStatus == .notDetermined,
+           medications.contains(where: { !$0.activeSchedules.isEmpty }) {
+            await requestAuthorization()
+        }
 
         var count = 0
         var limited = false
@@ -211,7 +234,6 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         content.body = medication.dosageText.isEmpty
             ? String(localized: "Time to take \(medication.doseAmountText).")
             : String(localized: "Time to take \(medication.doseAmountText) (\(medication.dosageText)).")
-        content.sound = .default
         content.sound = AppSettings.doseSound.notificationSound
         content.categoryIdentifier = Category.dose
         content.threadIdentifier = medication.id?.uuidString ?? "dose"

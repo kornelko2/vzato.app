@@ -20,7 +20,7 @@ struct NextDoseCard: View {
     var onTakeEarly: () -> Void = {}
 
     @State private var showingPill = false
-    private var pillPhotos: [MedicationPhoto] { slot.medication.photos(of: .pill) }
+    private var pillPhotos: [MedicationPhoto] { slot.medication.shownPhotos }
     private var isOverdue: Bool { slot.isOverdue(now: now, grace: grace) }
     private var isMissed: Bool { slot.status(now: now, grace: grace) == .missed }
     private var needsAttention: Bool { isOverdue || isMissed }
@@ -83,7 +83,8 @@ struct NextDoseCard: View {
                         PhotoThumbnail(photo: pill, size: 72)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel(Text("Show pill photo"))
+                    .accessibilityLabel(Text("Show photo"))
+                    .accessibilityIdentifier("todayPhoto")
                 }
             }
 
@@ -140,6 +141,6 @@ struct NextDoseCard: View {
                 .strokeBorder(isMissed ? Palette.missed : (isOverdue ? Palette.overdue : Color.primary), lineWidth: 2)
         )
         .accessibilityElement(children: .contain)
-        .photoViewer(isPresented: $showingPill, photos: pillPhotos, title: Text("Pill photo"))
+        .photoViewer(isPresented: $showingPill, photos: pillPhotos, title: Text(slot.medication.shownPhotoKind?.label ?? PhotoKind.pill.label))
     }
 }

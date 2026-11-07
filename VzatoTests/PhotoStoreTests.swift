@@ -60,4 +60,27 @@ struct PhotoStoreTests {
         let count = try store.context.count(for: MedicationPhoto.fetchRequest())
         #expect(count == 0)
     }
+
+    @Test func todayCardShowsTheChosenPhotoKind() throws {
+        let store = TestStore()
+        let medication = store.medication()
+        PhotoStore.add(sampleJPEG(width: 50, height: 50), kind: .pill, to: medication, context: store.context)
+        PhotoStore.add(sampleJPEG(width: 60, height: 60), kind: .package, to: medication, context: store.context)
+
+        // New and migrated medications show the pill.
+        #expect(medication.shownPhotoKind == .pill)
+        #expect(medication.shownPhotos.map(\.kind) == [.pill])
+
+        medication.shownPhotoKind = .package
+        try store.context.save()
+        #expect(medication.shownPhotos.map(\.kind) == [.package])
+
+        medication.shownPhotoKind = nil
+        #expect(medication.shownPhotoKindRaw == Medication.noPhoto)
+        #expect(medication.shownPhotos.isEmpty)
+
+        // A value from a device that does not know the field yet falls back to the pill.
+        medication.shownPhotoKindRaw = nil
+        #expect(medication.shownPhotoKind == .pill)
+    }
 }

@@ -26,6 +26,8 @@ public final class Medication: NSManagedObject {
     @NSManaged public var schedules: NSSet?
     @NSManaged public var doseEvents: NSSet?
     @NSManaged public var photos: NSSet?
+    /// Which photo the Today card shows: a `PhotoKind` raw value, or "none".
+    @NSManaged public var shownPhotoKindRaw: String?
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -57,6 +59,19 @@ public final class Medication: NSManagedObject {
             if a.pageIndex != b.pageIndex { return a.pageIndex < b.pageIndex }
             return (a.createdAt ?? .distantPast) < (b.createdAt ?? .distantPast)
         }
+    }
+
+    /// The kind of photo shown on the Today card, `nil` when the user chose not to show any.
+    var shownPhotoKind: PhotoKind? {
+        get { shownPhotoKindRaw == Self.noPhoto ? nil : (PhotoKind(rawValue: shownPhotoKindRaw ?? "") ?? .pill) }
+        set { shownPhotoKindRaw = newValue?.rawValue ?? Self.noPhoto }
+    }
+
+    static let noPhoto = "none"
+
+    /// Photos for the Today card, following `shownPhotoKind`.
+    var shownPhotos: [MedicationPhoto] {
+        shownPhotoKind.map { photos(of: $0) } ?? []
     }
 
     func photos(of kind: PhotoKind) -> [MedicationPhoto] {

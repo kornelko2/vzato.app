@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3).
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5).
 
 ---
 
@@ -58,6 +58,7 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 ### 3.2 Připomínky
 
 - Lokální notifikace v nastavený čas na všech zařízeních uživatele.
+- Povolení oznámení: aplikace o něj požádá sama, jakmile má některý lék nastavený čas (systém se ptá jen jednou). Dokud oznámení nejsou povolena, ukazuje obrazovka Dnes červené varování „Připomínky jsou vypnuté“ s tlačítkem „Povolit oznámení“, po odmítnutí „Otevřít nastavení“.
 - Akce v notifikaci: „Vzal jsem“, „Odložit o 10 minut“, „Přeskočit“.
 - Opakování, pokud dávka není potvrzena (nastavitelné, výchozí 2× po 10 minutách). Volitelně stupňování: druhé opakování hlasitější / „Time Sensitive“ (inspirace: eskalační alarmy konkurenční aplikace MedRemind pro Android).
 - Tichý režim / Focus: uživatel může povolit „Time Sensitive“ notifikace.
@@ -115,7 +116,7 @@ Uživatel si občas není jistý, zda lék vzal a jen zapomněl potvrdit, nebo p
 - Ke každému léku lze přidat fotografie tří druhů: **krabička** (balení, aby se lék poznal v lékárně i doma), **tableta** (jak vypadá samotná tableta/kapsle, pomůže při pochybnosti „je to ten správný lék?“) a **příbalový leták** (více stránek).
 - Zdroj: fotoaparát (iPhone, iPad) nebo výběr z knihovny / souboru (všechny platformy, na Macu hlavně soubor nebo import z iPhonu).
 - Příbalový leták: na iOS lze použít skener dokumentů (VisionKit), který narovná a ořízne stránky. Více stránek se ukládá jako seřazená sada fotografií.
-- Zobrazení: miniatury na detailu léku, po klepnutí celá obrazovka s přiblížením a listováním stránek letáku. V přehledu dneška malá miniatura tablety u dávky, pokud existuje.
+- Zobrazení: miniatury na detailu léku, po klepnutí celá obrazovka s přiblížením a listováním stránek letáku. Na velké kartě Dnes miniatura u dávky; u každého léku si uživatel vybere, co se tam ukáže: tableta (výchozí), krabička, nebo nic (Lék › Fotografie › Fotografie v přehledu Dnes).
 - Ukládání: fotografie se zmenší (delší strana cca 2000 px, JPEG) a ukládají se v datech aplikace, ne do knihovny fotek uživatele. Synchronizují se přes CloudKit jako přílohy. Mazání léku smaže i fotografie.
 - Rozpoznávání textu z letáku je mimo rozsah v1.
 
@@ -171,6 +172,7 @@ Medication
   createdAt: Date
   isArchived: Bool
   archivedAt: Date?            // po tomto datu se z plánu nedopočítávají dávky
+  shownPhotoKind: String?      // fotografie na kartě Dnes: pill (výchozí) / package / none
 
   // zásoba
   tracksStock: Bool

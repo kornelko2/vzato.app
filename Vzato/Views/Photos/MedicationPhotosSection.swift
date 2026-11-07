@@ -28,8 +28,22 @@ struct MedicationPhotosSection: View {
             ForEach(PhotoKind.allCases) { kind in
                 row(for: kind)
             }
+            if !medication.photoList.isEmpty {
+                Picker(selection: shownPhotoKind) {
+                    Text(PhotoKind.pill.label).tag(PhotoKind?.some(.pill))
+                    Text(PhotoKind.package.label).tag(PhotoKind?.some(.package))
+                    Text("Don't show").tag(PhotoKind?.none)
+                } label: {
+                    Label("Photo on Today", systemImage: "rectangle.portrait.on.rectangle.portrait")
+                }
+                .accessibilityIdentifier("shownPhotoKind")
+            }
         } header: {
             Text("Photos")
+        } footer: {
+            if !medication.photoList.isEmpty {
+                Text("The chosen photo appears on the big card next to the Taken button.")
+            }
         }
         .photosPicker(isPresented: Binding(get: { pickerKind != nil }, set: { if !$0 { pickerKind = nil } }),
                       selection: $pickerItems, maxSelectionCount: pickerKind?.maxSelection ?? 1, matching: .images)
@@ -64,6 +78,15 @@ struct MedicationPhotosSection: View {
         .photoViewer(isPresented: Binding(get: { viewerKind != nil }, set: { if !$0 { viewerKind = nil } }),
                      photos: viewerKind.map { medication.photos(of: $0) } ?? [],
                      title: Text(viewerKind?.label ?? PhotoKind.package.label))
+    }
+
+    private var shownPhotoKind: Binding<PhotoKind?> {
+        Binding {
+            medication.shownPhotoKind
+        } set: { kind in
+            medication.shownPhotoKind = kind
+            try? context.save()
+        }
     }
 
     @ViewBuilder

@@ -67,7 +67,7 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   (`startMergingExternalChanges`) and only the app talks to CloudKit. Never purge persistent history:
   CloudKit export depends on it.
 
-- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 2`) and
+- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 5`) and
   `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`. Arrays are stored as comma-separated
   strings (`weekdaysRaw`, `minutesRaw`); enums as raw strings with computed accessors.
 - `Vzato/Services` – logic without SwiftUI: `DoseScheduler` (expected doses per day,
@@ -98,9 +98,8 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 ## Conventions
 
 - Core Data model: every attribute optional or with a default, every relationship
-  optional with an inverse, no unique constraints, no ordered relationships. Until the
-  first TestFlight build ships, the current version (`Vzato 2`) may be edited in place;
-  after that, any schema change = new model version with lightweight migration.
+  optional with an inverse, no unique constraints, no ordered relationships. TestFlight
+  builds have shipped: any schema change = new model version with lightweight migration.
 - A scheduled dose has no `DoseEvent` until the user acts. Status for an unrecorded
   slot is derived (pending → missed after the grace period). Never pre-create events.
 - Stock changes only in `DoseLogger` (dose taken/reset) and `StockService.setStock`.

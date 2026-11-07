@@ -56,6 +56,10 @@ struct TodayView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
+                    if NotificationService.shared.remindersOff, !medications.isEmpty {
+                        RemindersOffBanner(denied: NotificationService.shared.authorizationStatus == .denied)
+                    }
+
                     if let featured {
                         NextDoseCard(slot: featured, now: now, grace: grace, snoozeMinutes: snoozeMinutes,
                                      onTaken: { requestTake(featured) },
@@ -254,6 +258,54 @@ struct MealWaitBanner: View {
         .padding(12)
         .background(Color(hex: "3B7DD8").opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// Shown on Today while the system blocks reminders, so a silent 12:00 does not come as a surprise.
+struct RemindersOffBanner: View {
+    /// Refused in the system settings; otherwise the app has not asked yet.
+    let denied: Bool
+    @Environment(\.openURL) private var openURL
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Reminders are off")
+                        .font(.subheadline.weight(.bold))
+                    Text("Without notifications you will not hear or see a reminder at dose time, not even on the lock screen.")
+                        .font(.caption)
+                }
+            } icon: {
+                Image(systemName: "bell.slash.fill")
+            }
+            Button {
+                if denied {
+                    if let url = URL(string: Self.settingsURL) { openURL(url) }
+                } else {
+                    Task { await NotificationService.shared.requestAuthorization() }
+                }
+            } label: {
+                Text(denied ? "Open settings" : "Allow notifications")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.white)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Palette.missed)
+            .accessibilityIdentifier("allowNotifications")
+        }
+        .foregroundStyle(Palette.missed)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(Palette.missed.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    private static var settingsURL: String {
+        #if os(iOS)
+        UIApplication.openNotificationSettingsURLString
+        #else
+        "x-apple.systempreferences:com.apple.Notifications-Settings.extension?id=app.vzato"
+        #endif
     }
 }
 

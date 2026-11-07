@@ -2585,6 +2585,28 @@
         }
       }
     },
+    "Don't show": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nezobrazovat"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne jelenjen meg"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nezobrazovať"
+          }
+        }
+      }
+    },
     "Done": {
       "localizations": {
         "cs": {
@@ -4389,6 +4411,28 @@
         }
       }
     },
+    "Open settings": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřít nastavení"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beállítások megnyitása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvoriť nastavenia"
+          }
+        }
+      }
+    },
     "Open system settings": {
       "localizations": {
         "cs": {
@@ -4587,6 +4631,28 @@
         }
       }
     },
+    "Photo on Today": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografie v přehledu Dnes"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotó a Ma nézetben"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografia v prehľade Dnes"
+          }
+        }
+      }
+    },
     "Photos": {
       "localizations": {
         "cs": {
@@ -4671,28 +4737,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tableta"
-          }
-        }
-      }
-    },
-    "Pill photo": {
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fotografie tablety"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tabletta fotója"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fotografia tablety"
           }
         }
       }
@@ -4979,6 +5023,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pripomienky"
+          }
+        }
+      }
+    },
+    "Reminders are off": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky jsou vypnuté"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők ki vannak kapcsolva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky sú vypnuté"
           }
         }
       }
@@ -5335,24 +5401,24 @@
         }
       }
     },
-    "Show pill photo": {
+    "Show photo": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zobrazit fotografii tablety"
+            "value": "Zobrazit fotografii"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tabletta fotójának megjelenítése"
+            "value": "Fotó megjelenítése"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zobraziť fotografiu tablety"
+            "value": "Zobraziť fotografiu"
           }
         }
       }
@@ -6017,6 +6083,28 @@
         }
       }
     },
+    "The chosen photo appears on the big card next to the Taken button.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vybraná fotografie se zobrazí na velké kartě u tlačítka Vzato."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kiválasztott fotó a nagy kártyán jelenik meg a Bevéve gomb mellett."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vybraná fotografia sa zobrazí na veľkej karte pri tlačidle Vzaté."
+          }
+        }
+      }
+    },
     "The next dose on the Lock Screen.": {
       "localizations": {
         "cs": {
@@ -6629,6 +6717,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bez záznamu"
+          }
+        }
+      }
+    },
+    "Without notifications you will not hear or see a reminder at dose time, not even on the lock screen.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez oznámení v čase dávky neuslyšíte ani neuvidíte žádnou připomínku, ani na zamčené obrazovce."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Értesítések nélkül az adag idején nem hall és nem lát emlékeztetőt, a zárolási képernyőn sem."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez upozornení v čase dávky nebudete počuť ani vidieť žiadnu pripomienku, ani na zamknutej obrazovke."
           }
         }
       }

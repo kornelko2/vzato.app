@@ -53,6 +53,13 @@ All notable changes to Vzato are listed here. The format follows
 - Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
   because the number pad has no Return key; they now count on every keystroke and
   accept a decimal comma (10,5).
+- Fixed: reminders never arrived (no sound, nothing on the lock screen) because
+  the app asked for notification permission only from a button in Settings. It now
+  asks as soon as a medication has a time, and Today shows a red warning with
+  *Allow notifications* / *Open settings* while reminders are off. Reminder
+  rebuilds run one after another.
+- Choose which photo the Today card shows for each medication: pill (default),
+  package or none (Medication › Photos › Photo on Today). Model version 5.
 - Doses scheduled before a medication was added no longer count as missed (Today,
   History, summary, supply check), unless recorded.
 - Summary for the doctor (History › Summary for the doctor): medications with dose
