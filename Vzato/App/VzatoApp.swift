@@ -71,6 +71,7 @@ struct VzatoApp: App {
                         Task { await NotificationService.shared.rescheduleAll() }
                     case .background:
                         WidgetBridge.shared.reloadNow()
+                        SyncMonitor.shared.keepRunningWhileSyncing()
                     default:
                         break
                     }

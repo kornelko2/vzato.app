@@ -163,7 +163,7 @@ yet.
 | Field | Value |
 |---|---|
 | Feedback email | info@vzato.app (Cloudflare Email Routing → iCloud) |
-| Review contact | Kornel Maraz, info@vzato.app, phone: _to fill in_ |
+| Review contact | Kornel Maraz, info@vzato.app (phone in App Store Connect) |
 | Sign-in required | No |
 
 ### cs – Popis bety
@@ -206,3 +206,31 @@ Needed once before the first TestFlight build, and again after every model chang
 5. Switch the environment to **Production** and check that the same record types are listed.
 
 Nothing else is needed: Core Data creates the private database zone on each user's device.
+
+---
+
+## App Review notes
+
+Asked for by App Review (Guideline 2.1, Information Needed) on the first submission.
+Goes into App Review Information › Notes for both iOS and macOS; the screen recording
+from an iPhone goes into App Review Information › Attachment.
+
+```
+1. Screen recording
+Attached: a recording from an iPhone on the latest iOS. It starts with launching the app from the Home Screen and shows the first-start guide, adding a medication, a reminder arriving on the Lock Screen, confirming the dose with Taken, undo, the supply and history, the summary for the doctor and Settings. The recording uses the Czech interface; with the device set to English the app is in English. The app has no accounts, no login, no user-generated content shared with others and no paid content.
+
+2. Purpose and audience
+Vzato is a medication reminder for people who take medication regularly, including older people who are not comfortable with phones, and for family members who look after them. It reminds the user at the planned time, records whether each dose was taken, tracks how many tablets are left at home and when to get more, reminds the user when they may eat after a before-meal dose, and keeps a history the user can show to their doctor. It is free, has no ads, no in-app purchases and no subscription. Vzato is not a medical device: it does not recommend doses, check interactions or interpret health data. This is stated in Settings and in Help.
+
+3. How to use it
+No login, account or sample files are needed. On first launch a short guide asks for notification permission and helps add the first medication (name, amount per dose, times). To see a reminder quickly, set a time one or two minutes ahead and lock the device. Main features: Today tab (the next dose with Taken, Snooze, Skip), Medications tab (add, edit, supply, photos), History tab (calendar and summary for the doctor with PDF export), Settings (sounds, reminders, iCloud sync status, help, introduction again).
+
+4. External services
+None besides Apple. Data is stored on the device. If the user is signed in to iCloud, the app syncs with the user's own private iCloud database (CloudKit). No third-party SDKs, no analytics, no advertising, no AI services, no own server, no payment processing.
+
+5. Regional differences
+None. The app works the same in all regions. It is localized into Czech, Slovak, English and Hungarian.
+
+6. Regulated industry
+The app does not provide medical, pharmacy or health services and is not a regulated medical device. It only stores the user's own notes and reminders, and it does not use protected third-party material.
+```

@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5). Jedenáctá revize (7. 11. 2026): Apple Health odloženo, důvody v 3.8; úvodní průvodce a nápověda (3.12), web na vzato.app.
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5). Jedenáctá revize (7. 11. 2026): Apple Health odloženo, důvody v 3.8; úvodní průvodce a nápověda (3.12), web na vzato.app. Dvanáctá revize (7. 11. 2026): tlačítko Přeskočit ve widgetu (3.9).
 
 ---
 
@@ -137,7 +137,7 @@ Kdy se k tomu vrátit: každý rok po WWDC (červen) zkontrolovat, zda `HKMedica
 
 - **iPhone a iPad:** widget „Dnes“ (seznam dávek, tlačítko potvrdit), widget na zamykací obrazovce s nejbližší dávkou.
 - **Mac:** widget „Dnes“ v Centru oznámení a na ploše.
-- Tlačítko „Vzato“ ve widgetu potvrdí dávku bez otevření aplikace; widget sám nesynchronizuje, zápis přenese aplikace.
+- Tlačítko „Vzato“ ve widgetu potvrdí dávku bez otevření aplikace; widget sám nesynchronizuje, zápis přenese aplikace. Vedle něj je menší tlačítko „Přeskočit“ (jen ikona, aby se vešlo do malého widgetu), které dávku zaznamená jako přeskočenou. Obě tlačítka jsou jen u dávky, kterou lze potvrdit jedním klepnutím.
 - Stav widgetu se synchronizuje přes sdílená data (App Group).
 
 ### 3.10 Synchronizace

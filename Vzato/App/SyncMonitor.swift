@@ -6,6 +6,9 @@ import CloudKit
 import CoreData
 import Foundation
 import Observation
+#if os(iOS)
+import UIKit
+#endif
 
 /// Watches the CloudKit container so Settings can show the sync state, and refreshes reminders
 /// when changes arrive from another device.
@@ -20,6 +23,10 @@ final class SyncMonitor {
 
     private var observers: [any NSObjectProtocol] = []
     private var rescheduleTask: Task<Void, Never>?
+    private var activity = SyncActivity()
+    #if os(iOS)
+    private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+    #endif
 
     private init() {}
 
@@ -29,13 +36,17 @@ final class SyncMonitor {
 
         let center = NotificationCenter.default
         observers.append(center.addObserver(forName: NSPersistentCloudKitContainer.eventChangedNotification, object: controller.container, queue: .main) { [weak self] notification in
-            guard let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event,
-                  event.endDate != nil else { return }
+            guard let event = notification.userInfo?[NSPersistentCloudKitContainer.eventNotificationUserInfoKey] as? NSPersistentCloudKitContainer.Event else { return }
+            let id = event.identifier
+            let ended = event.endDate
             let succeeded = event.succeeded
             let message = event.error.map(SyncMonitor.describe)
-            let ended = event.endDate ?? Date()
             MainActor.assumeIsolated {
-                self?.record(succeeded: succeeded, message: message, at: ended)
+                self?.activity.update(event: id, finished: ended != nil)
+                if let ended {
+                    self?.record(succeeded: succeeded, message: message, at: ended)
+                }
+                self?.releaseBackgroundTimeIfIdle()
             }
         })
         observers.append(center.addObserver(forName: .NSPersistentStoreRemoteChange, object: controller.container.persistentStoreCoordinator, queue: .main) { [weak self] _ in
@@ -43,6 +54,35 @@ final class SyncMonitor {
                 self?.scheduleReminderRefresh()
             }
         })
+    }
+
+    /// Called when the app goes to the background. A dose confirmed just before leaving the app
+    /// starts a CloudKit export that writes to the store; ask iOS for time to finish it, because a
+    /// suspended app holding the store's file lock is killed (0xdead10cc).
+    func keepRunningWhileSyncing() {
+        #if os(iOS)
+        guard isEnabled, backgroundTask == .invalid else { return }
+        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "Finish iCloud sync") { [weak self] in
+            MainActor.assumeIsolated { self?.releaseBackgroundTime() }
+        }
+        // The export starts shortly after the last save; if nothing has started by then, let go.
+        Task { [weak self] in
+            try? await Task.sleep(for: .seconds(3))
+            self?.releaseBackgroundTimeIfIdle()
+        }
+        #endif
+    }
+
+    private func releaseBackgroundTimeIfIdle() {
+        if activity.isIdle { releaseBackgroundTime() }
+    }
+
+    private func releaseBackgroundTime() {
+        #if os(iOS)
+        guard backgroundTask != .invalid else { return }
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        backgroundTask = .invalid
+        #endif
     }
 
     /// Turns CloudKit's terse errors into something a person can act on. Partial failures are

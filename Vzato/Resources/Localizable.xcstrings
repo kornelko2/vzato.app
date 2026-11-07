@@ -6479,6 +6479,28 @@
         }
       }
     },
+    "Skip dose": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přeskočit dávku"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adag kihagyása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preskočiť dávku"
+          }
+        }
+      }
+    },
     "Skipped": {
       "localizations": {
         "cs": {
@@ -8371,24 +8393,24 @@
         }
       }
     },
-    "Your next dose with a Taken button.": {
+    "Your next dose with Taken and Skip buttons.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Příští dávka s tlačítkem Vzato."
+            "value": "Příští dávka s tlačítky Vzato a Přeskočit."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "A következő adag a Bevéve gombbal."
+            "value": "A következő adag a Bevéve és Kihagyás gombokkal."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Najbližšia dávka s tlačidlom Vzaté."
+            "value": "Najbližšia dávka s tlačidlami Vzaté a Preskočiť."
           }
         }
       }

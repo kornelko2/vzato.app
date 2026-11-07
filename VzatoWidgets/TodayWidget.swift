@@ -25,7 +25,7 @@ struct TodayWidget: Widget {
                 .containerBackground(.background, for: .widget)
         }
         .configurationDisplayName(Text("Today"))
-        .description(Text("Your next dose with a Taken button."))
+        .description(Text("Your next dose with Taken and Skip buttons."))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -111,14 +111,29 @@ struct FeaturedDoseView: View {
             .foregroundStyle(.secondary)
             .frame(maxWidth: .infinity, minHeight: 32)
         } else if let id = dose.medicationID {
-            Button(intent: MarkDoseTakenIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
-                Label("Taken", systemImage: "checkmark")
+            HStack(spacing: 6) {
+                Button(intent: MarkDoseTakenIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
+                    ViewThatFits(in: .horizontal) {
+                        Label("Taken", systemImage: "checkmark")
+                        Text("Taken")
+                    }
                     .font(.subheadline.weight(.heavy))
                     .textCase(.uppercase)
+                    .lineLimit(1)
                     .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(Palette.taken)
+
+                // Icon only, so it fits next to Taken in the small widget.
+                Button(intent: MarkDoseSkippedIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
+                    Image(systemName: "forward.end.fill")
+                        .font(.subheadline.weight(.semibold))
+                }
+                .buttonStyle(.bordered)
+                .tint(.secondary)
+                .accessibilityLabel(Text("Skip"))
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Palette.taken)
         } else {
             Label("Taken", systemImage: "checkmark")
                 .font(.subheadline.weight(.heavy))

@@ -105,6 +105,12 @@ All notable changes to Vzato are listed here. The format follows
   ⇧⌘N, Go ⌘1–⌘3) and Return to confirm the featured dose.
 - Unit tests for the scheduler, dose logging, supply, supply check, summaries,
   photo store and CSV.
+- Skip button next to Taken in the Today widget.
+
+### Fixed
+- The app could be closed by iOS a moment after leaving it, while iCloud was still
+  saving the last change (crash report 0xdead10cc). It now asks for a few seconds
+  in the background until the sync step finishes.
 
 ### Added (behind a build flag)
 - iCloud sync through the user's private CloudKit database, with sync status in
