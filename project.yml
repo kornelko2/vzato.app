@@ -36,6 +36,8 @@ targets:
       path: Vzato/Info.plist
       properties:
         CFBundleDisplayName: Vzato
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.medical
         ITSAppUsesNonExemptEncryption: false
         NSCameraUsageDescription: Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.
@@ -81,6 +83,8 @@ targets:
       path: VzatoWidgets/Info.plist
       properties:
         CFBundleDisplayName: Vzato
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         VzatoAppGroup: $(VZATO_APP_GROUP)
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
