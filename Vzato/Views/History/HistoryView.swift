@@ -66,6 +66,17 @@ struct HistoryView: View {
                         }
                     }
                 }
+
+                Section {
+                    NavigationLink {
+                        DoctorSummaryView()
+                    } label: {
+                        Label("Summary for the doctor", systemImage: "doc.text.magnifyingglass")
+                    }
+                    .accessibilityIdentifier("doctorSummary")
+                } footer: {
+                    Text("Medications, plan, adherence and missed doses for 7, 30 or 90 days, as a PDF to send or print.")
+                }
             }
             .navigationTitle(Text("History"))
             .toolbar {

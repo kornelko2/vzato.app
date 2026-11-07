@@ -1573,6 +1573,72 @@
         }
       }
     },
+    "30 days": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 dní"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 nap"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 dní"
+          }
+        }
+      }
+    },
+    "7 days": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 nap"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní"
+          }
+        }
+      }
+    },
+    "90 days": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90 dní"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90 nap"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90 dní"
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "cs": {
@@ -2013,6 +2079,28 @@
         }
       }
     },
+    "At home %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doma %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otthon %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doma %@"
+          }
+        }
+      }
+    },
     "Before a meal": {
       "localizations": {
         "cs": {
@@ -2295,6 +2383,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spočítané"
+          }
+        }
+      }
+    },
+    "Created": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vytvořeno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Létrehozva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vytvorené"
           }
         }
       }
@@ -2933,6 +3043,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exportovať CSV"
+          }
+        }
+      }
+    },
+    "Export PDF": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovat PDF"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PDF exportálása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovať PDF"
           }
         }
       }
@@ -3641,6 +3773,28 @@
         }
       }
     },
+    "Medications, plan, adherence and missed doses for 7, 30 or 90 days, as a PDF to send or print.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Léky, plán, dodržování a zmeškané dávky za 7, 30 nebo 90 dní, jako PDF k odeslání nebo tisku."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszerek, terv, betartás és kihagyott adagok 7, 30 vagy 90 napra, PDF-ben küldéshez vagy nyomtatáshoz."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieky, plán, dodržiavanie a zmeškané dávky za 7, 30 alebo 90 dní, ako PDF na odoslanie alebo tlač."
+          }
+        }
+      }
+    },
     "Millilitres": {
       "localizations": {
         "cs": {
@@ -3681,6 +3835,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zmeškané"
+          }
+        }
+      }
+    },
+    "Missed doses": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmeškané dávky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kihagyott adagok"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmeškané dávky"
           }
         }
       }
@@ -3967,6 +4143,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Žiadne lieky"
+          }
+        }
+      }
+    },
+    "No medications in this period.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V tomto období žádné léky."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebben az időszakban nincs gyógyszer."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V tomto období žiadne lieky."
           }
         }
       }
@@ -4345,6 +4543,28 @@
         }
       }
     },
+    "Period": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Období"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Időszak"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obdobie"
+          }
+        }
+      }
+    },
     "Photo": {
       "localizations": {
         "cs": {
@@ -4649,6 +4869,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zaznamenané ako vzaté"
+          }
+        }
+      }
+    },
+    "Recorded by the patient in Vzato. Vzato is not a medical device; the records are the patient's own.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenal pacient v aplikaci Vzato. Vzato není zdravotnický prostředek, jde o vlastní záznamy pacienta."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pácienst rögzítette a Vzato alkalmazásban. A Vzato nem orvostechnikai eszköz, ezek a páciens saját feljegyzései."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaznamenal pacient v aplikácii Vzato. Vzato nie je zdravotnícka pomôcka, ide o vlastné záznamy pacienta."
           }
         }
       }
@@ -5331,6 +5573,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Začiatok"
+          }
+        }
+      }
+    },
+    "Summary for the doctor": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souhrn pro lékaře"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Összefoglaló az orvosnak"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Súhrn pre lekára"
           }
         }
       }
@@ -6171,6 +6435,28 @@
         }
       }
     },
+    "Vzato summary %@.pdf": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato souhrn %@.pdf"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato összefoglaló %@.pdf"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato súhrn %@.pdf"
+          }
+        }
+      }
+    },
     "Waiting for the first sync": {
       "localizations": {
         "cs": {
@@ -6545,6 +6831,28 @@
         }
       }
     },
+    "extra %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "navíc %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "extra %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "navyše %lld"
+          }
+        }
+      }
+    },
     "get more by %@": {
       "localizations": {
         "cs": {
@@ -6629,6 +6937,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS dovolí najviac 64 naplánovaných pripomienok. Niektoré časy neboli naplánované."
+          }
+        }
+      }
+    },
+    "missed %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zmeškáno %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kihagyva %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zmeškané %lld"
+          }
+        }
+      }
+    },
+    "runs out %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dojde %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "elfogy: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dôjde %@"
+          }
+        }
+      }
+    },
+    "skipped %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "přeskočeno %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kihagyva (szándékosan) %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "preskočené %lld"
           }
         }
       }

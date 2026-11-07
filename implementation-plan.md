@@ -263,6 +263,8 @@ Podle specifikace, kapitola 12. Model už profil má; přibude správa profilů 
 
 ### Volitelná fáze 13 – Předání dat při setkání
 
+**Stav 7. 11. 2026: krok 1 hotový** – Souhrn pro lékaře (Historie › Souhrn pro lékaře) za 7/30/90 dní, export PDF A4 přes `ImageRenderer` s více stránkami (`DoctorSummaryBuilder`, `SummaryPDF`, testy včetně UI testu). Kroky 2–5 (balíček `.vzato`, QR, šifrování, denní souhrn) zatím ne.
+
 Podle specifikace, kapitola 14. Pořadí uvnitř fáze: (1) obrazovka Souhrn pro lékaře + PDF přes `ImageRenderer`/`ShareLink`, (2) formát `.vzato` (JSON, verze schématu) s exportem a importem s náhledem, (3) QR kód z balíčku (komprese, sekvence QR pro delší období, čtečka přes `DataScannerViewController` / AVFoundation), (4) šifrovaný balíček heslem (CryptoKit AES‑GCM), (5) „Poslat denní souhrn“ jako jedno klepnutí a Zkratky. Bez serveru, bez nové závislosti.
 
 ### Volitelná fáze 14 – Pomocník pro týdenní dávkovač

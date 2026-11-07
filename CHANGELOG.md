@@ -53,6 +53,10 @@ All notable changes to Vzato are listed here. The format follows
 - Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
   because the number pad has no Return key; they now count on every keystroke and
   accept a decimal comma (10,5).
+- Summary for the doctor (History › Summary for the doctor): medications with dose
+  and plan, taken / missed / skipped / extra doses and adherence for 7, 30 or 90
+  days, current supply and run-out date, list of missed doses; exported as an A4
+  PDF to send or print.
 - Double-dose protection: only a due dose (from 30 minutes before its time) can be
   confirmed with one tap; later doses show only their time, no button (taking one
   early is possible by swiping its row in the timeline, with a question); taking

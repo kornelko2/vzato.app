@@ -408,6 +408,8 @@ Alternativa k živému sdílení z kapitoly 10: data se nepředávají průběž
 - **Vazba na Android:** souhrn e‑mailem/SMS a čitelný QR (prostý text) jsou jediné cesty, jak dostat informace k někomu bez zařízení Apple, aniž by vznikl server. To je silný argument pro tuto kapitolu oproti kapitole 10.
 - **Pracnost:** souhrn + PDF malá; `.vzato` balíček a import střední; QR sekvence střední; šifrování malé. Celkově menší než kapitola 10 a bez jejích rizik.
 
+Stav: souhrn pro lékaře s exportem PDF je od 7. 11. 2026 v aplikaci (Historie › Souhrn pro lékaře).
+
 Doporučení: pokud se někdy bude řešit „jak dát data lékaři nebo rodině“, začít tady (souhrn, PDF, `.vzato` balíček přes sdílení), a kapitolu 10 nechat až na případ, kdy je nutné průběžné sledování na dálku.
 
 ## 15. Možné rozšíření (mimo v1): pomocník pro týdenní dávkovač
