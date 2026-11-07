@@ -56,14 +56,20 @@ final class PersistenceController {
         guard let description = container.persistentStoreDescriptions.first else {
             fatalError("Missing persistent store description")
         }
+        let scratch = !inMemory && !AppSettings.isAppExtension && LaunchArguments.usesScratchStore
         if inMemory {
             description.url = URL(fileURLWithPath: "/dev/null")
+        } else if scratch {
+            let folder = FileManager.default.temporaryDirectory.appendingPathComponent("VzatoScratch", isDirectory: true)
+            try? FileManager.default.removeItem(at: folder)
+            try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            description.url = folder.appendingPathComponent("Vzato.sqlite")
         } else if let shared = Self.sharedStoreURL,
                   Self.moveLegacyStore(to: shared, coordinator: container.persistentStoreCoordinator) {
             description.url = shared
         }
         // The widget reads and writes the same file but never talks to CloudKit itself.
-        isCloudKitEnabled = !inMemory && Self.isCloudKitBuild && !AppSettings.isAppExtension
+        isCloudKitEnabled = !inMemory && !scratch && Self.isCloudKitBuild && !AppSettings.isAppExtension
         if isCloudKitEnabled {
             description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: Self.cloudKitContainerIdentifier)
         } else {

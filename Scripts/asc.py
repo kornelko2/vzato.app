@@ -10,6 +10,8 @@ App Store Connect API helper for Vzato. Standard library + the openssl CLI, no p
     python3 Scripts/asc.py check      # sign in, find the app by bundle ID, show its state
     python3 Scripts/asc.py metadata   # names, subtitles, texts, categories in all languages
     python3 Scripts/asc.py beta       # TestFlight description, what to test, feedback email
+    python3 Scripts/asc.py screenshots <folder> <display type> <IOS|MAC_OS>
+                                      # <folder>/<cs|sk|en|hu>/*.png, replaces that set
 
 The key is read from ~/.appstoreconnect/private_keys/AuthKey_<KEY_ID>.p8 and never printed.
 The app record itself must exist already: Apple's API cannot create apps.
@@ -230,6 +232,55 @@ def cmd_beta():
         print(f"What to test: build {build['attributes']['version']} ({build['id'][:8]})")
 
 
+SHOT_LOCALES = {"cs": "cs", "sk": "sk", "en": "en-US", "hu": "hu"}
+
+
+def upload_screenshot(set_id: str, path: str):
+    import hashlib
+    data = open(path, "rb").read()
+    reserved = call("POST", "/appScreenshots", {"data": {"type": "appScreenshots",
+        "attributes": {"fileName": os.path.basename(path), "fileSize": len(data)},
+        "relationships": {"appScreenshotSet": {"data": {"type": "appScreenshotSets", "id": set_id}}}}})["data"]
+    for operation in reserved["attributes"]["uploadOperations"]:
+        chunk = data[operation["offset"]:operation["offset"] + operation["length"]]
+        headers = {h["name"]: h["value"] for h in operation.get("requestHeaders", [])}
+        request = urllib.request.Request(operation["url"], data=chunk, method=operation["method"], headers=headers)
+        with urllib.request.urlopen(request) as response:
+            response.read()
+    call("PATCH", f"/appScreenshots/{reserved['id']}", {"data": {"type": "appScreenshots", "id": reserved["id"],
+        "attributes": {"uploaded": True, "sourceFileChecksum": hashlib.md5(data).hexdigest()}}})
+
+
+def cmd_screenshots():
+    if len(sys.argv) < 5:
+        sys.exit("Usage: asc.py screenshots <folder> <display type, e.g. APP_IPHONE_67> <IOS|MAC_OS>")
+    folder, display_type, platform = sys.argv[2], sys.argv[3], sys.argv[4]
+    app = find_app()
+    versions = [v for v in call("GET", f"/apps/{app['id']}/appStoreVersions")["data"]
+                if v["attributes"]["platform"] == platform
+                and (v["attributes"].get("appStoreState") or v["attributes"].get("appVersionState")) not in ("READY_FOR_SALE", "READY_FOR_DISTRIBUTION")]
+    if not versions:
+        sys.exit(f"No editable {platform} version")
+    localizations = call("GET", f"/appStoreVersions/{versions[0]['id']}/appStoreVersionLocalizations")["data"]
+    for lang, locale in SHOT_LOCALES.items():
+        files = sorted(f for f in os.listdir(os.path.join(folder, lang)) if f.endswith(".png")) if os.path.isdir(os.path.join(folder, lang)) else []
+        localization = next((l for l in localizations if l["attributes"]["locale"] == locale), None)
+        if not files or not localization:
+            continue
+        sets = call("GET", f"/appStoreVersionLocalizations/{localization['id']}/appScreenshotSets")["data"]
+        screenshot_set = next((x for x in sets if x["attributes"]["screenshotDisplayType"] == display_type), None)
+        if screenshot_set:
+            for old in call("GET", f"/appScreenshotSets/{screenshot_set['id']}/appScreenshots")["data"]:
+                call("DELETE", f"/appScreenshots/{old['id']}")
+        else:
+            screenshot_set = call("POST", "/appScreenshotSets", {"data": {"type": "appScreenshotSets",
+                "attributes": {"screenshotDisplayType": display_type},
+                "relationships": {"appStoreVersionLocalization": {"data": {"type": "appStoreVersionLocalizations", "id": localization["id"]}}}}})["data"]
+        for name in files:
+            upload_screenshot(screenshot_set["id"], os.path.join(folder, lang, name))
+        print(f"{platform} {display_type} {locale}: {len(files)} screenshots")
+
+
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else "check"
-    {"check": cmd_check, "metadata": cmd_metadata, "beta": cmd_beta}.get(command, lambda: sys.exit(__doc__))()
+    {"check": cmd_check, "metadata": cmd_metadata, "beta": cmd_beta, "screenshots": cmd_screenshots}.get(command, lambda: sys.exit(__doc__))()

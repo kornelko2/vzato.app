@@ -137,6 +137,29 @@ enum ReminderSound: String, CaseIterable, Identifiable, Sendable {
 
 /// Debug-only launch arguments used for simulator screenshots and UI work.
 enum LaunchArguments {
+    /// `--scratch-store`: a throwaway local store with no iCloud and no notifications, so demo data
+    /// for screenshots never touches the real data on a Mac that shares the App Group with the
+    /// installed app.
+    /// `--window-size 1440x900`: Mac window size in points for App Store screenshots.
+    static var windowSize: (width: Double, height: Double)? {
+        #if DEBUG
+        let args = CommandLine.arguments
+        guard let index = args.firstIndex(of: "--window-size"), index + 1 < args.count else { return nil }
+        let parts = args[index + 1].split(separator: "x").compactMap { Double($0) }
+        return parts.count == 2 ? (parts[0], parts[1]) : nil
+        #else
+        return nil
+        #endif
+    }
+
+    static var usesScratchStore: Bool {
+        #if DEBUG
+        return CommandLine.arguments.contains("--scratch-store")
+        #else
+        return false
+        #endif
+    }
+
     /// `--onboarding` shows the first-start guide even if it was finished; `--no-onboarding` never
     /// shows it (UI tests that start from an empty store). `nil`: decide as usual.
     static var onboardingOverride: Bool? {

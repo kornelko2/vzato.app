@@ -4,6 +4,9 @@
 
 import CoreData
 import SwiftUI
+#if os(macOS)
+import AppKit
+#endif
 
 @main
 struct VzatoApp: App {
@@ -31,7 +34,12 @@ struct VzatoApp: App {
             }
         }
         #endif
-        NotificationService.shared.configure(context: persistence.viewContext)
+        if LaunchArguments.usesScratchStore {
+            // Only read the permission, so Today shows the same state as the real app.
+            Task { await NotificationService.shared.refreshAuthorizationStatus() }
+        } else {
+            NotificationService.shared.configure(context: persistence.viewContext)
+        }
         SyncMonitor.shared.start(controller: persistence)
         persistence.startMergingExternalChanges()
         DuplicateResolver.resolve(in: persistence.viewContext)
@@ -46,6 +54,16 @@ struct VzatoApp: App {
             RootView()
                 .environment(state)
                 .environment(\.managedObjectContext, persistence.viewContext)
+                #if os(macOS)
+                .onAppear {
+                    guard let size = LaunchArguments.windowSize else { return }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        guard let window = NSApplication.shared.windows.first(where: { $0.isVisible && $0.styleMask.contains(.titled) }) else { return }
+                        let screen = window.screen?.visibleFrame ?? .zero
+                        window.setFrame(NSRect(x: screen.minX + 40, y: screen.maxY - size.height - 40, width: size.width, height: size.height), display: true)
+                    }
+                }
+                #endif
                 .onChange(of: scenePhase) { _, phase in
                     switch phase {
                     case .active:

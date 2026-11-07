@@ -53,6 +53,9 @@ All notable changes to Vzato are listed here. The format follows
 - Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
   because the number pad has no Return key; they now count on every keystroke and
   accept a decimal comma (10,5).
+- App Store screenshots from the simulator and the Mac in four languages
+  (`Scripts/screenshots.sh`, `Scripts/screenshots-mac.sh`, `asc.py screenshots`); demo
+  data goes to a throwaway store (`--scratch-store`, Debug only).
 - Settings › Free for everyone: every feature and the source code are free, the
   author maintains Vzato mainly for himself, feedback to info@vzato.app. A Buy Me a
   Coffee link is on the website and in the repository, not in the app (App Store rules).
