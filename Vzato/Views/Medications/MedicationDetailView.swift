@@ -106,6 +106,7 @@ struct MedicationDetailView: View {
                 Button("Edit") { editing = true }
             }
         }
+        .onAppear { if LaunchArguments.opensEditor { editing = true } }
         .sheet(isPresented: $editing) {
             MedicationFormView(medication: medication)
         }

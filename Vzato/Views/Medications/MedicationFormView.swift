@@ -89,11 +89,11 @@ struct MedicationFormView: View {
                         ForEach(MealRelation.allCases) { relation in
                             Text(relation.label).tag(relation)
                         }
+                    }
                     if mealRelation == .before {
                         Stepper(value: $mealWaitMinutes, in: 15...120, step: 15) {
                             LabeledContent("Eat after") { Text("\(mealWaitMinutes) min") }
                         }
-                    }
                     }
                     DatePicker("Start", selection: $startDate, displayedComponents: .date)
                     Toggle("End date", isOn: $hasEndDate)

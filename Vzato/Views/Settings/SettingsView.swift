@@ -90,8 +90,8 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    soundPicker(Text("Medication reminders"), selection: $doseSound)
-                    soundPicker(Text("\u{201E}You can eat now\u{201C}"), selection: $mealSound)
+                    soundPicker(Text("Medication reminders"), options: ReminderSound.forDoses, selection: $doseSound)
+                    soundPicker(Text("\u{201E}You can eat now\u{201C}"), options: ReminderSound.forMeals, selection: $mealSound)
                 } header: {
                     Text("Sounds")
                 } footer: {
@@ -99,9 +99,13 @@ struct SettingsView: View {
                 }
                 .onChange(of: doseSound) {
                     AppSettings.shareWithWidgets()
+                    SoundPreview.play(doseSound)
                     Task { await notifications.rescheduleAll() }
                 }
-                .onChange(of: mealSound) { AppSettings.shareWithWidgets() }
+                .onChange(of: mealSound) {
+                    AppSettings.shareWithWidgets()
+                    SoundPreview.play(mealSound)
+                }
 
                 Section {
                     NavigationLink {
@@ -142,10 +146,10 @@ struct SettingsView: View {
         }
     }
 
-    private func soundPicker(_ title: Text, selection: Binding<ReminderSound>) -> some View {
+    private func soundPicker(_ title: Text, options: [ReminderSound], selection: Binding<ReminderSound>) -> some View {
         HStack {
             Picker(selection: selection) {
-                ForEach(ReminderSound.allCases) { sound in
+                ForEach(options) { sound in
                     Text(sound.label).tag(sound)
                 }
             } label: {

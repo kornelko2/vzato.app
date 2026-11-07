@@ -138,7 +138,22 @@ struct TodayView: View {
         ContentUnavailableView {
             Label("No doses today", systemImage: "pills")
         } description: {
-            Text("Add a medication in the Medications tab to get reminders.")
+            Text(medications.isEmpty
+                 ? "Add your first medication with its dose and times. Vzato then reminds you."
+                 : "Nothing is scheduled for today.")
+        } actions: {
+            if medications.isEmpty {
+                Button {
+                    state.showingNewMedication = true
+                } label: {
+                    Label("Add medication", systemImage: "plus")
+                        .font(.title3.weight(.semibold))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
         }
     }
 

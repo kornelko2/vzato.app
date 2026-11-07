@@ -26,7 +26,18 @@ struct MedicationsView: View {
                     ContentUnavailableView {
                         Label("No medications", systemImage: "pills")
                     } description: {
-                        Text("Tap + to add your first medication.")
+                        Text("Add your first medication with its dose and times. Vzato then reminds you.")
+                    } actions: {
+                        Button {
+                            state.showingNewMedication = true
+                        } label: {
+                            Label("Add medication", systemImage: "plus")
+                                .font(.title3.weight(.semibold))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
                     }
                 }
             }
@@ -40,7 +51,10 @@ struct MedicationsView: View {
                 }
             }
             .onAppear {
-                if LaunchArguments.opensFirstMedication, path.isEmpty, let first = medications.first {
+                if path.isEmpty, let name = LaunchArguments.medicationToOpen,
+                   let medication = medications.first(where: { $0.name == name }) {
+                    path.append(medication)
+                } else if LaunchArguments.opensFirstMedication, path.isEmpty, let first = medications.first {
                     path.append(first)
                 }
             }

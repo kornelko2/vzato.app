@@ -46,10 +46,12 @@ All notable changes to Vzato are listed here. The format follows
 - "You can eat now": for medications taken before a meal, a reminder after a
   configurable waiting time (default 30 minutes) once the dose is confirmed, and
   an "Eat from 7:05" countdown on the Today screen. Model version 4.
-- Own notification sounds: a chime for medication reminders and a soft melody for
-  "you can eat now", each selectable in Settings › Sounds with a preview. The
+- Own notification sounds: six attention-getting sounds for medication reminders and
+  six gentle ones for "you can eat now", selectable in Settings › Sounds with a
+  preview (choosing a sound plays it). The
   sounds are synthesized by `Scripts/make-sounds.py`.
-- Debug launch argument `--sample-data`.
+- Empty Medications and Today screens offer a large *Add medication* button.
+- Debug launch arguments `--sample-data`, `--tab`, `--open-medication <name>`, `--edit`.
 - Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),
   cancelled when the dose is confirmed or skipped.
 - Early warning a configurable number of days before the supply runs out.
