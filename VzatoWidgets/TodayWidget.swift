@@ -101,7 +101,16 @@ struct FeaturedDoseView: View {
 
     @ViewBuilder
     private func takenButton(for dose: WidgetDose) -> some View {
-        if let id = dose.medicationID {
+        if !dose.canTakeNow {
+            // Not due yet, or the same medication was just taken: no one-tap button.
+            HStack(spacing: 4) {
+                Image(systemName: "clock")
+                Text("Next at \(dose.scheduledAt.formatted(date: .omitted, time: .shortened))")
+            }
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, minHeight: 32)
+        } else if let id = dose.medicationID {
             Button(intent: MarkDoseTakenIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
                 Label("Taken", systemImage: "checkmark")
                     .font(.subheadline.weight(.heavy))
@@ -145,7 +154,7 @@ struct UpcomingListView: View {
                         .lineLimit(1)
                     }
                     Spacer(minLength: 2)
-                    if dose.isCurrent, let id = dose.medicationID {
+                    if dose.isCurrent, dose.canTakeNow, let id = dose.medicationID {
                         Button(intent: MarkDoseTakenIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
                             Image(systemName: "checkmark")
                                 .font(.caption.weight(.heavy))
@@ -215,7 +224,7 @@ struct AccessoryDoseView: View {
         case .accessoryCircular:
             ZStack {
                 AccessoryWidgetBackground()
-                if let dose = entry.featured, dose.isCurrent, let id = dose.medicationID {
+                if let dose = entry.featured, dose.isCurrent, dose.canTakeNow, let id = dose.medicationID {
                     Button(intent: MarkDoseTakenIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
                         VStack(spacing: 0) {
                             Image(systemName: "checkmark").font(.title3.weight(.heavy))
@@ -251,7 +260,7 @@ struct AccessoryDoseView: View {
                         Text(dose.amount).font(.caption).lineLimit(1)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    if dose.isCurrent, let id = dose.medicationID {
+                    if dose.isCurrent, dose.canTakeNow, let id = dose.medicationID {
                         Button(intent: MarkDoseTakenIntent(medicationID: id, scheduledAt: dose.scheduledAt)) {
                             Image(systemName: "checkmark")
                                 .font(.title3.weight(.heavy))

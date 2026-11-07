@@ -13,6 +13,7 @@ struct ExtraDoseView: View {
     private var medications: FetchedResults<Medication>
     @State private var selected: Medication?
     @State private var date = Date()
+    @State private var warning: String?
 
     var body: some View {
         NavigationStack {
@@ -32,15 +33,28 @@ struct ExtraDoseView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Log") {
-                        if let selected {
+                        guard let selected else { return }
+                        if case .recentlyTaken(let at) = DoseGuard.verdictForExtraDose(of: selected, at: date) {
+                            warning = String(localized: "\(selected.name) was already taken at \(at.formatted(date: .omitted, time: .shortened)). Take another dose now?")
+                        } else {
                             DoseLogger(context: context).logExtraDose(for: selected, at: date)
+                            dismiss()
                         }
-                        dismiss()
                     }
                     .disabled(selected == nil)
                 }
             }
             .onAppear { if selected == nil { selected = medications.first } }
+            .confirmationDialog(Text("Take this dose?"), isPresented: Binding(get: { warning != nil }, set: { if !$0 { warning = nil } }),
+                                titleVisibility: .visible) {
+                Button("Take anyway", role: .destructive) {
+                    if let selected { DoseLogger(context: context).logExtraDose(for: selected, at: date) }
+                    dismiss()
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text(warning ?? "")
+            }
         }
         #if os(macOS)
         .frame(minWidth: 380, minHeight: 220)

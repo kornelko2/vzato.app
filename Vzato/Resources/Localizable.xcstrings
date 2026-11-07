@@ -441,6 +441,28 @@
         }
       }
     },
+    "%@ was already taken at %@. Take another dose now?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ už byl vzat v %@. Opravdu vzít další dávku?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A(z) %@ már be lett véve %@-kor. Biztosan bevesz még egy adagot?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ už bol vzatý o %@. Naozaj vziať ďalšiu dávku?"
+          }
+        }
+      }
+    },
     "%@, was %@.": {
       "localizations": {
         "cs": {
@@ -3751,6 +3773,28 @@
         }
       }
     },
+    "Next at %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Další v %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Következő: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ďalšia o %@"
+          }
+        }
+      }
+    },
     "Next dose": {
       "localizations": {
         "cs": {
@@ -3769,6 +3813,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Najbližšia dávka"
+          }
+        }
+      }
+    },
+    "Next dose at %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Další dávka v %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Következő adag: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ďalšia dávka o %@"
           }
         }
       }
@@ -5489,6 +5555,50 @@
         }
       }
     },
+    "Take anyway": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přesto vzít"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mégis beveszem"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napriek tomu vziať"
+          }
+        }
+      }
+    },
+    "Take early…": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzít dříve…"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevétel korábban…"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vziať skôr…"
+          }
+        }
+      }
+    },
     "Take photo": {
       "localizations": {
         "cs": {
@@ -5507,6 +5617,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Odfotiť"
+          }
+        }
+      }
+    },
+    "Take this dose?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzít tuto dávku?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beveszi ezt az adagot?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vziať túto dávku?"
           }
         }
       }
@@ -5577,6 +5709,28 @@
         }
       }
     },
+    "Taken: %@ at %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato: %@ v %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve: %@, %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté: %@ o %@"
+          }
+        }
+      }
+    },
     "Teaspoons": {
       "localizations": {
         "cs": {
@@ -5617,6 +5771,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Najbližšia dávka na zamknutej obrazovke."
+          }
+        }
+      }
+    },
+    "This dose is planned for %@. Take it now, early?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tato dávka je naplánovaná na %@. Vzít ji už teď?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ez az adag %@-ra van tervezve. Beveszi már most?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Táto dávka je naplánovaná na %@. Vziať ju už teraz?"
           }
         }
       }
@@ -5815,6 +5991,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dvojtón"
+          }
+        }
+      }
+    },
+    "Undo": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrátit"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Visszavonás"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrátiť"
           }
         }
       }
@@ -6343,6 +6541,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "navyše"
+          }
+        }
+      }
+    },
+    "get more by %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "doplnit do %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pótolni eddig: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "doplniť do %@"
           }
         }
       }

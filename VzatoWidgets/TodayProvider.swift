@@ -11,10 +11,10 @@ extension TodayEntry: TimelineEntry {
         let now = Date()
         let next = WidgetDose(id: "placeholder-1", medicationID: nil, name: "Ibuprofen",
                               amount: DoseFormatter.amount(1, unit: .tablet), strength: "400 mg", colorHex: "D9534F",
-                              scheduledAt: now, status: .pending, isOverdue: false, isOpen: true)
+                              scheduledAt: now, status: .pending, isOverdue: false, isOpen: true, canTakeNow: true)
         let later = WidgetDose(id: "placeholder-2", medicationID: nil, name: "Vitamin D",
                                amount: DoseFormatter.amount(20, unit: .drop), strength: "", colorHex: "E0A526",
-                               scheduledAt: now.addingTimeInterval(3 * 60 * 60), status: .pending, isOverdue: false, isOpen: true)
+                               scheduledAt: now.addingTimeInterval(3 * 60 * 60), status: .pending, isOverdue: false, isOpen: true, canTakeNow: false)
         return TodayEntry(date: now, featured: next, upcoming: [later], taken: 1, total: 3)
     }
 }

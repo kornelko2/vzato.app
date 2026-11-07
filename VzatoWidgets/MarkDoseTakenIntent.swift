@@ -37,8 +37,9 @@ struct MarkDoseTakenIntent: AppIntent {
         let slot = DoseScheduler.slots(for: [medication], on: scheduledAt, calendar: calendar).first {
             !$0.isUnscheduled && calendar.isDate($0.scheduledAt, equalTo: scheduledAt, toGranularity: .minute)
         }
-        // Already confirmed in the app or on another device: nothing to do.
-        guard let slot, slot.event?.status != .taken else { return .result() }
+        // Already confirmed in the app or on another device: nothing to do. The widget only shows the
+        // button when one tap is safe; check again in case the state changed since it was drawn.
+        guard let slot, slot.event?.status != .taken, DoseGuard.verdict(for: slot, now: Date()) == .ok else { return .result() }
         DoseLogger(context: context).markTaken(slot, source: .widget)
         NotificationService.shared.clearDelivered(for: medication)
         return .result()

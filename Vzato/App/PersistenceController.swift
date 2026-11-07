@@ -227,7 +227,7 @@ enum SampleData {
         let letrox = make("Letrox", "50 µg", "3B7DD8", times: [clamp(minutesNow - 150), clamp(minutesNow + 300)], meal: .before)
         letrox.unitsPerDose = 0.5
         let ibuprofen = make("Ibuprofen", "400 mg", "D9534F", times: [clamp(minutesNow - 25), clamp(minutesNow + 180)], meal: .after)
-        let vitamin = make("Vitamin D", "", "E0A526", times: [clamp(minutesNow + 60)])
+        let vitamin = make("Vitamin D", "", "E0A526", times: [clamp(minutesNow + 90)])
         vitamin.unitKind = .drop
         vitamin.unitsPerDose = 20
 

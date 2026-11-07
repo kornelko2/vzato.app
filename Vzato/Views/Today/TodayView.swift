@@ -19,6 +19,8 @@ struct TodayView: View {
     @AppStorage(AppSettings.missedAfterMinutesKey) private var missedAfterMinutes = AppSettings.defaultMissedAfterMinutes
     @AppStorage(AppSettings.snoozeMinutesKey) private var snoozeMinutes = AppSettings.defaultSnoozeMinutes
     @State private var now = Date()
+    @State private var confirming: PendingTake?
+    @State private var undo: UndoTake?
     private let clock = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
 
     private var grace: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
@@ -56,9 +58,11 @@ struct TodayView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     if let featured {
                         NextDoseCard(slot: featured, now: now, grace: grace, snoozeMinutes: snoozeMinutes,
-                                     onTaken: { take(featured) },
+                                     onTaken: { requestTake(featured) },
                                      onSnooze: { snooze(featured) },
-                                     onSkip: { skip(featured) })
+                                     onSkip: { skip(featured) },
+                                     canTakeDirectly: featured.event == nil && DoseGuard.verdict(for: featured, now: now) == .ok,
+                                     onTakeEarly: { requestTake(featured) })
                     } else if slots.isEmpty {
                         emptyState
                     } else {
@@ -66,7 +70,7 @@ struct TodayView: View {
                     }
 
                     if let last = mealWaits.last {
-                        MealWaitBanner(readyAt: last.readyAt, names: mealWaits.map(\.name))
+                        MealWaitBanner(readyAt: last.readyAt, names: mealWaits.map(\.name).uniqued())
                     }
 
                     if !lowStock.isEmpty {
@@ -78,6 +82,25 @@ struct TodayView: View {
                     }
                 }
                 .padding()
+            }
+            .safeAreaInset(edge: .bottom) {
+                if let undo {
+                    UndoBanner(info: undo) {
+                        DoseLogger(context: context).reset(undo.slot)
+                        self.undo = nil
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 8)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+            }
+            .animation(.default, value: undo?.id)
+            .confirmationDialog(Text("Take this dose?"), isPresented: Binding(get: { confirming != nil }, set: { if !$0 { confirming = nil } }),
+                                titleVisibility: .visible, presenting: confirming) { pending in
+                Button("Take anyway", role: .destructive) { take(pending.slot) }
+                Button("Cancel", role: .cancel) {}
+            } message: { pending in
+                Text(pending.message)
             }
             .navigationTitle(Text("Today"))
             .toolbar {
@@ -115,7 +138,7 @@ struct TodayView: View {
                 .padding(.bottom, 6)
             ForEach(slots) { slot in
                 DoseRow(slot: slot, now: now, grace: grace, compact: true,
-                        onTaken: { take(slot) }, onSkipped: { skip(slot) }, onReset: { reset(slot) })
+                        onTaken: { requestTake(slot) }, onSkipped: { skip(slot) }, onReset: { reset(slot) })
                 Divider()
             }
         }
@@ -157,9 +180,26 @@ struct TodayView: View {
         }
     }
 
+    /// Every "Taken" in Today goes through here: one tap when safe, a question when not.
+    private func requestTake(_ slot: DoseSlot) {
+        let verdict = DoseGuard.verdict(for: slot, now: Date())
+        if verdict == .ok {
+            take(slot)
+        } else {
+            confirming = PendingTake(slot: slot, verdict: verdict)
+        }
+    }
+
     private func take(_ slot: DoseSlot) {
-        DoseLogger(context: context).markTaken(slot)
+        let event = DoseLogger(context: context).markTaken(slot)
         NotificationService.shared.clearDelivered(for: slot.medication)
+        let info = UndoTake(slot: DoseSlot(medication: slot.medication, scheduledAt: slot.scheduledAt, event: event),
+                            takenAt: event.takenAt ?? Date())
+        undo = info
+        Task {
+            try? await Task.sleep(for: .seconds(8))
+            if undo?.id == info.id { undo = nil }
+        }
     }
 
     private func skip(_ slot: DoseSlot) {
@@ -233,4 +273,57 @@ struct LowStockBanner: View {
     TodayView()
         .environment(AppState())
         .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
+}
+
+struct PendingTake: Identifiable {
+    let id = UUID()
+    let slot: DoseSlot
+    let verdict: DoseGuard.Verdict
+
+    var message: String {
+        switch verdict {
+        case .recentlyTaken(let at):
+            return String(localized: "\(slot.medication.name) was already taken at \(at.formatted(date: .omitted, time: .shortened)). Take another dose now?")
+        case .tooEarly(let at):
+            return String(localized: "This dose is planned for \(at.formatted(date: .omitted, time: .shortened)). Take it now, early?")
+        case .ok:
+            return ""
+        }
+    }
+}
+
+struct UndoTake: Identifiable {
+    let id = UUID()
+    let slot: DoseSlot
+    let takenAt: Date
+}
+
+/// A few seconds to take back a tap on "Taken".
+struct UndoBanner: View {
+    let info: UndoTake
+    let onUndo: () -> Void
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.taken)
+            Text("Taken: \(info.slot.medication.name) at \(info.takenAt.formatted(date: .omitted, time: .shortened))")
+                .font(.subheadline.weight(.semibold))
+                .lineLimit(2)
+            Spacer(minLength: 8)
+            Button("Undo", action: onUndo)
+                .font(.subheadline.weight(.bold))
+                .accessibilityIdentifier("undoTaken")
+        }
+        .padding(14)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+        .shadow(color: .black.opacity(0.12), radius: 8, y: 2)
+    }
+}
+
+extension Array where Element: Hashable {
+    /// Keeps the first occurrence of each element, in order.
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter { seen.insert($0).inserted }
+    }
 }

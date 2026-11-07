@@ -84,6 +84,17 @@ struct MedicationRow: View {
                 }
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+                if medication.tracksStock {
+                    HStack(spacing: 4) {
+                        Text(medication.stockAmountText)
+                        if let reorder = StockService.reorderDate(for: medication) {
+                            Text(verbatim: "·")
+                            Text("get more by \(reorder.formatted(.dateTime.day().month()))")
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(medication.isLowStock ? Palette.overdue : .secondary)
+                }
             }
             Spacer()
             if medication.isLowStock {

@@ -17,6 +17,9 @@ struct WidgetDose: Identifiable, Hashable, Sendable {
     let isOverdue: Bool
     /// No record yet: can still be confirmed.
     let isOpen: Bool
+    /// One tap on "Taken" is safe: not more than an hour early and the same medication not taken
+    /// moments ago (`DoseGuard`). Otherwise the widget shows the time instead of a button.
+    let canTakeNow: Bool
     /// Due now, overdue or missed: the widget shows a Taken button for it.
     var isCurrent: Bool { isOpen && (isOverdue || status == .missed) }
 }
@@ -73,7 +76,8 @@ enum TodaySnapshot {
             scheduledAt: slot.scheduledAt,
             status: slot.status(now: date, grace: grace),
             isOverdue: slot.isOverdue(now: date, grace: grace),
-            isOpen: slot.event == nil
+            isOpen: slot.event == nil,
+            canTakeNow: slot.event == nil && DoseGuard.verdict(for: slot, now: date) == .ok
         )
     }
 }

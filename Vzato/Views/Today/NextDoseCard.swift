@@ -13,6 +13,10 @@ struct NextDoseCard: View {
     let onTaken: () -> Void
     let onSnooze: () -> Void
     let onSkip: () -> Void
+    /// False when the dose is more than an hour away or the medication was just taken: then the big
+    /// button is replaced by the time, and taking it needs a deliberate "Take early…".
+    var canTakeDirectly = true
+    var onTakeEarly: () -> Void = {}
 
     @State private var showingPill = false
     private var pillPhotos: [MedicationPhoto] { slot.medication.photos(of: .pill) }
@@ -82,28 +86,50 @@ struct NextDoseCard: View {
                 }
             }
 
-            Button(action: onTaken) {
-                Text("Taken")
-                    .font(.title2.weight(.heavy))
-                    .textCase(.uppercase)
-                    .frame(maxWidth: .infinity, minHeight: 64)
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(Palette.taken)
-            .keyboardShortcut(.defaultAction)
-            .accessibilityHint(Text("Records this dose as taken now"))
+            if canTakeDirectly {
+                Button(action: onTaken) {
+                    Text("Taken")
+                        .font(.title2.weight(.heavy))
+                        .textCase(.uppercase)
+                        .frame(maxWidth: .infinity, minHeight: 64)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(Palette.taken)
+                .keyboardShortcut(.defaultAction)
+                .accessibilityIdentifier("takenButton")
+                .accessibilityHint(Text("Records this dose as taken now"))
 
-            HStack(spacing: 10) {
-                Button(action: onSnooze) {
-                    Text("Snooze \(snoozeMinutes) min")
+                HStack(spacing: 10) {
+                    Button(action: onSnooze) {
+                        Text("Snooze \(snoozeMinutes) min")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                    Button(action: onSkip) {
+                        Text("Skip")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                }
+                .buttonStyle(.bordered)
+            } else {
+                HStack(spacing: 10) {
+                    Image(systemName: "clock")
+                        .font(.title2)
+                    Text("Next dose at \(slot.scheduledAt.formatted(date: .omitted, time: .shortened))")
+                        .font(.title3.weight(.bold))
+                }
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, minHeight: 64)
+                .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
+                .accessibilityElement(children: .combine)
+                .accessibilityIdentifier("nextDoseAt")
+
+                Button(action: onTakeEarly) {
+                    Text("Take early…")
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
-                Button(action: onSkip) {
-                    Text("Skip")
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                }
+                .buttonStyle(.bordered)
+                .accessibilityIdentifier("takeEarly")
             }
-            .buttonStyle(.bordered)
         }
         .padding(18)
         .background(

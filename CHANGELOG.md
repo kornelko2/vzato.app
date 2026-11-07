@@ -53,6 +53,11 @@ All notable changes to Vzato are listed here. The format follows
 - Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
   because the number pad has no Return key; they now count on every keystroke and
   accept a decimal comma (10,5).
+- Double-dose protection: only a due dose (at most an hour early) can be confirmed
+  with one tap; later doses show their time and "Take early…" asks first; taking
+  the same medication again soon after asks "already taken at 7:25" (card,
+  timeline, extra dose, widget); an Undo appears for a few seconds after Taken.
+- The list of medications shows the amount at home and the get-more-by date.
 - Fixed: typing over an amount appended to it (79 over 30 became 7930). Tapping an
   amount now clears it for the new entry; the number pad has a Done key.
 - Fixed: "Add time" could create a duplicate time; it now suggests morning, noon,
