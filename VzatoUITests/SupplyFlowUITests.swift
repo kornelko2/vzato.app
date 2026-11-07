@@ -13,7 +13,7 @@ final class SupplyFlowUITests: XCTestCase {
     @MainActor
     func testThreeTabletsADayWith79AtHome() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--reset-data", "--tab", "medications", "-AppleLanguages", "(en)", "-AppleLocale", "en_GB"]
+        app.launchArguments = ["--reset-data", "--no-onboarding", "--tab", "medications", "-AppleLanguages", "(en)", "-AppleLocale", "en_GB"]
         app.launch()
 
         // Empty Medications screen: the big Add button.

@@ -11,8 +11,8 @@ Shared for all languages
 | Category | Medical (primary), Health & Fitness (secondary) |
 | Age rating | 4+ (no objectionable content; answer "No" to every question) |
 | Price | Free |
-| Support URL | https://github.com/kornelko2/vzato.app (until vzato.app is live) |
-| Privacy policy URL | https://vzato.app/privacy, or a GitHub page with the policy until then |
+| Support URL | https://vzato.app/en/help/ (per language: /cs/, /sk/, /hu/) |
+| Privacy policy URL | https://vzato.app/privacy |
 | App Privacy | Data Not Collected |
 | Copyright | 2026 Kornel Maraz |
 
@@ -153,6 +153,44 @@ A Vzato ingyenes és nyílt forráskódú (MPL-2.0).
 A Vzato nem orvostechnikai eszköz, és nem helyettesíti az orvost vagy a gyógyszerészt. Nem ad orvosi tanácsot, csak emlékeztet, és az Ön saját feljegyzéseit vezeti.
 
 ---
+
+## TestFlight (external testers)
+
+Needed before the first external group: beta description and feedback email per
+language, review contact, privacy policy URL. `Scripts/asc.py` does not upload these
+yet.
+
+| Field | Value |
+|---|---|
+| Feedback email | info@vzato.app (Cloudflare Email Routing → iCloud) |
+| Review contact | Kornel Maraz, info@vzato.app, phone: _to fill in_ |
+| Sign-in required | No |
+
+### cs – Popis bety
+
+Vzato připomíná léky a hlídá, jestli jste je vzali. Jedno velké tlačítko Vzato,
+připomínky i na zamčené obrazovce, zásoba tablet a kdy dokoupit, historie a souhrn
+pro lékaře. Bez účtu a bez reklam, data zůstávají ve vašem zařízení a v iCloudu.
+Vzato není zdravotnický prostředek.
+
+### cs – Co testovat
+
+Přidejte svůj lék s časem a povolte oznámení. Počkejte na připomínku (zvuk, zamčená
+obrazovka, hodinky) a potvrďte dávku. Zkuste zásobu a kontrolu zásoby. Napište nám,
+co bylo nejasné nebo kde jste nevěděli, co dál.
+
+### en – Beta description
+
+Vzato reminds you of your medications and keeps track of whether you took them. One
+big Taken button, reminders on the Lock Screen, supply and when to get more, history
+and a summary for your doctor. No account, no ads; your data stays on your device and
+in your iCloud. Vzato is not a medical device.
+
+### en – What to test
+
+Add a medication with a time and allow notifications. Wait for the reminder (sound,
+Lock Screen, Apple Watch) and confirm the dose. Try the supply and the supply check.
+Tell us what was unclear or where you did not know what to do next.
 
 ## CloudKit container: deploy the schema to Production
 

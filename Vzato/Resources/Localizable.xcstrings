@@ -1639,6 +1639,50 @@
         }
       }
     },
+    "A dose confirmed on one device shows as taken on the others.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka potvrzená na jednom zařízení se na ostatních ukáže jako vzatá."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az egyik eszközön megerősített adag a többin is bevettként jelenik meg."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávka potvrdená na jednom zariadení sa na ostatných ukáže ako vzatá."
+          }
+        }
+      }
+    },
+    "A quarter tablet or a different amount can be set later in Medications.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čtvrt tablety nebo jiné množství nastavíte později v Lécích."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Negyed tablettát vagy más mennyiséget később a Gyógyszerek részben állíthat be."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Štvrť tablety alebo iné množstvo nastavíte neskôr v Liekoch."
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "cs": {
@@ -1701,6 +1745,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Záznam činností"
+          }
+        }
+      }
+    },
+    "Add a medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidat lék"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer hozzáadása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridať liek"
           }
         }
       }
@@ -1877,6 +1943,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dnes máte hotovo"
+          }
+        }
+      }
+    },
+    "All set": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vše připraveno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden kész"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všetko pripravené"
           }
         }
       }
@@ -2079,6 +2167,28 @@
         }
       }
     },
+    "At dose time you hear a sound and see the reminder, also on the lock screen and on Apple Watch.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V čase dávky uslyšíte zvuk a uvidíte připomínku, i na zamčené obrazovce a na Apple Watch."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adag idején hangot hall és látja az emlékeztetőt, a zárolási képernyőn és az Apple Watch-on is."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V čase dávky budete počuť zvuk a uvidíte pripomienku, aj na zamknutej obrazovke a na Apple Watch."
+          }
+        }
+      }
+    },
     "At home %@": {
       "localizations": {
         "cs": {
@@ -2101,6 +2211,50 @@
         }
       }
     },
+    "At the bottom of History is Summary for the doctor. Choose 7, 30 or 90 days and tap Export PDF to print or send it.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dole v Historii je Souhrn pro lékaře. Vyberte 7, 30 nebo 90 dní a klepněte na Exportovat PDF, pak ho vytisknete nebo pošlete."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Előzmények alján található az Összefoglaló az orvosnak. Válasszon 7, 30 vagy 90 napot, és koppintson a PDF exportálása gombra a nyomtatáshoz vagy küldéshez."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dole v Histórii je Súhrn pre lekára. Vyberte 7, 30 alebo 90 dní a ťuknite na Exportovať PDF, potom ho vytlačíte alebo pošlete."
+          }
+        }
+      }
+    },
+    "Back": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zpět"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vissza"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Späť"
+          }
+        }
+      }
+    },
     "Before a meal": {
       "localizations": {
         "cs": {
@@ -2119,6 +2273,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pred jedlom"
+          }
+        }
+      }
+    },
+    "Bought a new package? Open the medication, tap Edit and change Amount at home.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koupili jste nové balení? Otevřete lék, klepněte na Upravit a změňte Množství doma."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Új dobozt vett? Nyissa meg a gyógyszert, koppintson a Szerkesztés gombra, és módosítsa a Mennyiség otthon értéket."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kúpili ste nové balenie? Otvorte liek, ťuknite na Upraviť a zmeňte Množstvo doma."
           }
         }
       }
@@ -2211,6 +2387,50 @@
         }
       }
     },
+    "Check that Focus or Do Not Disturb is off, or that it allows Vzato.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zkontrolujte, že je vypnutý režim soustředění nebo Nerušit, nebo že Vzato povoluje."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ellenőrizze, hogy a Fókusz vagy a Ne zavarjanak ki van-e kapcsolva, vagy engedélyezi-e a Vzatót."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skontrolujte, že je vypnutý režim sústredenia alebo Nerušiť, alebo že Vzaté povoľuje."
+          }
+        }
+      }
+    },
+    "Check that the iPhone is not on silent and the volume is up.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zkontrolujte, že iPhone není ztlumený a hlasitost je zesílená."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ellenőrizze, hogy az iPhone nincs-e némítva, és fel van-e hangosítva."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skontrolujte, že iPhone nie je stlmený a hlasitosť je zosilnená."
+          }
+        }
+      }
+    },
     "Chime": {
       "localizations": {
         "cs": {
@@ -2273,6 +2493,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Farba"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokračovat"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tovább"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokračovať"
           }
         }
       }
@@ -2981,6 +3223,28 @@
         }
       }
     },
+    "Evening": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Večer"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Večer"
+          }
+        }
+      }
+    },
     "Every day": {
       "localizations": {
         "cs": {
@@ -2999,6 +3263,94 @@
           "stringUnit": {
             "state": "translated",
             "value": "Každý deň"
+          }
+        }
+      }
+    },
+    "Every day at %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý den v %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden nap ekkor: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý deň o %@"
+          }
+        }
+      }
+    },
+    "Every day. Turn on one or more times; tap a time to change it.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý den. Zapněte jeden nebo více časů; klepnutím na čas ho změníte."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden nap. Kapcsoljon be egy vagy több időpontot; az időpontra koppintva módosíthatja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý deň. Zapnite jeden alebo viac časov; ťuknutím na čas ho zmeníte."
+          }
+        }
+      }
+    },
+    "Every dose you take is subtracted from the supply.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každá vzatá dávka se odečte ze zásoby."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden bevett adag levonódik a készletből."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každá vzatá dávka sa odpočíta zo zásoby."
+          }
+        }
+      }
+    },
+    "Every feature is free for everyone, including the source code. No ads, no account, no paid version.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všechny funkce jsou zdarma pro všechny, včetně zdrojového kódu. Bez reklam, bez účtu, bez placené verze."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden funkció mindenkinek ingyenes, a forráskóddal együtt. Reklám, fiók és fizetős változat nélkül."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všetky funkcie sú zadarmo pre všetkých, vrátane zdrojového kódu. Bez reklám, bez účtu, bez platenej verzie."
           }
         }
       }
@@ -3179,6 +3531,28 @@
         }
       }
     },
+    "Free for everyone": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdarma pro všechny"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mindenkinek ingyenes"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadarmo pre všetkých"
+          }
+        }
+      }
+    },
     "Get more by": {
       "localizations": {
         "cs": {
@@ -3267,6 +3641,28 @@
         }
       }
     },
+    "Guide with pictures on vzato.app": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Návod s obrázky na vzato.app"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Képes útmutató a vzato.app oldalon"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Návod s obrázkami na vzato.app"
+          }
+        }
+      }
+    },
     "Harp": {
       "localizations": {
         "cs": {
@@ -3311,6 +3707,28 @@
         }
       }
     },
+    "Help": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nápověda"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Súgó"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomocník"
+          }
+        }
+      }
+    },
     "History": {
       "localizations": {
         "cs": {
@@ -3333,6 +3751,182 @@
         }
       }
     },
+    "History and your doctor": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historie a lékař"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Előzmények és az orvos"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "História a lekár"
+          }
+        }
+      }
+    },
+    "History shows every day in a calendar: green is taken, red is missed.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historie ukazuje každý den v kalendáři: zelená je vzato, červená zmeškáno."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Előzmények naptárban mutat minden napot: a zöld bevéve, a piros kihagyva."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "História ukazuje každý deň v kalendári: zelená je vzaté, červená zmeškané."
+          }
+        }
+      }
+    },
+    "How much do you take at once?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolik si vezmete najednou?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mennyit vesz be egyszerre?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koľko si vezmete naraz?"
+          }
+        }
+      }
+    },
+    "I did not get a reminder": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nepřišla mi připomínka"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nem kaptam emlékeztetőt"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neprišla mi pripomienka"
+          }
+        }
+      }
+    },
+    "I look after Vzato mainly for myself. Any comment or idea is welcome.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato udržuji hlavně pro sebe. Jakékoli připomínky a nápady jsou vítané."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzatót főleg magamnak tartom karban. Minden észrevételt és ötletet szívesen fogadok."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté udržiavam hlavne pre seba. Akékoľvek pripomienky a nápady sú vítané."
+          }
+        }
+      }
+    },
+    "If Today shows Reminders are off, tap Allow notifications or Open settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokud Dnes ukazuje Připomínky jsou vypnuté, klepněte na Povolit oznámení nebo Otevřít nastavení."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ha a Ma nézetben az Az emlékeztetők ki vannak kapcsolva felirat látható, koppintson az Értesítések engedélyezése vagy a Beállítások megnyitása gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ak Dnes ukazuje Pripomienky sú vypnuté, ťuknite na Povoliť upozornenia alebo Otvoriť nastavenia."
+          }
+        }
+      }
+    },
+    "If Vzato should count your tablets, turn on Track supply and enter how many you have.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokud má Vzato počítat tablety, zapněte Sledovat zásobu a zadejte, kolik jich máte."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ha a Vzato számolja a tablettákat, kapcsolja be a Készlet követése opciót, és adja meg, mennyi van."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ak má Vzaté počítať tablety, zapnite Sledovať zásobu a zadajte, koľko ich máte."
+          }
+        }
+      }
+    },
+    "If you have to take a later dose now, touch and hold it in the Whole day list and choose Taken. Vzato asks before it records it.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Když musíte pozdější dávku vzít už teď, podržte na ní prst v seznamu Celý den a vyberte Vzato. Vzato se před zápisem zeptá."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ha egy későbbi adagot már most be kell vennie, tartsa rajta az ujját az Egész nap listában, és válassza a Bevéve lehetőséget. A Vzato rögzítés előtt rákérdez."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keď musíte neskoršiu dávku vziať už teraz, podržte na nej prst v zozname Celý deň a vyberte Vzaté. Vzaté sa pred zápisom opýta."
+          }
+        }
+      }
+    },
     "Import file": {
       "localizations": {
         "cs": {
@@ -3351,6 +3945,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importovať súbor"
+          }
+        }
+      }
+    },
+    "In Settings › Sounds you can choose a different sound.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V Nastavení › Zvuky můžete vybrat jiný zvuk."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Beállítások › Hangok részben más hangot választhat."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V Nastaveniach › Zvuky môžete vybrať iný zvuk."
           }
         }
       }
@@ -3505,6 +4121,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "Príbalový leták"
+          }
+        }
+      }
+    },
+    "Less": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Méně"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kevesebb"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menej"
+          }
+        }
+      }
+    },
+    "Let's set it up together. It takes about a minute.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavíme to spolu. Zabere to asi minutu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Állítsuk be együtt. Körülbelül egy percig tart."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavíme to spolu. Zaberie to asi minútu."
+          }
+        }
+      }
+    },
+    "Let's start": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Začít"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kezdjük"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Začať"
           }
         }
       }
@@ -3795,6 +4477,28 @@
         }
       }
     },
+    "Medications shows how much is left and by when to get more.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V Lécích vidíte, kolik zbývá a do kdy dokoupit."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Gyógyszerek részben látja, mennyi maradt, és meddig kell újat vennie."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V Liekoch vidíte, koľko zostáva a do kedy dokúpiť."
+          }
+        }
+      }
+    },
     "Medications, plan, adherence and missed doses for 7, 30 or 90 days, as a PDF to send or print.": {
       "localizations": {
         "cs": {
@@ -3883,6 +4587,28 @@
         }
       }
     },
+    "More": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Více"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Több"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viac"
+          }
+        }
+      }
+    },
     "More units than the records expect.": {
       "localizations": {
         "cs": {
@@ -3901,6 +4627,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Viac kusov, než zodpovedá záznamom."
+          }
+        }
+      }
+    },
+    "Morning": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ráno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reggel"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ráno"
           }
         }
       }
@@ -4059,6 +4807,28 @@
         }
       }
     },
+    "Night": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na noc"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éjszakára"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na noc"
+          }
+        }
+      }
+    },
     "No activity yet": {
       "localizations": {
         "cs": {
@@ -4213,6 +4983,28 @@
         }
       }
     },
+    "Noon": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poledne"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dél"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poludnie"
+          }
+        }
+      }
+    },
     "Not available in this build.": {
       "localizations": {
         "cs": {
@@ -4253,6 +5045,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zatiaľ nepotvrdené. Keď liek vezmete, klepnite na Vzaté."
+          }
+        }
+      }
+    },
+    "Not now? Tap Snooze. Vzato reminds you again in a few minutes.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teď ne? Klepněte na Odložit. Vzato připomene znovu za pár minut."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most nem? Koppintson a Szundi gombra. A Vzato néhány perc múlva újra emlékezteti."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teraz nie? Ťuknite na Odložiť. Vzaté pripomenie znova o pár minút."
+          }
+        }
+      }
+    },
+    "Not sure the number is right? Count your tablets, tap Count and check supply and enter the number. Vzato shows whether it matches the records.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nejste si jistí počtem? Spočítejte tablety, klepněte na Spočítat a zkontrolovat zásobu a zadejte počet. Vzato ukáže, jestli sedí se záznamy."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nem biztos a számban? Számolja meg a tablettákat, koppintson a Készlet megszámolása és ellenőrzése gombra, és adja meg a számot. A Vzato megmutatja, egyezik-e a feljegyzésekkel."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie ste si istí počtom? Spočítajte tablety, ťuknite na Spočítať a skontrolovať zásobu a zadajte počet. Vzaté ukáže, či sedí so záznamami."
+          }
+        }
+      }
+    },
+    "Not taking this dose? Tap Skip.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tuhle dávku nevezmete? Klepněte na Přeskočit."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezt az adagot nem veszi be? Koppintson a Kihagyás gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Túto dávku nevezmete? Ťuknite na Preskočiť."
           }
         }
       }
@@ -4367,6 +5225,28 @@
         }
       }
     },
+    "Notifications are turned off for Vzato. Turn them on in the system settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oznámení jsou pro Vzato vypnutá. Zapněte je v nastavení systému."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzato értesítései ki vannak kapcsolva. Kapcsolja be őket a rendszerbeállításokban."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upozornenia sú pre Vzaté vypnuté. Zapnite ich v nastaveniach systému."
+          }
+        }
+      }
+    },
     "Off": {
       "localizations": {
         "cs": {
@@ -4389,6 +5269,28 @@
         }
       }
     },
+    "On the next screen the system asks. Tap Allow.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na další obrazovce se systém zeptá. Klepněte na Povolit."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A következő képernyőn a rendszer rákérdez. Koppintson az Engedélyezés gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na ďalšej obrazovke sa systém opýta. Ťuknite na Povoliť."
+          }
+        }
+      }
+    },
     "Only %@ left. Time to get more.": {
       "localizations": {
         "cs": {
@@ -4407,6 +5309,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zostáva len %@. Je čas zájsť po ďalšie."
+          }
+        }
+      }
+    },
+    "Open Medications and tap Add medication.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřete Léky a klepněte na Přidat lék."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyissa meg a Gyógyszerek részt, és koppintson a Gyógyszer hozzáadása gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorte Lieky a ťuknite na Pridať liek."
           }
         }
       }
@@ -4451,6 +5375,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otvoriť nastavenia systému"
+          }
+        }
+      }
+    },
+    "Open the medication. Under Photos add the pill, the package or the leaflet.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřete lék. V části Fotografie přidejte tabletu, krabičku nebo příbalový leták."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyissa meg a gyógyszert. A Fotók részben adja hozzá a tablettát, a dobozt vagy a betegtájékoztatót."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorte liek. V časti Fotografie pridajte tabletu, škatuľku alebo príbalový leták."
           }
         }
       }
@@ -5423,6 +6369,28 @@
         }
       }
     },
+    "Show the introduction again": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projít úvod znovu"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevezető újra"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prejsť úvod znova"
+          }
+        }
+      }
+    },
     "Sign in to iCloud in the system settings to sync.": {
       "localizations": {
         "cs": {
@@ -5441,6 +6409,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Na synchronizáciu sa prihláste do iCloudu v nastaveniach systému."
+          }
+        }
+      }
+    },
+    "Sign in with the same Apple Account on all devices and turn on iCloud. Vzato syncs by itself.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na všech zařízeních se přihlaste stejným Apple účtem a zapněte iCloud. Vzato se synchronizuje samo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden eszközön ugyanazzal az Apple-fiókkal jelentkezzen be, és kapcsolja be az iCloudot. A Vzato magától szinkronizál."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na všetkých zariadeniach sa prihláste rovnakým Apple účtom a zapnite iCloud. Vzaté sa synchronizuje samo."
           }
         }
       }
@@ -5643,6 +6633,72 @@
         }
       }
     },
+    "Step %lld of %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Krok %lld z %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld. lépés / %lld"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Krok %lld z %lld"
+          }
+        }
+      }
+    },
+    "Strength": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Síla"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatáserősség"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sila"
+          }
+        }
+      }
+    },
+    "Strength, if it is on the package (optional)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Síla, pokud je na krabičce (nepovinné)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatáserősség, ha szerepel a dobozon (nem kötelező)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sila, ak je na škatuľke (nepovinné)"
+          }
+        }
+      }
+    },
     "Summary for the doctor": {
       "localizations": {
         "cs": {
@@ -5771,6 +6827,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sledovanie zásoby začína týmto počtom."
+          }
+        }
+      }
+    },
+    "Supply, photos and meals can be added in Medications. Help is in Settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásobu, fotografie a jídlo doplníte v Lécích. Nápověda je v Nastavení."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készletet, fotókat és étkezést a Gyógyszerek részben adhat hozzá. A súgó a Beállításokban van."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásobu, fotografie a jedlo doplníte v Liekoch. Pomocník je v Nastaveniach."
           }
         }
       }
@@ -6061,6 +7139,94 @@
         }
       }
     },
+    "Tap Save.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klepněte na Uložit."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppintson a Mentés gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ťuknite na Uložiť."
+          }
+        }
+      }
+    },
+    "Tap Taken in the reminder or in the app. That is all.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klepněte na Vzato v připomínce nebo v aplikaci. To je vše."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koppintson a Bevéve gombra az emlékeztetőben vagy az alkalmazásban. Ennyi."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ťuknite na Vzaté v pripomienke alebo v aplikácii. To je všetko."
+          }
+        }
+      }
+    },
+    "Tap a day to see it or correct it.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klepnutím na den ho zobrazíte nebo opravíte."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egy napra koppintva megnézheti vagy javíthatja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ťuknutím na deň ho zobrazíte alebo opravíte."
+          }
+        }
+      }
+    },
+    "Tapped by mistake? Tap Undo right away. Later, touch and hold the dose in the Whole day list and choose Reset.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klepli jste omylem? Hned klepněte na Vrátit. Později podržte prst na dávce v seznamu Celý den a vyberte Vrátit zpět."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tévedésből koppintott? Azonnal koppintson a Visszavonás gombra. Később tartsa az ujját az adagon az Egész nap listában, és válassza a Visszaállítás lehetőséget."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ťukli ste omylom? Hneď ťuknite na Vrátiť. Neskôr podržte prst na dávke v zozname Celý deň a vyberte Vrátiť späť."
+          }
+        }
+      }
+    },
     "Teaspoons": {
       "localizations": {
         "cs": {
@@ -6083,6 +7249,28 @@
         }
       }
     },
+    "The Taken button appears from 30 minutes before the dose. This protects you from taking a dose twice.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tlačítko Vzato se ukáže 30 minut před dávkou. Chrání vás tak před tím, abyste dávku vzali dvakrát."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Bevéve gomb 30 perccel az adag előtt jelenik meg. Így véd attól, hogy kétszer vegye be az adagot."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tlačidlo Vzaté sa ukáže 30 minút pred dávkou. Chráni vás tak pred tým, aby ste dávku vzali dvakrát."
+          }
+        }
+      }
+    },
     "The chosen photo appears on the big card next to the Taken button.": {
       "localizations": {
         "cs": {
@@ -6101,6 +7289,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vybraná fotografia sa zobrazí na veľkej karte pri tlačidle Vzaté."
+          }
+        }
+      }
+    },
+    "The medication could not be saved. Try again.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lék se nepodařilo uložit. Zkuste to znovu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A gyógyszert nem sikerült menteni. Próbálja újra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liek sa nepodarilo uložiť. Skúste to znova."
           }
         }
       }
@@ -6347,6 +7557,50 @@
         }
       }
     },
+    "Under Photo on Today choose which photo appears on the big card.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V části Fotografie v přehledu Dnes vyberte, která fotka se ukáže na velké kartě."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Fotó a Ma nézetben opciónál válassza ki, melyik fotó jelenjen meg a nagy kártyán."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V časti Fotografia v prehľade Dnes vyberte, ktorá fotka sa ukáže na veľkej karte."
+          }
+        }
+      }
+    },
+    "Under Schedule, set when you take it. Add time adds another one.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V části Plán nastavte, kdy ho berete. Přidat čas přidá další."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Ütemezés részben állítsa be, mikor veszi be. Az Időpont hozzáadása újabbat ad hozzá."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V časti Plán nastavte, kedy ho beriete. Pridať čas pridá ďalší."
+          }
+        }
+      }
+    },
     "Undo": {
       "localizations": {
         "cs": {
@@ -6523,6 +7777,50 @@
         }
       }
     },
+    "Vzato is not a medical device. Ask your doctor or pharmacist about your medications.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato není zdravotnický prostředek. Na své léky se ptejte lékaře nebo lékárníka."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzato nem orvostechnikai eszköz. A gyógyszereivel kapcsolatban kérdezze orvosát vagy gyógyszerészét."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté nie je zdravotnícka pomôcka. Na svoje lieky sa pýtajte lekára alebo lekárnika."
+          }
+        }
+      }
+    },
+    "Vzato reminds you of your medications.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato vám připomene léky."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Vzato emlékezteti a gyógyszereire."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté vám pripomenie lieky."
+          }
+        }
+      }
+    },
     "Vzato summary %@.pdf": {
       "localizations": {
         "cs": {
@@ -6611,6 +7909,116 @@
         }
       }
     },
+    "What is the medication called?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jak se lék jmenuje?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi a gyógyszer neve?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ako sa liek volá?"
+          }
+        }
+      }
+    },
+    "When a reminder comes": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Když přijde připomínka"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amikor emlékeztető érkezik"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keď príde pripomienka"
+          }
+        }
+      }
+    },
+    "When do you take it?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kdy ho berete?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mikor veszi be?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kedy ho beriete?"
+          }
+        }
+      }
+    },
+    "When it is time, Vzato reminds you. Then tap Taken.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Až přijde čas, Vzato vám to připomene. Pak klepněte na Vzato."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amikor itt az ideje, a Vzato emlékezteti. Ekkor koppintson a Bevéve gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keď príde čas, Vzaté vám to pripomenie. Potom ťuknite na Vzaté."
+          }
+        }
+      }
+    },
+    "When it is time, you only tap Taken. Vzato remembers that you took it, counts your supply and shows the history.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Když přijde čas, jen klepnete na Vzato. Aplikace si zapamatuje, že jste lék vzali, hlídá zásobu a ukáže historii."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amikor itt az ideje, csak koppintson a Bevéve gombra. Az alkalmazás megjegyzi, hogy bevette, figyeli a készletet és mutatja az előzményeket."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keď príde čas, iba ťuknete na Vzaté. Aplikácia si zapamätá, že ste liek vzali, stráži zásobu a ukáže históriu."
+          }
+        }
+      }
+    },
     "Who recorded what and when, on which device.": {
       "localizations": {
         "cs": {
@@ -6651,6 +8059,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Celý deň"
+          }
+        }
+      }
+    },
+    "Why there is no Taken button": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proč tam není tlačítko Vzato"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miért nincs Bevéve gomb"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prečo tam nie je tlačidlo Vzaté"
           }
         }
       }
@@ -6739,6 +8169,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bez upozornení v čase dávky nebudete počuť ani vidieť žiadnu pripomienku, ani na zamknutej obrazovke."
+          }
+        }
+      }
+    },
+    "Without them you will not hear a reminder and nothing appears on the lock screen.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez nich připomínku neuslyšíte a na zamčené obrazovce se nic neukáže."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nélkülük nem hall emlékeztetőt, és a zárolási képernyőn sem jelenik meg semmi."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez nich pripomienku nebudete počuť a na zamknutej obrazovke sa nič neukáže."
+          }
+        }
+      }
+    },
+    "Write the name and how much you take at once.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napište název a kolik si vezmete najednou."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Írja be a nevet és azt, mennyit vesz be egyszerre."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napíšte názov a koľko si vezmete naraz."
+          }
+        }
+      }
+    },
+    "Write to us: info@vzato.app": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napište nám: info@vzato.app"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Írjon nekünk: info@vzato.app"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napíšte nám: info@vzato.app"
           }
         }
       }
@@ -6919,6 +8415,50 @@
         }
       }
     },
+    "e.g. 400 mg": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "např. 400 mg"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pl. 400 mg"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "napr. 400 mg"
+          }
+        }
+      }
+    },
+    "e.g. Ibuprofen": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "např. Ibuprofen"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pl. Ibuprofen"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "napr. Ibuprofen"
+          }
+        }
+      }
+    },
     "extra": {
       "localizations": {
         "cs": {
@@ -7047,6 +8587,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "iOS dovolí najviac 64 naplánovaných pripomienok. Niektoré časy neboli naplánované."
+          }
+        }
+      }
+    },
+    "iPhone, iPad and Mac": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone, iPad a Mac"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone, iPad és Mac"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone, iPad a Mac"
           }
         }
       }

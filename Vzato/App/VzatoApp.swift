@@ -79,6 +79,7 @@ struct VzatoApp: App {
         #if os(macOS)
         Settings {
             SettingsView()
+                .environment(state)
                 .environment(\.managedObjectContext, persistence.viewContext)
                 .frame(minWidth: 480, minHeight: 560)
         }

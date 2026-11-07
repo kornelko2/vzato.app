@@ -1,4 +1,7 @@
 #!/bin/sh
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
 # Renders the app icons from the SVG sources in Design/icon into the asset catalog.
 # Requires Inkscape (brew install --cask inkscape). Run from the repository root.
 set -e

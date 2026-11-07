@@ -23,6 +23,7 @@ enum AppSettings {
     static let appIconKey = "appIcon"
     static let doseSoundKey = "doseSound"
     static let mealSoundKey = "mealSound"
+    static let onboardingCompletedKey = "onboardingCompleted"
 
     static let defaultSnoozeMinutes = 10
     static let defaultMissedAfterMinutes = 120
@@ -136,6 +137,17 @@ enum ReminderSound: String, CaseIterable, Identifiable, Sendable {
 
 /// Debug-only launch arguments used for simulator screenshots and UI work.
 enum LaunchArguments {
+    /// `--onboarding` shows the first-start guide even if it was finished; `--no-onboarding` never
+    /// shows it (UI tests that start from an empty store). `nil`: decide as usual.
+    static var onboardingOverride: Bool? {
+        #if DEBUG
+        let args = CommandLine.arguments
+        if args.contains("--onboarding") { return true }
+        if args.contains("--no-onboarding") { return false }
+        #endif
+        return nil
+    }
+
     static var initialTab: String? {
         #if DEBUG
         let args = CommandLine.arguments

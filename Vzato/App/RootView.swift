@@ -8,6 +8,8 @@ import SwiftUI
 struct RootView: View {
     @Environment(AppState.self) private var state
     @AppStorage(AppSettings.appearanceKey) private var appearance = Appearance.system
+    @AppStorage(AppSettings.onboardingCompletedKey) private var onboardingCompleted = false
+    @Environment(\.managedObjectContext) private var context
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var sizeClass
     #endif
@@ -39,6 +41,38 @@ struct RootView: View {
         }
         .sheet(isPresented: $state.showingExtraDose) {
             ExtraDoseView()
+        }
+        #if os(iOS)
+        .fullScreenCover(isPresented: $state.showingOnboarding) { onboarding }
+        #else
+        .sheet(isPresented: $state.showingOnboarding) { onboarding }
+        #endif
+        .onAppear(perform: decideOnboarding)
+    }
+
+    private var onboarding: some View {
+        OnboardingView {
+            onboardingCompleted = true
+            state.showingOnboarding = false
+            state.section = .today
+        }
+        .environment(\.managedObjectContext, context)
+    }
+
+    /// The guide is for a first start: nobody who already has medications (an update, or data
+    /// from iCloud) sees it unasked. Settings › Help can start it again.
+    private func decideOnboarding() {
+        if let forced = LaunchArguments.onboardingOverride {
+            state.showingOnboarding = forced
+            return
+        }
+        guard !onboardingCompleted else { return }
+        let request = Medication.fetchRequest()
+        request.fetchLimit = 1
+        if (try? context.count(for: request)) ?? 0 > 0 {
+            onboardingCompleted = true
+        } else {
+            state.showingOnboarding = true
         }
     }
 

@@ -44,4 +44,5 @@ final class AppState {
     var section: AppTab = AppTab(rawValue: LaunchArguments.initialTab ?? "") ?? .today
     var showingNewMedication = false
     var showingExtraDose = false
+    var showingOnboarding = false
 }

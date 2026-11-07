@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5).
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5). Jedenáctá revize (7. 11. 2026): Apple Health odloženo, důvody v 3.8; úvodní průvodce a nápověda (3.12), web na vzato.app.
 
 ---
 
@@ -16,7 +16,7 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 - Běžet na iPhone, iPadu a Macu z jednoho zdrojového kódu (SwiftUI, multiplatform).
 - Synchronizovat data mezi zařízeními přihlášeného uživatele bez vlastního serveru.
 - Zobrazit dnešní dávky na ploše pomocí widgetů.
-- Zapisovat užité dávky do Apple Health.
+- ~~Zapisovat užité dávky do Apple Health.~~ Odloženo 7. 11. 2026, Apple zápis aplikacím třetích stran nedovoluje (3.8).
 - Zůstat zdarma, bez reklam, bez sledování a bez předplatného.
 - **Bez vlastního serveru.** Rozhodnuto 6. 11. 2026. Veškerá data jsou jen v zařízeních uživatele a v jeho iCloudu; vývojář k nim nemá přístup. Všechny funkce, včetně budoucích rozšíření (kapitoly 10–12), se staví jen nad infrastrukturou Apple a veřejnými API. Odůvodnění v kapitole 13.
 - Primární trh: Česko a Slovensko. Čeština, slovenština, angličtina a maďarština od první verze (maďarština kvůli rodinným testerům).
@@ -40,7 +40,7 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 | Notifikace | UserNotifications | Lokální notifikace, bez push serveru. |
 | Fotografie | PhotosUI (výběr), AVFoundation / UIImagePickerController (fotoaparát), VisionKit (skenování letáku, jen iOS) | Fotografie se ukládají zmenšené, mimo knihovnu fotek uživatele. |
 | Widgety | WidgetKit + App Intents | Stejný kód pro všechny platformy, interaktivní tlačítko „vzal jsem“ na iOS 17+ a macOS 14+. |
-| Zdraví | HealthKit | Zápis užitých dávek. Ověřit aktuální API pro léky v dokumentaci Apple před implementací. |
+| Zdraví | HealthKit | Odloženo: zápis léků a dávek API nedovoluje, viz 3.8. |
 | Jazyk | Swift | Minimální závislosti (ideálně žádné). |
 | Lokalizace | String Catalog (`.xcstrings`) | Angličtina jako zdrojový jazyk, čeština, slovenština a maďarština jako překlady. |
 
@@ -122,9 +122,16 @@ Uživatel si občas není jistý, zda lék vzal a jen zapomněl potvrdit, nebo p
 
 ### 3.8 Apple Health
 
-- Volitelný zápis potvrzené dávky do HealthKit.
-- Čtení se nepožaduje, pokud to není nutné.
-- Uživatel si oprávnění může kdykoli odebrat v Nastavení.
+**Stav: odloženo (on hold), rozhodnuto 7. 11. 2026.** Původní záměr byl volitelně zapisovat potvrzenou dávku do HealthKitu. Dokud Apple nezmění API, se nic nestaví.
+
+Proč, aby se to nemuselo dohledávat znovu:
+
+1. **Zápis nejde.** Ověřeno přímo v SDK iOS 27.2 (Xcode, `HealthKit.framework/Headers/HKMedicationDoseEvent.h` a `HKUserAnnotatedMedication.h`). `HKMedicationDoseEvent` (záznam dávky, iOS 26+) má `init` a `new` označené `NS_UNAVAILABLE`, všechny vlastnosti jsou jen pro čtení a ani Swift overlay nepřidává inicializátor. `HKUserAnnotatedMedication` (lék uživatele) je také jen pro čtení. Léky a dávky zapisuje pouze aplikace Zdraví od Applu; jiné aplikace je můžou jen číst (`HKUserAnnotatedMedicationQueryDescriptor`, souhlas pro každý lék zvlášť).
+2. **Čtení by Vzato zhoršilo.** Dávky zapsané ve Zdraví nebo na hodinkách by se ve Vzato jen zobrazovaly, dávka by se pak potvrzovala na dvou místech a nebylo by jasné, který záznam platí. To jde proti hlavnímu cíli (jistota, žádná dvojí dávka).
+3. **Import léků ze Zdraví naráží na App Store.** Pravidlo 5.1.3 zakazuje ukládat údaje z HealthKitu do iCloudu; Vzato synchronizuje přes iCloud (viz 5.1). Import „jako šablona“ by měl nejisté schválení, import jen do zařízení by se nedostal na iPad a Mac.
+4. **Uživatelé hodinek nepřicházejí o nic podstatného.** Připomínky Vzato z iPhonu se na Apple Watch zobrazí samy, včetně tlačítek Vzato / Odložit / Přeskočit, a dávka se zapíše do Vzato. Kdo chce mít léky ve Zdraví a na hodinkách, má vestavěnou funkci Léky od Applu (iOS 16+). Cílová skupina Vzato (jednoduchost, starší lidé, zásoby, fotografie, souhrn pro lékaře, Mac) hodinky používá spíš výjimečně; spolehlivá čísla nejsou.
+
+Kdy se k tomu vrátit: každý rok po WWDC (červen) zkontrolovat, zda `HKMedicationDoseEvent` nebo `HKUserAnnotatedMedication` dostaly veřejný inicializátor nebo zápisové API. Pokud ano, platí původní záměr: jen zápis, vypnutelný v Nastavení, z HealthKitu se nic nečte do synchronizovaného úložiště. Pokud se ukáže zájem o hodinky dřív, je lepší cestou malá aplikace Vzato pro watchOS nebo komplikace, nezávislá na HealthKitu.
 
 ### 3.9 Widgety
 
@@ -147,7 +154,24 @@ Uživatel si občas není jistý, zda lék vzal a jen zapomněl potvrdit, nebo p
 - Vzhled: světlý, tmavý, podle systému. Ikona aplikace: tableta (výchozí) nebo dávkovač. Na iOS a iPadOS se mění ikona na ploše, na Macu ikona v Docku za běhu aplikace (ve Finderu zůstává tableta, aplikace nesmí přepisovat vlastní podepsaný balíček).
 - Výchozí odklad notifikace, počet opakování, lhůta pro „zmeškáno“.
 - Upozornění na zásoby: zapnout/vypnout, kolik dní předem.
-- Správa oprávnění (notifikace, fotoaparát, Health).
+- Správa oprávnění (notifikace, fotoaparát).
+- Nápověda a „Projít úvod znovu“, viz 3.12.
+- „Zdarma pro všechny“: všechny funkce i zdrojový kód zdarma, bez reklam, účtu a placené verze; autor aplikaci udržuje hlavně pro sebe, připomínky vítá (info@vzato.app), odkaz na vzato.app. **Bez odkazu na dar v aplikaci** (rozhodnuto 7. 11. 2026): pravidla App Store 3.1.1 a 3.1.3 nedovolují vybírat peníze mimo nákup v aplikaci, v EU jen se zvláštním oprávněním a poplatkem. Odkaz Buy Me a Coffee (buymeacoffee.com/kornelko) je jen na webu a v repozitáři (README, `.github/FUNDING.yml`).
+
+### 3.12 Úvodní průvodce a nápověda
+
+Cíl: aplikaci zvládne i člověk, který s telefonem moc nepracuje (rozhodnuto 7. 11. 2026, varianta „Průvodce prvním lékem“).
+
+- **Kdy:** při prvním spuštění, pokud ještě není žádný lék. Kdo už léky má (aktualizace, data z iCloudu), průvodce neuvidí. Znovu ho lze spustit v Nastavení › Nápověda › Projít úvod znovu. Na každém kroku jde průvodce přeskočit.
+- **Kroky** (velké písmo, jedna věc na obrazovku, velké tlačítko Pokračovat, tečky s postupem, Zpět):
+  1. Vítejte: „Vzato vám připomene léky. Vy jen klepnete na Vzato.“
+  2. Oznámení: proč jsou potřeba (bez nich připomínka nezazní ani se neukáže na zamčené obrazovce), tlačítko „Povolit oznámení“ vyvolá systémový dotaz. Když už jsou povolená, krok se přeskočí; když jsou zakázaná, nabídne „Otevřít nastavení“.
+  3. Název léku (povinný) a síla (nepovinná, např. 400 mg).
+  4. Kolik: jednotka (tableta, kapsle, kapky…) a množství tlačítky − / + (u tablet po ½).
+  5. Kdy: ráno 8:00, poledne 12:00, večer 18:00, na noc 22:00 – zapnout jedno nebo více, čas jde změnit. Každý den.
+  6. Hotovo: shrnutí („Každý den v 8:00: 1 tableta Ibuprofen“) a upozornění, že zásobu, fotografie a jídlo se nastaví v Léky. Lék se uloží stejně jako z formuláře.
+- **Nápověda v aplikaci** (Nastavení › Nápověda, funguje bez internetu): krátké návody v číslovaných krocích – přidat lék, když přijde připomínka (Vzato, Odložit, Přeskočit, Vrátit zpět, proč je tlačítko až 30 minut před dávkou), zásoba, fotografie, historie a souhrn pro lékaře, iCloud, „Nepřišla mi připomínka“. Odkaz na podrobný návod s obrázky na vzato.app a kontakt info@vzato.app.
+- **Web:** stejné návody s obrázky ve čtyřech jazycích na vzato.app (Astro, Cloudflare), bez JavaScriptu, cookies a externích požadavků.
 
 ## 4. Datový model (návrh)
 
@@ -264,14 +288,14 @@ Pořadí odpovídá prioritám: nejdřív jistota, že dávka byla vzata, pak hi
 5. **Multiplatform:** iPad a Mac, adaptivní layout.
 6. **Sync:** Core Data + CloudKit včetně fotografií, test na dvou zařízeních.
 7. **Widgety:** Dnes a zamykací obrazovka, interaktivní potvrzení.
-8. **HealthKit:** zápis dávek.
+8. ~~**HealthKit:** zápis dávek.~~ Odloženo, viz 3.8.
 9. **Beta (TestFlight), potom veřejné vydání.**
 
 ## 9. Otevřené otázky
 
 1. ~~Název aplikace a bundle ID.~~ Rozhodnuto 6. 11. 2026: **Vzato**, projekt a doména **vzato.app**, bundle ID `app.vzato`. Zbývá ověřit ochranné známky (ÚPV ČR, ÚPV SR, EUIPO) a zaregistrovat domény vzato.app, vzato.cz, vzato.sk (whois: volné).
 2. ~~Licence: MIT, nebo GPL-3.0?~~ Rozhodnuto: MPL-2.0 (viz kapitola 6).
-3. Minimální verze: iOS 17 / macOS 14, nebo novější (kvůli API pro léky v HealthKitu)?
+3. ~~Minimální verze: iOS 17 / macOS 14, nebo novější (kvůli API pro léky v HealthKitu)?~~ Rozhodnuto 7. 11. 2026: zůstává iOS 17 / macOS 14, HealthKit je odložený (3.8).
 4. ~~Potřebujete sdílení mezi více lidmi (rodina) už ve v1?~~ Rozhodnuto: ne. Zůstává jako možné rozšíření, kapitola 10. Kvůli němu zvoleno Core Data od začátku (viz 10.3).
 5. ~~Lokalizace: čeština a angličtina od začátku?~~ Rozhodnuto: čeština, slovenština a angličtina od prototypu.
 6. Vývojářský účet Apple pro distribuci, nebo zatím jen sestavení ze zdrojáků?

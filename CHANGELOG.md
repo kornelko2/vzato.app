@@ -53,6 +53,15 @@ All notable changes to Vzato are listed here. The format follows
 - Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
   because the number pad has no Return key; they now count on every keystroke and
   accept a decimal comma (10,5).
+- Settings › Free for everyone: every feature and the source code are free, the
+  author maintains Vzato mainly for himself, feedback to info@vzato.app. A Buy Me a
+  Coffee link is on the website and in the repository, not in the app (App Store rules).
+- First-start guide for people who do not use phones much: welcome, allow
+  notifications (with the reason), then the first medication in three steps (name,
+  how much, when) and a summary. Shown only when there is no medication yet; every
+  step can be skipped; Settings › Help › Show the introduction again.
+- Help in Settings: eight short how-tos in numbered steps, offline, with a link to
+  the guide with pictures on vzato.app and the contact info@vzato.app.
 - Fixed: reminders never arrived (no sound, nothing on the lock screen) because
   the app asked for notification permission only from a button in Settings. It now
   asks as soon as a medication has a time, and Today shows a red warning with
@@ -68,7 +77,7 @@ All notable changes to Vzato are listed here. The format follows
   PDF to send or print.
 - Double-dose protection: only a due dose (from 30 minutes before its time) can be
   confirmed with one tap; later doses show only their time, no button (taking one
-  early is possible by swiping its row in the timeline, with a question); taking
+  early is possible by touching and holding its row in the timeline, with a question); taking
   the same medication again soon after asks "already taken at 7:25" (card,
   timeline, extra dose, widget); an Undo appears for a few seconds after Taken.
 - The list of medications shows the amount at home and the get-more-by date.

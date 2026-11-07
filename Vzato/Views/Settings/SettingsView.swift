@@ -16,11 +16,28 @@ struct SettingsView: View {
     @AppStorage(AppSettings.doseSoundKey) private var doseSound = ReminderSound.chime
     @AppStorage(AppSettings.mealSoundKey) private var mealSound = ReminderSound.soft
 
+    @Environment(AppState.self) private var state
     private var notifications: NotificationService { NotificationService.shared }
 
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    NavigationLink {
+                        HelpView()
+                    } label: {
+                        Label("Help", systemImage: "questionmark.circle")
+                    }
+                    .accessibilityIdentifier("help")
+                    Button {
+                        state.showingOnboarding = true
+                    } label: {
+                        Label("Show the introduction again", systemImage: "arrow.counterclockwise.circle")
+                    }
+                } header: {
+                    Text("Help")
+                }
+
                 Section {
                     Text("Vzato follows the language you set for it in the system settings. Czech, Slovak, English and Hungarian are available.")
                         .font(.subheadline)
@@ -125,6 +142,28 @@ struct SettingsView: View {
                     Text("iCloud sync")
                 } footer: {
                     Text("Syncs between your own devices through your iCloud account. Nobody else, not even the developer, can read the data.")
+                }
+
+                Section {
+                    Text("Every feature is free for everyone, including the source code. No ads, no account, no paid version.")
+                    Text("I look after Vzato mainly for myself. Any comment or idea is welcome.")
+                        .foregroundStyle(.secondary)
+                    if let mail = URL(string: "mailto:info@vzato.app") {
+                        Link(destination: mail) {
+                            Label("Write to us: info@vzato.app", systemImage: "envelope")
+                        }
+                    }
+                    if let site = URL(string: "https://vzato.app") {
+                        Link(destination: site) {
+                            Label {
+                                Text(verbatim: "vzato.app")
+                            } icon: {
+                                Image(systemName: "globe")
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Free for everyone")
                 }
 
                 Section("About") {
@@ -240,7 +279,7 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView().environment(AppState())
 }
 
 /// Plays a notification sound in Settings so the choice can be heard.

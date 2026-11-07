@@ -300,7 +300,7 @@ struct RemindersOffBanner: View {
         .background(Palette.missed.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
     }
 
-    private static var settingsURL: String {
+    static var settingsURL: String {
         #if os(iOS)
         UIApplication.openNotificationSettingsURLString
         #else

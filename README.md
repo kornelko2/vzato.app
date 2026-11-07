@@ -1,8 +1,11 @@
 # Vzato
 
 Free, open source medication reminder for iPhone, iPad and Mac. One SwiftUI code
-base, no server, no accounts. Your data stays on your devices and, once sync
-ships, in your own iCloud. Czech, Slovak, English and Hungarian.
+base, no server, no accounts. Your data stays on your devices and in your own
+iCloud. Czech, Slovak, English and Hungarian.
+
+Website, user guide and privacy policy: [vzato.app](https://vzato.app). Contact:
+info@vzato.app.
 
 **Vzato is not a medical device and does not replace your doctor or pharmacist.**
 It reminds you and keeps your own notes, nothing more. It never suggests doses
@@ -45,12 +48,32 @@ opening the app. *Next dose* on the Lock Screen.
 **Extra doses.** Log a painkiller or anything outside the plan; it shows in the
 history and lowers the supply.
 
+**No double doses.** One tap confirms a dose only from 30 minutes before its
+time; taking the same medication again soon after asks first, and *Undo* is
+there for a few seconds.
+
+**Photos.** The package, the pill and the leaflet, with the chosen one on the
+Today card.
+
+**Meals.** For medications taken before a meal, a "you can eat now" reminder
+with its own sound.
+
+**Summary for the doctor.** 7, 30 or 90 days of adherence, missed doses and
+supply, as an A4 PDF.
+
+**iCloud.** Sync between your iPhone, iPad and Mac through your private iCloud.
+
+**Easy start.** A first-start guide (allow notifications, first medication in
+three steps) and help in Settings, also on [vzato.app](https://vzato.app).
+
 **Languages.** Czech, Slovak, English and Hungarian, following the language you
 choose for the app in system settings.
 
-Planned, in the order people ask for it: Apple Health, profiles for children and pets,
+Possible later, not promised: profiles for children and pets,
 family sharing, hand-over of records by QR code or encrypted export, official
-leaflets from the Czech and Slovak medicines databases. The Czech design
+leaflets from the Czech and Slovak medicines databases. Apple Health is on hold:
+HealthKit lets other apps read medications and doses but not write them
+(specification 3.8). Reminders still show on Apple Watch with their buttons. The Czech design
 documents have the details: [specification.md](specification.md),
 [implementation-plan.md](implementation-plan.md),
 [design-options.md](design-options.md).
@@ -129,8 +152,8 @@ xcodebuild -exportArchive -archivePath build/Vzato.xcarchive \
 ## Privacy
 
 No analytics, no ads, no third-party code, no server. Everything is stored in
-the app's local database and, once sync ships, in the user's private iCloud
-database, which the developer cannot access. The only network requests the app
+the app's local database and in the user's private iCloud database, which the
+developer cannot access. The only network requests the app
 will ever make on its own are to Apple (iCloud) and, on an explicit tap, to the
 public medicines databases of the Czech and Slovak state institutes to fetch a
 leaflet. The privacy manifest declares no collected data.
@@ -147,10 +170,18 @@ Vzato/Resources   String Catalog (en, cs, sk, hu), assets, privacy manifest
 VzatoTests        Swift Testing unit tests
 Config            signing (local, gitignored), entitlements, export options
 Design/icon       app icon sources (SVG)
-website           marketing page and privacy policy (static, four languages)
 Docs/app-store    App Store texts in four languages
 Scripts           helper scripts
 ```
+
+## Free for everyone
+
+Every feature is free for everyone, including the source code. There are no ads,
+no accounts and no paid version. I maintain Vzato mainly
+for myself, so updates follow what I need, but any comment or idea is welcome:
+open an issue or write to info@vzato.app.
+
+If you want to say thanks, you can [buy me a coffee](https://buymeacoffee.com/kornelko).
 
 ## Contributing
 

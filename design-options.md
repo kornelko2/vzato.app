@@ -205,7 +205,7 @@ Domovská obrazovka je den na časové ose s týdenním pruhem nahoře. Dnes, hi
 
 ## 3. Rozhodnutí
 
-**Rozhodnuto 6. 11. 2026: směr C „Jistota“ na nativním základu směru A.** Vizuální návrhy všech čtyř směrů: https://claude.ai/artifact/42xwhq6dkUWkqEwC9V3ZP5
+**Rozhodnuto 6. 11. 2026: směr C „Jistota“ na nativním základu směru A.** Vizuální návrhy čtyř směrů byly jen v pracovním náhledu; výsledná podoba je v aplikaci a na snímcích v `Docs/screenshots/`.
 
 **Směr C „Jistota“ na nativním základu směru A.** Obrazovka Dnes dostane velkou kartu nejbližší dávky s obřím tlačítkem a miniaturou tablety; Historie, Léky a Nastavení zůstanou systémové seznamy. Tím se nejlépe pokryje hlavní cíl ze specifikace (uživatel má vždy jistotu, že dávku vzal) za malou cenu, a stejná karta poslouží jako widget ve fázi 7. Pokud se později ukáže, že aplikace potřebuje víc osobnosti pro App Store, dá se na kartu a ikonu přidat teplejší paleta ze směru B, aniž by se měnila struktura.
 

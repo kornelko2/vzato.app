@@ -211,9 +211,13 @@ Hotovo, když: dvě zařízení se stejným Apple ID, potvrzení na jednom se do
 
 ### Fáze 8 – HealthKit
 
+**Stav 7. 11. 2026: odloženo (on hold), rozhodnutí uživatele.** API ověřeno, zápis nejde. V SDK iOS 27.2 má `HKMedicationDoseEvent` `init` označený `NS_UNAVAILABLE` a všechny vlastnosti jen pro čtení, `HKUserAnnotatedMedication` taky. Aplikace třetích stran můžou léky a dávky ze Zdraví jen číst (iOS 26+, souhlas pro každý lék zvlášť), zapisuje je jen aplikace Zdraví. Původní zadání fáze níže proto nelze splnit. Důvody a kdy se k tomu vrátit: specifikace 3.8.
+
 Úkoly: ověřit aktuální API pro léky, oprávnění **jen na zápis** (z HealthKit se nikdy nečte do synchronizovaného úložiště, pravidlo App Store), zápis při potvrzení, zpětné smazání při `reset`. Vypnutelné v Nastavení.
 
 ### Fáze 9 – Beta a vydání
+
+**Stav 7. 11. 2026:** úvodní průvodce a nápověda v aplikaci (specifikace 3.12) hotové. Web přechází do samostatného projektu `vzato-web` (Astro, Cloudflare Workers přes Wrangler, doména vzato.app); složka `website/` z repozitáře aplikace zmizela. E-mail info@vzato.app přes Cloudflare Email Routing → iCloud. Repozitář aplikace se zveřejní. Zbývá: veřejná adresa zásad soukromí v App Store Connect, texty a kontakt pro externí TestFlight (`Docs/app-store/metadata.md`), externí skupina testerů.
 
 CONTRIBUTING.md, licence, screenshoty cs/sk/en, **zásady ochrany soukromí** (statická stránka na vzato.app, odkaz v aplikaci i v App Store Connect), **Privacy Nutrition Labels** „Data Not Collected“, TestFlight (vyžaduje účet), popis v App Store s upozorněním, že nejde o zdravotnický prostředek. Podklad: specifikace 5.1.
 
@@ -273,6 +277,6 @@ Podle specifikace, kapitola 15. Pořadí: (1) `Organizer` + `OrganizerService` (
 
 ## 6. Co se rozhodne až po prototypu
 
-- Zda zvednout minimum na iOS 18 / macOS 15 kvůli HealthKit API pro léky.
+- ~~Zda zvednout minimum na iOS 18 / macOS 15 kvůli HealthKit API pro léky.~~ Ne, HealthKit je odložený (specifikace 3.8).
 - Zda opakovat zmeškanou dávku ještě jednou notifikací (otevřená otázka 9).
 - Zda fotografie synchronizovat vždy, nebo volitelně (otevřená otázka 8).
