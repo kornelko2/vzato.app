@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import CoreData
 import SwiftUI
 
 @main
@@ -13,6 +14,14 @@ struct VzatoApp: App {
     init() {
         persistence = PersistenceController.shared
         #if DEBUG
+        if LaunchArguments.resetsData {
+            let context = persistence.viewContext
+            for entity in ["DoseEvent", "MedicationPhoto", "Schedule", "Medication", "ActivityEntry"] {
+                let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+                (try? context.fetch(request))?.forEach(context.delete)
+            }
+            try? context.save()
+        }
         // `--sample-data` fills an empty store with demo medications (simulator screenshots, UI work).
         if CommandLine.arguments.contains("--sample-data") {
             let request = Medication.fetchRequest()

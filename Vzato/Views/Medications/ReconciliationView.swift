@@ -21,19 +21,9 @@ struct ReconciliationView: View {
     var body: some View {
         NavigationStack {
             Form {
-                if medication.tracksStock {
-                    Section("Since the last count") {
-                        LabeledContent("Counted on") { Text(report.since, style: .date) }
-                        LabeledContent("Scheduled doses") { Text(report.scheduledDoses, format: .number) }
-                        LabeledContent("Recorded as taken") { Text(report.recordedTaken, format: .number) }
-                        LabeledContent("Skipped") { Text(report.recordedSkipped, format: .number) }
-                        LabeledContent("Without a record") { Text(report.unaccounted, format: .number) }
-                        LabeledContent("Should be at home") { Text(DoseFormatter.amount(report.expectedStock, unit: medication.unitKind)) }
-                    }
-                }
-
                 Section {
                     AmountField("Amount you have at home", value: $actual)
+                        .accessibilityIdentifier("countedAmount")
                 } header: {
                     Text("Count what you have")
                 } footer: {
@@ -50,6 +40,18 @@ struct ReconciliationView: View {
                         }
                     }
                 }
+
+                if medication.tracksStock {
+                    Section("Since the last count") {
+                        LabeledContent("Counted on") { Text(report.since, style: .date) }
+                        LabeledContent("Scheduled doses") { Text(report.scheduledDoses, format: .number) }
+                        LabeledContent("Recorded as taken") { Text(report.recordedTaken, format: .number) }
+                        LabeledContent("Skipped") { Text(report.recordedSkipped, format: .number) }
+                        LabeledContent("Without a record") { Text(report.unaccounted, format: .number) }
+                        LabeledContent("Should be at home") { Text(DoseFormatter.amount(report.expectedStock, unit: medication.unitKind)) }
+                    }
+                }
+
             }
             .formStyle(.grouped)
             .navigationTitle(Text("Supply check"))
@@ -59,6 +61,7 @@ struct ReconciliationView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { save() }.disabled(actual == nil)
+                        .accessibilityIdentifier("saveCheck")
                 }
             }
         }

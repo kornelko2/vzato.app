@@ -53,6 +53,13 @@ All notable changes to Vzato are listed here. The format follows
 - Fixed: amounts typed in the supply check and in "Amount at home" were ignored,
   because the number pad has no Return key; they now count on every keystroke and
   accept a decimal comma (10,5).
+- Fixed: typing over an amount appended to it (79 over 30 became 7930). Tapping an
+  amount now clears it for the new entry; the number pad has a Done key.
+- Fixed: "Add time" could create a duplicate time; it now suggests morning, noon,
+  evening, night.
+- Medication detail shows *Get more by*, a week before the supply runs out.
+- The supply check shows the result directly under the count.
+- UI test in the simulator for the supply flow (`VzatoUITests`).
 - Empty Medications and Today screens offer a large *Add medication* button.
 - Debug launch arguments `--sample-data`, `--tab`, `--open-medication <name>`, `--edit`.
 - Follow-up reminders for unconfirmed doses (default twice, 10 minutes apart),

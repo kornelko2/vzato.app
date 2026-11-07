@@ -52,6 +52,15 @@ enum StockService {
         medication.lowStockNotifiedAt = now
     }
 
+    /// The day to get more: `runOutWarningDays` before the projected run-out (the same day the
+    /// early-warning notification fires), never in the past.
+    static func reorderDate(for medication: Medication, from now: Date = Date(), calendar: Calendar = .current,
+                            warningDays: Int = AppSettings.runOutWarningDays) -> Date? {
+        guard let runOut = projectedRunOutDate(for: medication, from: now, calendar: calendar) else { return nil }
+        let day = calendar.date(byAdding: .day, value: -max(0, warningDays), to: calendar.startOfDay(for: runOut)) ?? runOut
+        return max(day, calendar.startOfDay(for: now))
+    }
+
     /// Time of the first upcoming dose that the current stock cannot cover, or nil when stock lasts
     /// through the horizon or nothing is scheduled.
     static func projectedRunOutDate(for medication: Medication, from now: Date = Date(), calendar: Calendar = .current, horizonDays: Int = 365) -> Date? {

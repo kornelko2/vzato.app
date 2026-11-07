@@ -46,6 +46,18 @@ public final class Schedule: NSManagedObject {
 
     var isEveryDay: Bool { Set(weekdays).count == 7 }
 
+    /// Typical dose times: morning, noon, evening, night. "Add time" offers the next one that is
+    /// not taken yet, then hourly after the last one, never a duplicate.
+    static let suggestedMinutes = [8 * 60, 12 * 60, 18 * 60, 22 * 60]
+
+    static func nextSuggestedMinutes(after existing: [Int]) -> Int {
+        let taken = Set(existing)
+        if let free = suggestedMinutes.first(where: { !taken.contains($0) }) { return free }
+        var candidate = (existing.max() ?? 8 * 60) + 60
+        while taken.contains(candidate % (24 * 60)) { candidate += 60 }
+        return candidate % (24 * 60)
+    }
+
     static func parse(_ raw: String) -> [Int] {
         raw.split(separator: ",").compactMap { Int($0.trimmingCharacters(in: .whitespaces)) }
     }

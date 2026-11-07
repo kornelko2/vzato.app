@@ -166,6 +166,15 @@ enum LaunchArguments {
         #endif
     }
 
+    /// `--reset-data`: start with an empty database (UI tests).
+    static var resetsData: Bool {
+        #if DEBUG
+        return CommandLine.arguments.contains("--reset-data")
+        #else
+        return false
+        #endif
+    }
+
     static var opensFirstMedication: Bool {
         #if DEBUG
         return CommandLine.arguments.contains("--open-first-medication")

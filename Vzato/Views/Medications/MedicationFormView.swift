@@ -24,7 +24,8 @@ struct MedicationFormView: View {
     @State private var hasEndDate = false
     @State private var endDate = Calendar.current.date(byAdding: .month, value: 1, to: Date()) ?? Date()
     @State private var tracksStock = false
-    @State private var stockCount: Double = 30
+    /// nil until the person enters how much they have; a preset number would be easy to save by mistake.
+    @State private var stockCount: Double?
     @State private var unitsPerDose: Double = 1
     @State private var unitKind = DoseUnit.tablet
     @State private var lowStockThreshold: Double = 5
@@ -44,7 +45,7 @@ struct MedicationFormView: View {
         _notes = State(initialValue: medication.notes)
         _colorHex = State(initialValue: medication.colorHex)
         _tracksStock = State(initialValue: medication.tracksStock)
-        _stockCount = State(initialValue: medication.stockCount)
+        _stockCount = State(initialValue: medication.tracksStock ? medication.stockCount : nil)
         _unitsPerDose = State(initialValue: medication.effectiveUnitsPerDose)
         _unitKind = State(initialValue: medication.unitKind)
         _lowStockThreshold = State(initialValue: medication.lowStockThreshold)
@@ -61,6 +62,7 @@ struct MedicationFormView: View {
 
     private var canSave: Bool {
         !name.trimmingCharacters(in: .whitespaces).isEmpty && !weekdays.isEmpty && !times.isEmpty
+            && (!tracksStock || stockCount != nil)
     }
 
     var body: some View {
@@ -68,6 +70,7 @@ struct MedicationFormView: View {
             Form {
                 Section("Medication") {
                     TextField("Name", text: $name)
+                        .accessibilityIdentifier("name")
                     TextField("Dose, e.g. 400 mg", text: $dosageText)
                     colorPicker
                     TextField("Notes", text: $notes, axis: .vertical)
@@ -80,11 +83,11 @@ struct MedicationFormView: View {
                     }
                     .onDelete { times.remove(atOffsets: $0) }
                     Button {
-                        let last = times.last?.minutes ?? 8 * 60
-                        times.append(TimeEntry(minutes: (last + 12 * 60) % (24 * 60)))
+                        times.append(TimeEntry(minutes: Schedule.nextSuggestedMinutes(after: times.map(\.minutes))))
                     } label: {
                         Label("Add time", systemImage: "plus.circle")
                     }
+                    .accessibilityIdentifier("addTime")
                     Picker("Meals", selection: $mealRelation) {
                         ForEach(MealRelation.allCases) { relation in
                             Text(relation.label).tag(relation)
@@ -116,9 +119,11 @@ struct MedicationFormView: View {
                         LabeledContent("Amount per dose") { Text(DoseFormatter.amount(unitsPerDose, unit: unitKind)) }
                     }
                     Toggle("Track supply", isOn: $tracksStock)
+                        .accessibilityIdentifier("trackSupply")
                     if tracksStock {
                         LabeledContent("Amount at home") {
-                            AmountField("Amount at home", value: $stockCount.optional)
+                            AmountField("Amount at home", value: $stockCount)
+                                .accessibilityIdentifier("stockAmount")
                                 .multilineTextAlignment(.trailing)
                                 .labelsHidden()
                         }
@@ -140,6 +145,7 @@ struct MedicationFormView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") { save() }.disabled(!canSave)
+                        .accessibilityIdentifier("save")
                 }
             }
         }
@@ -234,7 +240,7 @@ struct MedicationFormView: View {
         target.unitsPerDose = max(Medication.minimumDoseUnits, unitsPerDose)
         if tracksStock {
             target.lowStockThreshold = max(0, lowStockThreshold)
-            if !target.tracksStock || target.stockCount != stockCount {
+            if let stockCount, !target.tracksStock || target.stockCount != stockCount {
                 StockService.setStock(target, count: stockCount)
             }
         } else {

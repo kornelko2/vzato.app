@@ -50,9 +50,17 @@ struct MedicationDetailView: View {
             Section("Supply") {
                 if medication.tracksStock {
                     LabeledContent("Amount at home") { Text(medication.stockAmountText) }
+                        .accessibilityElement(children: .combine).accessibilityIdentifier("amountAtHome")
                     LabeledContent("Doses left") { Text(medication.dosesInStock, format: .number) }
+                        .accessibilityElement(children: .combine).accessibilityIdentifier("dosesLeft")
                     if let runOut {
                         LabeledContent("Runs out") { Text(runOut, style: .date) }
+                            .accessibilityElement(children: .combine).accessibilityIdentifier("runsOut")
+                        if let reorder = StockService.reorderDate(for: medication) {
+                            LabeledContent("Get more by") { Text(reorder, style: .date) }
+                                .foregroundStyle(reorder <= Date() ? Palette.overdue : .primary)
+                                .accessibilityElement(children: .combine).accessibilityIdentifier("getMoreBy")
+                        }
                     }
                     if let counted = medication.stockCountedAt {
                         LabeledContent("Last counted") { Text(counted, style: .date) }
@@ -66,6 +74,7 @@ struct MedicationDetailView: View {
                     } label: {
                         Label("Count and check supply", systemImage: "checklist")
                     }
+                    .accessibilityIdentifier("checkSupply")
                 } else {
                     Button {
                         checkingSupply = true

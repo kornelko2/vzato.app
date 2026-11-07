@@ -3003,6 +3003,28 @@
         }
       }
     },
+    "Get more by": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doplnit do"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pótolni eddig"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doplniť do"
+          }
+        }
+      }
+    },
     "Glockenspiel": {
       "localizations": {
         "cs": {
