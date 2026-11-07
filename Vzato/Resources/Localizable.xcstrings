@@ -5577,28 +5577,6 @@
         }
       }
     },
-    "Take early…": {
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vzít dříve…"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bevétel korábban…"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vziať skôr…"
-          }
-        }
-      }
-    },
     "Take photo": {
       "localizations": {
         "cs": {
@@ -5727,6 +5705,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vzaté: %@ o %@"
+          }
+        }
+      }
+    },
+    "Taken…": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato…"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve…"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté…"
           }
         }
       }

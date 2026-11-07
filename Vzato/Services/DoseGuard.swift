@@ -7,8 +7,9 @@ import Foundation
 /// Protects against the most dangerous mistake: taking a medication twice. Every "Taken" action
 /// that is not obviously right asks first. The app never refuses; it makes the person look twice.
 enum DoseGuard {
-    /// A dose may be confirmed with one tap from this long before its time.
-    static let earlyWindow: TimeInterval = 60 * 60
+    /// A dose may be confirmed with one tap from this long before its time (and any time after,
+    /// while it is still open). Further ahead the card shows only the time.
+    static let earlyWindow: TimeInterval = 30 * 60
 
     enum Verdict: Equatable {
         case ok

@@ -61,7 +61,7 @@ struct TodayView: View {
                                      onTaken: { requestTake(featured) },
                                      onSnooze: { snooze(featured) },
                                      onSkip: { skip(featured) },
-                                     canTakeDirectly: featured.event == nil && DoseGuard.verdict(for: featured, now: now) == .ok,
+                                     takeMode: takeMode(for: featured),
                                      onTakeEarly: { requestTake(featured) })
                     } else if slots.isEmpty {
                         emptyState
@@ -177,6 +177,15 @@ struct TodayView: View {
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
             }
+        }
+    }
+
+    private func takeMode(for slot: DoseSlot) -> NextDoseCard.TakeMode {
+        switch DoseGuard.verdict(for: slot, now: now) {
+        case .ok: .direct
+        case .tooEarly: .notYet
+        case .recentlyTaken:
+            slot.scheduledAt.timeIntervalSince(now) > DoseGuard.earlyWindow ? .notYet : .askFirst
         }
     }
 

@@ -34,8 +34,11 @@ struct DoseGuardTests {
         let medication = degan(store)
         let slots = DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)
         #expect(DoseGuard.verdict(for: slots[1], now: at(monday, 9)) == .tooEarly(at(monday, 12)))
-        // Within the hour before, one tap is enough.
-        #expect(DoseGuard.verdict(for: slots[1], now: at(monday, 11, 15)) == .ok)
+        // From 30 minutes before, one tap is enough; 45 minutes before is still too early.
+        #expect(DoseGuard.verdict(for: slots[1], now: at(monday, 11, 30)) == .ok)
+        #expect(DoseGuard.verdict(for: slots[1], now: at(monday, 11, 15)) == .tooEarly(at(monday, 12)))
+        // Late is always fine while the dose is open.
+        #expect(DoseGuard.verdict(for: slots[1], now: at(monday, 15)) == .ok)
     }
 
     @Test func gapIsHalfTheShortestInterval() {

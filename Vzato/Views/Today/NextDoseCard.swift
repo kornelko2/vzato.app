@@ -13,9 +13,10 @@ struct NextDoseCard: View {
     let onTaken: () -> Void
     let onSnooze: () -> Void
     let onSkip: () -> Void
-    /// False when the dose is more than an hour away or the medication was just taken: then the big
-    /// button is replaced by the time, and taking it needs a deliberate "Take early…".
-    var canTakeDirectly = true
+    enum TakeMode { case direct, askFirst, notYet }
+    /// `.direct`: the big Taken button. `.askFirst`: due, but the same medication was taken recently,
+    /// so "Taken…" asks. `.notYet`: more than 30 minutes ahead, only the time is shown.
+    var takeMode: TakeMode = .direct
     var onTakeEarly: () -> Void = {}
 
     @State private var showingPill = false
@@ -86,7 +87,7 @@ struct NextDoseCard: View {
                 }
             }
 
-            if canTakeDirectly {
+            if takeMode == .direct {
                 Button(action: onTaken) {
                     Text("Taken")
                         .font(.title2.weight(.heavy))
@@ -123,12 +124,14 @@ struct NextDoseCard: View {
                 .accessibilityElement(children: .combine)
                 .accessibilityIdentifier("nextDoseAt")
 
-                Button(action: onTakeEarly) {
-                    Text("Take early…")
-                        .frame(maxWidth: .infinity, minHeight: 44)
+                if takeMode == .askFirst {
+                    Button(action: onTakeEarly) {
+                        Text("Taken…")
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                    }
+                    .buttonStyle(.bordered)
+                    .accessibilityIdentifier("takeEarly")
                 }
-                .buttonStyle(.bordered)
-                .accessibilityIdentifier("takeEarly")
             }
         }
         .padding(18)
