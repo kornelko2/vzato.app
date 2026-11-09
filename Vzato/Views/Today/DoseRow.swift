@@ -6,6 +6,7 @@ import SwiftUI
 
 /// One dose in a list: time, status, medication. Used in Today's timeline and in History.
 struct DoseRow: View {
+    @Environment(\.showsProfiles) private var showsProfiles
     let slot: DoseSlot
     let now: Date
     let grace: TimeInterval
@@ -36,6 +37,9 @@ struct DoseRow: View {
                 .accessibilityLabel(Text(isOverdue ? "Overdue" : status.label))
 
             VStack(alignment: .leading, spacing: 2) {
+                if showsProfiles {
+                    ProfileBadge(profile: slot.medication.profile)
+                }
                 HStack(spacing: 6) {
                     Circle().fill(Color(hex: slot.medication.colorHex)).frame(width: 8, height: 8)
                         .accessibilityHidden(true)

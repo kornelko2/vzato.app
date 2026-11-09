@@ -2,7 +2,7 @@
 
 Jednoduchá, zdarma a open source aplikace na připomínání léků pro iPhone, iPad a Mac. Jeden kódový základ, jedna aplikace pro všechna zařízení, data se synchronizují mezi zařízeními uživatele.
 
-Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5). Jedenáctá revize (7. 11. 2026): Apple Health odloženo, důvody v 3.8; úvodní průvodce a nápověda (3.12), web na vzato.app. Dvanáctá revize (7. 11. 2026): tlačítko Přeskočit ve widgetu (3.9).
+Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, historie a kalendář, zásoby a jejich kontrola, fotografie léku a příbalového letáku, čeština a angličtina od začátku. Třetí revize: primární trh je Česko a Slovensko (přidána slovenština), rodinné sdílení popsáno jako možné budoucí rozšíření, výsledek kontroly názvů. Čtvrtá revize: název Vzato, profily (děti, zvířata) jako možné rozšíření, strategie „malé jádro, otevřené dveře“. Pátá revize: rozhodnuto Core Data, bez serveru, minimalistická v1 (milníky 1–3), jedna univerzální aplikace pro iPhone, iPad a Mac. Šestá revize: tlačítko „Vzato“, předání dat při setkání (kapitola 14), ikona odložena. Stav implementace: fáze 1–4 hotové (6. 11. 2026). Sedmá revize: pomocník pro týdenní dávkovač (kapitola 15). Osmá revize: dávky po půlkách a čtvrtkách tablety, maďarština, jednotky dávky (kapky, ml…). Devátá revize: slučování duplicit mezi zařízeními a záznam činností (model verze 3). Desátá revize (7. 11. 2026): žádost o povolení oznámení hned u prvního léku s časem a varování na Dnes, volba fotografie na kartě Dnes (model verze 5). Jedenáctá revize (7. 11. 2026): Apple Health odloženo, důvody v 3.8; úvodní průvodce a nápověda (3.12), web na vzato.app. Dvanáctá revize (7. 11. 2026): tlačítko Přeskočit ve widgetu (3.9). Třináctá revize (7. 11. 2026): rozhodnuto o profilech (kapitola 12), opakování po dnech, týdnech a měsících (3.1) a umístění databáze léčiv včetně veterinárních (kapitola 11); model verze 6.
 
 ---
 
@@ -49,7 +49,12 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 ### 3.1 Léky a plán
 
 - Přidání léku: název, síla (volný text, např. „500 mg“), **jednotka** (tablety, kapsle, kapky, ml, lžičky, vdechy, sáčky, injekce, kusy) a **množství na dávku** (výchozí 1 tableta; u tablet a kapslí lze půlka nebo čtvrtka, krok ¼; kapky a ml po celých), barva/ikona, poznámka. Množství se zobrazuje slovy s správným skloňováním ve všech jazycích („2 tablety“, „20 kapek“, „½ tablety“) na kartě Dnes, v časové ose i v notifikaci, aby uživatel vždy viděl, kolik si má vzít.
-- Plán: dny v týdnu, časy (více za den), volitelně „s jídlem / před jídlem / po jídle / bez ohledu“.
+- Plán: časy (více za den), volitelně „s jídlem / před jídlem / po jídle / bez ohledu“, a **opakování**:
+  - vybrané dny v týdnu (výchozí: každý den),
+  - každých N dní (např. obden),
+  - každých N týdnů (týdenní injekce), počítáno od dne začátku,
+  - každých N měsíců (odčervení jednou za měsíc nebo za 3 měsíce) ve stejný den měsíce jako začátek; když měsíc ten den nemá, platí jeho poslední den (začátek 31. 1. → 28. 2., 31. 3.).
+  Formulář ukáže nejbližší tři termíny, aby bylo vidět, co plán znamená. Připomínky pro opakování po dnech, týdnech a měsících se plánují jednotlivě na konkrétní data (iOS neumí opakovat „každý třetí den“); vejdou se do limitu 64 čekajících připomínek spolu s ostatními.
 - Začátek a konec léčby (volitelně), pauza.
 - Jednorázová dávka mimo plán (např. lék na bolest), zaznamená se do historie a odečte ze zásoby.
 - Archivace léku: lék zmizí z dnešního přehledu, historie zůstane.
@@ -327,9 +332,18 @@ V Česku a na Slovensku je běžné, že dospělé děti hlídají léky starš�
 - **Soukromí:** sdílení zapíná jen vlastník dat, výslovně a pro konkrétní osobu; v aplikaci je vidět, co a s kým se sdílí; odebrání přístupu funguje okamžitě. Zdravotní data neopouštějí iCloud zúčastněných. Žádná analytika ani server to nemění.
 - **Pracnost:** zhruba velikost fáze Sync znovu (samostatná fáze po v1), plus testování na třech zařízeních se dvěma Apple ID.
 
-## 11. Možné rozšíření (mimo v1): databáze léčiv SÚKL a ŠÚKL
+## 11. Databáze léčiv SÚKL a ŠÚKL – rozhodnuto 7. 11. 2026
 
 Oba státní ústavy poskytují data o registrovaných lécích zdarma a bez API klíče. Ověřeno 6. 11. 2026. Použití je volitelné; aplikace musí plně fungovat i bez něj (ruční zadání).
+
+**Rozhodnutí (7. 11. 2026):** na iPhonu bez nové záložky: záložka Léky dostane nahoře vyhledávání, které hledá ve vlastních lécích a pod nimi ukáže shodné léky z databáze s tlačítkem Přidat (otevře formulář s vyplněným názvem, sílou, jednotkou a balením). Na iPadu a Macu je databáze navíc samostatná položka postranního panelu. Veterinární léky zatím ne (rozhodnutí 7. 11. 2026): česká data ÚSKVBL (`uskvbl.cz/attachments/spc/*.csv`) jsou úplná, ale neuvádějí licenci; slovenský seznam ÚŠKVBL je volné dílo, ale jen s názvy a formami. U zvířat zůstává ruční zadání a fotografie. Vrátit se k tomu, pokud ÚSKVBL zveřejní podmínky užití.
+
+**Ověřeno 7. 11. 2026:**
+- **SÚKL:** otevřená data jsou na `opendata.sukl.gov.cz` (stará doména přesměrovává); měsíční ZIP `soubory/SODrrrrmmdd/DLPrrrrmmdd.zip`, odkaz se čte ze stránky datové sady. CSV v cp1250, oddělovač `;`. `dlp_lecivepripravky.csv`: 70 032 řádků, registrované (REG R/B) 68 357, z toho dodávané v posledních 6 měsících (DODAVKY=1) 9 146. Sloupec EAN je prázdný („údaje již nejsou k dispozici“), sken čárového kódu proto nejde. Podmínky: šíření a komerční užití dovoleno, nutné uvést zdroj SÚKL (bez dojmu, že SÚKL aplikaci podporuje), neměnit význam dat a odkázat na podmínky užití (`opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat`).
+- **Příbalový leták CZ:** `https://prehledy.sukl.gov.cz/dlp/v1/dokumenty/{kod}/pil` vrací PDF (0,2–0,7 MB, typ `application/octet-stream`), neznámý kód 404.
+- **ŠÚKL:** `https://api.sukl.sk/json/lieky_ui42.php` vrací všech 55 051 registrovaných balení najednou (99 MB, JSON uvnitř HTML), síla, forma a balení zvlášť; příznak dodávek ani EAN není. Licence CC0 (Národný katalóg otvorených dát).
+- **Příbalový leták SK:** API není (odkaz vyžaduje tajný parametr ze stránky léku). Aplikace proto otevře vyhledávání léku na `sukl.sk` v prohlížeči.
+- **Velikost indexu:** CZ registrované + SK, komprimovaně asi 1,1 MB.
 
 ### 11.1 Co by to přineslo
 
@@ -359,7 +373,7 @@ Oba státní ústavy poskytují data o registrovaných lécích zdarma a bez API
 
 - Build skript (CSV → SQLite/JSON index, kontrola velikosti; odhad 2–5 MB pro CZ+SK), našeptávač ve formuláři, stažení a zobrazení PDF, správa aktualizací indexu. Samostatná fáze po v1, menší než fáze Sync.
 
-## 12. Možné rozšíření (mimo v1): více profilů (děti, domácí zvířata)
+## 12. Více profilů (děti, domácí zvířata) – rozhodnuto 7. 11. 2026
 
 Rodiče hlídají léky dětem, majitelé zvířatům (odčervení, antibiotika, kapky). Dnes si to lidé řeší v jedné aplikaci jako „své“ léky s matoucími názvy.
 
@@ -368,6 +382,7 @@ Rodiče hlídají léky dětem, majitelé zvířatům (odčervení, antibiotika,
 - Profily „Já“, „Anička“, „Mikeš“ s barvou nebo ikonou (osoba / zvíře). Lék patří profilu.
 - Přehled Dnes zobrazuje dávky všech profilů, u každé jméno a ikona; filtr na jeden profil. Velká karta směru C říká „Mikeš · Milbemax“.
 - Notifikace nesou jméno („Anička: Nurofen 8:00“). Historie, kalendář, zásoby a export jsou per profil.
+- **Rozhodnutí (7. 11. 2026):** Dnes ukazuje dávky všech profilů dohromady, u každé jméno a ikonu profilu, nahoře štítky pro filtr na jeden profil. Kdo má jen jeden profil, nevidí nic nového (žádné štítky ani jména). Profil má jméno, druh (člověk, zvíře), ikonu a barvu. Správa v Nastavení › Profily; výchozí profil „Já“ nejde smazat, ostatní jen bez léků (léky se nejdřív přesunou nebo archivují).
 - Vše zůstává v jednom iCloudu uživatele, žádné sdílení. (Sdílení profilu s jiným člověkem je kapitola 10 a jde kombinovat: sdílí se profil, ne celá aplikace.)
 
 ### 12.2 Co by to stálo

@@ -6,6 +6,12 @@ import CoreData
 import SwiftUI
 
 struct HistoryView: View {
+    @Environment(AppState.self) private var state
+    @Environment(\.showsProfiles) private var showsProfiles
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Profile.createdAt)]) private var profiles: FetchedResults<Profile>
+
+    /// The profile chosen on Today or here, or everyone.
+    private var shown: [Medication] { medications.of(profile: showsProfiles ? state.profileFilter : nil) }
     @Environment(\.managedObjectContext) private var context
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)])
     private var medications: FetchedResults<Medication>
@@ -22,12 +28,12 @@ struct HistoryView: View {
 
     private var daySlots: [DoseSlot] {
         _ = events.count
-        return DoseScheduler.slots(for: Array(medications), on: selectedDay, calendar: calendar)
+        return DoseScheduler.slots(for: shown, on: selectedDay, calendar: calendar)
     }
 
     private var monthSummaries: [Date: DaySummary] {
         _ = events.count
-        return DoseSummary.byDay(medications: Array(medications), monthStart: monthStart, now: now, grace: grace, calendar: calendar)
+        return DoseSummary.byDay(medications: shown, monthStart: monthStart, now: now, grace: grace, calendar: calendar)
     }
 
     private var monthTotals: DaySummary { DoseSummary.total(Array(monthSummaries.values)) }
@@ -35,6 +41,14 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             List {
+                if showsProfiles {
+                    Section {
+                        ProfileFilterBar(profiles: Array(profiles),
+                                         selection: Binding(get: { state.profileFilter }, set: { state.profileFilter = $0 }))
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4))
+                }
                 Section {
                     MonthCalendarView(monthStart: $monthStart, selectedDay: $selectedDay, summaries: monthSummaries)
                         .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))

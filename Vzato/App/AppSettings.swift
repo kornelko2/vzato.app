@@ -154,7 +154,18 @@ enum LaunchArguments {
 
     static var usesScratchStore: Bool {
         #if DEBUG
-        return CommandLine.arguments.contains("--scratch-store")
+        return CommandLine.arguments.contains("--scratch-store") || initsCloudKitSchema
+        #else
+        return false
+        #endif
+    }
+
+    /// `--init-cloudkit-schema`: push the model to the CloudKit development environment. Uses a
+    /// throwaway store like `--scratch-store` (the real one is never migrated by a Debug build and the
+    /// reminders stay untouched) but keeps CloudKit on.
+    static var initsCloudKitSchema: Bool {
+        #if DEBUG
+        return CommandLine.arguments.contains("--init-cloudkit-schema")
         #else
         return false
         #endif
@@ -175,6 +186,17 @@ enum LaunchArguments {
         #if DEBUG
         let args = CommandLine.arguments
         guard let index = args.firstIndex(of: "--tab"), index + 1 < args.count else { return nil }
+        return args[index + 1]
+        #else
+        return nil
+        #endif
+    }
+
+    /// `--search <text>`: start Medications with this search (screenshots).
+    static var searchText: String? {
+        #if DEBUG
+        let args = CommandLine.arguments
+        guard let index = args.firstIndex(of: "--search"), index + 1 < args.count else { return nil }
         return args[index + 1]
         #else
         return nil

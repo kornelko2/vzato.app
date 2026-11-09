@@ -55,6 +55,16 @@ there for a few seconds.
 **Photos.** The package, the pill and the leaflet, with the chosen one on the
 Today card.
 
+**Repeat.** On chosen weekdays, or every few days, weeks or months, for example
+a deworming tablet once a month.
+
+**Children and animals.** Profiles with a name and icon; Today shows whose dose
+it is and can show one profile at a time. Nothing changes with a single profile.
+
+**Medicines database.** Search Czech and Slovak registered medicines offline
+and fill in name, strength and unit. For Czech medicines, the official package
+leaflet from SÚKL on a tap.
+
 **Meals.** For medications taken before a meal, a "you can eat now" reminder
 with its own sound.
 
@@ -69,9 +79,8 @@ three steps) and help in Settings, also on [vzato.app](https://vzato.app).
 **Languages.** Czech, Slovak, English and Hungarian, following the language you
 choose for the app in system settings.
 
-Possible later, not promised: profiles for children and pets,
-family sharing, hand-over of records by QR code or encrypted export, official
-leaflets from the Czech and Slovak medicines databases. Apple Health is on hold:
+Possible later, not promised: family sharing, hand-over of records by QR code
+or encrypted export, veterinary medicines in the database. Apple Health is on hold:
 HealthKit lets other apps read medications and doses but not write them
 (specification 3.8). Reminders still show on Apple Watch with their buttons. The Czech design
 documents have the details: [specification.md](specification.md),
@@ -192,3 +201,8 @@ first; it is short. Changes are listed in [CHANGELOG.md](CHANGELOG.md).
 
 [Mozilla Public License 2.0](LICENSE). The name *Vzato* and the app icon are
 not covered by the license and may only be used by official builds.
+
+The medicines index (`Vzato/Resources/Medicines.index`, built by
+`Scripts/build-medicines-index.py`) comes from open data of the Czech State
+Institute for Drug Control, SÚKL ([terms of use](https://opendata.sukl.gov.cz/podminky-uziti-otevrenych-dat)),
+and the Slovak ŠÚKL (CC0). Neither institute endorses this app.

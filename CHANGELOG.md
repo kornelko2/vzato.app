@@ -106,6 +106,21 @@ All notable changes to Vzato are listed here. The format follows
 - Unit tests for the scheduler, dose logging, supply, supply check, summaries,
   photo store and CSV.
 - Skip button next to Taken in the Today widget.
+- Profiles for children and animals (Settings › Profiles). Today shows whose dose
+  it is with a filter at the top; History, the summary for the doctor, CSV export,
+  reminders and widgets name the profile. Nothing changes with a single profile.
+- Plans that repeat every N days, weeks or months (for example a deworming tablet
+  once a month), counted from the start date, with the next three doses shown in
+  the form. Reminders for these plans are planned on dates.
+- Medicines database: the search in Medications (and its own section in the iPad
+  and Mac sidebar) finds Czech and Slovak registered medicines offline and fills in
+  name, strength and unit. Built from SÚKL and ŠÚKL open data by
+  `Scripts/build-medicines-index.py`; nothing typed leaves the device.
+- Package leaflet: for Czech medicines picked from the database, the official PDF
+  from SÚKL on a tap (only the medicine code is sent), kept with the medication.
+  Slovak medicines link to the ŠÚKL website.
+- Model version 6: repeat rule on Schedule, icon on Profile, database code and
+  leaflet on Medication.
 
 ### Fixed
 - The app could be closed by iOS a moment after leaving it, while iCloud was still

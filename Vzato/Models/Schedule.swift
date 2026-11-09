@@ -15,6 +15,9 @@ public final class Schedule: NSManagedObject {
     @NSManaged public var startDate: Date?
     @NSManaged public var endDate: Date?
     @NSManaged public var isPaused: Bool
+    @NSManaged public var repeatKindRaw: String
+    /// N in "every N days / weeks / months"; ignored for weekdays.
+    @NSManaged public var repeatIntervalCount: Int
     @NSManaged public var medication: Medication?
 
     public override func awakeFromInsert() {
@@ -44,7 +47,95 @@ public final class Schedule: NSManagedObject {
         set { mealRelationRaw = newValue.rawValue }
     }
 
-    var isEveryDay: Bool { Set(weekdays).count == 7 }
+    var isEveryDay: Bool { repeatKind == .weekdays && Set(weekdays).count == 7 }
+
+    var repeatKind: RepeatKind {
+        get { RepeatKind(rawValue: repeatKindRaw) ?? .weekdays }
+        set { repeatKindRaw = newValue.rawValue }
+    }
+
+    var repeatInterval: Int {
+        get { max(1, repeatIntervalCount) }
+        set { repeatIntervalCount = max(1, newValue) }
+    }
+
+    /// Whether the plan has doses on this day, by its repeat rule only (start, end and pause are
+    /// checked by `DoseScheduler`). Intervals count from the start date; "every month" keeps the
+    /// start's day of the month and falls back to the month's last day (31 Jan → 28 Feb → 31 Mar).
+    func occurs(on day: Date, calendar: Calendar) -> Bool {
+        Self.occurs(kind: repeatKind, interval: repeatInterval, weekdays: weekdays, start: startDate, on: day, calendar: calendar)
+    }
+
+    /// The next days with doses, from `day` on (inclusive), at most `limit`, looking `horizonDays` ahead.
+    func occurrenceDays(from day: Date, limit: Int, horizonDays: Int = 400, calendar: Calendar) -> [Date] {
+        Self.occurrenceDays(kind: repeatKind, interval: repeatInterval, weekdays: weekdays, start: startDate, end: endDate,
+                            from: day, limit: limit, horizonDays: horizonDays, calendar: calendar)
+    }
+
+    static func occurs(kind: RepeatKind, interval: Int, weekdays: [Int], start: Date?, on day: Date, calendar: Calendar) -> Bool {
+        let day = calendar.startOfDay(for: day)
+        switch kind {
+        case .weekdays:
+            return weekdays.contains(calendar.component(.weekday, from: day))
+        case .days, .weeks:
+            guard let start else { return interval == 1 && kind == .days }
+            let step = kind == .days ? interval : interval * 7
+            guard let offset = calendar.dateComponents([.day], from: calendar.startOfDay(for: start), to: day).day,
+                  offset >= 0 else { return false }
+            return offset % step == 0
+        case .months:
+            guard let start else { return false }
+            let anchor = calendar.startOfDay(for: start)
+            let a = calendar.dateComponents([.year, .month], from: anchor)
+            let d = calendar.dateComponents([.year, .month], from: day)
+            guard let ay = a.year, let am = a.month, let dy = d.year, let dm = d.month else { return false }
+            let months = (dy - ay) * 12 + (dm - am)
+            guard months >= 0, months % interval == 0,
+                  let expected = calendar.date(byAdding: .month, value: months, to: anchor) else { return false }
+            return calendar.isDate(expected, inSameDayAs: day)
+        }
+    }
+
+    static func occurrenceDays(kind: RepeatKind, interval: Int, weekdays: [Int], start: Date?, end: Date?,
+                               from day: Date, limit: Int, horizonDays: Int, calendar: Calendar) -> [Date] {
+        var result: [Date] = []
+        var current = calendar.startOfDay(for: day)
+        if let start, current < calendar.startOfDay(for: start) { current = calendar.startOfDay(for: start) }
+        let lastDay = end.map { calendar.startOfDay(for: $0) }
+        for _ in 0..<max(0, horizonDays) {
+            if result.count >= limit { break }
+            if let lastDay, current > lastDay { break }
+            if occurs(kind: kind, interval: interval, weekdays: weekdays, start: start, on: current, calendar: calendar) {
+                result.append(current)
+            }
+            guard let next = calendar.date(byAdding: .day, value: 1, to: current) else { break }
+            current = next
+        }
+        return result
+    }
+
+    /// "Every day", "Mon, Wed, Fri", "Every 2 days", "Every month".
+    func repeatDescription(calendar: Calendar = .current) -> String {
+        Self.describe(kind: repeatKind, interval: repeatInterval, weekdays: weekdays, calendar: calendar)
+    }
+
+    static func describe(kind: RepeatKind, interval: Int, weekdays: [Int], calendar: Calendar = .current) -> String {
+        let repeatInterval = max(1, interval)
+        switch kind {
+        case .weekdays:
+            if Set(weekdays).count == 7 { return String(localized: "Every day") }
+            let order = (0..<7).map { (calendar.firstWeekday - 1 + $0) % 7 + 1 }
+            return order.filter { weekdays.contains($0) }
+                .map { calendar.shortStandaloneWeekdaySymbols[$0 - 1] }
+                .joined(separator: ", ")
+        case .days:
+            return repeatInterval == 1 ? String(localized: "Every day") : String(localized: "Every \(repeatInterval) days")
+        case .weeks:
+            return repeatInterval == 1 ? String(localized: "Every week") : String(localized: "Every \(repeatInterval) weeks")
+        case .months:
+            return repeatInterval == 1 ? String(localized: "Every month") : String(localized: "Every \(repeatInterval) months")
+        }
+    }
 
     /// Typical dose times: morning, noon, evening, night. "Add time" offers the next one that is
     /// not taken yet, then hourly after the last one, never a duplicate.

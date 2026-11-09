@@ -37,8 +37,49 @@ enum MealRelation: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-enum ProfileKind: String, Sendable {
+/// How a schedule repeats. Raw values are stored in Core Data: never rename an existing case.
+enum RepeatKind: String, CaseIterable, Identifiable, Sendable {
+    /// On chosen weekdays (every day by default).
+    case weekdays
+    /// Every N days, every N weeks or every N months, counted from the start date.
+    case days, weeks, months
+    var id: String { rawValue }
+
+    var label: LocalizedStringResource {
+        switch self {
+        case .weekdays: "On chosen days"
+        case .days: "Every few days"
+        case .weeks: "Every few weeks"
+        case .months: "Every few months"
+        }
+    }
+}
+
+enum ProfileKind: String, CaseIterable, Identifiable, Sendable {
     case person, pet
+    var id: String { rawValue }
+
+    var label: LocalizedStringResource {
+        switch self {
+        case .person: "Person"
+        case .pet: "Animal"
+        }
+    }
+
+    var defaultSymbol: String {
+        switch self {
+        case .person: "person.fill"
+        case .pet: "pawprint.fill"
+        }
+    }
+
+    /// Icons offered in the profile editor.
+    var symbols: [String] {
+        switch self {
+        case .person: ["person.fill", "figure.child", "figure.and.child.holdinghands", "figure.2", "heart.fill"]
+        case .pet: ["pawprint.fill", "dog.fill", "cat.fill", "bird.fill", "fish.fill", "hare.fill", "tortoise.fill", "lizard.fill"]
+        }
+    }
 }
 
 extension DoseStatus {

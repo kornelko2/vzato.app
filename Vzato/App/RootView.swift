@@ -10,6 +10,7 @@ struct RootView: View {
     @AppStorage(AppSettings.appearanceKey) private var appearance = Appearance.system
     @AppStorage(AppSettings.onboardingCompletedKey) private var onboardingCompleted = false
     @Environment(\.managedObjectContext) private var context
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Profile.createdAt)]) private var profiles: FetchedResults<Profile>
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var sizeClass
     #endif
@@ -36,8 +37,10 @@ struct RootView: View {
         #else
         .onChange(of: appearance) { _, value in value.apply() }
         #endif
+        .environment(\.showsProfiles, profiles.count > 1)
         .sheet(isPresented: $state.showingNewMedication) {
-            MedicationFormView(medication: nil)
+            MedicationFormView(medication: nil, profile: profiles.first { $0.id == state.profileFilter })
+                .environment(\.showsProfiles, profiles.count > 1)
         }
         .sheet(isPresented: $state.showingExtraDose) {
             ExtraDoseView()
@@ -90,7 +93,7 @@ struct RootView: View {
     private var sidebarLayout: some View {
         @Bindable var state = state
         return NavigationSplitView {
-            List(AppTab.visible, selection: Binding(get: { Optional(state.section) }, set: { state.section = $0 ?? .today })) { tab in
+            List(AppTab.sidebar, selection: Binding(get: { Optional(state.section) }, set: { state.section = $0 ?? .today })) { tab in
                 Label(tab.label, systemImage: tab.symbolName)
                     .tag(tab)
             }
@@ -120,6 +123,7 @@ struct RootView: View {
         case .today: TodayView()
         case .history: HistoryView()
         case .medications: MedicationsView()
+        case .database: MedicineDatabaseView()
         case .settings: SettingsView()
         }
     }

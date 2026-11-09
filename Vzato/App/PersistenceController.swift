@@ -69,7 +69,8 @@ final class PersistenceController {
             description.url = shared
         }
         // The widget reads and writes the same file but never talks to CloudKit itself.
-        isCloudKitEnabled = !inMemory && !scratch && Self.isCloudKitBuild && !AppSettings.isAppExtension
+        isCloudKitEnabled = !inMemory && (!scratch || LaunchArguments.initsCloudKitSchema)
+            && Self.isCloudKitBuild && !AppSettings.isAppExtension
         if isCloudKitEnabled {
             description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: Self.cloudKitContainerIdentifier)
         } else {
@@ -99,8 +100,17 @@ final class PersistenceController {
         }
         #if DEBUG
         // `--init-cloudkit-schema` pushes the model to the CloudKit development environment once.
-        if isCloudKitEnabled, CommandLine.arguments.contains("--init-cloudkit-schema") {
-            do { try container.initializeCloudKitSchema(options: []) } catch { print("CloudKit schema: \(error)") }
+        if isCloudKitEnabled, LaunchArguments.initsCloudKitSchema {
+            // Off the main thread: CloudKit's setup needs the main thread while this call waits.
+            let container = container
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    try container.initializeCloudKitSchema(options: [])
+                    NSLog("CloudKit schema: uploaded to the development environment")
+                } catch {
+                    NSLog("CloudKit schema: %@", String(describing: error))
+                }
+            }
         }
         #endif
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -202,7 +212,7 @@ enum SampleData {
     /// Demo content for simulator screenshots and previews. Times are relative to now so the Today
     /// screen always shows one taken dose, one overdue dose and upcoming ones.
     @MainActor
-    static func populate(in context: NSManagedObjectContext, now: Date = Date()) {
+    static func populate(in context: NSManagedObjectContext, now: Date = Date(), withProfiles: Bool = false) {
         let calendar = Calendar.current
         let profileRequest = Profile.fetchRequest()
         profileRequest.predicate = NSPredicate(format: "isDefault == YES")
@@ -264,6 +274,20 @@ enum SampleData {
                 event.status = .taken
                 event.takenAt = scheduled.addingTimeInterval(120)
                 event.medication = medication
+            }
+        }
+        if withProfiles {
+            // A dog with a monthly deworming tablet that is due today.
+            let dog = Profile(context: context)
+            dog.name = "Mentík"
+            dog.kind = .pet
+            dog.symbolName = "dog.fill"
+            dog.colorHex = "8E5A3C"
+            let milbemax = make("Milbemax", "", "2E8B57", times: [clamp(minutesNow + 30)])
+            milbemax.profile = dog
+            if let schedule = milbemax.allSchedules.first {
+                schedule.repeatKind = .months
+                schedule.startDate = calendar.date(byAdding: .month, value: -2, to: calendar.startOfDay(for: now))
             }
         }
         try? context.save()

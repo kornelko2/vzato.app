@@ -30,7 +30,8 @@ struct VzatoApp: App {
             let request = Medication.fetchRequest()
             request.fetchLimit = 1
             if (try? persistence.viewContext.count(for: request)) == 0 {
-                SampleData.populate(in: persistence.viewContext)
+                SampleData.populate(in: persistence.viewContext,
+                                    withProfiles: CommandLine.arguments.contains("--sample-profiles"))
             }
         }
         #endif
@@ -88,7 +89,7 @@ struct VzatoApp: App {
                     .keyboardShortcut("n", modifiers: [.command, .shift])
             }
             CommandMenu(Text("Go")) {
-                ForEach(Array(AppTab.visible.enumerated()), id: \.element) { index, tab in
+                ForEach(Array(AppTab.sidebar.enumerated()), id: \.element) { index, tab in
                     Button { state.section = tab } label: { Text(tab.label) }
                         .keyboardShortcut(KeyEquivalent(Character(String(index + 1))), modifiers: .command)
                 }

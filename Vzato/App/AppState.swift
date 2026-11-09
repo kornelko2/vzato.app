@@ -6,7 +6,7 @@ import Observation
 import SwiftUI
 
 enum AppTab: String, CaseIterable, Hashable, Identifiable {
-    case today, history, medications, settings
+    case today, history, medications, database, settings
     var id: String { rawValue }
 
     var label: LocalizedStringResource {
@@ -14,6 +14,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable {
         case .today: "Today"
         case .history: "History"
         case .medications: "Medications"
+        case .database: "Medicines database"
         case .settings: "Settings"
         }
     }
@@ -23,6 +24,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable {
         case .today: "sun.max"
         case .history: "calendar"
         case .medications: "pills"
+        case .database: "books.vertical"
         case .settings: "gear"
         }
     }
@@ -32,8 +34,14 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable {
         #if os(macOS)
         return [.today, .history, .medications]
         #else
-        return allCases
+        return [.today, .history, .medications, .settings]
         #endif
+    }
+
+    /// The sidebar on the iPad and the Mac also lists the medicines database; on the iPhone it is
+    /// the search in Medications, without an extra tab.
+    static var sidebar: [AppTab] {
+        visible.flatMap { $0 == .medications ? [.medications, .database] : [$0] }
     }
 }
 
@@ -45,4 +53,6 @@ final class AppState {
     var showingNewMedication = false
     var showingExtraDose = false
     var showingOnboarding = false
+    /// Today and History show one profile's doses when set, everyone's when nil.
+    var profileFilter: UUID?
 }

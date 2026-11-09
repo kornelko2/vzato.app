@@ -11,6 +11,13 @@ struct MedicationFormView: View {
     @Environment(\.dismiss) private var dismiss
 
     let medication: Medication?
+    /// Picked in the medicines database: fills name, strength and unit, and keeps the code for the leaflet.
+    private let entry: MedicineEntry?
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Profile.createdAt)]) private var profiles: FetchedResults<Profile>
+    @State private var profile: Profile?
+    @State private var repeatKind = RepeatKind.weekdays
+    @State private var repeatInterval = 1
 
     @State private var name = ""
     @State private var dosageText = ""
@@ -37,8 +44,15 @@ struct MedicationFormView: View {
         var minutes: Int
     }
 
-    init(medication: Medication?) {
+    init(medication: Medication?, profile: Profile? = nil, entry: MedicineEntry? = nil) {
         self.medication = medication
+        self.entry = entry
+        _profile = State(initialValue: medication?.profile ?? profile)
+        if medication == nil, let entry {
+            _name = State(initialValue: entry.displayName)
+            _dosageText = State(initialValue: entry.dosageText)
+            _unitKind = State(initialValue: entry.unit)
+        }
         guard let medication else { return }
         _name = State(initialValue: medication.name)
         _dosageText = State(initialValue: medication.dosageText)
@@ -51,6 +65,8 @@ struct MedicationFormView: View {
         _lowStockThreshold = State(initialValue: medication.lowStockThreshold)
         if let schedule = medication.allSchedules.first {
             _weekdays = State(initialValue: Set(schedule.weekdays))
+            _repeatKind = State(initialValue: schedule.repeatKind)
+            _repeatInterval = State(initialValue: schedule.repeatInterval)
             _times = State(initialValue: schedule.minutesOfDay.sorted().map { TimeEntry(minutes: $0) })
             _mealRelation = State(initialValue: schedule.mealRelation)
             _mealWaitMinutes = State(initialValue: max(15, schedule.mealWaitMinutes))
@@ -61,7 +77,7 @@ struct MedicationFormView: View {
     }
 
     private var canSave: Bool {
-        !name.trimmingCharacters(in: .whitespaces).isEmpty && !weekdays.isEmpty && !times.isEmpty
+        !name.trimmingCharacters(in: .whitespaces).isEmpty && (repeatKind != .weekdays || !weekdays.isEmpty) && !times.isEmpty
             && (!tracksStock || stockCount != nil)
     }
 
@@ -74,10 +90,32 @@ struct MedicationFormView: View {
                     TextField("Dose, e.g. 400 mg", text: $dosageText)
                     colorPicker
                     TextField("Notes", text: $notes, axis: .vertical)
+                    if profiles.count > 1 {
+                        Picker("For", selection: $profile) {
+                            ForEach(profiles) { profile in
+                                Label { Text(profile.name) } icon: { Image(systemName: profile.symbol) }
+                                    .tag(Optional(profile))
+                            }
+                        }
+                        .accessibilityIdentifier("profile")
+                    }
                 }
 
-                Section("Schedule") {
-                    weekdayPicker
+                Section {
+                    Picker("Repeat", selection: $repeatKind) {
+                        ForEach(RepeatKind.allCases) { kind in
+                            Text(kind.label).tag(kind)
+                        }
+                    }
+                    .accessibilityIdentifier("repeatKind")
+                    if repeatKind == .weekdays {
+                        weekdayPicker
+                    } else {
+                        Stepper(value: $repeatInterval, in: 1...(repeatKind == .days ? 90 : repeatKind == .weeks ? 52 : 24)) {
+                            Text(repeatPreview.description)
+                        }
+                        .accessibilityIdentifier("repeatInterval")
+                    }
                     ForEach($times) { $entry in
                         DatePicker("Time", selection: binding(for: $entry), displayedComponents: .hourAndMinute)
                     }
@@ -102,6 +140,18 @@ struct MedicationFormView: View {
                     Toggle("End date", isOn: $hasEndDate)
                     if hasEndDate {
                         DatePicker("End", selection: $endDate, in: startDate..., displayedComponents: .date)
+                    }
+                    if repeatKind != .weekdays {
+                        LabeledContent("Next doses") {
+                            Text(repeatPreview.nextDays.map { $0.formatted(.dateTime.day().month()) }.joined(separator: ", "))
+                        }
+                        .accessibilityIdentifier("nextDoses")
+                    }
+                } header: {
+                    Text("Schedule")
+                } footer: {
+                    if repeatKind != .weekdays {
+                        Text("Counted from the start date. For every month, the dose stays on the same day of the month; in shorter months on the last day.")
                     }
                 }
 
@@ -177,6 +227,16 @@ struct MedicationFormView: View {
         .padding(.vertical, 4)
     }
 
+    /// The repeat rule as typed so far, for the stepper label and the next three dates.
+    private var repeatPreview: (description: String, nextDays: [Date]) {
+        let start = calendar.startOfDay(for: startDate)
+        let description = Schedule.describe(kind: repeatKind, interval: repeatInterval, weekdays: Array(weekdays), calendar: calendar)
+        let days = Schedule.occurrenceDays(kind: repeatKind, interval: repeatInterval, weekdays: Array(weekdays), start: start,
+                                           end: hasEndDate ? endDate : nil, from: max(start, calendar.startOfDay(for: Date())),
+                                           limit: 3, horizonDays: 800, calendar: calendar)
+        return (description, days)
+    }
+
     private var weekdayOrder: [Int] {
         (0..<7).map { (calendar.firstWeekday - 1 + $0) % 7 + 1 }
     }
@@ -220,7 +280,13 @@ struct MedicationFormView: View {
         target.dosageText = dosageText.trimmingCharacters(in: .whitespaces)
         target.notes = notes
         target.colorHex = colorHex
-        if target.profile == nil {
+        if let entry {
+            target.registryCode = entry.code
+            target.registrySourceRaw = entry.source.rawValue
+        }
+        if let profile {
+            target.profile = profile
+        } else if target.profile == nil {
             target.profile = PersistenceController.shared.ensureDefaultProfile()
         }
 
@@ -230,6 +296,8 @@ struct MedicationFormView: View {
             return schedule
         }()
         schedule.weekdays = Array(weekdays)
+        schedule.repeatKind = repeatKind
+        schedule.repeatInterval = repeatInterval
         schedule.minutesOfDay = times.map(\.minutes)
         schedule.mealRelation = mealRelation
         schedule.mealWaitMinutes = mealWaitMinutes

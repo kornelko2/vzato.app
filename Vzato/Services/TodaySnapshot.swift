@@ -69,7 +69,7 @@ enum TodaySnapshot {
         WidgetDose(
             id: slot.id,
             medicationID: slot.medication.id,
-            name: slot.medication.name,
+            name: slot.medication.nameWithProfile,
             amount: slot.medication.doseAmountText,
             strength: slot.medication.dosageText,
             colorHex: slot.medication.colorHex,

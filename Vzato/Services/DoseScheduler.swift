@@ -55,8 +55,7 @@ enum DoseScheduler {
         let startOfDay = calendar.startOfDay(for: day)
         if let start = schedule.startDate, startOfDay < calendar.startOfDay(for: start) { return [] }
         if let end = schedule.endDate, startOfDay > calendar.startOfDay(for: end) { return [] }
-        let weekday = calendar.component(.weekday, from: startOfDay)
-        guard schedule.weekdays.contains(weekday) else { return [] }
+        guard schedule.occurs(on: startOfDay, calendar: calendar) else { return [] }
         return schedule.minutesOfDay.sorted().compactMap { minutes in
             calendar.date(bySettingHour: minutes / 60, minute: minutes % 60, second: 0, of: startOfDay)
         }

@@ -7,6 +7,12 @@ import SwiftUI
 
 /// "Summary for the doctor": one screen to show in the surgery, and the same content as an A4 PDF.
 struct DoctorSummaryView: View {
+    @Environment(AppState.self) private var state
+    @Environment(\.showsProfiles) private var showsProfiles
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Profile.createdAt)]) private var profiles: FetchedResults<Profile>
+
+    /// The profile chosen on Today or here, or everyone.
+    private var shown: [Medication] { medications.of(profile: showsProfiles ? state.profileFilter : nil) }
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)])
     private var medications: FetchedResults<Medication>
     // Observed so the summary updates when doses change.
@@ -19,8 +25,12 @@ struct DoctorSummaryView: View {
 
     private var summary: DoctorSummary {
         _ = events.count
-        return DoctorSummaryBuilder.build(medications: Array(medications), days: days,
-                                          grace: TimeInterval(missedAfterMinutes * 60))
+        var summary = DoctorSummaryBuilder.build(medications: shown, days: days,
+                                                 grace: TimeInterval(missedAfterMinutes * 60))
+        if showsProfiles, let id = state.profileFilter {
+            summary.profileName = profiles.first { $0.id == id }?.name
+        }
+        return summary
     }
 
     var body: some View {
@@ -67,6 +77,9 @@ struct DoctorSummaryContent: View {
                     Text(verbatim: "Vzato").font(.title.weight(.heavy)).foregroundStyle(Palette.taken)
                     Text("Summary for the doctor").font(.title2.weight(.semibold))
                 }
+            }
+            if let name = summary.profileName {
+                Text(name).font(.title3.weight(.bold))
             }
             HStack(spacing: 6) {
                 Text(summary.start, format: .dateTime.day().month().year())
@@ -177,13 +190,7 @@ private struct MedicationSummaryCard: View {
             calendar.date(bySettingHour: minutes / 60, minute: minutes % 60, second: 0, of: Date())?
                 .formatted(date: .omitted, time: .shortened)
         }.joined(separator: ", ")
-        let days: String
-        if Set(row.weekdays).count == 7 {
-            days = String(localized: "Every day")
-        } else {
-            let order = (0..<7).map { (calendar.firstWeekday - 1 + $0) % 7 + 1 }
-            days = order.filter { row.weekdays.contains($0) }.map { calendar.shortStandaloneWeekdaySymbols[$0 - 1] }.joined(separator: ", ")
-        }
+        let days = row.repeatText
         var parts = [row.amountPerDose]
         if !times.isEmpty { parts.append(times) }
         if !days.isEmpty { parts.append(days) }

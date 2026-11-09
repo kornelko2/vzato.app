@@ -6,6 +6,7 @@ import SwiftUI
 
 /// The large card at the top of Today: one dose, one big button.
 struct NextDoseCard: View {
+    @Environment(\.showsProfiles) private var showsProfiles
     let slot: DoseSlot
     let now: Date
     let grace: TimeInterval
@@ -57,6 +58,9 @@ struct NextDoseCard: View {
 
             HStack(alignment: .center, spacing: 14) {
                 VStack(alignment: .leading, spacing: 4) {
+                    if showsProfiles {
+                        ProfileBadge(profile: slot.medication.profile, font: .headline)
+                    }
                     Text(slot.medication.name)
                         .font(.system(size: 32, weight: .heavy))
                         .lineLimit(2)

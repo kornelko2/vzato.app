@@ -118,7 +118,20 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
                     var components = DateComponents()
                     components.hour = minutes / 60
                     components.minute = minutes % 60
-                    if schedule.isEveryDay {
+                    if schedule.repeatKind != .weekdays {
+                        // iOS cannot repeat "every third day" or "every month on the 31st": plan the
+                        // next dates one by one. The app replans on every launch and change.
+                        for day in Self.datedReminderDays(for: schedule, now: now) {
+                            if count >= Self.pendingLimit { limited = true; break outer }
+                            var dated = Calendar.current.dateComponents([.year, .month, .day], from: day)
+                            dated.hour = minutes / 60
+                            dated.minute = minutes % 60
+                            guard let fire = Calendar.current.date(from: dated), fire > now else { continue }
+                            add(id: Self.datedDoseID(medicationID: medication.id, day: day, minutes: minutes),
+                                content: content, components: dated, repeats: false)
+                            count += 1
+                        }
+                    } else if schedule.isEveryDay {
                         if count >= Self.pendingLimit { limited = true; break outer }
                         add(id: "dose|\(medication.id?.uuidString ?? "")|0|\(minutes)", content: content, components: components)
                         count += 1
@@ -223,14 +236,29 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         center.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
-    private func add(id: String, content: UNNotificationContent, components: DateComponents) {
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+    /// Days to plan one-off reminders for: the next few within a month, at least the next one.
+    static func datedReminderDays(for schedule: Schedule, now: Date, calendar: Calendar = .current) -> [Date] {
+        let days = schedule.occurrenceDays(from: now, limit: 8, calendar: calendar)
+        guard let monthAhead = calendar.date(byAdding: .day, value: 31, to: now) else { return Array(days.prefix(1)) }
+        let soon = days.filter { $0 <= monthAhead }
+        return soon.isEmpty ? Array(days.prefix(1)) : soon
+    }
+
+    /// `dose|<medicationID>|<yyyy-MM-dd>|<minutes>` for reminders planned on one date.
+    static func datedDoseID(medicationID: UUID?, day: Date, minutes: Int, calendar: Calendar = .current) -> String {
+        let c = calendar.dateComponents([.year, .month, .day], from: day)
+        let date = String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)
+        return "dose|\(medicationID?.uuidString ?? "")|\(date)|\(minutes)"
+    }
+
+    private func add(id: String, content: UNNotificationContent, components: DateComponents, repeats: Bool = true) {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: repeats)
         center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger)) { _ in }
     }
 
     private func doseContent(for medication: Medication, minutesOfDay: Int) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = medication.name
+        content.title = medication.nameWithProfile
         content.body = medication.dosageText.isEmpty
             ? String(localized: "Time to take \(medication.doseAmountText).")
             : String(localized: "Time to take \(medication.doseAmountText) (\(medication.dosageText)).")

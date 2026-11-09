@@ -32,14 +32,17 @@ final class TestStore {
 
     @discardableResult
     func medication(name: String = "Ibuprofen", times: [Int] = [8 * 60, 20 * 60], weekdays: [Int] = Array(1...7),
-                    start: Date = monday, end: Date? = nil, stock: Double? = nil, unitsPerDose: Double = 1) -> Medication {
+                    start: Date = monday, end: Date? = nil, stock: Double? = nil, unitsPerDose: Double = 1,
+                    repeat repeatKind: RepeatKind = .weekdays, every interval: Int = 1, profile: Profile? = nil) -> Medication {
         let medication = Medication(context: context)
         medication.name = name
-        medication.profile = controller.ensureDefaultProfile()
+        medication.profile = profile ?? controller.ensureDefaultProfile()
         medication.createdAt = start
         let schedule = Schedule(context: context)
         schedule.minutesOfDay = times
         schedule.weekdays = weekdays
+        schedule.repeatKind = repeatKind
+        schedule.repeatInterval = interval
         schedule.startDate = start
         schedule.endDate = end
         schedule.medication = medication

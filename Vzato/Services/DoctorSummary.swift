@@ -12,7 +12,8 @@ struct DoctorSummary {
         let name: String
         let strength: String
         let amountPerDose: String
-        let weekdays: [Int]
+        /// "Every day", "Mon, Thu", "Every month".
+        let repeatText: String
         let minutesOfDay: [Int]
         let mealRelation: MealRelation
         let scheduled: Int
@@ -41,6 +42,8 @@ struct DoctorSummary {
     let generatedAt: Date
     let rows: [Row]
     let missed: [MissedDose]
+    /// Whose summary it is, when there are several profiles and one is chosen.
+    var profileName: String?
 
     var totalTaken: Int { rows.reduce(0) { $0 + $1.taken } }
     var totalMissed: Int { rows.reduce(0) { $0 + $1.missed } }
@@ -84,7 +87,7 @@ enum DoctorSummaryBuilder {
                 name: medication.name,
                 strength: medication.dosageText,
                 amountPerDose: medication.doseAmountText,
-                weekdays: schedule?.weekdays ?? [],
+                repeatText: schedule?.repeatDescription(calendar: calendar) ?? "",
                 minutesOfDay: (schedule?.minutesOfDay ?? []).sorted(),
                 mealRelation: schedule?.mealRelation ?? .any,
                 scheduled: planned.count,

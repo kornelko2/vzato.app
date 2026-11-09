@@ -907,6 +907,106 @@
         }
       }
     },
+    "%lld medications": {
+      "localizations": {
+        "cs": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld léky"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld léků"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld lék"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld léků"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld medication"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld medications"
+                }
+              }
+            }
+          }
+        },
+        "hu": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld gyógyszer"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld gyógyszer"
+                }
+              }
+            }
+          }
+        },
+        "sk": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld lieky"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld liekov"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld liek"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld liekov"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld min": {
       "localizations": {
         "cs": {
@@ -1749,6 +1849,28 @@
         }
       }
     },
+    "Add": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidat"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hozzáadás"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridať"
+          }
+        }
+      }
+    },
     "Add a medication": {
       "localizations": {
         "cs": {
@@ -1815,6 +1937,28 @@
         }
       }
     },
+    "Add profile": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidat profil"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil hozzáadása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridať profil"
+          }
+        }
+      }
+    },
     "Add time": {
       "localizations": {
         "cs": {
@@ -1833,6 +1977,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pridať čas"
+          }
+        }
+      }
+    },
+    "Add your children or your animals, for example a dog that gets a deworming tablet once a month. Today then shows whose dose it is, and you can show one profile at a time.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přidejte své děti nebo zvířata, třeba psa, který jednou za měsíc dostává tabletu na odčervení. Obrazovka Dnes pak ukazuje, čí je dávka, a můžete zobrazit jen jeden profil."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adja hozzá gyermekeit vagy állatait, például egy kutyát, amely havonta egyszer féreghajtó tablettát kap. A Ma képernyő ezután mutatja, kié az adag, és egyszerre egy profilt is megjeleníthet."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pridajte svoje deti alebo zvieratá, napríklad psa, ktorý raz za mesiac dostáva tabletu na odčervenie. Obrazovka Dnes potom ukazuje, čia je dávka, a môžete zobraziť len jeden profil."
           }
         }
       }
@@ -2053,6 +2219,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Množstvo, ktoré máte doma"
+          }
+        }
+      }
+    },
+    "Animal": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvíře"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Állat"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zviera"
           }
         }
       }
@@ -2431,6 +2619,28 @@
         }
       }
     },
+    "Children and animals": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Děti a zvířata"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyermekek és állatok"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deti a zvieratá"
+          }
+        }
+      }
+    },
     "Chime": {
       "localizations": {
         "cs": {
@@ -2519,6 +2729,28 @@
         }
       }
     },
+    "Could not connect. Check the internet connection and try again.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nepodařilo se připojit. Zkontrolujte internet a zkuste to znovu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nem sikerült csatlakozni. Ellenőrizze az internetkapcsolatot, és próbálja újra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nepodarilo sa pripojiť. Skontrolujte internet a skúste to znova."
+          }
+        }
+      }
+    },
     "Could not read the image.": {
       "localizations": {
         "cs": {
@@ -2603,6 +2835,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spočítané %@, podľa záznamov malo byť %@."
+          }
+        }
+      }
+    },
+    "Counted from the start date. For every month, the dose stays on the same day of the month; in shorter months on the last day.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Počítá se od data začátku. U měsíčního opakování zůstává dávka ve stejný den v měsíci, v kratších měsících poslední den."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kezdő naptól számítva. Havi ismétlésnél az adag a hónap ugyanazon napjára esik, rövidebb hónapokban az utolsó napra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Počíta sa od dátumu začiatku. Pri mesačnom opakovaní zostáva dávka v rovnaký deň v mesiaci, v kratších mesiacoch posledný deň."
           }
         }
       }
@@ -2761,6 +3015,28 @@
         }
       }
     },
+    "Delete profile": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smazat profil"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil törlése"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať profil"
+          }
+        }
+      }
+    },
     "Delete this medication and its history?": {
       "localizations": {
         "cs": {
@@ -2779,6 +3055,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vymazať tento liek a jeho históriu?"
+          }
+        }
+      }
+    },
+    "Delete this profile?": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smazat tento profil?"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Törli ezt a profilt?"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vymazať tento profil?"
           }
         }
       }
@@ -3003,6 +3301,72 @@
         }
       }
     },
+    "Download again": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stáhnout znovu"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letöltés újra"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stiahnuť znova"
+          }
+        }
+      }
+    },
+    "Download package leaflet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stáhnout příbalový leták"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betegtájékoztató letöltése"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stiahnuť písomnú informáciu"
+          }
+        }
+      }
+    },
+    "Downloads the official leaflet from SÚKL. Only the medicine code is sent. The leaflet is kept with the medication.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stáhne oficiální příbalový leták ze SÚKL. Odešle se jen kód léku. Leták zůstane uložený u léku."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letölti a hivatalos betegtájékoztatót a SÚKL-tól. Csak a gyógyszer kódja kerül elküldésre. A tájékoztató a gyógyszernél marad."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stiahne oficiálnu písomnú informáciu zo SÚKL. Odošle sa len kód lieku. Informácia zostane uložená pri lieku."
+          }
+        }
+      }
+    },
     "Droplets": {
       "localizations": {
         "cs": {
@@ -3157,6 +3521,28 @@
         }
       }
     },
+    "Edit profile": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upravit profil"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil szerkesztése"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upraviť profil"
+          }
+        }
+      }
+    },
     "End": {
       "localizations": {
         "cs": {
@@ -3201,6 +3587,28 @@
         }
       }
     },
+    "Enter a name, choose Person or Animal and an icon.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadejte jméno, zvolte Člověk nebo Zvíře a ikonu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adjon meg egy nevet, válassza a Személy vagy Állat lehetőséget és egy ikont."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadajte meno, zvoľte Človek alebo Zviera a ikonu."
+          }
+        }
+      }
+    },
     "Enter the number of units to start tracking this medication's supply.": {
       "localizations": {
         "cs": {
@@ -3241,6 +3649,306 @@
           "stringUnit": {
             "state": "translated",
             "value": "Večer"
+          }
+        }
+      }
+    },
+    "Every %lld days": {
+      "localizations": {
+        "cs": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každé %lld dny"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld dní"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každý %lld den"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld dní"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Every %lld day"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Every %lld days"
+                }
+              }
+            }
+          }
+        },
+        "hu": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld naponta"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld naponta"
+                }
+              }
+            }
+          }
+        },
+        "sk": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každé %lld dni"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld dní"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každý %lld deň"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld dní"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Every %lld months": {
+      "localizations": {
+        "cs": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každé %lld měsíce"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld měsíců"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každý %lld měsíc"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld měsíců"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Every %lld month"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Every %lld months"
+                }
+              }
+            }
+          }
+        },
+        "hu": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld havonta"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld havonta"
+                }
+              }
+            }
+          }
+        },
+        "sk": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každé %lld mesiace"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld mesiacov"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každý %lld mesiac"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld mesiacov"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Every %lld weeks": {
+      "localizations": {
+        "cs": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každé %lld týdny"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld týdnů"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každý %lld týden"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld týdnů"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Every %lld week"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Every %lld weeks"
+                }
+              }
+            }
+          }
+        },
+        "hu": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld hetente"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld hetente"
+                }
+              }
+            }
+          }
+        },
+        "sk": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každé %lld týždne"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld týždňov"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každý %lld týždeň"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Každých %lld týždňov"
+                }
+              }
+            }
           }
         }
       }
@@ -3355,6 +4063,94 @@
         }
       }
     },
+    "Every few days": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po několika dnech"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Néhány naponta"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po niekoľkých dňoch"
+          }
+        }
+      }
+    },
+    "Every few months": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po několika měsících"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Néhány havonta"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po niekoľkých mesiacoch"
+          }
+        }
+      }
+    },
+    "Every few weeks": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po několika týdnech"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Néhány hetente"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po niekoľkých týždňoch"
+          }
+        }
+      }
+    },
+    "Every month": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý měsíc"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Havonta"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý mesiac"
+          }
+        }
+      }
+    },
     "Every scheduled dose is recorded.": {
       "localizations": {
         "cs": {
@@ -3395,6 +4191,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Každá vzatá, preskočená alebo opravená dávka sa tu zaznamená aj so zariadením, z ktorého prišla. Záznamy sa nikdy nemenia."
+          }
+        }
+      }
+    },
+    "Every week": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý týden"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hetente"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý týždeň"
+          }
+        }
+      }
+    },
+    "Everyone": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všichni"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mindenki"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všetci"
           }
         }
       }
@@ -3509,6 +4349,28 @@
         }
       }
     },
+    "Find a medicine in the database": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najít lék v databázi"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer keresése az adatbázisban"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nájsť liek v databáze"
+          }
+        }
+      }
+    },
     "Flute": {
       "localizations": {
         "cs": {
@@ -3527,6 +4389,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Flauta"
+          }
+        }
+      }
+    },
+    "For": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kinek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pre"
+          }
+        }
+      }
+    },
+    "For Czech medicines, the medication's page can download the official package leaflet from SÚKL.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "U českých léků můžete na stránce léku stáhnout oficiální příbalový leták ze SÚKL."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cseh gyógyszereknél a gyógyszer oldalán letölthető a hivatalos betegtájékoztató a SÚKL-tól."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pri českých liekoch môžete na stránke lieku stiahnuť oficiálnu písomnú informáciu zo SÚKL."
           }
         }
       }
@@ -3861,6 +4767,28 @@
         }
       }
     },
+    "Icon": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikon"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona"
+          }
+        }
+      }
+    },
     "If Today shows Reminders are off, tap Allow notifications or Open settings.": {
       "localizations": {
         "cs": {
@@ -3949,6 +4877,28 @@
         }
       }
     },
+    "In Medications, type the name in the search field at the top.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V záložce Léky napište název do vyhledávacího pole nahoře."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Gyógyszerek lapon írja be a nevet a fenti keresőmezőbe."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V záložke Lieky napíšte názov do vyhľadávacieho poľa hore."
+          }
+        }
+      }
+    },
     "In Settings › Sounds you can choose a different sound.": {
       "localizations": {
         "cs": {
@@ -3967,6 +4917,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "V Nastaveniach › Zvuky môžete vybrať iný zvuk."
+          }
+        }
+      }
+    },
+    "In the medication form, under Schedule, choose Repeat.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ve formuláři léku v části Plán zvolte Opakovat."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A gyógyszer űrlapján az Ütemezés részben válassza az Ismétlés lehetőséget."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vo formulári lieku v časti Plán zvoľte Opakovať."
           }
         }
       }
@@ -4011,6 +4983,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ponechané: %@, odstránené: %@."
+          }
+        }
+      }
+    },
+    "Kind": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Druh"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fajta"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Druh"
           }
         }
       }
@@ -4121,6 +5115,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Príbalový leták"
+          }
+        }
+      }
+    },
+    "Leaflet on sukl.sk": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leták na sukl.sk"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tájékoztató a sukl.sk oldalon"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Písomná informácia na sukl.sk"
           }
         }
       }
@@ -4477,6 +5493,28 @@
         }
       }
     },
+    "Medications for your children or animals.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Léky pro vaše děti nebo zvířata."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszerek a gyermekeinek vagy az állatainak."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieky pre vaše deti alebo zvieratá."
+          }
+        }
+      }
+    },
     "Medications shows how much is left and by when to get more.": {
       "localizations": {
         "cs": {
@@ -4517,6 +5555,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lieky, plán, dodržiavanie a zmeškané dávky za 7, 30 alebo 90 dní, ako PDF na odoslanie alebo tlač."
+          }
+        }
+      }
+    },
+    "Medicine name": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Název léku"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer neve"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Názov lieku"
+          }
+        }
+      }
+    },
+    "Medicines database": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Databáze léčiv"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer-adatbázis"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Databáza liekov"
           }
         }
       }
@@ -4653,6 +5735,50 @@
         }
       }
     },
+    "Move this profile's medications to another profile or delete them first.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nejdřív léky tohoto profilu přesuňte k jinému profilu nebo je smažte."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Előbb helyezze át a profil gyógyszereit egy másik profilhoz, vagy törölje őket."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najprv lieky tohto profilu presuňte k inému profilu alebo ich vymažte."
+          }
+        }
+      }
+    },
+    "My medications": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moje léky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saját gyógyszereim"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moje lieky"
+          }
+        }
+      }
+    },
     "Name": {
       "localizations": {
         "cs": {
@@ -4693,6 +5819,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nový liek"
+          }
+        }
+      }
+    },
+    "New profile": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nový profil"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Új profil"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nový profil"
           }
         }
       }
@@ -4781,6 +5929,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ďalšia dávka o %@"
+          }
+        }
+      }
+    },
+    "Next doses": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Další dávky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Következő adagok"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ďalšie dávky"
           }
         }
       }
@@ -5137,6 +6307,50 @@
         }
       }
     },
+    "Nothing found in the database. You can still add the medication by hand.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V databázi nic nenalezeno. Lék můžete přidat i ručně."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adatbázisban nincs találat. A gyógyszert kézzel is hozzáadhatja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V databáze sa nič nenašlo. Liek môžete pridať aj ručne."
+          }
+        }
+      }
+    },
+    "Nothing found. You can still add the medication by hand.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nic nenalezeno. Lék můžete přidat i ručně."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nincs találat. A gyógyszert kézzel is hozzáadhatja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nič sa nenašlo. Liek môžete pridať aj ručne."
+          }
+        }
+      }
+    },
     "Nothing is scheduled for today.": {
       "localizations": {
         "cs": {
@@ -5269,6 +6483,28 @@
         }
       }
     },
+    "On chosen days": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vybrané dny v týdnu"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hét kiválasztott napjain"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vybrané dni v týždni"
+          }
+        }
+      }
+    },
     "On the next screen the system asks. Tap Allow.": {
       "localizations": {
         "cs": {
@@ -5287,6 +6523,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Na ďalšej obrazovke sa systém opýta. Ťuknite na Povoliť."
+          }
+        }
+      }
+    },
+    "Once a month or every other day": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jednou za měsíc nebo obden"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Havonta egyszer vagy minden másnap"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raz za mesiac alebo každý druhý deň"
           }
         }
       }
@@ -5331,6 +6589,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otvorte Lieky a ťuknite na Pridať liek."
+          }
+        }
+      }
+    },
+    "Open Settings › Profiles and tap Add profile.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřete Nastavení › Profily a klepněte na Přidat profil."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyissa meg a Beállítások › Profilok menüt, és koppintson a Profil hozzáadása gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorte Nastavenia › Profily a ťuknite na Pridať profil."
+          }
+        }
+      }
+    },
+    "Open package leaflet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřít příbalový leták"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betegtájékoztató megnyitása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvoriť písomnú informáciu"
           }
         }
       }
@@ -5401,6 +6703,28 @@
         }
       }
     },
+    "Opens the medicine on the ŠÚKL website, where you can open its leaflet.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevře lék na webu ŠÚKL, kde najdete jeho příbalový leták."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megnyitja a gyógyszert a ŠÚKL weboldalán, ahol megtalálja a betegtájékoztatót."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorí liek na webe ŠÚKL, kde nájdete jeho písomnú informáciu."
+          }
+        }
+      }
+    },
     "Organizer": {
       "localizations": {
         "cs": {
@@ -5463,6 +6787,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Škatuľka"
+          }
+        }
+      }
+    },
+    "Package leaflet": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Příbalový leták"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betegtájékoztató"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Písomná informácia pre používateľa"
+          }
+        }
+      }
+    },
+    "Packs: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balení: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiszerelés: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balenia: %@"
           }
         }
       }
@@ -5555,6 +6923,28 @@
         }
       }
     },
+    "Person": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Člověk"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Személy"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Človek"
+          }
+        }
+      }
+    },
     "Photo": {
       "localizations": {
         "cs": {
@@ -5617,6 +7007,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fotografie"
+          }
+        }
+      }
+    },
+    "Pick every few days, weeks or months and set the number with + and −.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyberte po několika dnech, týdnech nebo měsících a počet nastavte tlačítky + a −."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Válassza a néhány naponta, hetente vagy havonta lehetőséget, és a számot a + és − gombbal állítsa be."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vyberte po niekoľkých dňoch, týždňoch alebo mesiacoch a počet nastavte tlačidlami + a −."
           }
         }
       }
@@ -5749,6 +7161,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Predtým: %@."
+          }
+        }
+      }
+    },
+    "Profiles": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profily"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profilok"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profily"
           }
         }
       }
@@ -5991,6 +7425,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pripomienky sú vypnuté"
+          }
+        }
+      }
+    },
+    "Repeat": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opakovat"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ismétlés"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opakovať"
           }
         }
       }
@@ -6633,6 +8089,28 @@
         }
       }
     },
+    "Source: SÚKL and ŠÚKL open data, as of %@. The list only helps to fill in the name and does not recommend any medicine.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdroj: otevřená data SÚKL a ŠÚKL, stav k %@. Seznam jen pomáhá vyplnit název a žádný lék nedoporučuje."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forrás: a SÚKL és a ŠÚKL nyílt adatai, %@ állapot szerint. A lista csak a név kitöltését segíti, és nem ajánl gyógyszert."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdroj: otvorené dáta ŠÚKL a SÚKL, stav k %@. Zoznam len pomáha vyplniť názov a žiadny liek neodporúča."
+          }
+        }
+      }
+    },
     "Start": {
       "localizations": {
         "cs": {
@@ -6959,6 +8437,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zvuk systému"
+          }
+        }
+      }
+    },
+    "SÚKL did not send a leaflet. Try again later.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SÚKL leták neposlal. Zkuste to později."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A SÚKL nem küldött tájékoztatót. Próbálja később."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SÚKL písomnú informáciu neposlal. Skúste to neskôr."
+          }
+        }
+      }
+    },
+    "SÚKL has no leaflet for this medicine.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SÚKL k tomuto léku leták nemá."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A SÚKL-nál nincs tájékoztató ehhez a gyógyszerhez."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SÚKL k tomuto lieku písomnú informáciu nemá."
+          }
+        }
+      }
+    },
+    "SÚKL terms of use": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podmínky užití dat SÚKL"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A SÚKL felhasználási feltételei"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podmienky používania údajov SÚKL"
           }
         }
       }
@@ -7337,6 +8881,28 @@
         }
       }
     },
+    "The name, strength and unit are filled in. Add the times and tap Save.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Název, síla a jednotka se vyplní samy. Doplňte časy a klepněte na Uložit."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A név, a hatáserősség és az egység kitöltődik. Adja meg az időpontokat, és koppintson a Mentés gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Názov, sila a jednotka sa vyplnia samy. Doplňte časy a ťuknite na Uložiť."
+          }
+        }
+      }
+    },
     "The next dose on the Lock Screen.": {
       "localizations": {
         "cs": {
@@ -7355,6 +8921,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Najbližšia dávka na zamknutej obrazovke."
+          }
+        }
+      }
+    },
+    "The start date decides the days. Below you see the next three doses.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dny se počítají od data začátku. Níže uvidíte další tři dávky."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A napokat a kezdő dátumtól számítja. Lent látja a következő három adagot."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dni sa počítajú od dátumu začiatku. Nižšie uvidíte ďalšie tri dávky."
           }
         }
       }
@@ -7513,6 +9101,28 @@
         }
       }
     },
+    "Today shows whose dose it is. Tap a name at the top to show only that profile.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrazovka Dnes ukazuje, čí je dávka. Klepnutím na jméno nahoře zobrazíte jen tento profil."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Ma képernyő mutatja, kié az adag. Fent egy névre koppintva csak az a profil látszik."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrazovka Dnes ukazuje, čia je dávka. Ťuknutím na meno hore zobrazíte len tento profil."
+          }
+        }
+      }
+    },
     "Track supply": {
       "localizations": {
         "cs": {
@@ -7575,6 +9185,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dvojtón"
+          }
+        }
+      }
+    },
+    "Type the name of a medicine from the Czech or Slovak register, then tap Add.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napište název léku z českého nebo slovenského registru a klepněte na Přidat."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Írja be egy cseh vagy szlovák nyilvántartásban szereplő gyógyszer nevét, majd koppintson a Hozzáadás gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napíšte názov lieku z českého alebo slovenského registra a ťuknite na Pridať."
+          }
+        }
+      }
+    },
+    "Under Medicines database, tap the medicine with the right strength.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V části Databáze léčiv klepněte na lék se správnou silou."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Gyógyszer-adatbázis részben koppintson a megfelelő hatáserősségű gyógyszerre."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V časti Databáza liekov ťuknite na liek so správnou silou."
           }
         }
       }
@@ -7971,6 +9625,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Keď príde pripomienka"
+          }
+        }
+      }
+    },
+    "When adding a medication, choose whose it is under For.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Při přidání léku zvolte u položky Pro, čí lék je."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer hozzáadásakor a Kinek mezőben válassza ki, kié."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pri pridaní lieku zvoľte pri položke Pre, čí liek je."
           }
         }
       }
@@ -8389,6 +10065,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vaše úložisko iCloud je plné. Uvoľnite miesto alebo navýšte plán iCloud; synchronizácia potom pokračuje sama."
+          }
+        }
+      }
+    },
+    "Your medications and the database": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaše léky a databáze"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saját gyógyszerek és az adatbázis"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaše lieky a databáza"
           }
         }
       }

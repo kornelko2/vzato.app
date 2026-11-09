@@ -67,13 +67,18 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   (`startMergingExternalChanges`) and only the app talks to CloudKit. Never purge persistent history:
   CloudKit export depends on it.
 
-- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 5`) and
+- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 6`) and
   `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`. Arrays are stored as comma-separated
   strings (`weekdaysRaw`, `minutesRaw`); enums as raw strings with computed accessors.
 - `Vzato/Services` – logic without SwiftUI: `DoseScheduler` (expected doses per day,
   merged with recorded events), `DoseLogger` (the only place stock changes because of a
   dose), `StockService`, `ReconciliationService` (supply check), `NotificationService`,
   `CSVExport`, `DoseSummary`, `PhotoStore` (ImageIO only, no UIKit/AppKit).
+- `Vzato/Resources/Medicines.index` – offline register of Czech and Slovak medicines, rebuilt before a release with
+  `python3 Scripts/build-medicines-index.py` (SÚKL and ŠÚKL open data; SÚKL must stay credited in the app and README).
+  The only other network use besides Apple: the leaflet PDF from SÚKL on a tap (`LeafletService`).
+- `Vzato/Views/Profiles` (profiles, filter chips, `showsProfiles` environment) and `Vzato/Views/Medicines`
+  (database search, leaflet).
 - `Vzato/App/SyncMonitor.swift` – observes CloudKit container events (last success, last
   error) and reschedules notifications after remote changes. Entitlement variants live in
   `Config/{iOS,macOS}-{Local,CloudKit}.entitlements`, selected by `VZATO_ENTITLEMENTS_VARIANT`.
@@ -122,7 +127,7 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   decided by the user; do not change to "Vzal jsem").
 - Dates: always `Calendar` arithmetic and `Text(date, style:)` / `FormatStyle`; never
   manual seconds math or hard-coded formats.
-- Notification identifiers: `dose|<medicationID>|<weekday|0>|<minutes>`,
+- Notification identifiers: `dose|<medicationID>|<weekday|0>|<minutes>` (repeating), `dose|<medicationID>|<yyyy-MM-dd>|<minutes>` (one date, for every-N-days/weeks/months plans),
   `snooze|…`, `lowstock|<medicationID>`; iOS caps pending requests at 64.
 - Czech docs: keep the revision note at the top of `specification.md` current and mark
   decided open questions with strikethrough plus the decision.

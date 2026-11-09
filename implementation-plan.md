@@ -259,9 +259,13 @@ Podle specifikace, kapitola 10. CloudKit sdílení (CKShare) bez vlastního serv
 
 ### Volitelná fáze 11 – Databáze léčiv (jen pokud se rozhodne)
 
+**Stav 8. 11. 2026: hotovo pro lidské léky CZ a SK** (rozhodnutí 7. 11. 2026). `Scripts/build-medicines-index.py` stáhne DLP ze SÚKL a seznam ŠÚKL a uloží `Vzato/Resources/Medicines.index` (raw DEFLATE, ~0,9 MB); spustit před každým vydáním. `MedicineIndex` hledá offline, `MedicineSearch` v záložce Léky a v položce Databáze léčiv na iPadu a Macu, formulář se předvyplní (název, síla, jednotka, kód). `LeafletService` stáhne PIL ze SÚKL na klepnutí, u SK odkaz na sukl.sk. Veterinární léky ne (ÚSKVBL bez licence), EAN v datech není. Testy včetně UI testu stažení letáku (potřebuje internet).
+
 Podle specifikace, kapitola 11. Skript nad otevřenými daty SÚKL a ŠÚKL vytvoří offline index (název, síla, forma, balení, ATC, kód, EAN), formulář léku dostane našeptávač, detail léku tlačítko „Stáhnout příbalový leták“ (`/dlp/v1/dokumenty/{kod}/pil`). Bez serveru, síť jen na výslovnou akci.
 
 ### Volitelná fáze 12 – Více profilů (děti, domácí zvířata)
+
+**Stav 8. 11. 2026: hotovo** (model verze 6). Nastavení › Profily, výběr „Pro“ ve formuláři, štítky filtru v Dnes a Historii, jméno profilu u dávek, v připomínce a ve widgetu, souhrn pro lékaře a CSV podle profilu. Současně opakování po dnech, týdnech a měsících (`Schedule.repeatKind`, připomínky na konkrétní data).
 
 Podle specifikace, kapitola 12. Model už profil má; přibude správa profilů v Nastavení, výběr profilu ve formuláři léku, jméno a ikona v řádku dávky, ve velké kartě a v notifikaci, filtr v Dnes a Historii, export per profil. Odhad: menší než fáze 2.
 

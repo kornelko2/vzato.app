@@ -28,6 +28,21 @@ public final class Medication: NSManagedObject {
     @NSManaged public var photos: NSSet?
     /// Which photo the Today card shows: a `PhotoKind` raw value, or "none".
     @NSManaged public var shownPhotoKindRaw: String?
+    /// Code in the medicines database the medication was picked from (SÚKL, ŠÚKL, ÚSKVBL…), if any.
+    /// "Mentík · Milbemax" when there are several profiles, else just the name. For reminders and widgets.
+    var nameWithProfile: String {
+        guard let profile, Profile.several(in: managedObjectContext) else { return name }
+        return "\(profile.name) · \(name)"
+    }
+
+    @NSManaged public var registryCode: String?
+    /// Which database `registryCode` belongs to, e.g. "cz", "sk", "cz-vet".
+    @NSManaged public var registrySourceRaw: String?
+    /// The official package leaflet (PDF) downloaded from SÚKL on the person's request.
+    @NSManaged public var leafletData: Data?
+    @NSManaged public var leafletFetchedAt: Date?
+
+    var registrySource: MedicineSource? { registrySourceRaw.flatMap(MedicineSource.init(rawValue:)) }
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()

@@ -13,6 +13,7 @@ struct MedicationDetailView: View {
     @State private var editing = false
     @State private var checkingSupply = false
     @State private var confirmingDelete = false
+    @State private var showingLeaflet = false
 
     private var schedule: Schedule? { medication.allSchedules.first }
     private var runOut: Date? { StockService.projectedRunOutDate(for: medication) }
@@ -46,6 +47,7 @@ struct MedicationDetailView: View {
             }
 
             MedicationPhotosSection(medication: medication)
+            LeafletSection(medication: medication, showing: $showingLeaflet)
 
             Section("Supply") {
                 if medication.tracksStock {
@@ -122,18 +124,16 @@ struct MedicationDetailView: View {
         .sheet(isPresented: $checkingSupply) {
             ReconciliationView(medication: medication)
         }
+        .sheet(isPresented: $showingLeaflet) {
+            LeafletViewer(medication: medication)
+        }
         .confirmationDialog("Delete this medication and its history?", isPresented: $confirmingDelete, titleVisibility: .visible) {
             Button("Delete", role: .destructive) { delete() }
         }
     }
 
     private func weekdaysText(_ schedule: Schedule) -> String {
-        if schedule.isEveryDay { return String(localized: "Every day") }
-        let calendar = Calendar.current
-        let order = (0..<7).map { (calendar.firstWeekday - 1 + $0) % 7 + 1 }
-        return order.filter { schedule.weekdays.contains($0) }
-            .map { calendar.shortStandaloneWeekdaySymbols[$0 - 1] }
-            .joined(separator: ", ")
+        schedule.repeatDescription()
     }
 
     private func timesText(_ schedule: Schedule) -> String {

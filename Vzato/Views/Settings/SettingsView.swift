@@ -24,6 +24,23 @@ struct SettingsView: View {
             Form {
                 Section {
                     NavigationLink {
+                        ProfilesView()
+                    } label: {
+                        Label("Profiles", systemImage: "person.2")
+                    }
+                    .accessibilityIdentifier("profiles")
+                } footer: {
+                    Text("Medications for your children or animals.")
+                }
+
+                Section {
+                    MedicineSourceNote()
+                } header: {
+                    Text("Medicines database")
+                }
+
+                Section {
+                    NavigationLink {
                         HelpView()
                     } label: {
                         Label("Help", systemImage: "questionmark.circle")

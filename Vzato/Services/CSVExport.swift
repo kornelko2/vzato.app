@@ -18,7 +18,7 @@ struct DoseHistoryCSV: Transferable, Sendable {
 enum CSVExport {
     static func make(events: [DoseEvent]) -> String {
         let formatter = ISO8601DateFormatter()
-        var lines = ["medication,dosage,scheduled_at,status,taken_at,source,unscheduled"]
+        var lines = ["medication,dosage,scheduled_at,status,taken_at,source,unscheduled,profile"]
         let sorted = events.sorted { ($0.scheduledAt ?? .distantPast) < ($1.scheduledAt ?? .distantPast) }
         for event in sorted {
             lines.append([
@@ -29,6 +29,7 @@ enum CSVExport {
                 event.takenAt.map(formatter.string) ?? "",
                 event.sourceRaw,
                 event.isUnscheduled ? "1" : "0",
+                escape(event.medication?.profile?.name ?? ""),
             ].joined(separator: ","))
         }
         return lines.joined(separator: "\n") + "\n"

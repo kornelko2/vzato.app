@@ -39,6 +39,23 @@ struct HelpView: View {
             "Bought a new package? Open the medication, tap Edit and change Amount at home.",
             "Not sure the number is right? Count your tablets, tap Count and check supply and enter the number. Vzato shows whether it matches the records.",
         ]),
+        Topic(id: "database", title: "Find a medicine in the database", symbol: "magnifyingglass", steps: [
+            "In Medications, type the name in the search field at the top.",
+            "Under Medicines database, tap the medicine with the right strength.",
+            "The name, strength and unit are filled in. Add the times and tap Save.",
+            "For Czech medicines, the medication's page can download the official package leaflet from SÚKL.",
+        ]),
+        Topic(id: "repeat", title: "Once a month or every other day", symbol: "repeat", steps: [
+            "In the medication form, under Schedule, choose Repeat.",
+            "Pick every few days, weeks or months and set the number with + and −.",
+            "The start date decides the days. Below you see the next three doses.",
+        ]),
+        Topic(id: "profiles", title: "Children and animals", symbol: "pawprint", steps: [
+            "Open Settings › Profiles and tap Add profile.",
+            "Enter a name, choose Person or Animal and an icon.",
+            "When adding a medication, choose whose it is under For.",
+            "Today shows whose dose it is. Tap a name at the top to show only that profile.",
+        ]),
         Topic(id: "photos", title: "Photos", symbol: "camera", steps: [
             "Open the medication. Under Photos add the pill, the package or the leaflet.",
             "Under Photo on Today choose which photo appears on the big card.",

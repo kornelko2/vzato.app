@@ -25,9 +25,19 @@ struct TodayView: View {
 
     private var grace: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
 
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Profile.createdAt)]) private var profiles: FetchedResults<Profile>
+    @Environment(\.showsProfiles) private var showsProfiles
+
+    /// The medications of the profile chosen in the filter, or everyone's.
+    private var profileFilter: Binding<UUID?> {
+        Binding(get: { state.profileFilter }, set: { state.profileFilter = $0 })
+    }
+
+    private var shown: [Medication] { medications.of(profile: showsProfiles ? state.profileFilter : nil) }
+
     private var slots: [DoseSlot] {
         _ = events.count
-        return DoseScheduler.slots(for: Array(medications), on: now)
+        return DoseScheduler.slots(for: shown, on: now)
     }
 
     /// Oldest overdue dose, else the oldest missed dose without a record (it can still be confirmed late),
@@ -41,7 +51,7 @@ struct TodayView: View {
     }
 
     private var takenCount: Int { slots.filter { $0.status(now: now, grace: grace) == .taken }.count }
-    private var lowStock: [Medication] { medications.filter(\.isLowStock) }
+    private var lowStock: [Medication] { shown.filter(\.isLowStock) }
 
     /// "Before a meal" doses taken today whose waiting time is still running.
     private var mealWaits: [(name: String, readyAt: Date)] {
@@ -56,6 +66,9 @@ struct TodayView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
+                    if showsProfiles {
+                        ProfileFilterBar(profiles: Array(profiles), selection: profileFilter)
+                    }
                     if NotificationService.shared.remindersOff, !medications.isEmpty {
                         RemindersOffBanner(denied: NotificationService.shared.authorizationStatus == .denied)
                     }

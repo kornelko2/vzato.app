@@ -11,18 +11,51 @@ struct MedicationsView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == NO"))
     private var medications: FetchedResults<Medication>
     @State private var path = NavigationPath()
+    @State private var query = ""
+    @State private var search = MedicineSearch()
+    @State private var adding: MedicineEntry?
+
+    private var searching: Bool { query.trimmingCharacters(in: .whitespaces).count >= 2 }
+
+    /// Your own medications whose name and strength contain every typed word, like the database search.
+    private var ownMatches: [Medication] {
+        let words = MedicineIndex.fold(query).split(separator: " ").map(String.init)
+        return medications.filter { medication in
+            let text = MedicineIndex.fold("\(medication.name) \(medication.dosageText)")
+            return words.allSatisfy { text.contains($0) }
+        }
+    }
+    @Environment(\.showsProfiles) private var showsProfiles
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Profile.createdAt)]) private var profiles: FetchedResults<Profile>
 
     var body: some View {
         NavigationStack(path: $path) {
             List {
-                ForEach(medications) { medication in
-                    NavigationLink(value: medication) {
-                        MedicationRow(medication: medication)
+                if searching {
+                    searchResults
+                } else if showsProfiles {
+                    // One section per profile, so a child's or a dog's medications stay together.
+                    ForEach(profiles) { profile in
+                        let own = medications.of(profile: profile.id)
+                        if !own.isEmpty {
+                            Section {
+                                rows(own)
+                            } header: {
+                                ProfileBadge(profile: profile, font: .subheadline.weight(.semibold))
+                            }
+                        }
                     }
+                } else {
+                    rows(Array(medications))
                 }
             }
+            .searchable(text: $query, prompt: Text("Your medications and the database"))
+            .onChange(of: query) { _, value in search.update(value) }
+            .sheet(item: $adding) { entry in
+                MedicationFormView(medication: nil, entry: entry)
+            }
             .overlay {
-                if medications.isEmpty {
+                if medications.isEmpty && !searching {
                     ContentUnavailableView {
                         Label("No medications", systemImage: "pills")
                     } description: {
@@ -52,12 +85,45 @@ struct MedicationsView: View {
                 }
             }
             .onAppear {
+                if query.isEmpty, let text = LaunchArguments.searchText { query = text }
                 if path.isEmpty, let name = LaunchArguments.medicationToOpen,
                    let medication = medications.first(where: { $0.name == name }) {
                     path.append(medication)
                 } else if LaunchArguments.opensFirstMedication, path.isEmpty, let first = medications.first {
                     path.append(first)
                 }
+            }
+        }
+    }
+}
+
+extension MedicationsView {
+    @ViewBuilder
+    fileprivate var searchResults: some View {
+        if !ownMatches.isEmpty {
+            Section("My medications") {
+                rows(ownMatches)
+            }
+        }
+        Section {
+            if search.results.isEmpty {
+                Text("Nothing found in the database. You can still add the medication by hand.")
+                    .foregroundStyle(.secondary)
+            }
+            ForEach(search.results) { entry in
+                MedicineResultRow(entry: entry) { adding = entry }
+            }
+        } header: {
+            Text("Medicines database")
+        } footer: {
+            MedicineSourceNote()
+        }
+    }
+
+    fileprivate func rows(_ list: [Medication]) -> some View {
+        ForEach(list) { medication in
+            NavigationLink(value: medication) {
+                MedicationRow(medication: medication)
             }
         }
     }
