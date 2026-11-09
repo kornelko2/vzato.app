@@ -105,10 +105,19 @@ struct MedicationDetailView: View {
             }
 
             Section {
-                Button("Archive medication") { archive() }
+                if medication.isArchived {
+                    Button("Restore medication") { restore() }
+                        .accessibilityIdentifier("restoreMedication")
+                } else {
+                    Button("Archive medication") { archive() }
+                }
                 Button("Delete medication", role: .destructive) { confirmingDelete = true }
             } footer: {
-                Text("Archiving keeps the history. Deleting removes the medication and all its records.")
+                if medication.isArchived {
+                    Text("Archived medications have no reminders and are not on Today. Restoring brings it back from today on.")
+                } else {
+                    Text("Archiving keeps the history. Deleting removes the medication and all its records.")
+                }
             }
         }
         .navigationTitle(medication.name)
@@ -145,9 +154,13 @@ struct MedicationDetailView: View {
     }
 
     private func archive() {
-        medication.isArchived = true
-        medication.archivedAt = Date()
-        try? context.save()
+        MedicationArchive.archive(medication)
+        Task { await NotificationService.shared.rescheduleAll() }
+        dismiss()
+    }
+
+    private func restore() {
+        MedicationArchive.restore(medication)
         Task { await NotificationService.shared.rescheduleAll() }
         dismiss()
     }

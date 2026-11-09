@@ -151,7 +151,7 @@ struct MedicationFormView: View {
                     Text("Schedule")
                 } footer: {
                     if repeatKind != .weekdays {
-                        Text("Counted from the start date. For every month, the dose stays on the same day of the month; in shorter months on the last day.")
+                        Text("Counted from the start date. If it was already given, set the start to the day of the last dose. For every month, the dose stays on the same day of the month; in shorter months on the last day.")
                     }
                 }
 

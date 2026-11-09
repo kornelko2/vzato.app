@@ -27,6 +27,8 @@ final class SyncMonitor {
     #if os(iOS)
     private var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     #endif
+    /// Keep the background time at least until then, even when CloudKit is idle.
+    private var holdUntil = Date.distantPast
 
     private init() {}
 
@@ -42,11 +44,17 @@ final class SyncMonitor {
             let succeeded = event.succeeded
             let message = event.error.map(SyncMonitor.describe)
             MainActor.assumeIsolated {
-                self?.activity.update(event: id, finished: ended != nil)
+                guard let self else { return }
+                self.activity.update(event: id, finished: ended != nil)
                 if let ended {
-                    self?.record(succeeded: succeeded, message: message, at: ended)
+                    self.record(succeeded: succeeded, message: message, at: ended)
+                    // CloudKit often starts the next step right away; let go only after a quiet moment.
+                    self.hold(atLeast: 2)
+                } else {
+                    // Every import or export writes to the shared store: never let iOS suspend the
+                    // app in the middle of it (crash 0xdead10cc), in the foreground or not.
+                    self.hold(atLeast: 0)
                 }
-                self?.releaseBackgroundTimeIfIdle()
             }
         })
         observers.append(center.addObserver(forName: .NSPersistentStoreRemoteChange, object: controller.container.persistentStoreCoordinator, queue: .main) { [weak self] _ in
@@ -60,21 +68,42 @@ final class SyncMonitor {
     /// starts a CloudKit export that writes to the store; ask iOS for time to finish it, because a
     /// suspended app holding the store's file lock is killed (0xdead10cc).
     func keepRunningWhileSyncing() {
-        #if os(iOS)
-        guard isEnabled, backgroundTask == .invalid else { return }
-        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "Finish iCloud sync") { [weak self] in
-            MainActor.assumeIsolated { self?.releaseBackgroundTime() }
+        guard isEnabled else { return }
+        hold(atLeast: 3)
+    }
+
+    /// A silent push from iCloud woke the app: changes from another device are coming. Holds the
+    /// background time before CloudKit starts writing and waits until the import is done, at most
+    /// 25 seconds (iOS allows about 30).
+    func waitForRemoteChanges() async {
+        guard isEnabled else { return }
+        hold(atLeast: 3)
+        let deadline = Date().addingTimeInterval(25)
+        while (!activity.isIdle || Date() < holdUntil), Date() < deadline {
+            try? await Task.sleep(for: .milliseconds(500))
         }
-        // The export starts shortly after the last save; if nothing has started by then, let go.
+        holdUntil = .distantPast
+        releaseBackgroundTimeIfIdle()
+    }
+
+    /// Takes background time (once) and keeps it at least `seconds` from now and while CloudKit works.
+    private func hold(atLeast seconds: Double) {
+        #if os(iOS)
+        if backgroundTask == .invalid {
+            backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "Finish iCloud sync") { [weak self] in
+                MainActor.assumeIsolated { self?.releaseBackgroundTime() }
+            }
+        }
+        holdUntil = max(holdUntil, Date().addingTimeInterval(seconds))
         Task { [weak self] in
-            try? await Task.sleep(for: .seconds(3))
+            try? await Task.sleep(for: .seconds(seconds + 0.1))
             self?.releaseBackgroundTimeIfIdle()
         }
         #endif
     }
 
     private func releaseBackgroundTimeIfIdle() {
-        if activity.isIdle { releaseBackgroundTime() }
+        if activity.isIdle, Date() >= holdUntil { releaseBackgroundTime() }
     }
 
     private func releaseBackgroundTime() {

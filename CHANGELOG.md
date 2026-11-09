@@ -125,7 +125,11 @@ All notable changes to Vzato are listed here. The format follows
 ### Fixed
 - The app could be closed by iOS a moment after leaving it, while iCloud was still
   saving the last change (crash report 0xdead10cc). It now asks for a few seconds
-  in the background until the sync step finishes.
+  in the background until the sync step finishes. Since build 14 it also holds that
+  time during every iCloud import or export and when a silent push from iCloud wakes
+  the app (the second 0xdead10cc report came from an import in the background).
+- Archived medications can be found again (Medications › Archived medications) and
+  restored; doses from the archived time do not show as missed.
 
 ### Added (behind a build flag)
 - iCloud sync through the user's private CloudKit database, with sync status in

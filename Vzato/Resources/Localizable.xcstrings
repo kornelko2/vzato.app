@@ -2333,6 +2333,50 @@
         }
       }
     },
+    "Archived medications": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivované léky"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivált gyógyszerek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivované lieky"
+          }
+        }
+      }
+    },
+    "Archived medications have no reminders and are not on Today. Restoring brings it back from today on.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivované léky nemají připomínky a nejsou na obrazovce Dnes. Obnovením se lék vrátí od dnešního dne."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az archivált gyógyszerekhez nincs emlékeztető, és nem jelennek meg a Ma képernyőn. Visszaállítás után a mai naptól újra látható."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivované lieky nemajú pripomienky a nie sú na obrazovke Dnes. Obnovením sa liek vráti od dnešného dňa."
+          }
+        }
+      }
+    },
     "Archiving keeps the history. Deleting removes the medication and all its records.": {
       "localizations": {
         "cs": {
@@ -2839,24 +2883,24 @@
         }
       }
     },
-    "Counted from the start date. For every month, the dose stays on the same day of the month; in shorter months on the last day.": {
+    "Counted from the start date. If it was already given, set the start to the day of the last dose. For every month, the dose stays on the same day of the month; in shorter months on the last day.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Počítá se od data začátku. U měsíčního opakování zůstává dávka ve stejný den v měsíci, v kratších měsících poslední den."
+            "value": "Počítá se od data začátku. Pokud už lék dostal, nastavte začátek na den poslední dávky. U měsíčního opakování zůstává dávka ve stejný den v měsíci, v kratších měsících poslední den."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "A kezdő naptól számítva. Havi ismétlésnél az adag a hónap ugyanazon napjára esik, rövidebb hónapokban az utolsó napra."
+            "value": "A kezdő naptól számítva. Ha már kapott belőle, állítsa a kezdetet az utolsó adag napjára. Havi ismétlésnél az adag a hónap ugyanazon napjára esik, rövidebb hónapokban az utolsó napra."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Počíta sa od dátumu začiatku. Pri mesačnom opakovaní zostáva dávka v rovnaký deň v mesiaci, v kratších mesiacoch posledný deň."
+            "value": "Počíta sa od dátumu začiatku. Ak už liek dostal, nastavte začiatok na deň poslednej dávky. Pri mesačnom opakovaní zostáva dávka v rovnaký deň v mesiaci, v kratších mesiacoch posledný deň."
           }
         }
       }
@@ -7491,6 +7535,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vrátiť späť"
+          }
+        }
+      }
+    },
+    "Restore medication": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obnovit lék"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszer visszaállítása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obnoviť liek"
           }
         }
       }

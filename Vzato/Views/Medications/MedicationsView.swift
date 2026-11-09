@@ -11,6 +11,8 @@ struct MedicationsView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == NO"))
     private var medications: FetchedResults<Medication>
     @State private var path = NavigationPath()
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Medication.name)], predicate: NSPredicate(format: "isArchived == YES"))
+    private var archived: FetchedResults<Medication>
     @State private var query = ""
     @State private var search = MedicineSearch()
     @State private var adding: MedicineEntry?
@@ -48,6 +50,21 @@ struct MedicationsView: View {
                 } else {
                     rows(Array(medications))
                 }
+                if !searching && !archived.isEmpty {
+                    Section {
+                        NavigationLink {
+                            List { rows(Array(archived)) }
+                                .navigationTitle(Text("Archived medications"))
+                        } label: {
+                            LabeledContent {
+                                Text(verbatim: "\(archived.count)")
+                            } label: {
+                                Label("Archived medications", systemImage: "archivebox")
+                            }
+                        }
+                        .accessibilityIdentifier("archivedMedications")
+                    }
+                }
             }
             .searchable(text: $query, prompt: Text("Your medications and the database"))
             .onChange(of: query) { _, value in search.update(value) }
@@ -55,7 +72,7 @@ struct MedicationsView: View {
                 MedicationFormView(medication: nil, entry: entry)
             }
             .overlay {
-                if medications.isEmpty && !searching {
+                if medications.isEmpty && archived.isEmpty && !searching {
                     ContentUnavailableView {
                         Label("No medications", systemImage: "pills")
                     } description: {

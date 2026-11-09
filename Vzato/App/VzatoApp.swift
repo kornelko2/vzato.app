@@ -10,6 +10,9 @@ import AppKit
 
 @main
 struct VzatoApp: App {
+    #if os(iOS)
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #endif
     private let persistence: PersistenceController
     @State private var state = AppState()
     @Environment(\.scenePhase) private var scenePhase
@@ -106,3 +109,15 @@ struct VzatoApp: App {
         #endif
     }
 }
+
+#if os(iOS)
+/// Only for silent pushes from iCloud: holds background time while CloudKit imports the changes,
+/// so iOS does not suspend the app with the store file locked.
+final class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
+        await SyncMonitor.shared.waitForRemoteChanges()
+        return .newData
+    }
+}
+#endif
