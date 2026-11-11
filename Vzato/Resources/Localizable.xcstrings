@@ -2399,24 +2399,24 @@
         }
       }
     },
-    "At dose time you hear a sound and see the reminder, also on the lock screen and on Apple Watch.": {
+    "At dose time one reminder comes with every medication due at that time, with a sound, also on the lock screen and on Apple Watch.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "V čase dávky uslyšíte zvuk a uvidíte připomínku, i na zamčené obrazovce a na Apple Watch."
+            "value": "V čas dávky přijde jedno oznámení se všemi léky na ten čas, se zvukem, i na zamčenou obrazovku a na Apple Watch."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Az adag idején hangot hall és látja az emlékeztetőt, a zárolási képernyőn és az Apple Watch-on is."
+            "value": "Az adag idején egy értesítés érkezik az akkor esedékes összes gyógyszerrel, hanggal, a zárolt képernyőn és az Apple Watchon is."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "V čase dávky budete počuť zvuk a uvidíte pripomienku, aj na zamknutej obrazovke a na Apple Watch."
+            "value": "V čase dávky príde jedno oznámenie so všetkými liekmi na ten čas, so zvukom, aj na zamknutú obrazovku a na Apple Watch."
           }
         }
       }
@@ -2527,6 +2527,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kúpili ste nové balenie? Otvorte liek, ťuknite na Upraviť a zmeňte Množstvo doma."
+          }
+        }
+      }
+    },
+    "Break through Focus and Do Not Disturb": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prorazit Soustředění a Nerušit"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Áttörés a Fókuszon és a Ne zavarjanak módon"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prelomiť Sústredenie a Nerušiť"
           }
         }
       }
@@ -6065,6 +6087,28 @@
         }
       }
     },
+    "No answer? Vzato reminds you again, twice every 10 minutes unless you change it in Settings › Reminders. Then it stops, and after the set time the dose counts as missed.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez odpovědi připomene Vzato znovu, 2× po 10 minutách, pokud to v Nastavení › Připomínky nezměníte. Pak přestane a po nastavené době se dávka počítá jako zmeškaná."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ha nincs válasz, a Vzato újra emlékeztet, 10 percenként kétszer, hacsak a Beállítások › Emlékeztetők alatt nem módosítja. Utána leáll, és a beállított idő után az adag kihagyottnak számít."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez odpovede pripomenie Vzato znova, 2× po 10 minútach, ak to v Nastaveniach › Pripomienky nezmeníte. Potom prestane a po nastavenom čase sa dávka počíta ako zmeškaná."
+          }
+        }
+      }
+    },
     "No doses on this day": {
       "localizations": {
         "cs": {
@@ -6197,6 +6241,28 @@
         }
       }
     },
+    "No reminders are scheduled.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žádné připomínky nejsou naplánované."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nincs beütemezett emlékeztető."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Žiadne pripomienky nie sú naplánované."
+          }
+        }
+      }
+    },
     "Noon": {
       "localizations": {
         "cs": {
@@ -6241,46 +6307,46 @@
         }
       }
     },
-    "Not confirmed yet. Tap Taken when you have taken it.": {
+    "Not confirmed yet": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zatím nepotvrzeno. Až lék vezmete, klepněte na Vzato."
+            "value": "Zatím nepotvrzeno"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Még nincs megerősítve. Koppintson a Bevéve gombra, ha bevette."
+            "value": "Még nincs megerősítve"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zatiaľ nepotvrdené. Keď liek vezmete, klepnite na Vzaté."
+            "value": "Zatiaľ nepotvrdené"
           }
         }
       }
     },
-    "Not now? Tap Snooze. Vzato reminds you again in a few minutes.": {
+    "Not now? Tap Snooze. The reminder comes back after the snooze time and repeats from there.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Teď ne? Klepněte na Odložit. Vzato připomene znovu za pár minut."
+            "value": "Teď ne? Klepněte na Odložit. Oznámení se vrátí po době odložení a odtud se znovu opakuje."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Most nem? Koppintson a Szundi gombra. A Vzato néhány perc múlva újra emlékezteti."
+            "value": "Most nem? Koppintson a Szundi gombra. Az értesítés a szundi idő után visszatér, és onnan ismétlődik."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Teraz nie? Ťuknite na Odložiť. Vzaté pripomenie znova o pár minút."
+            "value": "Teraz nie? Ťuknite na Odložiť. Oznámenie sa vráti po čase odloženia a odtiaľ sa znova opakuje."
           }
         }
       }
@@ -6593,6 +6659,28 @@
         }
       }
     },
+    "One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. Medication reminders come through Do Not Disturb and Focus; “You can eat now” and supply alerts stay ordinary.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na každý čas jedno oznámení se všemi léky, které jsou v něm na řadě. Bez potvrzení se opakuje podle nastavení výše a pak přestane. Připomínky léků projdou i přes Nerušit a Soustředění; „Už můžete jíst“ a zásoby zůstávají obyčejné."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden időponthoz egy értesítés az akkor esedékes összes gyógyszerrel. Ha nincs megerősítve, a fenti beállítás szerint ismétlődik, majd leáll. A gyógyszer-emlékeztetők a Ne zavarjanak és a Fókusz módon is átjutnak; az „Ehet” és a készlet-értesítések hagyományosak maradnak."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na každý čas jedno oznámenie so všetkými liekmi, ktoré sú vtedy na rade. Bez potvrdenia sa opakuje podľa nastavenia vyššie a potom prestane. Pripomienky liekov prejdú aj cez Nerušiť a Sústredenie; „Už môžete jesť“ a zásoby zostávajú obyčajné."
+          }
+        }
+      }
+    },
     "Only %@ left. Time to get more.": {
       "localizations": {
         "cs": {
@@ -6655,6 +6743,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otvorte Nastavenia › Profily a ťuknite na Pridať profil."
+          }
+        }
+      }
+    },
+    "Open Vzato so they continue after that.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřete Vzato, aby pokračovaly i potom."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyissa meg a Vzatót, hogy utána is folytatódjanak."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorte Vzato, aby pokračovali aj potom."
           }
         }
       }
@@ -7429,6 +7539,28 @@
         }
       }
     },
+    "Reminder %lld of %lld": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínka %lld z %lld"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld/%lld. emlékeztető"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienka %lld z %lld"
+          }
+        }
+      }
+    },
     "Reminders": {
       "localizations": {
         "cs": {
@@ -7469,6 +7601,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pripomienky sú vypnuté"
+          }
+        }
+      }
+    },
+    "Reminders are planned until %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky jsou naplánované do %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők eddig vannak beütemezve: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky sú naplánované do %@"
+          }
+        }
+      }
+    },
+    "Reminders are planned until %@. Vzato plans further whenever it runs, and once a day on its own.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky jsou naplánované do %@. Vzato plánuje dál při každém spuštění a jednou denně samo."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők eddig vannak beütemezve: %@. A Vzato minden indításkor és naponta egyszer magától tovább tervez."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky sú naplánované do %@. Vzato plánuje ďalej pri každom spustení a raz denne samo."
+          }
+        }
+      }
+    },
+    "Reminders come through Do Not Disturb and Focus. You can turn that off in Settings › Reminders.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky projdou i přes Nerušit a Soustředění. Vypnout to jde v Nastavení › Připomínky."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők a Ne zavarjanak és a Fókusz módon is átjutnak. A Beállítások › Emlékeztetők alatt kikapcsolható."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky prejdú aj cez Nerušiť a Sústredenie. Vypnúť to môžete v Nastaveniach › Pripomienky."
           }
         }
       }
@@ -7799,28 +7997,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plánované dávky"
-          }
-        }
-      }
-    },
-    "Scheduled reminders: %lld": {
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Naplánované připomínky: %lld"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ütemezett emlékeztetők: %lld"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Naplánované pripomienky: %lld"
           }
         }
       }
@@ -8793,24 +8969,46 @@
         }
       }
     },
-    "Tap Taken in the reminder or in the app. That is all.": {
+    "Tap Taken in the reminder or in the app. With several medications, Taken confirms all of them.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Klepněte na Vzato v připomínce nebo v aplikaci. To je vše."
+            "value": "Klepněte na Vzato v oznámení nebo v aplikaci. U více léků potvrdí Vzato všechny najednou."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Koppintson a Bevéve gombra az emlékeztetőben vagy az alkalmazásban. Ennyi."
+            "value": "Koppintson a Bevéve gombra az értesítésben vagy az alkalmazásban. Több gyógyszernél a Bevéve mindet megerősíti."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ťuknite na Vzaté v pripomienke alebo v aplikácii. To je všetko."
+            "value": "Ťuknite na Vzaté v oznámení alebo v aplikácii. Pri viacerých liekoch potvrdí Vzaté všetky naraz."
+          }
+        }
+      }
+    },
+    "Tap Taken when you have taken it.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Až si lék vezmete, klepněte na Vzato."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ha bevette, koppintson a Bevéve gombra."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keď si liek vezmete, ťuknite na Vzaté."
           }
         }
       }
@@ -10351,28 +10549,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Synchronizácia iCloud"
-          }
-        }
-      }
-    },
-    "iOS allows at most 64 scheduled reminders. Some times were not scheduled.": {
-      "localizations": {
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iOS dovolí nejvýše 64 naplánovaných připomínek. Některé časy nebyly naplánovány."
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Az iOS legfeljebb 64 ütemezett emlékeztetőt enged. Néhány időpont nem lett ütemezve."
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "iOS dovolí najviac 64 naplánovaných pripomienok. Niektoré časy neboli naplánované."
           }
         }
       }

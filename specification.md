@@ -64,10 +64,10 @@ Stav: návrh v1, k 6. 11. 2026. Druhá revize: přidáno potvrzování dávek, h
 
 - Lokální notifikace v nastavený čas na všech zařízeních uživatele.
 - Povolení oznámení: aplikace o něj požádá sama, jakmile má některý lék nastavený čas (systém se ptá jen jednou). Dokud oznámení nejsou povolena, ukazuje obrazovka Dnes červené varování „Připomínky jsou vypnuté“ s tlačítkem „Povolit oznámení“, po odmítnutí „Otevřít nastavení“.
-- Akce v notifikaci: „Vzal jsem“, „Odložit o 10 minut“, „Přeskočit“.
-- Opakování, pokud dávka není potvrzena (nastavitelné, výchozí 2× po 10 minutách). Volitelně stupňování: druhé opakování hlasitější / „Time Sensitive“ (inspirace: eskalační alarmy konkurenční aplikace MedRemind pro Android).
-- Tichý režim / Focus: uživatel může povolit „Time Sensitive“ notifikace.
-- Notifikace se při potvrzení na jednom zařízení zruší i na ostatních (přes sync).
+- **Jedno pravidlo (rozhodnuto 11. 11. 2026):** v čas dávky přijde **jedno oznámení se všemi léky, které jsou v ten čas na řadě** („3 léky“ + řádek pro každý lék s množstvím). Bez potvrzení se opakuje (nastavitelné, výchozí 2× po 10 minutách; „Připomínka 1 z 2“), nikdy po lhůtě pro zmeškání, a potom přestane. Potvrzení kdekoli (aplikace, widget, oznámení, jiné zařízení přes sync) zruší zbývající opakování a odstraní doručená oznámení ze zamčené obrazovky.
+- Akce v oznámení: „Vzato“, „Odložit o 10 minut“, „Přeskočit“; u více léků platí pro všechny. „Odložit“ zruší naplánovaná opakování a oznámení se vrátí po době odložení a odtud se opakuje znovu.
+- Připomínky se plánují na konkrétní dávky (ne jako věčné denní opakování), nejdál 14 dní dopředu, v rámci limitu 64 čekajících oznámení iOS; zaznamenaná dávka nezvoní, po konci léčby a archivaci nic nezvoní. Plán se přestaví při spuštění, aktivaci, každé změně, akci z oznámení, synchronizaci a jednou denně na pozadí (BGAppRefresh). Když limit zkrátí horizont, přijde půl hodiny po poslední naplánované připomínce oznámení „Připomínky jsou naplánované do …, otevřete Vzato“.
+- Tichý režim / Soustředění: připomínky léků jsou „Time Sensitive“ (projdou přes Nerušit a Soustředění, nečekají na souhrn oznámení); v Nastavení › Připomínky to jde vypnout, výchozí zapnuto. „Už můžete jíst“ zůstává obyčejné, zásoby jsou tiché (passive, bez zvuku).
 - Upozornění na docházející zásobu, viz 3.5.
 - **„Už můžete jíst“:** u léku užívaného před jídlem (např. Letrox) se nastaví čekací doba (výchozí 30 min, krok 15 min). Po potvrzení dávky přijde v daný čas notifikace „Už můžete jíst“ a na obrazovce Dnes běží odpočet „Jíst od 7:05“. Připomínky léků a „Už můžete jíst“ mají každá jiný zvuk (zvonek Vzato / jemná melodie Vzato / zvuk systému, volba v Nastavení › Zvuky s přehráním). Vrácení dávky upomínku zruší; u dávky zaznamenané dodatečně, kdy už čekací doba uplynula, se nic neplánuje.
 

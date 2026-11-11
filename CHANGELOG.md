@@ -131,6 +131,17 @@ All notable changes to Vzato are listed here. The format follows
 - Archived medications can be found again (Medications › Archived medications) and
   restored; doses from the archived time do not show as missed.
 
+### Changed
+- Reminders follow one rule: at dose time one notification with every medication
+  due then; if not confirmed it repeats (2× every 10 minutes by default), never
+  after the dose counts as missed, then stops. Confirming anywhere clears the rest,
+  also from the lock screen. Snooze replaces the planned repeats. Reminders are
+  planned per dose up to two weeks ahead (a recorded or ended dose never rings),
+  rebuilt on every launch, change and sync, and once a day in the background; when
+  the iOS limit cuts the plan short, a notification asks to open Vzato.
+- Medication reminders are Time Sensitive (come through Do Not Disturb and Focus),
+  with a switch in Settings › Reminders. Supply alerts are silent.
+
 ### Added (behind a build flag)
 - iCloud sync through the user's private CloudKit database, with sync status in
   Settings. Off unless `Config/Local.xcconfig` sets `VZATO_CLOUDKIT = YES`; the

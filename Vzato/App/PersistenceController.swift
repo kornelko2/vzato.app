@@ -167,7 +167,11 @@ final class PersistenceController {
         }
         saveHistoryToken(transactions.last?.token)
         // Changes from another device or the widget may duplicate a dose recorded here.
-        if foreign > 0 { DuplicateResolver.resolve(in: viewContext) }
+        if foreign > 0 {
+            DuplicateResolver.resolve(in: viewContext)
+            // A dose confirmed in the widget or on another device: its reminders go away.
+            if !AppSettings.isAppExtension { NotificationService.shared.scheduleReplan() }
+        }
     }
 
     private func loadHistoryToken() -> NSPersistentHistoryToken? {

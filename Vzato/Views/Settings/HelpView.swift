@@ -23,10 +23,12 @@ struct HelpView: View {
             "Tap Save.",
         ]),
         Topic(id: "reminder", title: "When a reminder comes", symbol: "bell", steps: [
-            "At dose time you hear a sound and see the reminder, also on the lock screen and on Apple Watch.",
-            "Tap Taken in the reminder or in the app. That is all.",
-            "Not now? Tap Snooze. Vzato reminds you again in a few minutes.",
+            "At dose time one reminder comes with every medication due at that time, with a sound, also on the lock screen and on Apple Watch.",
+            "Tap Taken in the reminder or in the app. With several medications, Taken confirms all of them.",
+            "No answer? Vzato reminds you again, twice every 10 minutes unless you change it in Settings › Reminders. Then it stops, and after the set time the dose counts as missed.",
+            "Not now? Tap Snooze. The reminder comes back after the snooze time and repeats from there.",
             "Not taking this dose? Tap Skip.",
+            "Reminders come through Do Not Disturb and Focus. You can turn that off in Settings › Reminders.",
             "Tapped by mistake? Tap Undo right away. Later, touch and hold the dose in the Whole day list and choose Reset.",
         ]),
         Topic(id: "button", title: "Why there is no Taken button", symbol: "hand.raised", steps: [

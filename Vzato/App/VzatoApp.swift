@@ -76,6 +76,9 @@ struct VzatoApp: App {
                     case .background:
                         WidgetBridge.shared.reloadNow()
                         SyncMonitor.shared.keepRunningWhileSyncing()
+                        #if os(iOS)
+                        BackgroundRefresh.schedule()
+                        #endif
                     default:
                         break
                     }
@@ -111,9 +114,15 @@ struct VzatoApp: App {
 }
 
 #if os(iOS)
-/// Only for silent pushes from iCloud: holds background time while CloudKit imports the changes,
+/// Registers the daily background refresh and, for silent pushes from iCloud, holds background time while CloudKit imports the changes,
 /// so iOS does not suspend the app with the store file locked.
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        BackgroundRefresh.register()
+        return true
+    }
+
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
         await SyncMonitor.shared.waitForRemoteChanges()

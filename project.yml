@@ -20,7 +20,7 @@ settings:
     SWIFT_STRICT_CONCURRENCY: complete
     SWIFT_EMIT_LOC_STRINGS: YES
     MARKETING_VERSION: "1.0.1"
-    CURRENT_PROJECT_VERSION: "14"
+    CURRENT_PROJECT_VERSION: "15"
     CODE_SIGN_STYLE: Automatic
     ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
@@ -43,7 +43,8 @@ targets:
         NSCameraUsageDescription: Vzato uses the camera to photograph your medication, pills and leaflets. The photos stay on your device.
         VzatoCloudKit: $(VZATO_CLOUDKIT)
         VzatoAppGroup: $(VZATO_APP_GROUP)
-        UIBackgroundModes: [remote-notification]
+        UIBackgroundModes: [remote-notification, fetch]
+        BGTaskSchedulerPermittedIdentifiers: [app.vzato.refresh]
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait

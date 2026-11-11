@@ -11,6 +11,7 @@ struct SettingsView: View {
     @AppStorage(AppSettings.missedAfterMinutesKey) private var missedAfterMinutes = AppSettings.defaultMissedAfterMinutes
     @AppStorage(AppSettings.lowStockNotificationsKey) private var lowStockNotifications = true
     @AppStorage(AppSettings.repeatCountKey) private var repeatCount = AppSettings.defaultRepeatCount
+    @AppStorage(AppSettings.breaksThroughFocusKey) private var breaksThroughFocus = true
     @AppStorage(AppSettings.runOutWarningDaysKey) private var runOutWarningDays = AppSettings.defaultRunOutWarningDays
     @AppStorage(AppSettings.appIconKey) private var appIcon = AppIcon.pill
     @AppStorage(AppSettings.doseSoundKey) private var doseSound = ReminderSound.chime
@@ -96,6 +97,8 @@ struct SettingsView: View {
                             if repeatCount == 0 { Text("Off") } else { Text("\(repeatCount)×") }
                         }
                     }
+                    Toggle("Break through Focus and Do Not Disturb", isOn: $breaksThroughFocus)
+                        .accessibilityIdentifier("breakThroughFocus")
                     Toggle("Low supply alerts", isOn: $lowStockNotifications)
                     Stepper(value: $runOutWarningDays, in: 0...30) {
                         LabeledContent("Warn before running out") {
@@ -109,6 +112,7 @@ struct SettingsView: View {
                     .onChange(of: repeatCount) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: runOutWarningDays) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: snoozeMinutes) { Task { await notifications.rescheduleAll() } }
+                    .onChange(of: breaksThroughFocus) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: missedAfterMinutes) {
                         AppSettings.shareWithWidgets()
                         WidgetBridge.shared.reloadNow()
@@ -116,10 +120,13 @@ struct SettingsView: View {
                 } header: {
                     Text("Reminders")
                 } footer: {
-                    if notifications.hitLimit {
-                        Text("iOS allows at most 64 scheduled reminders. Some times were not scheduled.")
-                    } else {
-                        Text("Scheduled reminders: \(notifications.scheduledCount)")
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. Medication reminders come through Do Not Disturb and Focus; “You can eat now” and supply alerts stay ordinary.")
+                        if let until = notifications.plannedUntil {
+                            Text("Reminders are planned until \(until.formatted(date: .abbreviated, time: .omitted)). Vzato plans further whenever it runs, and once a day on its own.")
+                        } else {
+                            Text("No reminders are scheduled.")
+                        }
                     }
                 }
 

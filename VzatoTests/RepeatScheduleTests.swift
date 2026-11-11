@@ -78,16 +78,18 @@ struct RepeatScheduleTests {
 
     @Test func remindersArePlannedOnDatesForIntervalPlans() {
         let store = TestStore()
-        let monthly = store.medication(times: [8 * 60], repeat: .months).allSchedules[0]
-        let monthlyDays = NotificationService.datedReminderDays(for: monthly, now: at(monday, 9), calendar: testCalendar)
-        // Today's 8:00 has passed; the next is 2 December, more than a month is never needed.
-        #expect(monthlyDays.count == 2)
-        #expect(monthlyDays.last == testCalendar.date(from: DateComponents(year: 2026, month: 12, day: 2)))
-
-        let everyOther = store.medication(times: [8 * 60], repeat: .days, every: 2).allSchedules[0]
-        #expect(NotificationService.datedReminderDays(for: everyOther, now: at(monday, 9), calendar: testCalendar).count == 8)
-        #expect(NotificationService.datedDoseID(medicationID: nil, day: days(2, after: monday), minutes: 480, calendar: testCalendar)
-                == "dose||2026-11-04|480")
+        let monthly = store.medication(name: "Milbemax", times: [8 * 60], repeat: .months)
+        let everyOther = store.medication(name: "Letrox", times: [9 * 60], repeat: .days, every: 2)
+        let now = at(monday, 9, 30)
+        let window = DateInterval(start: now, end: days(13, after: monday))
+        let slots = DoseScheduler.slots(for: [monthly, everyOther], in: window, calendar: testCalendar).filter { $0.event == nil }
+        let settings = ReminderPlanner.Settings(snoozeMinutes: 10, repeatCount: 0, missedAfterMinutes: 120)
+        let plan = ReminderPlanner.plan(slots: slots, now: now, settings: settings, budget: 60, calendar: testCalendar)
+        // Today's doses are past. Milbemax comes again on 2 December, beyond the horizon, so only
+        // Letrox every other day is planned, on its dates.
+        #expect(plan.reminders.map(\.dayKey).prefix(3) == ["2026-11-04", "2026-11-06", "2026-11-08"])
+        #expect(plan.reminders.allSatisfy { $0.medicationIDs == [everyOther.id!] && $0.minutesOfDay == 9 * 60 && $0.attempt == 0 })
+        #expect(!plan.limited)
     }
 
     @Test func descriptions() {

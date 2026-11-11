@@ -238,10 +238,7 @@ struct TodayView: View {
     }
 
     private func snooze(_ slot: DoseSlot) {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour, .minute], from: slot.scheduledAt)
-        let minutesOfDay = (components.hour ?? 0) * 60 + (components.minute ?? 0)
-        NotificationService.shared.snooze(medication: slot.medication, minutesOfDay: minutesOfDay, after: snoozeMinutes)
+        NotificationService.shared.snooze(slot)
         NotificationService.shared.clearDelivered(for: slot.medication)
     }
 }

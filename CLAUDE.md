@@ -127,7 +127,9 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   decided by the user; do not change to "Vzal jsem").
 - Dates: always `Calendar` arithmetic and `Text(date, style:)` / `FormatStyle`; never
   manual seconds math or hard-coded formats.
-- Notification identifiers: `dose|<medicationID>|<weekday|0>|<minutes>` (repeating), `dose|<medicationID>|<yyyy-MM-dd>|<minutes>` (one date, for every-N-days/weeks/months plans),
-  `snooze|…`, `lowstock|<medicationID>`; iOS caps pending requests at 64.
+- Notifications: one per time with every medication due then, planned per concrete dose by `ReminderPlanner`
+  (no repeating triggers). Identifiers `dose|<yyyy-MM-dd>|<minutes>|<attempt>`, `snooze|<yyyy-MM-dd>|<minutes>|<attempt>`,
+  `meal|…`, `runout|<medicationID>`, `lowstock|<medicationID>`, `plan`; userInfo carries `day`, `minutesOfDay`,
+  `medicationIDs`. iOS caps pending requests at 64; `BackgroundRefresh` rebuilds the plan daily.
 - Czech docs: keep the revision note at the top of `specification.md` current and mark
   decided open questions with strikethrough plus the decision.

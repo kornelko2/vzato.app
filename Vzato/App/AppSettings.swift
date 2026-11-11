@@ -24,6 +24,7 @@ enum AppSettings {
     static let doseSoundKey = "doseSound"
     static let mealSoundKey = "mealSound"
     static let onboardingCompletedKey = "onboardingCompleted"
+    static let breaksThroughFocusKey = "breaksThroughFocus"
 
     static let defaultSnoozeMinutes = 10
     static let defaultMissedAfterMinutes = 120
@@ -76,6 +77,13 @@ enum AppSettings {
 
     static var mealSound: ReminderSound {
         ReminderSound(rawValue: defaults.string(forKey: mealSoundKey) ?? "") ?? .soft
+    }
+
+    /// Dose reminders are Time Sensitive: they come through Do Not Disturb and Focus and are not
+    /// held for the notification summary. On by default; a medication is worth it.
+    static var breaksThroughFocus: Bool {
+        guard defaults.object(forKey: breaksThroughFocusKey) != nil else { return true }
+        return defaults.bool(forKey: breaksThroughFocusKey)
     }
 
     static var lowStockNotificationsEnabled: Bool {
