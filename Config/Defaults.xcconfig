@@ -9,4 +9,8 @@ VZATO_ENTITLEMENTS_VARIANT = Local
 VZATO_APP_GROUP = group.app.vzato
 VZATO_APP_GROUP[sdk=macosx*] = $(DEVELOPMENT_TEAM).app.vzato
 
+// Provisioning profiles for manual signing of release archives; empty means automatic signing.
+VZATO_APP_PROFILE =
+VZATO_WIDGET_PROFILE =
+
 #include? "Local.xcconfig"

@@ -62,6 +62,9 @@ targets:
         "CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]": Config/iOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
         "CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]": Config/iOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
         "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": Config/macOS-$(VZATO_ENTITLEMENTS_VARIANT).entitlements
+        # Empty by default (automatic signing). Release archives pass CODE_SIGN_STYLE=Manual and the
+        # App Store profile UUIDs on the command line, see README › TestFlight.
+        PROVISIONING_PROFILE_SPECIFIER: $(VZATO_APP_PROFILE)
     dependencies:
       - target: VzatoWidgets
 
@@ -97,6 +100,7 @@ targets:
         "CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]": Config/Widgets-iOS.entitlements
         "CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]": Config/Widgets-iOS.entitlements
         "CODE_SIGN_ENTITLEMENTS[sdk=macosx*]": Config/Widgets-macOS.entitlements
+        PROVISIONING_PROFILE_SPECIFIER: $(VZATO_WIDGET_PROFILE)
 
   VzatoTests:
     type: bundle.unit-test

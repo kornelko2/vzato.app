@@ -158,6 +158,17 @@ xcodebuild -exportArchive -archivePath build/Vzato.xcarchive \
   -exportOptionsPlist Config/ExportOptions.plist -exportPath build/export
 ```
 
+Without an Xcode account (or when the managed development profile lacks a
+capability such as Time Sensitive Notifications), sign the archive manually with
+App Store profiles from the developer portal:
+
+```bash
+xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'generic/platform=iOS' \
+  -archivePath build/Vzato.xcarchive CODE_SIGN_STYLE=Manual \
+  CODE_SIGN_IDENTITY="Apple Distribution" \
+  VZATO_APP_PROFILE=<app profile UUID> VZATO_WIDGET_PROFILE=<widget profile UUID> archive
+```
+
 ## Privacy
 
 No analytics, no ads, no third-party code, no server. Everything is stored in
