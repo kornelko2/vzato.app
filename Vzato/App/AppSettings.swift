@@ -190,6 +190,15 @@ enum LaunchArguments {
         return nil
     }
 
+    /// `--open-profiles`: Settings starts on the Profiles screen (screenshots).
+    static var opensProfiles: Bool {
+        #if DEBUG
+        return CommandLine.arguments.contains("--open-profiles")
+        #else
+        return false
+        #endif
+    }
+
     static var initialTab: String? {
         #if DEBUG
         let args = CommandLine.arguments

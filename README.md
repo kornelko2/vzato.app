@@ -4,9 +4,10 @@ Free, open source medication reminder for iPhone, iPad and Mac. One SwiftUI code
 base, no server, no accounts. Your data stays on your devices and in your own
 iCloud. Czech, Slovak, English and Hungarian.
 
-**[Download on the App Store](https://apps.apple.com/app/id6831807640)** for iPhone,
-iPad and Mac. Website, user guide and privacy policy: [vzato.app](https://vzato.app).
-Contact: info@vzato.app.
+<a href="https://apps.apple.com/app/id6831807640"><img src="Docs/app-store/download-on-the-app-store.svg" alt="Download on the App Store" height="50"></a>
+
+Free for iPhone, iPad and Mac. Website, user guide and privacy policy:
+[vzato.app](https://vzato.app). Contact: info@vzato.app.
 
 **Vzato is not a medical device and does not replace your doctor or pharmacist.**
 It reminds you and keeps your own notes, nothing more. It never suggests doses

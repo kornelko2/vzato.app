@@ -18,15 +18,14 @@ struct SettingsView: View {
     @AppStorage(AppSettings.mealSoundKey) private var mealSound = ReminderSound.soft
 
     @Environment(AppState.self) private var state
+    @State private var path: [String] = LaunchArguments.opensProfiles ? ["profiles"] : []
     private var notifications: NotificationService { NotificationService.shared }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Form {
                 Section {
-                    NavigationLink {
-                        ProfilesView()
-                    } label: {
+                    NavigationLink(value: "profiles") {
                         Label("Profiles", systemImage: "person.2")
                     }
                     .accessibilityIdentifier("profiles")
@@ -204,6 +203,9 @@ struct SettingsView: View {
                 }
             }
             .formStyle(.grouped)
+            .navigationDestination(for: String.self) { value in
+                if value == "profiles" { ProfilesView() }
+            }
             .navigationTitle(Text("Settings"))
             .task { await notifications.refreshAuthorizationStatus() }
         }
