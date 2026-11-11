@@ -12,6 +12,7 @@ App Store Connect API helper for Vzato. Standard library + the openssl CLI, no p
     python3 Scripts/asc.py beta       # TestFlight description, what to test, feedback email
     python3 Scripts/asc.py screenshots <folder> <display type> <IOS|MAC_OS>
                                       # <folder>/<cs|sk|en|hu>/*.png, replaces that set
+    python3 Scripts/asc.py release 1.0.1   # version for iOS and macOS, newest build, What's new
 
 The key is read from ~/.appstoreconnect/private_keys/AuthKey_<KEY_ID>.p8 and never printed.
 The app record itself must exist already: Apple's API cannot create apps.
@@ -281,6 +282,52 @@ def cmd_screenshots():
         print(f"{platform} {display_type} {locale}: {len(files)} screenshots")
 
 
+def release_notes(version: str) -> dict:
+    text = open(METADATA, encoding="utf-8").read()
+    notes = {}
+    for locale in ("cs", "sk", "en-US", "hu"):
+        m = re.search(rf"^### {re.escape(version)} – {locale}\n(.*?)(?=^#|\Z)", text, re.S | re.M)
+        if m:
+            notes[locale] = m.group(1).strip()
+    if not notes:
+        sys.exit(f"No '### {version} – <locale>' blocks in metadata.md")
+    return notes
+
+
+def cmd_release():
+    """Create version <string> for iOS and macOS if missing, attach the newest valid build of each
+    platform, and set What's New in every language. The submission itself stays a click in the UI."""
+    if len(sys.argv) < 3:
+        sys.exit("usage: asc.py release <version>")
+    version_string = sys.argv[2]
+    app = find_app()
+    notes = release_notes(version_string)
+    for platform in ("IOS", "MAC_OS"):
+        versions = call("GET", f"/apps/{app['id']}/appStoreVersions?filter[platform]={platform}&filter[versionString]={version_string}")["data"]
+        if versions:
+            version = versions[0]
+            print(f"{platform} {version_string}: exists ({version['attributes'].get('appStoreState')})")
+        else:
+            version = call("POST", "/appStoreVersions", {"data": {"type": "appStoreVersions",
+                "attributes": {"platform": platform, "versionString": version_string, "releaseType": "AFTER_APPROVAL"},
+                "relationships": {"app": {"data": {"type": "apps", "id": app["id"]}}}}})["data"]
+            print(f"{platform} {version_string}: created")
+        builds = call("GET", f"/builds?filter[app]={app['id']}&filter[preReleaseVersion.platform]={platform}"
+                             f"&filter[processingState]=VALID&sort=-uploadedDate&limit=1")["data"]
+        if builds:
+            build = builds[0]
+            call("PATCH", f"/appStoreVersions/{version['id']}/relationships/build",
+                 {"data": {"type": "builds", "id": build["id"]}})
+            print(f"  build {build['attributes']['version']} attached")
+        else:
+            print("  no valid build")
+        existing = call("GET", f"/appStoreVersions/{version['id']}/appStoreVersionLocalizations")["data"]
+        for locale, text in notes.items():
+            state = upsert("", existing, locale, {"whatsNew": text}, "appStoreVersionLocalizations",
+                           "appStoreVersion", "appStoreVersions", version["id"])
+            print(f"  What's new {locale}: {state}")
+
+
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else "check"
-    {"check": cmd_check, "metadata": cmd_metadata, "beta": cmd_beta, "screenshots": cmd_screenshots}.get(command, lambda: sys.exit(__doc__))()
+    {"check": cmd_check, "metadata": cmd_metadata, "beta": cmd_beta, "screenshots": cmd_screenshots, "release": cmd_release}.get(command, lambda: sys.exit(__doc__))()

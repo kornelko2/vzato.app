@@ -39,6 +39,9 @@ Vzato vám připomene každý lék ve správný čas a hlavně řekne, jestli u�
 • Zásoba léků: odečítá se sama, upozorní, když dochází, a odhadne, kdy dojde
 • Kontrola zásoby: spočítáte tablety doma a Vzato ukáže, jestli záznamy sedí
 • Fotografie krabičky, tablety a příbalového letáku
+• Databáze léčiv: napište pár písmen a vyberte český nebo slovenský lék, název a síla se vyplní samy; u českých léků stáhnete oficiální příbalový leták
+• Profily pro děti, rodiče a zvířata: Dnes ukazuje, čí je dávka
+• Opakování po několika dnech, týdnech nebo měsících, třeba odčervení jednou za měsíc
 • Widgety na plochu a zamčenou obrazovku s tlačítkem Vzato
 • Synchronizace mezi iPhonem, iPadem a Macem přes váš iCloud
 • Záznam činností: kdo, kdy a na kterém zařízení dávku zaznamenal
@@ -73,6 +76,9 @@ Vzato vám pripomenie každý liek v správny čas a hlavne povie, či ste ho u�
 • Zásoba liekov: odpočítava sa sama, upozorní, keď dochádza, a odhadne, kedy sa minie
 • Kontrola zásoby: spočítate tablety doma a Vzato ukáže, či záznamy sedia
 • Fotografie škatuľky, tablety a príbalového letáka
+• Databáza liekov: napíšte pár písmen a vyberte slovenský alebo český liek, názov a sila sa vyplnia samy
+• Profily pre deti, rodičov a zvieratá: Dnes ukazuje, čia je dávka
+• Opakovanie po niekoľkých dňoch, týždňoch alebo mesiacoch, napríklad odčervenie raz za mesiac
 • Widgety na plochu a zamknutú obrazovku s tlačidlom Vzaté
 • Synchronizácia medzi iPhonom, iPadom a Macom cez váš iCloud
 • Záznam činností: kto, kedy a na ktorom zariadení dávku zaznamenal
@@ -107,6 +113,9 @@ Vzato reminds you of every medication at the right time and, above all, tells yo
 • Supply tracking: counts down by itself, warns when you run low and estimates when you run out
 • Supply check: count the pills at home and Vzato shows whether the records match
 • Photos of the package, the pill and the leaflet
+• Medicines database: type a few letters and pick a Czech or Slovak medicine; name, strength and unit fill in by themselves
+• Profiles for children, parents and animals: Today shows whose dose it is
+• Repeat every few days, weeks or months, for example a monthly deworming tablet
 • Home screen and Lock Screen widgets with a Taken button
 • Sync between iPhone, iPad and Mac through your own iCloud
 • Activity log: who recorded a dose, when and on which device
@@ -141,6 +150,9 @@ A Vzato a megfelelő időben emlékeztet minden gyógyszerre, és ami a legfonto
 • Készletkövetés: magától csökken, figyelmeztet, ha fogy, és megbecsüli, mikor fogy el
 • Készletellenőrzés: megszámolja otthon a tablettákat, és a Vzato megmutatja, egyeznek-e a bejegyzések
 • Fotók a dobozról, a tablettáról és a betegtájékoztatóról
+• Gyógyszer-adatbázis: írjon be néhány betűt, és válasszon cseh vagy szlovák gyógyszert; a név, a hatáserősség és az egység magától kitöltődik
+• Profilok gyermekeknek, szülőknek és állatoknak: a Ma mutatja, kié az adag
+• Ismétlés néhány naponta, hetente vagy havonta, például havi féreghajtó tabletta
 • Widgetek a kezdőképernyőre és a zárolási képernyőre Bevéve gombbal
 • Szinkronizálás iPhone, iPad és Mac között az Ön iCloudján keresztül
 • Tevékenységnapló: ki, mikor és melyik eszközön rögzítette az adagot
@@ -234,3 +246,42 @@ None. The app works the same in all regions. It is localized into Czech, Slovak,
 6. Regulated industry
 The app does not provide medical, pharmacy or health services and is not a regulated medical device. It only stores the user's own notes and reminders, and it does not use protected third-party material.
 ```
+
+---
+
+## What's new (release notes per version)
+
+`Scripts/asc.py release <version>` creates the version for iOS and macOS when it does not exist,
+attaches the newest build and uploads these texts. One `###` block per locale.
+
+### 1.0.1 – cs
+Databáze léčiv: napište pár písmen a vyberte český nebo slovenský lék, název a síla se vyplní samy. U českých léků stáhnete oficiální příbalový leták ze SÚKL.
+Profily pro děti, rodiče a zvířata: obrazovka Dnes ukazuje, čí je dávka.
+Opakování po několika dnech, týdnech nebo měsících, třeba odčervení jednou za měsíc.
+Připomínky: v čas dávky jedno oznámení se všemi léky na ten čas; bez potvrzení se opakuje a potom přestane. Projdou i přes Nerušit a Soustředění (jde vypnout v Nastavení).
+Archivované léky jdou najít a obnovit. Tlačítko Přeskočit ve widgetu.
+Opraveno ukončení aplikace na pozadí během synchronizace s iCloudem.
+
+### 1.0.1 – sk
+Databáza liekov: napíšte pár písmen a vyberte slovenský alebo český liek, názov a sila sa vyplnia samy.
+Profily pre deti, rodičov a zvieratá: obrazovka Dnes ukazuje, čia je dávka.
+Opakovanie po niekoľkých dňoch, týždňoch alebo mesiacoch, napríklad odčervenie raz za mesiac.
+Pripomienky: v čase dávky jedno oznámenie so všetkými liekmi na ten čas; bez potvrdenia sa opakuje a potom prestane. Prejdú aj cez Nerušiť a Sústredenie (dá sa vypnúť v Nastaveniach).
+Archivované lieky sa dajú nájsť a obnoviť. Tlačidlo Preskočiť vo widgete.
+Opravené ukončenie aplikácie na pozadí počas synchronizácie s iCloudom.
+
+### 1.0.1 – en-US
+Medicines database: type a few letters and pick a Czech or Slovak medicine; name, strength and unit fill in by themselves. For Czech medicines, download the official leaflet from SÚKL.
+Profiles for children, parents and animals: Today shows whose dose it is.
+Repeat every few days, weeks or months, for example a monthly deworming tablet.
+Reminders: one notification at dose time with every medication due then; if not confirmed it repeats, then stops. They come through Do Not Disturb and Focus (switch in Settings).
+Archived medications can be found and restored. Skip button in the widget.
+Fixed the app being closed in the background during iCloud sync.
+
+### 1.0.1 – hu
+Gyógyszer-adatbázis: írjon be néhány betűt, és válasszon cseh vagy szlovák gyógyszert; a név, a hatáserősség és az egység magától kitöltődik.
+Profilok gyermekeknek, szülőknek és állatoknak: a Ma képernyő mutatja, kié az adag.
+Ismétlés néhány naponta, hetente vagy havonta, például havi féreghajtó tabletta.
+Emlékeztetők: az adag idején egy értesítés az akkor esedékes összes gyógyszerrel; ha nincs megerősítve, ismétlődik, majd leáll. A Ne zavarjanak és a Fókusz módon is átjutnak (a Beállításokban kikapcsolható).
+Az archivált gyógyszerek megtalálhatók és visszaállíthatók. Kihagyás gomb a widgetben.
+Javítva az alkalmazás háttérben történő leállítása iCloud-szinkronizálás közben.

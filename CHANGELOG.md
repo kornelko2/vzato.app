@@ -6,6 +6,8 @@ All notable changes to Vzato are listed here. The format follows
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-11
+
 ### Added
 - Medications with a weekly schedule, several times per day, meal relation,
   start and end dates, color and notes.
