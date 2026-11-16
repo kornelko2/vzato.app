@@ -30,6 +30,8 @@ All notable changes to Vzato are listed here. The format follows
   text is large.
 - The "running out" warning comes once per supply instead of again after a
   late or skipped dose.
+- After a dose time is changed (or a flight to another time zone) right after
+  taking it, the dose at its new time does not remind again.
 - If the data cannot be opened, Vzato shows a message instead of crashing and
   leaves the scheduled reminders alone.
 

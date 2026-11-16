@@ -109,6 +109,32 @@ enum DoseScheduler {
         return result.sorted { $0.scheduledAt < $1.scheduledAt }
     }
 
+    /// Taken doses that no longer belong to a time of the plan: the time was changed after the dose,
+    /// or the person travelled to another time zone. Looks at the slot's day and the day before.
+    static func orphanTakenTimes(of medication: Medication, near date: Date, calendar: Calendar = .current) -> [Date] {
+        let day = calendar.startOfDay(for: date)
+        let days = [calendar.date(byAdding: .day, value: -1, to: day) ?? day, day]
+        return days.flatMap { day in
+            let planned = Set(medication.activeSchedules.flatMap { times(for: $0, on: day, calendar: calendar) }
+                .map { Int($0.timeIntervalSince1970 / 60) })
+            return medication.eventList.compactMap { event -> Date? in
+                guard event.status == .taken, !event.isUnscheduled, let at = event.scheduledAt,
+                      calendar.isDate(at, inSameDayAs: day), !planned.contains(Int(at.timeIntervalSince1970 / 60)) else { return nil }
+                return event.takenAt ?? at
+            }
+        }
+    }
+
+    /// An open dose that comes too soon after such a taken dose gets no reminder: it is most likely
+    /// the same dose at its new time. The Today card still shows it and asks before recording.
+    @MainActor
+    static func isCoveredByMovedDose(_ slot: DoseSlot, calendar: Calendar = .current) -> Bool {
+        let gap = DoseGuard.minimumGap(for: slot.medication)
+        return orphanTakenTimes(of: slot.medication, near: slot.scheduledAt, calendar: calendar).contains { taken in
+            taken <= slot.scheduledAt && slot.scheduledAt.timeIntervalSince(taken) < gap
+        }
+    }
+
     /// Slots across several days, limited to the interval (inclusive).
     static func slots(for medications: [Medication], in interval: DateInterval, calendar: Calendar = .current) -> [DoseSlot] {
         var result: [DoseSlot] = []

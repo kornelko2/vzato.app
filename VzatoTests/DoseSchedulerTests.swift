@@ -99,3 +99,33 @@ struct DoseSchedulerTests {
         #expect(slots.first?.event?.status == .taken)
     }
 }
+
+/// A dose taken, then its time changed: the new time must not remind again right away.
+@MainActor
+struct MovedDoseTests {
+    @Test func doseMovedAfterTakingGetsNoReminder() {
+        let store = TestStore()
+        let medication = store.medication(name: "Letrox", times: [8 * 60])
+        DoseLogger(context: store.context, now: at(monday, 8, 5), notifier: SpyNotifier())
+            .markTaken(DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)[0])
+        // At 8:30 the time is changed to 9:00.
+        medication.activeSchedules.first!.minutesOfDay = [9 * 60]
+        let slots = DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)
+        let nine = slots.first { $0.scheduledAt == at(monday, 9) }!
+        #expect(nine.event == nil)
+        #expect(DoseScheduler.isCoveredByMovedDose(nine, calendar: testCalendar))
+        // Tomorrow's 9:00 is a normal dose again.
+        let tomorrow = DoseScheduler.slots(for: [medication], on: days(1, after: monday), calendar: testCalendar)[0]
+        #expect(!DoseScheduler.isCoveredByMovedDose(tomorrow, calendar: testCalendar))
+    }
+
+    @Test func aLateDoseDoesNotSilenceTheNextOne() {
+        let store = TestStore()
+        let medication = store.medication(name: "Ibuprofen", times: [8 * 60, 12 * 60])
+        // The 8:00 dose taken late at 10:30 still belongs to 8:00.
+        DoseLogger(context: store.context, now: at(monday, 10, 30), notifier: SpyNotifier())
+            .markTaken(DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)[0])
+        let noon = DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)[1]
+        #expect(!DoseScheduler.isCoveredByMovedDose(noon, calendar: testCalendar))
+    }
+}

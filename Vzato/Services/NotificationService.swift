@@ -173,7 +173,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
                                                 missedAfterMinutes: AppSettings.missedAfterMinutes)
         let window = DateInterval(start: now.addingTimeInterval(-TimeInterval(settings.missedAfterMinutes * 60)),
                                   end: now.addingTimeInterval(TimeInterval(ReminderPlanner.horizonDays * 24 * 60 * 60)))
-        let slots = DoseScheduler.slots(for: medications, in: window, calendar: calendar).filter { $0.event == nil && !$0.isUnscheduled }
+        let slots = DoseScheduler.slots(for: medications, in: window, calendar: calendar).filter { $0.event == nil && !$0.isUnscheduled && !DoseScheduler.isCoveredByMovedDose($0, calendar: calendar) }
         let plan = ReminderPlanner.plan(slots: slots, now: now, settings: settings, budget: Self.pendingLimit - count - 1,
                                         skipping: snoozed, calendar: calendar)
         for reminder in plan.reminders {
