@@ -22,6 +22,8 @@ struct HistoryView: View {
     @State private var monthStart = Calendar.current.dateInterval(of: .month, for: Date())?.start ?? Date()
     @State private var selectedDay = Calendar.current.startOfDay(for: Date())
     @State private var now = Date()
+    /// Built when the data changes, not on every redraw: missed doses take a pass over the plan.
+    @State private var csv: DoseHistoryCSV?
 
     private let calendar = Calendar.current
     private var grace: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
@@ -95,14 +97,18 @@ struct HistoryView: View {
             .navigationTitle(Text("History"))
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    ShareLink(item: DoseHistoryCSV(text: CSVExport.make(events: Array(events))),
-                              preview: SharePreview(Text("Dose history"))) {
-                        Label("Export CSV", systemImage: "square.and.arrow.up")
+                    if let csv {
+                        ShareLink(item: csv, preview: SharePreview(Text("Dose history"))) {
+                            Label("Export CSV", systemImage: "square.and.arrow.up")
+                        }
                     }
-                    .disabled(events.isEmpty)
                 }
             }
             .onAppear { now = Date() }
+            .task(id: "\(events.count)|\(medications.count)|\(missedAfterMinutes)") {
+                let missed = CSVExport.missedSlots(for: Array(medications), now: Date(), grace: grace, calendar: calendar)
+                csv = events.isEmpty && missed.isEmpty ? nil : DoseHistoryCSV(text: CSVExport.make(events: Array(events), missed: missed))
+            }
         }
     }
 }

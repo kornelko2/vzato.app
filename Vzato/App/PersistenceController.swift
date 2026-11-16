@@ -37,9 +37,11 @@ final class PersistenceController {
 
     let container: NSPersistentCloudKitContainer
     let isCloudKitEnabled: Bool
-    /// False only in the widget when the store could not be opened (for example while the app is
-    /// still migrating it after an update). The widget then shows its empty state.
+    /// False when the store could not be opened: in the widget while the app is still migrating it
+    /// after an update (the widget shows its empty state), in the app for example on a full disk
+    /// (the app shows `StoreErrorView` and leaves the scheduled reminders alone).
     private(set) var isStoreLoaded = true
+    private(set) var loadErrorDescription: String?
     var viewContext: NSManagedObjectContext { container.viewContext }
 
     /// `Vzato.sqlite` in the App Group container, or nil when the entitlement is missing.
@@ -94,9 +96,9 @@ final class PersistenceController {
             container.loadPersistentStores { _, error in loadError = error }
         }
         if let loadError {
-            guard AppSettings.isAppExtension else { fatalError("Could not load the data store: \(loadError)") }
-            print("Vzato widget: store not available yet: \(loadError)")
+            print("Vzato: store not available: \(loadError)")
             isStoreLoaded = false
+            loadErrorDescription = loadError.localizedDescription
         }
         #if DEBUG
         // `--init-cloudkit-schema` pushes the model to the CloudKit development environment once.

@@ -23,12 +23,15 @@ struct DoseRow: View {
     }
     private var isOverdue: Bool { slot.isOverdue(now: now, grace: grace) }
 
+    /// Room for "12:45" (or "12:45 PM") at the current text size.
+    @ScaledMetric(relativeTo: .body) private var timeWidth: CGFloat = 56
+
     var body: some View {
         HStack(spacing: 12) {
             Text(slot.scheduledAt, style: .time)
                 .font(.body.weight(.semibold))
                 .foregroundStyle(.secondary)
-                .frame(width: 56, alignment: .leading)
+                .frame(minWidth: timeWidth, alignment: .leading)
                 .monospacedDigit()
 
             Image(systemName: isOverdue ? "exclamationmark.circle" : status.symbolName)

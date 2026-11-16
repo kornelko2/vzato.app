@@ -11,6 +11,8 @@ All notable changes to Vzato are listed here. The format follows
   banners, lock screen or sounds turned off for Vzato) and open the system's
   notification settings.
 - Reminders are replanned after a time zone change and at midnight.
+- Privacy policy link in Settings › About.
+- The CSV export includes missed doses.
 
 ### Fixed
 - Snoozing one medication on the Today card no longer silences the other
@@ -24,6 +26,12 @@ All notable changes to Vzato are listed here. The format follows
   not recorded; a notification explains why.
 - The Snooze button on notifications shows the current snooze time.
 - The reminder settings footer matches the Focus switch.
+- The Today card follows the system text size; Snooze and Skip stack when the
+  text is large.
+- The "running out" warning comes once per supply instead of again after a
+  late or skipped dose.
+- If the data cannot be opened, Vzato shows a message instead of crashing and
+  leaves the scheduled reminders alone.
 
 ## [1.0.1] - 2026-11-11
 

@@ -244,7 +244,10 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             guard let runOut = StockService.projectedRunOutDate(for: medication, from: now, calendar: calendar),
                   let warnDay = calendar.date(byAdding: .day, value: -days, to: calendar.startOfDay(for: runOut)),
                   let fire = calendar.date(bySettingHour: 9, minute: 0, second: 0, of: warnDay),
-                  fire > now else { continue }
+                  fire > now, let id = medication.id,
+                  RunOutWarningLog.shouldSchedule(fire: fire, previous: RunOutWarningLog.previousFire(for: id), now: now,
+                                                  windowDays: days, calendar: calendar) else { continue }
+            RunOutWarningLog.record(fire, for: id)
             let content = UNMutableNotificationContent()
             content.title = String(localized: "Supply of \(medication.name) is running out")
             content.body = String(localized: "Runs out on \(runOut.formatted(date: .long, time: .omitted)). Time to get more.")

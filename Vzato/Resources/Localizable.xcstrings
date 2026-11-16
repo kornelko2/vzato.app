@@ -4899,6 +4899,28 @@
         }
       }
     },
+    "If Settings › Reminders shows a warning, tap Open notification settings and turn on what it names.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokud Nastavení › Připomínky ukazuje varování, klepněte na Otevřít nastavení oznámení a zapněte, co varování jmenuje."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ha a Beállítások › Emlékeztetők figyelmeztetést mutat, koppintson az Értesítési beállítások megnyitása gombra, és kapcsolja be, amit említ."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ak Nastavenia › Pripomienky ukazujú varovanie, klepnite na Otvoriť nastavenia hlásení a zapnite, čo varovanie uvádza."
+          }
+        }
+      }
+    },
     "If Today shows Reminders are off, tap Allow notifications or Open settings.": {
       "localizations": {
         "cs": {
@@ -6571,6 +6593,28 @@
         }
       }
     },
+    "Nothing was deleted. Close Vzato completely and open it again. If this keeps happening, check that the device has free space, or write to info@vzato.app.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nic se nesmazalo. Vzato úplně zavřete a otevřete znovu. Pokud se to opakuje, zkontrolujte volné místo v zařízení, nebo napište na info@vzato.app."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semmi sem törlődött. Zárja be teljesen a Vzatót, és nyissa meg újra. Ha ez ismétlődik, ellenőrizze, van-e szabad hely az eszközön, vagy írjon az info@vzato.app címre."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nič sa nevymazalo. Vzato úplne zatvorte a otvorte znova. Ak sa to opakuje, skontrolujte voľné miesto v zariadení, alebo napíšte na info@vzato.app."
+          }
+        }
+      }
+    },
     "Notification": {
       "localizations": {
         "cs": {
@@ -7447,6 +7491,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Predtým: %@."
+          }
+        }
+      }
+    },
+    "Privacy policy": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásady ochrany soukromí"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adatvédelmi irányelvek"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásady ochrany súkromia"
           }
         }
       }
@@ -10527,6 +10593,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Váš počet zodpovedá záznamom."
+          }
+        }
+      }
+    },
+    "Your data could not be opened": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data se nepodařilo otevřít"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adatokat nem sikerült megnyitni"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Údaje sa nepodarilo otvoriť"
           }
         }
       }

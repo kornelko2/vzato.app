@@ -15,13 +15,25 @@ struct DoseHistoryCSV: Transferable, Sendable {
     }
 }
 
+@MainActor
 enum CSVExport {
-    static func make(events: [DoseEvent]) -> String {
+    /// Recorded doses plus the missed ones, which have no record (a scheduled dose gets one only
+    /// when the person acts), so the export shows the same history as the calendar.
+    static func make(events: [DoseEvent], missed: [DoseSlot] = []) -> String {
         let formatter = ISO8601DateFormatter()
         var lines = ["medication,dosage,scheduled_at,status,taken_at,source,unscheduled,profile"]
-        let sorted = events.sorted { ($0.scheduledAt ?? .distantPast) < ($1.scheduledAt ?? .distantPast) }
-        for event in sorted {
-            lines.append([
+        var rows: [(Date, String)] = missed.map { slot in
+            (slot.scheduledAt, [
+                escape(slot.medication.name),
+                escape(slot.medication.dosageText),
+                formatter.string(from: slot.scheduledAt),
+                DoseStatus.missed.rawValue,
+                "", "", "0",
+                escape(slot.medication.profile?.name ?? ""),
+            ].joined(separator: ","))
+        }
+        for event in events {
+            rows.append((event.scheduledAt ?? .distantPast, [
                 escape(event.medication?.name ?? ""),
                 escape(event.medication?.dosageText ?? ""),
                 event.scheduledAt.map(formatter.string) ?? "",
@@ -30,12 +42,26 @@ enum CSVExport {
                 event.sourceRaw,
                 event.isUnscheduled ? "1" : "0",
                 escape(event.medication?.profile?.name ?? ""),
-            ].joined(separator: ","))
+            ].joined(separator: ",")))
         }
+        lines += rows.sorted { $0.0 < $1.0 }.map(\.1)
         return lines.joined(separator: "\n") + "\n"
     }
 
-    static func escape(_ field: String) -> String {
+    /// Scheduled doses without a record whose grace period is over, from each medication's start,
+    /// at most `maxDays` back.
+    static func missedSlots(for medications: [Medication], now: Date, grace: TimeInterval, maxDays: Int = 730,
+                            calendar: Calendar = .current) -> [DoseSlot] {
+        let earliest = medications.flatMap(\.activeSchedules).compactMap(\.startDate).min()
+            ?? medications.compactMap(\.createdAt).min() ?? now
+        let limit = calendar.date(byAdding: .day, value: -maxDays, to: now) ?? now
+        let start = calendar.startOfDay(for: max(earliest, limit))
+        guard start < now else { return [] }
+        return DoseScheduler.slots(for: medications, in: DateInterval(start: start, end: now), calendar: calendar)
+            .filter { !$0.isUnscheduled && $0.status(now: now, grace: grace) == .missed }
+    }
+
+    nonisolated static func escape(_ field: String) -> String {
         guard field.contains(where: { $0 == "," || $0 == "\"" || $0 == "\n" }) else { return field }
         return "\"" + field.replacingOccurrences(of: "\"", with: "\"\"") + "\""
     }

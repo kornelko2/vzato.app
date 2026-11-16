@@ -209,6 +209,7 @@ struct SettingsView: View {
                     Text("Your data stays on this device and in your iCloud. Nothing is collected.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                    Link("Privacy policy", destination: Self.privacyPolicyURL)
                     Link("Source code and license (MPL-2.0)", destination: URL(string: "https://github.com/kornelko2/vzato.app")!)
                 }
             }
@@ -219,6 +220,13 @@ struct SettingsView: View {
             .navigationTitle(Text("Settings"))
             .task { await notifications.refreshAuthorizationStatus() }
         }
+    }
+
+    /// The policy on vzato.app in the app's language (cs, sk, hu), English otherwise.
+    static var privacyPolicyURL: URL {
+        let language = Bundle.main.preferredLocalizations.first.map { String($0.prefix(2)) } ?? "en"
+        let path = ["cs", "sk", "hu"].contains(language) ? language : "en"
+        return URL(string: "https://vzato.app/\(path)/privacy/")!
     }
 
     private func soundPicker(_ title: Text, options: [ReminderSound], selection: Binding<ReminderSound>) -> some View {

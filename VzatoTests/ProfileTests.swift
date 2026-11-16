@@ -59,3 +59,21 @@ struct ProfileTests {
         #expect(csv.contains(",Mentík\n"))
     }
 }
+
+@MainActor
+struct CSVMissedTests {
+    @Test func missedDosesAreExportedInTimeOrder() {
+        let store = TestStore()
+        let medication = store.medication(name: "Letrox", times: [8 * 60, 20 * 60])
+        let logger = DoseLogger(context: store.context, now: at(monday, 8, 5), notifier: SpyNotifier())
+        logger.markTaken(DoseScheduler.slots(for: [medication], on: monday, calendar: testCalendar)[0])
+        let now = at(days(1, after: monday), 12)
+        let missed = CSVExport.missedSlots(for: [medication], now: now, grace: 2 * 3600, calendar: testCalendar)
+        // Monday 20:00 and Tuesday 8:00 are missed; Tuesday 20:00 is still ahead.
+        #expect(missed.map(\.scheduledAt) == [at(monday, 20), at(days(1, after: monday), 8)])
+        let lines = CSVExport.make(events: medication.eventList, missed: missed).split(separator: "\n")
+        #expect(lines.count == 4)
+        #expect(lines[1].contains(",taken,"))
+        #expect(lines[2].contains(",missed,") && lines[3].contains(",missed,"))
+    }
+}

@@ -19,6 +19,9 @@ struct VzatoApp: App {
 
     init() {
         persistence = PersistenceController.shared
+        // Without the store nothing may run: a reminder rebuild would see no medications and
+        // remove every scheduled reminder. The ones already scheduled keep working.
+        guard persistence.isStoreLoaded else { return }
         #if DEBUG
         if LaunchArguments.resetsData {
             let context = persistence.viewContext
@@ -55,7 +58,13 @@ struct VzatoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            Group {
+                if persistence.isStoreLoaded {
+                    RootView()
+                } else {
+                    StoreErrorView(message: persistence.loadErrorDescription ?? "")
+                }
+            }
                 .environment(state)
                 .environment(\.managedObjectContext, persistence.viewContext)
                 #if os(macOS)
@@ -71,6 +80,7 @@ struct VzatoApp: App {
                 .onChange(of: scenePhase) { _, phase in
                     switch phase {
                     case .active:
+                        guard persistence.isStoreLoaded else { break }
                         persistence.mergeExternalChanges()
                         Task { await NotificationService.shared.rescheduleAll() }
                     case .background:

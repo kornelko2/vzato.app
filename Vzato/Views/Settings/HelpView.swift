@@ -74,6 +74,7 @@ struct HelpView: View {
         Topic(id: "noReminder", title: "I did not get a reminder", symbol: "bell.slash", steps: [
             "If Today shows Reminders are off, tap Allow notifications or Open settings.",
             "Check that Focus or Do Not Disturb is off, or that it allows Vzato.",
+            "If Settings › Reminders shows a warning, tap Open notification settings and turn on what it names.",
             "Check that the iPhone is not on silent and the volume is up.",
             "In Settings › Sounds you can choose a different sound.",
         ]),

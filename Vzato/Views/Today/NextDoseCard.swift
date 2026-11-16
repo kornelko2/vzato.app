@@ -7,6 +7,8 @@ import SwiftUI
 /// The large card at the top of Today: one dose, one big button.
 struct NextDoseCard: View {
     @Environment(\.showsProfiles) private var showsProfiles
+    /// The medication name grows with the text size setting like the rest of the card.
+    @ScaledMetric(relativeTo: .largeTitle) private var nameSize: CGFloat = 32
     let slot: DoseSlot
     let now: Date
     let grace: TimeInterval
@@ -62,7 +64,7 @@ struct NextDoseCard: View {
                         ProfileBadge(profile: slot.medication.profile, font: .headline)
                     }
                     Text(slot.medication.name)
-                        .font(.system(size: 32, weight: .heavy))
+                        .font(.system(size: nameSize, weight: .heavy))
                         .lineLimit(2)
                         .minimumScaleFactor(0.7)
                     Text(slot.medication.doseAmountText)
@@ -105,15 +107,22 @@ struct NextDoseCard: View {
                 .accessibilityIdentifier("takenButton")
                 .accessibilityHint(Text("Records this dose as taken now"))
 
-                HStack(spacing: 10) {
+                // Side by side; one under the other when large text would not fit on one line.
+                let secondary = Group {
                     Button(action: onSnooze) {
                         Text("Snooze \(snoozeMinutes) min")
+                            .lineLimit(1)
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
                     Button(action: onSkip) {
                         Text("Skip")
+                            .lineLimit(1)
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
+                }
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 10) { secondary }
+                    VStack(spacing: 10) { secondary }
                 }
                 .buttonStyle(.bordered)
             } else {
