@@ -1761,6 +1761,28 @@
         }
       }
     },
+    "A locked phone shows no reminder. Turn on Lock Screen for Vzato in the system settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zamčený telefon připomínku neukáže. V systémovém nastavení zapněte u Vzato Zamčenou obrazovku."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A zárolt telefon nem mutat emlékeztetőt. A rendszerbeállításokban kapcsolja be a Vzato zárolási képernyős megjelenítését."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zamknutý telefón pripomienku neukáže. V systémových nastaveniach zapnite pri Vzato Zamknutú obrazovku."
+          }
+        }
+      }
+    },
     "A quarter tablet or a different amount can be set later in Medications.": {
       "localizations": {
         "cs": {
@@ -2483,6 +2505,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Späť"
+          }
+        }
+      }
+    },
+    "Banners are off": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bannery jsou vypnuté"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A szalagcímek ki vannak kapcsolva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bannery sú vypnuté"
           }
         }
       }
@@ -5031,6 +5075,28 @@
         }
       }
     },
+    "It was already taken at %@. If you really took another dose, record it in Vzato.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Už bylo vzato v %@. Pokud jste opravdu vzali další dávku, zaznamenejte ji ve Vzato."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Már bevette ekkor: %@. Ha valóban bevett még egy adagot, rögzítse a Vzatóban."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Už bolo vzaté o %@. Ak ste naozaj vzali ďalšiu dávku, zaznamenajte ju vo Vzato."
+          }
+        }
+      }
+    },
     "Kept %@, removed %@.": {
       "localizations": {
         "cs": {
@@ -6351,6 +6417,28 @@
         }
       }
     },
+    "Not recorded: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nezaznamenáno: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nincs rögzítve: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nezaznamenané: %@"
+          }
+        }
+      }
+    },
     "Not sure the number is right? Count your tablets, tap Count and check supply and enter the number. Vzato shows whether it matches the records.": {
       "localizations": {
         "cs": {
@@ -6659,24 +6747,46 @@
         }
       }
     },
-    "One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. Medication reminders come through Do Not Disturb and Focus; “You can eat now” and supply alerts stay ordinary.": {
+    "One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. During Do Not Disturb and Focus, reminders wait silently in Notification Center.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Na každý čas jedno oznámení se všemi léky, které jsou v něm na řadě. Bez potvrzení se opakuje podle nastavení výše a pak přestane. Připomínky léků projdou i přes Nerušit a Soustředění; „Už můžete jíst“ a zásoby zůstávají obyčejné."
+            "value": "Na každý čas jedno oznámení se všemi léky, které jsou v něm na řadě. Bez potvrzení se opakuje podle nastavení výše a pak přestane. Během Nerušit a Soustředění čekají připomínky potichu v Centru oznámení."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minden időponthoz egy értesítés az akkor esedékes összes gyógyszerrel. Ha nincs megerősítve, a fenti beállítás szerint ismétlődik, majd leáll. A gyógyszer-emlékeztetők a Ne zavarjanak és a Fókusz módon is átjutnak; az „Ehet” és a készlet-értesítések hagyományosak maradnak."
+            "value": "Minden időponthoz egy értesítés az akkor esedékes összes gyógyszerrel. Ha nincs megerősítve, a fenti beállítás szerint ismétlődik, majd leáll. Ne zavarjanak és Fókusz módban az emlékeztetők csendben várnak az Értesítési központban."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Na každý čas jedno oznámenie so všetkými liekmi, ktoré sú vtedy na rade. Bez potvrdenia sa opakuje podľa nastavenia vyššie a potom prestane. Pripomienky liekov prejdú aj cez Nerušiť a Sústredenie; „Už môžete jesť“ a zásoby zostávajú obyčajné."
+            "value": "Na každý čas jedno oznámenie so všetkými liekmi, ktoré sú vtedy na rade. Bez potvrdenia sa opakuje podľa nastavenia vyššie a potom prestane. Počas Nerušiť a Sústredenia čakajú pripomienky potichu v Centre hlásení."
+          }
+        }
+      }
+    },
+    "One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. Medication reminders come through Do Not Disturb and Focus; “You can eat now” and supply alerts stay ordinary. The ring/silent switch still mutes the sound.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na každý čas jedno oznámení se všemi léky, které jsou v něm na řadě. Bez potvrzení se opakuje podle nastavení výše a pak přestane. Připomínky léků projdou i přes Nerušit a Soustředění; „Už můžete jíst“ a zásoby zůstávají obyčejné. Přepínač tichého režimu zvuk přesto ztlumí."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden időponthoz egy értesítés az akkor esedékes összes gyógyszerrel. Ha nincs megerősítve, a fenti beállítás szerint ismétlődik, majd leáll. A gyógyszer-emlékeztetők a Ne zavarjanak és a Fókusz módon is átjutnak; az „Ehet” és a készlet-értesítések hagyományosak maradnak. A némító kapcsoló a hangot így is elnémítja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na každý čas jedno oznámenie so všetkými liekmi, ktoré sú vtedy na rade. Bez potvrdenia sa opakuje podľa nastavenia vyššie a potom prestane. Pripomienky liekov prejdú aj cez Nerušiť a Sústredenie; „Už môžete jesť“ a zásoby zostávajú obyčajné. Prepínač tichého režimu zvuk aj tak stlmí."
           }
         }
       }
@@ -6765,6 +6875,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otvorte Vzato, aby pokračovali aj potom."
+          }
+        }
+      }
+    },
+    "Open notification settings": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřít nastavení oznámení"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Értesítési beállítások megnyitása"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvoriť nastavenia hlásení"
           }
         }
       }
@@ -7561,6 +7693,28 @@
         }
       }
     },
+    "Reminder sounds are off": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvuky připomínek jsou vypnuté"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők hangja ki van kapcsolva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zvuky pripomienok sú vypnuté"
+          }
+        }
+      }
+    },
     "Reminders": {
       "localizations": {
         "cs": {
@@ -7579,6 +7733,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pripomienky"
+          }
+        }
+      }
+    },
+    "Reminders are hidden on the lock screen": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na zamčené obrazovce se připomínky nezobrazují"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők nem jelennek meg a zárolási képernyőn"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na zamknutej obrazovke sa pripomienky nezobrazujú"
           }
         }
       }
@@ -7649,6 +7825,28 @@
         }
       }
     },
+    "Reminders arrive without a sound. Turn on Sounds for Vzato in the system settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky přijdou bez zvuku. V systémovém nastavení zapněte u Vzato Zvuky."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők hang nélkül érkeznek. A rendszerbeállításokban kapcsolja be a Vzato hangjait."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky prídu bez zvuku. V systémových nastaveniach zapnite pri Vzato Zvuky."
+          }
+        }
+      }
+    },
     "Reminders come through Do Not Disturb and Focus. You can turn that off in Settings › Reminders.": {
       "localizations": {
         "cs": {
@@ -7667,6 +7865,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pripomienky prejdú aj cez Nerušiť a Sústredenie. Vypnúť to môžete v Nastaveniach › Pripomienky."
+          }
+        }
+      }
+    },
+    "Reminders only appear in Notification Center. Turn on banners for Vzato in the system settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Připomínky se objeví jen v Centru oznámení. V systémovém nastavení zapněte u Vzato bannery."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az emlékeztetők csak az Értesítési központban jelennek meg. A rendszerbeállításokban kapcsolja be a Vzato szalagcímeit."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pripomienky sa zobrazia len v Centre hlásení. V systémových nastaveniach zapnite pri Vzato bannery."
+          }
+        }
+      }
+    },
+    "Reminders stay silent during Focus and Do Not Disturb. Turn on Time Sensitive Notifications for Vzato in the system settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Během Soustředění a Nerušit zůstanou připomínky potichu. V systémovém nastavení zapněte u Vzato Časově citlivá oznámení."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fókusz és Ne zavarjanak módban az emlékeztetők némák maradnak. A rendszerbeállításokban kapcsolja be a Vzato időérzékeny értesítéseit."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Počas Sústredenia a Nerušiť zostanú pripomienky potichu. V systémových nastaveniach zapnite pri Vzato Časovo citlivé hlásenia."
           }
         }
       }
@@ -9273,6 +9515,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Čas"
+          }
+        }
+      }
+    },
+    "Time Sensitive notifications are off": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Časově citlivá oznámení jsou vypnutá"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az időérzékeny értesítések ki vannak kapcsolva"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Časovo citlivé hlásenia sú vypnuté"
           }
         }
       }

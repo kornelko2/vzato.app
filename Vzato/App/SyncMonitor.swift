@@ -82,6 +82,10 @@ final class SyncMonitor {
         while (!activity.isIdle || Date() < holdUntil), Date() < deadline {
             try? await Task.sleep(for: .milliseconds(500))
         }
+        // A dose confirmed on another device: its reminders go away here before iOS suspends the
+        // app again, instead of in the delayed refresh that would not get to run.
+        rescheduleTask?.cancel()
+        await NotificationService.shared.rescheduleAll()
         holdUntil = .distantPast
         releaseBackgroundTimeIfIdle()
     }

@@ -44,19 +44,22 @@ enum ReminderPlanner {
     /// `slots` are open scheduled doses (no record yet), any order. Doses whose reminders are all in
     /// the past are skipped. Doses at the same minute share one notification. Groups are planned in
     /// time order, each with all its follow-ups or not at all, until `budget` is used up.
+    /// `snoozed` maps a group key ("yyyy-MM-dd|minutes") to the medications that have their own
+    /// snoozed reminder; the rest of that group is planned as usual.
     static func plan(slots: [DoseSlot], now: Date, settings: Settings, budget: Int,
-                     skipping snoozedGroups: Set<String> = [], calendar: Calendar = .current) -> ReminderPlan {
+                     skipping snoozed: [String: Set<UUID>] = [:], calendar: Calendar = .current) -> ReminderPlan {
         var plan = ReminderPlan()
         let groups = Dictionary(grouping: slots) { Int($0.scheduledAt.timeIntervalSince1970 / 60) }
         for key in groups.keys.sorted() {
             guard let members = groups[key], let scheduledAt = members.first?.scheduledAt else { continue }
+            let dayKey = Self.dayKey(for: scheduledAt, calendar: calendar)
+            let minutes = calendar.component(.hour, from: scheduledAt) * 60 + calendar.component(.minute, from: scheduledAt)
+            let snoozedIDs = snoozed["\(dayKey)|\(minutes)"] ?? []
             let ids = members
                 .sorted { $0.medication.name.localizedStandardCompare($1.medication.name) == .orderedAscending }
                 .compactMap(\.medication.id)
+                .filter { !snoozedIDs.contains($0) }
             guard !ids.isEmpty else { continue }
-            let dayKey = Self.dayKey(for: scheduledAt, calendar: calendar)
-            let minutes = calendar.component(.hour, from: scheduledAt) * 60 + calendar.component(.minute, from: scheduledAt)
-            if snoozedGroups.contains("\(dayKey)|\(minutes)") { continue }
 
             let missedAt = scheduledAt.addingTimeInterval(TimeInterval(settings.missedAfterMinutes * 60))
             var sequence: [PlannedReminder] = []

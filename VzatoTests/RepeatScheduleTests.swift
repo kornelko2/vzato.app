@@ -98,3 +98,41 @@ struct RepeatScheduleTests {
         #expect(Schedule.describe(kind: .weekdays, interval: 1, weekdays: Array(1...7)) == String(localized: "Every day"))
     }
 }
+
+/// Daylight saving changes in Prague: 25 Oct 2026 (02:00–03:00 twice) and 28 Mar 2027 (no 02:00–03:00).
+@MainActor
+struct DaylightSavingTests {
+    private let autumn = testCalendar.date(from: DateComponents(year: 2026, month: 10, day: 25))!
+    private let spring = testCalendar.date(from: DateComponents(year: 2027, month: 3, day: 28))!
+
+    @Test func everyDoseTimeHappensOnceOnBothChangeDays() {
+        let store = TestStore()
+        let medication = store.medication(times: [2 * 60 + 30, 8 * 60, 22 * 60], start: days(-30, after: autumn))
+        for day in [autumn, spring] {
+            let slots = DoseScheduler.slots(for: [medication], on: day, calendar: testCalendar)
+            #expect(slots.count == 3)
+            #expect(Set(slots.map(\.scheduledAt)).count == 3)
+            #expect(slots.allSatisfy { testCalendar.isDate($0.scheduledAt, inSameDayAs: day) })
+        }
+    }
+
+    @Test func remindersAcrossTheChangeKeepTheirWallClockTime() {
+        let store = TestStore()
+        store.medication(times: [8 * 60], start: days(-30, after: autumn))
+        let window = DateInterval(start: days(-1, after: autumn), end: days(2, after: autumn))
+        let slots = DoseScheduler.slots(for: store.context.registeredObjects.compactMap { $0 as? Medication }, in: window, calendar: testCalendar)
+        let plan = ReminderPlanner.plan(slots: slots, now: at(days(-1, after: autumn), 0),
+                                        settings: .init(snoozeMinutes: 10, repeatCount: 0, missedAfterMinutes: 120),
+                                        budget: 60, calendar: testCalendar)
+        #expect(plan.reminders.count == 3)
+        #expect(plan.reminders.allSatisfy { testCalendar.component(.hour, from: $0.fireAt) == 8 && $0.minutesOfDay == 480 })
+    }
+
+    @Test func everyOtherDayCountsCalendarDaysNotHours() {
+        let store = TestStore()
+        let medication = store.medication(times: [8 * 60], start: days(-2, after: spring), repeat: .days, every: 2)
+        #expect(DoseScheduler.slots(for: [medication], on: spring, calendar: testCalendar).count == 1)
+        #expect(DoseScheduler.slots(for: [medication], on: days(1, after: spring), calendar: testCalendar).isEmpty)
+        #expect(DoseScheduler.slots(for: [medication], on: days(2, after: spring), calendar: testCalendar).count == 1)
+    }
+}

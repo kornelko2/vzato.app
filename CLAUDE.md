@@ -129,7 +129,8 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   manual seconds math or hard-coded formats.
 - Notifications: one per time with every medication due then, planned per concrete dose by `ReminderPlanner`
   (no repeating triggers). Identifiers `dose|<yyyy-MM-dd>|<minutes>|<attempt>`, `snooze|<yyyy-MM-dd>|<minutes>|<attempt>`,
-  `meal|…`, `runout|<medicationID>`, `lowstock|<medicationID>`, `plan`; userInfo carries `day`, `minutesOfDay`,
-  `medicationIDs`. iOS caps pending requests at 64; `BackgroundRefresh` rebuilds the plan daily.
+  `meal|…`, `runout|<medicationID>`, `lowstock|<medicationID>`, `notrecorded|<medicationID>`, `plan`; userInfo carries `day`, `minutesOfDay`,
+  `medicationIDs`. A snooze covers only the medications in its `medicationIDs`; the rest of that time is planned as usual.
+  The widget process has no plan: after its buttons it edits pending requests itself (`widgetResolvedDose`). iOS caps pending requests at 64; `BackgroundRefresh` rebuilds the plan daily.
 - Czech docs: keep the revision note at the top of `specification.md` current and mark
   decided open questions with strikethrough plus the decision.

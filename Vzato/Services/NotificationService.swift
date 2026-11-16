@@ -41,6 +41,9 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
     /// The budget ran out before the two-week horizon; a "open Vzato" reminder is set for the end.
     private(set) var hitLimit = false
 
+    /// System settings that silently weaken reminders although notifications are allowed.
+    private(set) var deliveryIssues: [DeliveryIssue] = []
+
     /// True when reminders cannot reach the user: permission refused, or never asked yet.
     var remindersOff: Bool { authorizationStatus == .denied || authorizationStatus == .notDetermined }
 
@@ -57,6 +60,12 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         self.context = context
         center.delegate = self
         registerCategories()
+        // Travelling to another time zone moves every dose time; a new day widens the plan.
+        for name in [Notification.Name.NSSystemTimeZoneDidChange, .NSCalendarDayChanged] {
+            NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) { _ in
+                MainActor.assumeIsolated { NotificationService.shared.scheduleReplan() }
+            }
+        }
         Task {
             await refreshAuthorizationStatus()
             await rescheduleAll()
@@ -71,10 +80,13 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
     }
 
     func refreshAuthorizationStatus() async {
-        let status: UNAuthorizationStatus = await withCheckedContinuation { continuation in
-            center.getNotificationSettings { continuation.resume(returning: $0.authorizationStatus) }
+        let snapshot: (UNAuthorizationStatus, [DeliveryIssue]) = await withCheckedContinuation { continuation in
+            center.getNotificationSettings { settings in
+                continuation.resume(returning: (settings.authorizationStatus, DeliveryIssue.issues(in: settings)))
+            }
         }
-        authorizationStatus = status
+        authorizationStatus = snapshot.0
+        deliveryIssues = snapshot.1
     }
 
     private func registerCategories() {
@@ -114,7 +126,10 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
 
     private func performReschedule() async {
         guard let context else { return }
-        let now = Date()
+        // The widget plans follow-ups and meal reminders with the same settings, and the Snooze
+        // button names the current snooze time.
+        AppSettings.shareWithWidgets()
+        registerCategories()
         let calendar = Calendar.current
         let request = Medication.fetchRequest()
         request.predicate = NSPredicate(format: "isArchived == NO")
@@ -132,8 +147,10 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         // Meal reminders belong to doses already taken and stay. Snoozes stay while their dose is
         // open: the person asked for them, and a rebuild must not take them away.
         let pending = await center.pendingNotificationRequests()
+        // Read the time only now: the permission prompt above can wait for the person for a while.
+        let now = Date()
         var kept = 0
-        var snoozedGroups = Set<String>()
+        var snoozed: [String: Set<UUID>] = [:]
         var remove: [String] = []
         for item in pending {
             if item.identifier.hasPrefix("meal|") {
@@ -141,7 +158,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             } else if item.identifier.hasPrefix("snooze|"), let group = Self.group(of: item.content.userInfo),
                       Self.isOpen(group, medications: byID, calendar: calendar) {
                 kept += 1
-                snoozedGroups.insert(group.key)
+                snoozed[group.key, default: []].formUnion(group.medicationIDs)
             } else {
                 remove.append(item.identifier)
             }
@@ -158,7 +175,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
                                   end: now.addingTimeInterval(TimeInterval(ReminderPlanner.horizonDays * 24 * 60 * 60)))
         let slots = DoseScheduler.slots(for: medications, in: window, calendar: calendar).filter { $0.event == nil && !$0.isUnscheduled }
         let plan = ReminderPlanner.plan(slots: slots, now: now, settings: settings, budget: Self.pendingLimit - count - 1,
-                                        skipping: snoozedGroups, calendar: calendar)
+                                        skipping: snoozed, calendar: calendar)
         for reminder in plan.reminders {
             let content = doseContent(for: reminder.medicationIDs.compactMap { byID[$0] }, reminder: reminder, totalAttempts: settings.repeatCount)
             add(id: reminder.identifier, content: content, at: reminder.fireAt, calendar: calendar)
@@ -294,25 +311,97 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         let calendar = Calendar.current
         let minutes = calendar.component(.hour, from: slot.scheduledAt) * 60 + calendar.component(.minute, from: slot.scheduledAt)
         let group = DoseGroup(dayKey: ReminderPlanner.dayKey(for: slot.scheduledAt, calendar: calendar), minutesOfDay: minutes, medicationIDs: [id])
-        snooze(group, medications: [slot.medication])
+        enqueueSnooze(group)
+    }
+
+    /// Snoozes run in the same queue as rebuilds, so a rebuild never sees half a snooze.
+    private func enqueueSnooze(_ group: DoseGroup) {
+        let previous = rescheduling
+        let task = Task { @MainActor in
+            await previous?.value
+            await snooze(group)
+            await performReschedule()
+        }
+        rescheduling = task
     }
 
     /// "Snooze": the reminder comes back after the snooze time and repeats from there like a fresh
-    /// one. The planned follow-ups of the group make way for it.
-    private func snooze(_ group: DoseGroup, medications: [Medication]) {
+    /// one. Medications of the same time snoozed earlier and still open come along, so a time keeps
+    /// one snoozed reminder. The rebuild that follows plans the rest of the group without them.
+    private func snooze(_ group: DoseGroup) async {
+        guard let context else { return }
         let settings = ReminderPlanner.Settings(snoozeMinutes: AppSettings.snoozeMinutes, repeatCount: AppSettings.repeatCount,
                                                 missedAfterMinutes: AppSettings.missedAfterMinutes)
         let calendar = Calendar.current
+        var ids = group.medicationIDs
+        for item in await center.pendingNotificationRequests() where item.identifier.hasPrefix("snooze|") {
+            guard let earlier = Self.group(of: item.content.userInfo), earlier.key == group.key else { continue }
+            ids += earlier.medicationIDs.filter { !ids.contains($0) }
+        }
+        let request = Medication.fetchRequest()
+        request.predicate = NSPredicate(format: "id IN %@", ids)
+        let byID = Dictionary(((try? context.fetch(request)) ?? []).compactMap { medication in medication.id.map { ($0, medication) } },
+                              uniquingKeysWith: { a, _ in a })
+        let open = ids.filter { id in
+            group.medicationIDs.contains(id)
+                || Self.isOpen(DoseGroup(dayKey: group.dayKey, minutesOfDay: group.minutesOfDay, medicationIDs: [id]), medications: byID, calendar: calendar)
+        }
+        let medications = open.compactMap { byID[$0] }
+        center.removePendingNotificationRequests(withIdentifiers: (0...3).map { "snooze|\(group.key)|\($0)" })
+        guard !medications.isEmpty else { return }
         let base = Date().addingTimeInterval(TimeInterval(settings.snoozeMinutes * 60))
-        let stale = (0...3).flatMap { ["dose|\(group.key)|\($0)", "snooze|\(group.key)|\($0)"] }
-        center.removePendingNotificationRequests(withIdentifiers: stale)
         for attempt in 0...max(0, settings.repeatCount) {
             let fireAt = base.addingTimeInterval(TimeInterval(attempt * settings.snoozeMinutes * 60))
             let reminder = PlannedReminder(dayKey: group.dayKey, minutesOfDay: group.minutesOfDay, attempt: attempt,
-                                           fireAt: fireAt, medicationIDs: group.medicationIDs)
-            add(id: "snooze|\(group.key)|\(attempt)", content: doseContent(for: medications, reminder: reminder, totalAttempts: settings.repeatCount),
-                at: fireAt, calendar: calendar)
+                                           fireAt: fireAt, medicationIDs: medications.compactMap(\.id))
+            // Awaited, so the rebuild right after sees the snooze and plans around it.
+            let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fireAt)
+            try? await center.add(UNNotificationRequest(
+                identifier: "snooze|\(group.key)|\(attempt)",
+                content: doseContent(for: medications, reminder: reminder, totalAttempts: settings.repeatCount),
+                trigger: UNCalendarNotificationTrigger(dateMatching: components, repeats: false)))
         }
+    }
+
+    /// The widget recorded a dose. Its process cannot rebuild the plan (only the app does, the next
+    /// time it runs), so it updates the pending reminders of that time on its own: a reminder with
+    /// nothing open left is removed, one shared with other medications is rewritten for the rest.
+    /// Without this, "Not confirmed yet" would follow a dose confirmed in the widget.
+    func widgetResolvedDose(of medication: Medication, scheduledAt: Date, in context: NSManagedObjectContext) async {
+        guard let id = medication.id else { return }
+        let calendar = Calendar.current
+        let dayKey = ReminderPlanner.dayKey(for: scheduledAt, calendar: calendar)
+        let minutes = calendar.component(.hour, from: scheduledAt) * 60 + calendar.component(.minute, from: scheduledAt)
+        for item in await center.pendingNotificationRequests()
+        where item.identifier.hasPrefix("dose|") || item.identifier.hasPrefix("snooze|") {
+            guard let group = Self.group(of: item.content.userInfo), group.dayKey == dayKey,
+                  group.minutesOfDay == minutes, group.medicationIDs.contains(id) else { continue }
+            let (open, byID) = Self.stillOpen(group, excluding: id, in: context, calendar: calendar)
+            if open.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: [item.identifier])
+            } else {
+                let attempt = item.identifier.split(separator: "|").last.flatMap { Int($0) } ?? 0
+                let reminder = PlannedReminder(dayKey: dayKey, minutesOfDay: minutes, attempt: attempt, fireAt: Date(), medicationIDs: open)
+                let content = doseContent(for: open.compactMap { byID[$0] }, reminder: reminder, totalAttempts: AppSettings.repeatCount)
+                // The same identifier replaces the pending request and keeps its time.
+                try? await center.add(UNNotificationRequest(identifier: item.identifier, content: content, trigger: item.trigger))
+            }
+        }
+    }
+
+    /// The medications of a reminder whose dose still has no record, leaving out one just recorded
+    /// (its write may not be visible to every fetch yet).
+    static func stillOpen(_ group: DoseGroup, excluding id: UUID, in context: NSManagedObjectContext,
+                          calendar: Calendar) -> (ids: [UUID], medications: [UUID: Medication]) {
+        let request = Medication.fetchRequest()
+        request.predicate = NSPredicate(format: "id IN %@", group.medicationIDs)
+        let byID = Dictionary(((try? context.fetch(request)) ?? []).compactMap { medication in medication.id.map { ($0, medication) } },
+                              uniquingKeysWith: { a, _ in a })
+        let open = group.medicationIDs.filter { other in
+            other != id && isOpen(DoseGroup(dayKey: group.dayKey, minutesOfDay: group.minutesOfDay, medicationIDs: [other]),
+                                  medications: byID, calendar: calendar)
+        }
+        return (open, byID)
     }
 
     // MARK: Delivered reminders
@@ -387,7 +476,9 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
 
     // MARK: Responses
 
-    private func handle(action: String, group: DoseGroup) {
+    /// Returns once the reminders are rebuilt: after a Taken from the lock screen iOS may suspend the
+    /// app right after the completion handler, and the dose's follow-ups must be gone by then.
+    private func handle(action: String, group: DoseGroup) async {
         guard let context, let day = ReminderPlanner.day(fromKey: group.dayKey) else { return }
         let calendar = Calendar.current
         let request = Medication.fetchRequest()
@@ -396,7 +487,8 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         guard !medications.isEmpty else { return }
 
         if action == Action.snooze {
-            snooze(group, medications: medications)
+            enqueueSnooze(group)
+            await rescheduling?.value
             return
         }
         let logger = DoseLogger(context: context, notifier: self)
@@ -407,12 +499,28 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
                 ?? DoseSlot(medication: medication, scheduledAt: scheduledAt, event: nil)
             guard slot.event == nil else { continue }
             switch action {
-            case Action.taken: logger.markTaken(slot, source: .notification)
+            case Action.taken:
+                // The Today card asks before a second dose; from the lock screen nobody can be asked,
+                // so a dose right after another one is not recorded, and the person is told why.
+                if case .recentlyTaken(let last) = DoseGuard.verdict(for: slot, now: Date()) {
+                    notifyNotRecorded(medication, takenAt: last)
+                    continue
+                }
+                logger.markTaken(slot, source: .notification)
             case Action.skip: logger.markSkipped(slot, source: .notification)
             default: break
             }
         }
-        scheduleReplan()
+        await rescheduleAll()
+    }
+
+    private func notifyNotRecorded(_ medication: Medication, takenAt: Date) {
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "Not recorded: \(medication.nameWithProfile)")
+        content.body = String(localized: "It was already taken at \(takenAt.formatted(date: .omitted, time: .shortened)). If you really took another dose, record it in Vzato.")
+        content.threadIdentifier = "dose|notrecorded"
+        content.interruptionLevel = .active
+        center.add(UNNotificationRequest(identifier: "notrecorded|\(medication.id?.uuidString ?? "")", content: content, trigger: nil)) { _ in }
     }
 
     nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -424,7 +532,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         let group = Self.group(of: response.notification.request.content.userInfo, fallbackDay: response.notification.date)
         nonisolated(unsafe) let completion = completionHandler
         Task { @MainActor in
-            if let group { self.handle(action: action, group: group) }
+            if let group { await self.handle(action: action, group: group) }
             completion()
         }
     }

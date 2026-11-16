@@ -6,6 +6,25 @@ All notable changes to Vzato are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+- Settings warn when a system setting keeps reminders quiet (Time Sensitive,
+  banners, lock screen or sounds turned off for Vzato) and open the system's
+  notification settings.
+- Reminders are replanned after a time zone change and at midnight.
+
+### Fixed
+- Snoozing one medication on the Today card no longer silences the other
+  medications due at the same time.
+- A dose confirmed or skipped in the widget no longer gets "Not confirmed yet"
+  follow-ups.
+- Taken, Skip and Snooze from a notification finish rebuilding the reminders
+  before iOS suspends the app; the same after a change synced from another
+  device.
+- Taken from a notification right after another dose of the same medication is
+  not recorded; a notification explains why.
+- The Snooze button on notifications shows the current snooze time.
+- The reminder settings footer matches the Focus switch.
+
 ## [1.0.1] - 2026-11-11
 
 ### Added

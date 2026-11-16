@@ -18,6 +18,8 @@ struct SettingsView: View {
     @AppStorage(AppSettings.mealSoundKey) private var mealSound = ReminderSound.soft
 
     @Environment(AppState.self) private var state
+    @Environment(\.openURL) private var openURL
+    @Environment(\.scenePhase) private var scenePhase
     @State private var path: [String] = LaunchArguments.opensProfiles ? ["profiles"] : []
     private var notifications: NotificationService { NotificationService.shared }
 
@@ -112,6 +114,10 @@ struct SettingsView: View {
                     .onChange(of: runOutWarningDays) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: snoozeMinutes) { Task { await notifications.rescheduleAll() } }
                     .onChange(of: breaksThroughFocus) { Task { await notifications.rescheduleAll() } }
+                    .onChange(of: scenePhase) { _, phase in
+                        // Back from the system settings: show what changed there.
+                        if phase == .active { Task { await notifications.refreshAuthorizationStatus() } }
+                    }
                     .onChange(of: missedAfterMinutes) {
                         AppSettings.shareWithWidgets()
                         WidgetBridge.shared.reloadNow()
@@ -120,7 +126,11 @@ struct SettingsView: View {
                     Text("Reminders")
                 } footer: {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. Medication reminders come through Do Not Disturb and Focus; “You can eat now” and supply alerts stay ordinary.")
+                        if breaksThroughFocus {
+                            Text("One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. Medication reminders come through Do Not Disturb and Focus; “You can eat now” and supply alerts stay ordinary. The ring/silent switch still mutes the sound.")
+                        } else {
+                            Text("One reminder per time with every medication due then. Not confirmed? It repeats as set above, then stops. During Do Not Disturb and Focus, reminders wait silently in Notification Center.")
+                        }
                         if let until = notifications.plannedUntil {
                             Text("Reminders are planned until \(until.formatted(date: .abbreviated, time: .omitted)). Vzato plans further whenever it runs, and once a day on its own.")
                         } else {
@@ -282,11 +292,35 @@ struct SettingsView: View {
         }
     }
 
+    /// The system's notification settings for Vzato.
+    private var openNotificationSettings: some View {
+        Button("Open notification settings") {
+            #if os(iOS)
+            let url = URL(string: UIApplication.openNotificationSettingsURLString)
+            #else
+            let url = URL(string: "x-apple.systempreferences:com.apple.Notifications-Settings.extension")
+            #endif
+            if let url { openURL(url) }
+        }
+    }
+
     @ViewBuilder
     private var notificationStatus: some View {
         switch notifications.authorizationStatus {
         case .authorized, .provisional, .ephemeral:
-            Label("Notifications are allowed", systemImage: "bell.badge")
+            if notifications.deliveryIssues.isEmpty {
+                Label("Notifications are allowed", systemImage: "bell.badge")
+            } else {
+                ForEach(notifications.deliveryIssues) { issue in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Label { Text(issue.title) } icon: { Image(systemName: "exclamationmark.triangle") }
+                            .foregroundStyle(Palette.missed)
+                        Text(issue.explanation)
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+                openNotificationSettings
+            }
         case .denied:
             VStack(alignment: .leading, spacing: 4) {
                 Label("Notifications are turned off", systemImage: "bell.slash")
@@ -294,6 +328,7 @@ struct SettingsView: View {
                 Text("Turn them on in the system settings to get reminders.")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            openNotificationSettings
         default:
             Button {
                 Task { await notifications.requestAuthorization() }

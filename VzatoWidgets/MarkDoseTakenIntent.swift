@@ -32,6 +32,7 @@ struct MarkDoseTakenIntent: AppIntent {
         guard DoseGuard.verdict(for: slot, now: Date()) == .ok else { return .result() }
         DoseLogger(context: context).markTaken(slot, source: .widget)
         NotificationService.shared.clearDelivered(for: medication)
+        await NotificationService.shared.widgetResolvedDose(of: medication, scheduledAt: slot.scheduledAt, in: context)
         return .result()
     }
 }
@@ -58,6 +59,7 @@ struct MarkDoseSkippedIntent: AppIntent {
         }
         DoseLogger(context: context).markSkipped(slot, source: .widget)
         NotificationService.shared.clearDelivered(for: medication)
+        await NotificationService.shared.widgetResolvedDose(of: medication, scheduledAt: slot.scheduledAt, in: context)
         return .result()
     }
 }

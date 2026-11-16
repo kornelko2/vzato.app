@@ -45,6 +45,10 @@ enum AppSettings {
         // The widget schedules the "you can eat now" reminder after its Taken button.
         shared?.set(mealSound.rawValue, forKey: mealSoundKey)
         shared?.set(doseSound.rawValue, forKey: doseSoundKey)
+        // It also rewrites pending reminders after its buttons, which need these to look the same.
+        shared?.set(repeatCount, forKey: repeatCountKey)
+        shared?.set(snoozeMinutes, forKey: snoozeMinutesKey)
+        shared?.set(breaksThroughFocus, forKey: breaksThroughFocusKey)
     }
 
     static var snoozeMinutes: Int {

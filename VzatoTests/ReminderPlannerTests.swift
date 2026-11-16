@@ -74,10 +74,20 @@ struct ReminderPlannerTests {
 
     @Test func snoozedGroupsAreLeftToTheSnooze() {
         let store = TestStore()
-        store.medication(name: "Letrox", times: [8 * 60])
+        let letrox = store.medication(name: "Letrox", times: [8 * 60])
         let plan = ReminderPlanner.plan(slots: openSlots(store, days: 1), now: at(monday, 7), settings: settings, budget: 60,
-                                        skipping: ["2026-11-02|480"], calendar: testCalendar)
+                                        skipping: ["2026-11-02|480": [letrox.id!]], calendar: testCalendar)
         #expect(plan.reminders.isEmpty)
+    }
+
+    @Test func snoozingOneMedicationKeepsTheOthersOfItsTime() {
+        let store = TestStore()
+        let letrox = store.medication(name: "Letrox", times: [8 * 60])
+        let vitamin = store.medication(name: "Vitamin D", times: [8 * 60])
+        let plan = ReminderPlanner.plan(slots: openSlots(store, days: 1), now: at(monday, 7), settings: settings, budget: 60,
+                                        skipping: ["2026-11-02|480": [letrox.id!]], calendar: testCalendar)
+        #expect(!plan.reminders.isEmpty)
+        #expect(plan.reminders.allSatisfy { $0.medicationIDs == [vitamin.id!] })
     }
 
     @Test func dayKeysRoundTrip() {
