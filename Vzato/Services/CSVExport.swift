@@ -2,18 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import CoreTransferable
 import Foundation
-import UniformTypeIdentifiers
-
-struct DoseHistoryCSV: Transferable, Sendable {
-    let text: String
-
-    static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(exportedContentType: .commaSeparatedText) { Data($0.text.utf8) }
-            .suggestedFileName("vzato-history.csv")
-    }
-}
 
 @MainActor
 enum CSVExport {
@@ -59,6 +48,19 @@ enum CSVExport {
         guard start < now else { return [] }
         return DoseScheduler.slots(for: medications, in: DateInterval(start: start, end: now), calendar: calendar)
             .filter { !$0.isUnscheduled && $0.status(now: now, grace: grace) == .missed }
+    }
+
+    /// Writes the table to a `.csv` file to share. Shared as plain data, Mail and Files would name
+    /// it `.txt`; a file keeps its name and type. The BOM makes Excel read the accents as UTF-8.
+    static func writeFile(_ text: String, on day: Date = Date()) -> URL? {
+        let date = day.formatted(.iso8601.year().month().day())
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(String(localized: "Vzato history \(date).csv"))
+        do {
+            try Data(("\u{FEFF}" + text).utf8).write(to: url, options: .atomic)
+            return url
+        } catch {
+            return nil
+        }
     }
 
     nonisolated static func escape(_ field: String) -> String {

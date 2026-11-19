@@ -22,8 +22,10 @@ struct HistoryView: View {
     @State private var monthStart = Calendar.current.dateInterval(of: .month, for: Date())?.start ?? Date()
     @State private var selectedDay = Calendar.current.startOfDay(for: Date())
     @State private var now = Date()
+    @Environment(\.scenePhase) private var scenePhase
     /// Built when the data changes, not on every redraw: missed doses take a pass over the plan.
-    @State private var csv: DoseHistoryCSV?
+    @State private var csvURL: URL?
+    @State private var pdfURL: URL?
 
     private let calendar = Calendar.current
     private var grace: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
@@ -97,17 +99,38 @@ struct HistoryView: View {
             .navigationTitle(Text("History"))
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    if let csv {
-                        ShareLink(item: csv, preview: SharePreview(Text("Dose history"))) {
-                            Label("Export CSV", systemImage: "square.and.arrow.up")
+                    if csvURL != nil || pdfURL != nil {
+                        Menu {
+                            if let pdfURL {
+                                ShareLink(item: pdfURL, preview: SharePreview(Text("Summary for the doctor"))) {
+                                    Label("Summary for the doctor (PDF, 30 days)", systemImage: "doc.richtext")
+                                }
+                            }
+                            if let csvURL {
+                                ShareLink(item: csvURL, preview: SharePreview(Text("Dose history"))) {
+                                    Label("All doses as a table (CSV)", systemImage: "tablecells")
+                                }
+                            }
+                        } label: {
+                            Label("Export", systemImage: "square.and.arrow.up")
                         }
+                        .accessibilityIdentifier("historyExport")
                     }
                 }
             }
             .onAppear { now = Date() }
-            .task(id: "\(events.count)|\(medications.count)|\(missedAfterMinutes)") {
-                let missed = CSVExport.missedSlots(for: Array(medications), now: Date(), grace: grace, calendar: calendar)
-                csv = events.isEmpty && missed.isEmpty ? nil : DoseHistoryCSV(text: CSVExport.make(events: Array(events), missed: missed))
+            .onChange(of: scenePhase) { _, phase in if phase == .active { now = Date() } }
+            .task(id: "\(events.count)|\(medications.count)|\(missedAfterMinutes)|\(state.profileFilter?.uuidString ?? "")") {
+                // Both follow the profile chosen above, like the calendar.
+                let medications = shown
+                let missed = CSVExport.missedSlots(for: medications, now: Date(), grace: grace, calendar: calendar)
+                let recorded = medications.flatMap(\.eventList)
+                csvURL = recorded.isEmpty && missed.isEmpty ? nil : CSVExport.writeFile(CSVExport.make(events: recorded, missed: missed))
+                var summary = DoctorSummaryBuilder.build(medications: medications, days: 30, grace: grace)
+                if showsProfiles, let id = state.profileFilter {
+                    summary.profileName = profiles.first { $0.id == id }?.name
+                }
+                pdfURL = medications.isEmpty ? nil : SummaryPDF.write(summary)
             }
         }
     }

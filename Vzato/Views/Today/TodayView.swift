@@ -21,7 +21,7 @@ struct TodayView: View {
     @State private var now = Date()
     @State private var confirming: PendingTake?
     @State private var undo: UndoTake?
-    private let clock = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    @Environment(\.scenePhase) private var scenePhase
 
     private var grace: TimeInterval { TimeInterval(missedAfterMinutes * 60) }
 
@@ -50,6 +50,14 @@ struct TodayView: View {
         return overdue ?? missed ?? upcoming
     }
 
+    /// The organizer compartment the featured dose belongs to, shown whole on the big card.
+    private var featuredGroup: OrganizerGroup? {
+        guard let featured, OrganizerService.compartment(of: featured) != nil else { return nil }
+        return OrganizerService.group(slots).groups.first { group in
+            group.slots.contains { $0.medication == featured.medication && $0.scheduledAt == featured.scheduledAt }
+        }
+    }
+
     private var takenCount: Int { slots.filter { $0.status(now: now, grace: grace) == .taken }.count }
     private var lowStock: [Medication] { shown.filter(\.isLowStock) }
 
@@ -73,7 +81,13 @@ struct TodayView: View {
                         RemindersOffBanner(denied: NotificationService.shared.authorizationStatus == .denied)
                     }
 
-                    if let featured {
+                    if let group = featuredGroup {
+                        OrganizerCard(group: group, now: now, grace: grace, snoozeMinutes: snoozeMinutes,
+                                      takeMode: takeMode(for: group),
+                                      onTaken: { requestTake(group.openSlots) },
+                                      onSnooze: { snooze(group) },
+                                      onSkip: { group.openSlots.forEach(skip) })
+                    } else if let featured {
                         NextDoseCard(slot: featured, now: now, grace: grace, snoozeMinutes: snoozeMinutes,
                                      onTaken: { requestTake(featured) },
                                      onSnooze: { snooze(featured) },
@@ -103,7 +117,8 @@ struct TodayView: View {
             .safeAreaInset(edge: .bottom) {
                 if let undo {
                     UndoBanner(info: undo) {
-                        DoseLogger(context: context).reset(undo.slot)
+                        let logger = DoseLogger(context: context)
+                        undo.slots.forEach { logger.reset($0) }
                         self.undo = nil
                     }
                     .padding(.horizontal)
@@ -114,7 +129,7 @@ struct TodayView: View {
             .animation(.default, value: undo?.id)
             .confirmationDialog(Text("Take this dose?"), isPresented: Binding(get: { confirming != nil }, set: { if !$0 { confirming = nil } }),
                                 titleVisibility: .visible, presenting: confirming) { pending in
-                Button("Take anyway", role: .destructive) { take(pending.slot) }
+                Button("Take anyway", role: .destructive) { take(pending.slots) }
                 Button("Cancel", role: .cancel) {}
             } message: { pending in
                 Text(pending.message)
@@ -141,8 +156,15 @@ struct TodayView: View {
                     }
                 }
             }
-            .onReceive(clock) { now = $0 }
-            .onAppear { now = Date() }
+            // A timer does not run in the background: refresh on return, then tick on :00 and :30
+            // so a dose turns due right at its minute.
+            .task(id: scenePhase) {
+                guard scenePhase != .background else { return }
+                while !Task.isCancelled {
+                    now = Date()
+                    try? await Task.sleep(for: .seconds(Self.secondsToNextTick(after: now)))
+                }
+            }
         }
     }
 
@@ -197,6 +219,14 @@ struct TodayView: View {
         }
     }
 
+    /// Time until the next full or half minute, at least a moment so the loop never spins.
+    static func secondsToNextTick(after date: Date, calendar: Calendar = .current) -> Double {
+        let second = Double(calendar.component(.second, from: date))
+            + date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 1)
+        let rest = (second < 30 ? 30 : 60) - second
+        return max(rest, 0.2)
+    }
+
     private func takeMode(for slot: DoseSlot) -> NextDoseCard.TakeMode {
         switch DoseGuard.verdict(for: slot, now: now) {
         case .ok: .direct
@@ -206,21 +236,52 @@ struct TodayView: View {
         }
     }
 
+    /// A compartment is taken as a whole: it waits for its earliest open dose like a single one.
+    private func takeMode(for group: OrganizerGroup) -> NextDoseCard.TakeMode {
+        let open = group.openSlots
+        guard let first = open.first else { return .direct }
+        if first.scheduledAt.timeIntervalSince(now) > DoseGuard.earlyWindow { return .notYet }
+        return open.allSatisfy { DoseGuard.verdict(for: $0, now: now) == .ok || isOnlyEarly($0) } ? .direct : .askFirst
+    }
+
+    /// Later doses of a compartment are "too early" on their own, but go with the first one.
+    private func isOnlyEarly(_ slot: DoseSlot) -> Bool {
+        if case .tooEarly = DoseGuard.verdict(for: slot, now: now) { return true }
+        return false
+    }
+
     /// Every "Taken" in Today goes through here: one tap when safe, a question when not.
     private func requestTake(_ slot: DoseSlot) {
-        let verdict = DoseGuard.verdict(for: slot, now: Date())
-        if verdict == .ok {
-            take(slot)
+        requestTake([slot])
+    }
+
+    private func requestTake(_ slots: [DoseSlot]) {
+        guard !slots.isEmpty else { return }
+        let now = Date()
+        // In a compartment only "recently taken" asks; a single dose also asks when far too early.
+        let problem = slots.lazy.map { (slot: $0, verdict: DoseGuard.verdict(for: $0, now: now)) }.first { item in
+            switch item.verdict {
+            case .ok: false
+            case .tooEarly: slots.count == 1
+            case .recentlyTaken: true
+            }
+        }
+        if let problem {
+            confirming = PendingTake(slot: problem.slot, verdict: problem.verdict, slots: slots)
         } else {
-            confirming = PendingTake(slot: slot, verdict: verdict)
+            take(slots)
         }
     }
 
-    private func take(_ slot: DoseSlot) {
-        let event = DoseLogger(context: context).markTaken(slot)
-        NotificationService.shared.clearDelivered(for: slot.medication)
-        let info = UndoTake(slot: DoseSlot(medication: slot.medication, scheduledAt: slot.scheduledAt, event: event),
-                            takenAt: event.takenAt ?? Date())
+    private func take(_ slots: [DoseSlot]) {
+        let logger = DoseLogger(context: context)
+        let taken = slots.map { slot in
+            let event = logger.markTaken(slot)
+            NotificationService.shared.clearDelivered(for: slot.medication)
+            return DoseSlot(medication: slot.medication, scheduledAt: slot.scheduledAt, event: event)
+        }
+        guard !taken.isEmpty else { return }
+        let info = UndoTake(slots: taken, takenAt: taken.first?.event?.takenAt ?? Date())
         undo = info
         Task {
             try? await Task.sleep(for: .seconds(8))
@@ -240,6 +301,11 @@ struct TodayView: View {
     private func snooze(_ slot: DoseSlot) {
         NotificationService.shared.snooze(slot)
         NotificationService.shared.clearDelivered(for: slot.medication)
+    }
+
+    private func snooze(_ group: OrganizerGroup) {
+        NotificationService.shared.snooze(group.openSlots, compartment: group.compartment)
+        group.openSlots.forEach { NotificationService.shared.clearDelivered(for: $0.medication) }
     }
 }
 
@@ -348,8 +414,17 @@ struct LowStockBanner: View {
 
 struct PendingTake: Identifiable {
     let id = UUID()
+    /// The dose the question is about.
     let slot: DoseSlot
     let verdict: DoseGuard.Verdict
+    /// Everything "Take anyway" records: the dose, or its whole organizer compartment.
+    var slots: [DoseSlot]
+
+    init(slot: DoseSlot, verdict: DoseGuard.Verdict, slots: [DoseSlot]? = nil) {
+        self.slot = slot
+        self.verdict = verdict
+        self.slots = slots ?? [slot]
+    }
 
     var message: String {
         switch verdict {
@@ -365,8 +440,10 @@ struct PendingTake: Identifiable {
 
 struct UndoTake: Identifiable {
     let id = UUID()
-    let slot: DoseSlot
+    let slots: [DoseSlot]
     let takenAt: Date
+
+    var names: String { slots.map(\.medication.name).uniqued().formatted(.list(type: .and)) }
 }
 
 /// A few seconds to take back a tap on "Taken".
@@ -377,7 +454,7 @@ struct UndoBanner: View {
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "checkmark.circle.fill").foregroundStyle(Palette.taken)
-            Text("Taken: \(info.slot.medication.name) at \(info.takenAt.formatted(date: .omitted, time: .shortened))")
+            Text("Taken: \(info.names) at \(info.takenAt.formatted(date: .omitted, time: .shortened))")
                 .font(.subheadline.weight(.semibold))
                 .lineLimit(2)
             Spacer(minLength: 8)

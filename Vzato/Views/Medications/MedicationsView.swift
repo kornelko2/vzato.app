@@ -50,6 +50,26 @@ struct MedicationsView: View {
                 } else {
                     rows(Array(medications))
                 }
+                if !searching {
+                    // Profiles with an enabled pill organizer: straight to filling it.
+                    let organized = profiles.filter { $0.organizer?.isEnabled == true }
+                    if !organized.isEmpty {
+                        Section {
+                            ForEach(organized) { profile in
+                                NavigationLink {
+                                    OrganizerFillView(profile: profile)
+                                } label: {
+                                    if organized.count > 1 {
+                                        Label { Text("Fill the organizer") + Text(verbatim: " · \(profile.name)") }
+                                            icon: { Image(systemName: "square.grid.3x3") }
+                                    } else {
+                                        Label("Fill the organizer", systemImage: "square.grid.3x3")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 if !searching && !archived.isEmpty {
                     Section {
                         NavigationLink {

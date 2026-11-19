@@ -12,7 +12,17 @@ struct PlannedReminder: Equatable, Sendable {
     let minutesOfDay: Int
     let attempt: Int
     let fireAt: Date
+    /// One entry per dose; a medication can appear twice when it is taken twice in one organizer
+    /// compartment.
     let medicationIDs: [UUID]
+    /// Each dose's own time, parallel to `medicationIDs`. Empty means all at `minutesOfDay`. Doses of
+    /// one organizer compartment share a reminder at the earliest of their times.
+    var doseMinutes: [Int] = []
+    /// Set when the reminder stands for an organizer compartment ("Morning: …").
+    var compartment: Compartment?
+
+    /// Each dose's own time.
+    var resolvedDoseMinutes: [Int] { doseMinutes.count == medicationIDs.count ? doseMinutes : medicationIDs.map { _ in minutesOfDay } }
 
     var identifier: String { "dose|\(dayKey)|\(minutesOfDay)|\(attempt)" }
     var groupKey: String { "\(dayKey)|\(minutesOfDay)" }
@@ -44,21 +54,46 @@ enum ReminderPlanner {
     /// `slots` are open scheduled doses (no record yet), any order. Doses whose reminders are all in
     /// the past are skipped. Doses at the same minute share one notification. Groups are planned in
     /// time order, each with all its follow-ups or not at all, until `budget` is used up.
-    /// `snoozed` maps a group key ("yyyy-MM-dd|minutes") to the medications that have their own
-    /// snoozed reminder; the rest of that group is planned as usual.
+    /// `snoozed` maps a dose time ("yyyy-MM-dd|minutes") to the medications that have their own
+    /// snoozed reminder for it; the rest is planned as usual. `organizer` names the compartment of a
+    /// dose that comes from an enabled pill organizer (a key unique per profile, and the compartment):
+    /// such doses share one reminder at the earliest open dose of their compartment.
     static func plan(slots: [DoseSlot], now: Date, settings: Settings, budget: Int,
-                     skipping snoozed: [String: Set<UUID>] = [:], calendar: Calendar = .current) -> ReminderPlan {
+                     skipping snoozed: [String: Set<UUID>] = [:],
+                     organizer: (DoseSlot) -> (key: String, compartment: Compartment)? = { _ in nil },
+                     calendar: Calendar = .current) -> ReminderPlan {
         var plan = ReminderPlan()
-        let groups = Dictionary(grouping: slots) { Int($0.scheduledAt.timeIntervalSince1970 / 60) }
+        func minutes(_ date: Date) -> Int { calendar.component(.hour, from: date) * 60 + calendar.component(.minute, from: date) }
+        let open = slots.filter { slot in
+            guard let id = slot.medication.id else { return false }
+            return !(snoozed["\(Self.dayKey(for: slot.scheduledAt, calendar: calendar))|\(minutes(slot.scheduledAt))"]?.contains(id) ?? false)
+        }
+        // Organizer doses move to the earliest open dose of their compartment.
+        var compartmentStart: [String: Date] = [:]
+        var compartments: [Int: Compartment] = [:]
+        func compartmentKey(_ slot: DoseSlot) -> String? {
+            organizer(slot).map { "\(Self.dayKey(for: slot.scheduledAt, calendar: calendar))|\($0.key)" }
+        }
+        for slot in open {
+            guard let key = compartmentKey(slot) else { continue }
+            compartmentStart[key] = min(compartmentStart[key] ?? slot.scheduledAt, slot.scheduledAt)
+        }
+        func reminderTime(_ slot: DoseSlot) -> Date { compartmentKey(slot).flatMap { compartmentStart[$0] } ?? slot.scheduledAt }
+        for slot in open {
+            if let found = organizer(slot) { compartments[Int(reminderTime(slot).timeIntervalSince1970 / 60)] = found.compartment }
+        }
+
+        let groups = Dictionary(grouping: open) { Int(reminderTime($0).timeIntervalSince1970 / 60) }
         for key in groups.keys.sorted() {
-            guard let members = groups[key], let scheduledAt = members.first?.scheduledAt else { continue }
+            guard let members = groups[key], let first = members.first else { continue }
+            let scheduledAt = reminderTime(first)
             let dayKey = Self.dayKey(for: scheduledAt, calendar: calendar)
-            let minutes = calendar.component(.hour, from: scheduledAt) * 60 + calendar.component(.minute, from: scheduledAt)
-            let snoozedIDs = snoozed["\(dayKey)|\(minutes)"] ?? []
-            let ids = members
-                .sorted { $0.medication.name.localizedStandardCompare($1.medication.name) == .orderedAscending }
-                .compactMap(\.medication.id)
-                .filter { !snoozedIDs.contains($0) }
+            let groupMinutes = minutes(scheduledAt)
+            let sorted = members.sorted {
+                ($0.scheduledAt, $0.medication.name.localizedLowercase) < ($1.scheduledAt, $1.medication.name.localizedLowercase)
+            }
+            let ids = sorted.compactMap(\.medication.id)
+            let doseMinutes = sorted.filter { $0.medication.id != nil }.map { minutes($0.scheduledAt) }
             guard !ids.isEmpty else { continue }
 
             let missedAt = scheduledAt.addingTimeInterval(TimeInterval(settings.missedAfterMinutes * 60))
@@ -66,7 +101,8 @@ enum ReminderPlanner {
             for attempt in 0...max(0, settings.repeatCount) {
                 let fireAt = scheduledAt.addingTimeInterval(TimeInterval(attempt * settings.snoozeMinutes * 60))
                 guard fireAt > now, attempt == 0 || fireAt <= missedAt else { continue }
-                sequence.append(PlannedReminder(dayKey: dayKey, minutesOfDay: minutes, attempt: attempt, fireAt: fireAt, medicationIDs: ids))
+                sequence.append(PlannedReminder(dayKey: dayKey, minutesOfDay: groupMinutes, attempt: attempt, fireAt: fireAt, medicationIDs: ids,
+                                                doseMinutes: doseMinutes, compartment: compartments[key]))
             }
             guard !sequence.isEmpty else { continue }
             if plan.reminders.count + sequence.count > budget {

@@ -57,4 +57,44 @@ struct MigrationTests {
         }
         for store in current.persistentStores { try current.remove(store) }
     }
+
+    /// 1.0.1 on the App Store uses version 6.
+    @Test func version6StoreOpensWithTheCurrentModel() throws {
+        let bundle = Bundle(for: PersistenceController.self)
+        let momd = try #require(bundle.url(forResource: "Vzato", withExtension: "momd"))
+        let oldModel = try #require(NSManagedObjectModel(contentsOf: momd.appendingPathComponent("Vzato 6.mom")))
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("migration-\(UUID().uuidString)")
+            .appendingPathComponent("Vzato.sqlite")
+        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: url.deletingLastPathComponent()) }
+
+        let old = NSPersistentStoreCoordinator(managedObjectModel: oldModel)
+        try old.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url)
+        let oldContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        oldContext.persistentStoreCoordinator = old
+        try oldContext.performAndWait {
+            let profile = NSEntityDescription.insertNewObject(forEntityName: "Profile", into: oldContext)
+            profile.setValue("Me", forKey: "name")
+            let medication = NSEntityDescription.insertNewObject(forEntityName: "Medication", into: oldContext)
+            medication.setValue("Letrox", forKey: "name")
+            medication.setValue(profile, forKey: "profile")
+            try oldContext.save()
+        }
+        for store in old.persistentStores { try old.remove(store) }
+
+        let current = NSPersistentStoreCoordinator(managedObjectModel: PersistenceController.model)
+        try current.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true,
+        ])
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = current
+        try context.performAndWait {
+            let medications = try context.fetch(NSFetchRequest<NSManagedObject>(entityName: "Medication"))
+            #expect(medications.first?.value(forKey: "organizerModeRaw") as? String == "auto")
+            #expect(try context.count(for: NSFetchRequest<NSManagedObject>(entityName: "Organizer")) == 0)
+        }
+        for store in current.persistentStores { try current.remove(store) }
+    }
 }

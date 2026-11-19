@@ -158,7 +158,7 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             } else if item.identifier.hasPrefix("snooze|"), let group = Self.group(of: item.content.userInfo),
                       Self.isOpen(group, medications: byID, calendar: calendar) {
                 kept += 1
-                snoozed[group.key, default: []].formUnion(group.medicationIDs)
+                for dose in group.doses { snoozed["\(group.dayKey)|\(dose.minutes)", default: []].insert(dose.id) }
             } else {
                 remove.append(item.identifier)
             }
@@ -175,7 +175,11 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
                                   end: now.addingTimeInterval(TimeInterval(ReminderPlanner.horizonDays * 24 * 60 * 60)))
         let slots = DoseScheduler.slots(for: medications, in: window, calendar: calendar).filter { $0.event == nil && !$0.isUnscheduled && !DoseScheduler.isCoveredByMovedDose($0, calendar: calendar) }
         let plan = ReminderPlanner.plan(slots: slots, now: now, settings: settings, budget: Self.pendingLimit - count - 1,
-                                        skipping: snoozed, calendar: calendar)
+                                        skipping: snoozed, organizer: { slot in
+                                            OrganizerService.compartment(of: slot, calendar: calendar).map { compartment in
+                                                ("\(slot.medication.profile?.objectID.uriRepresentation().absoluteString ?? "")|\(compartment.rawValue)", compartment)
+                                            }
+                                        }, calendar: calendar)
         for reminder in plan.reminders {
             let content = doseContent(for: reminder.medicationIDs.compactMap { byID[$0] }, reminder: reminder, totalAttempts: settings.repeatCount)
             add(id: reminder.identifier, content: content, at: reminder.fireAt, calendar: calendar)
@@ -200,7 +204,10 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
                 : "\(medication.nameWithProfile) · \(medication.doseAmountText) (\(medication.dosageText))"
         }
         if reminder.attempt == 0 {
-            if medications.count == 1, let medication = medications.first {
+            if let compartment = reminder.compartment {
+                content.title = compartment.reminderTitle(medications.map(\.nameWithProfile).formatted(.list(type: .and)))
+                content.body = lines.joined(separator: "\n")
+            } else if medications.count == 1, let medication = medications.first {
                 content.title = medication.nameWithProfile
                 content.body = medication.dosageText.isEmpty
                     ? String(localized: "Time to take \(medication.doseAmountText).")
@@ -218,8 +225,11 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         content.interruptionLevel = AppSettings.breaksThroughFocus ? .timeSensitive : .active
         content.categoryIdentifier = Category.dose
         content.threadIdentifier = "dose|\(reminder.groupKey)"
-        content.userInfo = ["day": reminder.dayKey, "minutesOfDay": reminder.minutesOfDay,
-                            "medicationIDs": reminder.medicationIDs.map(\.uuidString)]
+        var info: [String: Any] = ["day": reminder.dayKey, "minutesOfDay": reminder.minutesOfDay,
+                                   "medicationIDs": reminder.medicationIDs.map(\.uuidString),
+                                   "doseMinutes": reminder.resolvedDoseMinutes]
+        if let compartment = reminder.compartment { info["compartment"] = compartment.rawValue }
+        content.userInfo = info
         return content
     }
 
@@ -310,11 +320,18 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
 
     /// Snooze from the Today card: one dose, its own group.
     func snooze(_ slot: DoseSlot) {
-        guard let id = slot.medication.id else { return }
+        snooze([slot], compartment: nil)
+    }
+
+    /// Snooze a whole organizer compartment from the Today card: one snoozed reminder for all of it.
+    func snooze(_ slots: [DoseSlot], compartment: Compartment?) {
         let calendar = Calendar.current
-        let minutes = calendar.component(.hour, from: slot.scheduledAt) * 60 + calendar.component(.minute, from: slot.scheduledAt)
-        let group = DoseGroup(dayKey: ReminderPlanner.dayKey(for: slot.scheduledAt, calendar: calendar), minutesOfDay: minutes, medicationIDs: [id])
-        enqueueSnooze(group)
+        func minutes(_ date: Date) -> Int { calendar.component(.hour, from: date) * 60 + calendar.component(.minute, from: date) }
+        let doses = slots.sorted { $0.scheduledAt < $1.scheduledAt }
+            .compactMap { slot in slot.medication.id.map { DoseGroup.Dose(id: $0, minutes: minutes(slot.scheduledAt)) } }
+        guard let first = slots.map(\.scheduledAt).min(), !doses.isEmpty else { return }
+        enqueueSnooze(DoseGroup(dayKey: ReminderPlanner.dayKey(for: first, calendar: calendar), minutesOfDay: minutes(first),
+                                doses: doses, compartment: compartment))
     }
 
     /// Snoozes run in the same queue as rebuilds, so a rebuild never sees half a snooze.
@@ -336,27 +353,26 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         let settings = ReminderPlanner.Settings(snoozeMinutes: AppSettings.snoozeMinutes, repeatCount: AppSettings.repeatCount,
                                                 missedAfterMinutes: AppSettings.missedAfterMinutes)
         let calendar = Calendar.current
-        var ids = group.medicationIDs
+        var doses = group.doses
+        var compartment = group.compartment
         for item in await center.pendingNotificationRequests() where item.identifier.hasPrefix("snooze|") {
             guard let earlier = Self.group(of: item.content.userInfo), earlier.key == group.key else { continue }
-            ids += earlier.medicationIDs.filter { !ids.contains($0) }
+            doses += earlier.doses.filter { !doses.contains($0) }
+            compartment = compartment ?? earlier.compartment
         }
-        let request = Medication.fetchRequest()
-        request.predicate = NSPredicate(format: "id IN %@", ids)
-        let byID = Dictionary(((try? context.fetch(request)) ?? []).compactMap { medication in medication.id.map { ($0, medication) } },
-                              uniquingKeysWith: { a, _ in a })
-        let open = ids.filter { id in
-            group.medicationIDs.contains(id)
-                || Self.isOpen(DoseGroup(dayKey: group.dayKey, minutesOfDay: group.minutesOfDay, medicationIDs: [id]), medications: byID, calendar: calendar)
-        }
-        let medications = open.compactMap { byID[$0] }
+        let byID = Self.medications(for: doses.map(\.id), in: context)
+        let open = doses.filter { dose in
+            group.doses.contains(dose) || Self.isOpen(group.single(dose), medications: byID, calendar: calendar)
+        }.filter { byID[$0.id] != nil }
+        let medications = open.compactMap { byID[$0.id] }
         center.removePendingNotificationRequests(withIdentifiers: (0...3).map { "snooze|\(group.key)|\($0)" })
         guard !medications.isEmpty else { return }
         let base = Date().addingTimeInterval(TimeInterval(settings.snoozeMinutes * 60))
         for attempt in 0...max(0, settings.repeatCount) {
             let fireAt = base.addingTimeInterval(TimeInterval(attempt * settings.snoozeMinutes * 60))
             let reminder = PlannedReminder(dayKey: group.dayKey, minutesOfDay: group.minutesOfDay, attempt: attempt,
-                                           fireAt: fireAt, medicationIDs: medications.compactMap(\.id))
+                                           fireAt: fireAt, medicationIDs: open.map(\.id), doseMinutes: open.map(\.minutes),
+                                           compartment: compartment)
             // Awaited, so the rebuild right after sees the snooze and plans around it.
             let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fireAt)
             try? await center.add(UNNotificationRequest(
@@ -375,36 +391,42 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         let calendar = Calendar.current
         let dayKey = ReminderPlanner.dayKey(for: scheduledAt, calendar: calendar)
         let minutes = calendar.component(.hour, from: scheduledAt) * 60 + calendar.component(.minute, from: scheduledAt)
+        let resolved = DoseGroup.Dose(id: id, minutes: minutes)
         for item in await center.pendingNotificationRequests()
         where item.identifier.hasPrefix("dose|") || item.identifier.hasPrefix("snooze|") {
             guard let group = Self.group(of: item.content.userInfo), group.dayKey == dayKey,
-                  group.minutesOfDay == minutes, group.medicationIDs.contains(id) else { continue }
-            let (open, byID) = Self.stillOpen(group, excluding: id, in: context, calendar: calendar)
+                  group.doses.contains(resolved) else { continue }
+            let (open, byID) = Self.stillOpen(group, excluding: resolved, in: context, calendar: calendar)
             if open.isEmpty {
                 center.removePendingNotificationRequests(withIdentifiers: [item.identifier])
             } else {
                 let attempt = item.identifier.split(separator: "|").last.flatMap { Int($0) } ?? 0
-                let reminder = PlannedReminder(dayKey: dayKey, minutesOfDay: minutes, attempt: attempt, fireAt: Date(), medicationIDs: open)
-                let content = doseContent(for: open.compactMap { byID[$0] }, reminder: reminder, totalAttempts: AppSettings.repeatCount)
+                let reminder = PlannedReminder(dayKey: dayKey, minutesOfDay: group.minutesOfDay, attempt: attempt, fireAt: Date(),
+                                               medicationIDs: open.map(\.id), doseMinutes: open.map(\.minutes),
+                                               compartment: group.compartment)
+                let content = doseContent(for: open.compactMap { byID[$0.id] }, reminder: reminder, totalAttempts: AppSettings.repeatCount)
                 // The same identifier replaces the pending request and keeps its time.
                 try? await center.add(UNNotificationRequest(identifier: item.identifier, content: content, trigger: item.trigger))
             }
         }
     }
 
-    /// The medications of a reminder whose dose still has no record, leaving out one just recorded
-    /// (its write may not be visible to every fetch yet).
-    static func stillOpen(_ group: DoseGroup, excluding id: UUID, in context: NSManagedObjectContext,
-                          calendar: Calendar) -> (ids: [UUID], medications: [UUID: Medication]) {
-        let request = Medication.fetchRequest()
-        request.predicate = NSPredicate(format: "id IN %@", group.medicationIDs)
-        let byID = Dictionary(((try? context.fetch(request)) ?? []).compactMap { medication in medication.id.map { ($0, medication) } },
-                              uniquingKeysWith: { a, _ in a })
-        let open = group.medicationIDs.filter { other in
-            other != id && isOpen(DoseGroup(dayKey: group.dayKey, minutesOfDay: group.minutesOfDay, medicationIDs: [other]),
-                                  medications: byID, calendar: calendar)
+    /// The doses of a reminder that still have no record, leaving out one just recorded (its write
+    /// may not be visible to every fetch yet).
+    static func stillOpen(_ group: DoseGroup, excluding resolved: DoseGroup.Dose, in context: NSManagedObjectContext,
+                          calendar: Calendar) -> (doses: [DoseGroup.Dose], medications: [UUID: Medication]) {
+        let byID = medications(for: group.medicationIDs, in: context)
+        let open = group.doses.filter { dose in
+            dose != resolved && isOpen(group.single(dose), medications: byID, calendar: calendar)
         }
         return (open, byID)
+    }
+
+    static func medications(for ids: [UUID], in context: NSManagedObjectContext) -> [UUID: Medication] {
+        let request = Medication.fetchRequest()
+        request.predicate = NSPredicate(format: "id IN %@", ids)
+        return Dictionary(((try? context.fetch(request)) ?? []).compactMap { medication in medication.id.map { ($0, medication) } },
+                          uniquingKeysWith: { a, _ in a })
     }
 
     // MARK: Delivered reminders
@@ -447,12 +469,40 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         if !stale.isEmpty { center.removeDeliveredNotifications(withIdentifiers: stale) }
     }
 
-    /// The doses one notification stands for.
+    /// The doses one notification stands for: usually every medication due at one time, or the
+    /// doses of one organizer compartment, each with its own time.
     struct DoseGroup: Sendable {
+        struct Dose: Sendable, Hashable {
+            let id: UUID
+            let minutes: Int
+        }
         let dayKey: String
+        /// When the notification is about: the earliest dose.
         let minutesOfDay: Int
-        let medicationIDs: [UUID]
+        let doses: [Dose]
+        var compartment: Compartment?
+
+        init(dayKey: String, minutesOfDay: Int, doses: [Dose], compartment: Compartment? = nil) {
+            self.dayKey = dayKey
+            self.minutesOfDay = minutesOfDay
+            self.doses = doses
+            self.compartment = compartment
+        }
+
+        /// Every medication at the same time.
+        init(dayKey: String, minutesOfDay: Int, medicationIDs: [UUID]) {
+            self.init(dayKey: dayKey, minutesOfDay: minutesOfDay, doses: medicationIDs.map { Dose(id: $0, minutes: minutesOfDay) })
+        }
+
         var key: String { "\(dayKey)|\(minutesOfDay)" }
+        var medicationIDs: [UUID] {
+            var seen = Set<UUID>()
+            return doses.map(\.id).filter { seen.insert($0).inserted }
+        }
+
+        func single(_ dose: Dose) -> DoseGroup {
+            DoseGroup(dayKey: dayKey, minutesOfDay: dose.minutes, doses: [dose], compartment: compartment)
+        }
     }
 
     nonisolated static func group(of userInfo: [AnyHashable: Any], fallbackDay: Date? = nil) -> DoseGroup? {
@@ -462,17 +512,22 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
         guard !ids.isEmpty else { return nil }
         let dayKey = userInfo["day"] as? String ?? fallbackDay.map { ReminderPlanner.dayKey(for: $0) }
         guard let dayKey else { return nil }
-        return DoseGroup(dayKey: dayKey, minutesOfDay: minutes, medicationIDs: ids)
+        // Older reminders and plain ones: every dose at the reminder's time.
+        let doseMinutes = (userInfo["doseMinutes"] as? [Int]).flatMap { $0.count == ids.count ? $0 : nil }
+            ?? ids.map { _ in minutes }
+        return DoseGroup(dayKey: dayKey, minutesOfDay: minutes,
+                         doses: zip(ids, doseMinutes).map { DoseGroup.Dose(id: $0, minutes: $1) },
+                         compartment: (userInfo["compartment"] as? String).flatMap(Compartment.init(rawValue:)))
     }
 
     /// True while at least one dose of the group has no record yet.
     private static func isOpen(_ group: DoseGroup, medications: [UUID: Medication], calendar: Calendar) -> Bool {
         guard let day = ReminderPlanner.day(fromKey: group.dayKey, calendar: calendar) else { return false }
-        return group.medicationIDs.contains { id in
-            guard let medication = medications[id] else { return false }
+        return group.doses.contains { dose in
+            guard let medication = medications[dose.id] else { return false }
             return DoseScheduler.slots(for: [medication], on: day, calendar: calendar).contains { slot in
                 !slot.isUnscheduled && slot.event == nil
-                    && calendar.component(.hour, from: slot.scheduledAt) * 60 + calendar.component(.minute, from: slot.scheduledAt) == group.minutesOfDay
+                    && calendar.component(.hour, from: slot.scheduledAt) * 60 + calendar.component(.minute, from: slot.scheduledAt) == dose.minutes
             }
         }
     }
@@ -495,8 +550,12 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             return
         }
         let logger = DoseLogger(context: context, notifier: self)
-        for medication in medications {
-            let scheduledAt = calendar.date(bySettingHour: group.minutesOfDay / 60, minute: group.minutesOfDay % 60, second: 0, of: day) ?? day
+        let byID = Dictionary(medications.compactMap { medication in medication.id.map { ($0, medication) } }, uniquingKeysWith: { a, _ in a })
+        // A medication twice in one organizer compartment: both doses are in the person's hand.
+        var recordedNow = Set<UUID>()
+        for dose in group.doses {
+            guard let medication = byID[dose.id] else { continue }
+            let scheduledAt = calendar.date(bySettingHour: dose.minutes / 60, minute: dose.minutes % 60, second: 0, of: day) ?? day
             let slot = DoseScheduler.slots(for: [medication], on: day, calendar: calendar)
                 .first { calendar.isDate($0.scheduledAt, equalTo: scheduledAt, toGranularity: .minute) && !$0.isUnscheduled }
                 ?? DoseSlot(medication: medication, scheduledAt: scheduledAt, event: nil)
@@ -505,11 +564,12 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, Dos
             case Action.taken:
                 // The Today card asks before a second dose; from the lock screen nobody can be asked,
                 // so a dose right after another one is not recorded, and the person is told why.
-                if case .recentlyTaken(let last) = DoseGuard.verdict(for: slot, now: Date()) {
+                if !recordedNow.contains(dose.id), case .recentlyTaken(let last) = DoseGuard.verdict(for: slot, now: Date()) {
                     notifyNotRecorded(medication, takenAt: last)
                     continue
                 }
                 logger.markTaken(slot, source: .notification)
+                recordedNow.insert(dose.id)
             case Action.skip: logger.markSkipped(slot, source: .notification)
             default: break
             }

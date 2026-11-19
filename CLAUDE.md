@@ -67,8 +67,8 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   (`startMergingExternalChanges`) and only the app talks to CloudKit. Never purge persistent history:
   CloudKit export depends on it.
 
-- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 6`) and
-  `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`. Arrays are stored as comma-separated
+- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 7`) and
+  `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`, `Organizer` (pill organizer per profile; duplicates from sync resolve to the oldest). Arrays are stored as comma-separated
   strings (`weekdaysRaw`, `minutesRaw`); enums as raw strings with computed accessors.
 - `Vzato/Services` – logic without SwiftUI: `DoseScheduler` (expected doses per day,
   merged with recorded events), `DoseLogger` (the only place stock changes because of a
@@ -77,6 +77,9 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
 - `Vzato/Resources/Medicines.index` – offline register of Czech and Slovak medicines, rebuilt before a release with
   `python3 Scripts/build-medicines-index.py` (SÚKL and ŠÚKL open data; SÚKL must stay credited in the app and README).
   The only other network use besides Apple: the leaflet PDF from SÚKL on a tap (`LeafletService`).
+- `OrganizerService` groups organizer doses by compartment (Today card, fill guide) and `ReminderPlanner` gives a
+  compartment one reminder at its earliest open dose; userInfo then also carries `doseMinutes` (each dose's own time)
+  and `compartment`. Views in `Vzato/Views/Organizer`.
 - `Vzato/Views/Profiles` (profiles, filter chips, `showsProfiles` environment) and `Vzato/Views/Medicines`
   (database search, leaflet).
 - `Vzato/App/SyncMonitor.swift` – observes CloudKit container events (last success, last

@@ -18,9 +18,10 @@ struct SettingsView: View {
     @AppStorage(AppSettings.mealSoundKey) private var mealSound = ReminderSound.soft
 
     @Environment(AppState.self) private var state
+    @Environment(\.managedObjectContext) private var context
     @Environment(\.openURL) private var openURL
     @Environment(\.scenePhase) private var scenePhase
-    @State private var path: [String] = LaunchArguments.opensProfiles ? ["profiles"] : []
+    @State private var path: [String] = LaunchArguments.settingsPath
     private var notifications: NotificationService { NotificationService.shared }
 
     var body: some View {
@@ -31,8 +32,12 @@ struct SettingsView: View {
                         Label("Profiles", systemImage: "person.2")
                     }
                     .accessibilityIdentifier("profiles")
+                    NavigationLink(value: "organizer") {
+                        Label("Pill organizer", systemImage: "square.grid.3x3")
+                    }
+                    .accessibilityIdentifier("organizer")
                 } footer: {
-                    Text("Medications for your children or animals.")
+                    Text("Medications for your children or animals. A weekly pill organizer: one Taken button and one reminder per compartment.")
                 }
 
                 Section {
@@ -216,6 +221,8 @@ struct SettingsView: View {
             .formStyle(.grouped)
             .navigationDestination(for: String.self) { value in
                 if value == "profiles" { ProfilesView() }
+                if value == "organizer" { OrganizerSettingsView() }
+                if value == "fill", let profile = Profile.defaultProfile(in: context) { OrganizerFillView(profile: profile) }
             }
             .navigationTitle(Text("Settings"))
             .task { await notifications.refreshAuthorizationStatus() }

@@ -95,4 +95,30 @@ struct ReminderPlannerTests {
         #expect(ReminderPlanner.day(fromKey: "2026-11-02", calendar: testCalendar) == monday)
         #expect(ReminderPlanner.day(fromKey: "nonsense", calendar: testCalendar) == nil)
     }
+
+    @Test func organizerCompartmentSharesOneReminderAtItsFirstDose() {
+        let store = TestStore()
+        let letrox = store.medication(name: "Letrox", times: [7 * 60])
+        let ibuprofen = store.medication(name: "Ibuprofen", times: [8 * 60])
+        let drops = store.medication(name: "Eye drops", times: [8 * 60])
+        drops.unitKind = .drop
+        let organizer = OrganizerService.organizer(for: store.controller.ensureDefaultProfile(), in: store.context)
+        organizer.isEnabled = true
+        let byCompartment: (DoseSlot) -> (key: String, compartment: Compartment)? = { slot in
+            OrganizerService.compartment(of: slot, calendar: testCalendar).map { ("me|\($0.rawValue)", $0) }
+        }
+        let plan = ReminderPlanner.plan(slots: openSlots(store, days: 1), now: at(monday, 6), settings: settings, budget: 60,
+                                        organizer: byCompartment, calendar: testCalendar)
+        let first = plan.reminders.filter { $0.attempt == 0 }
+        #expect(first.count == 2)
+        #expect(first[0].minutesOfDay == 7 * 60 && first[0].compartment == .morning)
+        #expect(first[0].medicationIDs == [letrox.id!, ibuprofen.id!])
+        #expect(first[0].doseMinutes == [7 * 60, 8 * 60])
+        #expect(first[1].minutesOfDay == 8 * 60 && first[1].compartment == nil && first[1].medicationIDs == [drops.id!])
+
+        // Snoozing Ibuprofen's own dose takes it out of the compartment reminder.
+        let snoozed = ReminderPlanner.plan(slots: openSlots(store, days: 1), now: at(monday, 6), settings: settings, budget: 60,
+                                           skipping: ["2026-11-02|480": [ibuprofen.id!]], organizer: byCompartment, calendar: testCalendar)
+        #expect(snoozed.reminders.filter { $0.attempt == 0 }.first?.medicationIDs == [letrox.id!])
+    }
 }

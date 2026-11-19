@@ -49,7 +49,7 @@ struct WidgetResolvedDoseTests {
         }
         let group = NotificationService.DoseGroup(dayKey: ReminderPlanner.dayKey(for: monday, calendar: testCalendar),
                                                   minutesOfDay: 8 * 60, medicationIDs: [a.id!, b.id!, c.id!])
-        #expect(NotificationService.stillOpen(group, excluding: a.id!, in: store.context, calendar: testCalendar).ids == [b.id!])
-        #expect(NotificationService.stillOpen(group, excluding: b.id!, in: store.context, calendar: testCalendar).ids.isEmpty)
+        #expect(NotificationService.stillOpen(group, excluding: .init(id: a.id!, minutes: 8 * 60), in: store.context, calendar: testCalendar).doses.map(\.id) == [b.id!])
+        #expect(NotificationService.stillOpen(group, excluding: .init(id: b.id!, minutes: 8 * 60), in: store.context, calendar: testCalendar).doses.isEmpty)
     }
 }

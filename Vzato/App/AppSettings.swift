@@ -194,6 +194,18 @@ enum LaunchArguments {
         return nil
     }
 
+    /// `--open-organizer` / `--fill-organizer`: Settings starts on the pill organizer settings or on
+    /// its fill guide (screenshots).
+    static var settingsPath: [String] {
+        #if DEBUG
+        let args = CommandLine.arguments
+        if args.contains("--fill-organizer") { return ["organizer", "fill"] }
+        if args.contains("--open-organizer") { return ["organizer"] }
+        if args.contains("--open-profiles") { return ["profiles"] }
+        #endif
+        return []
+    }
+
     /// `--open-profiles`: Settings starts on the Profiles screen (screenshots).
     static var opensProfiles: Bool {
         #if DEBUG

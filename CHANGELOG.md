@@ -7,14 +7,27 @@ All notable changes to Vzato are listed here. The format follows
 ## [Unreleased]
 
 ### Added
+- Pill organizer (Settings › Pill organizer): 7 × 1 to 7 × 4 or a daily 1 × 4
+  organizer per profile, synced through iCloud. Today shows the whole
+  compartment on the big card with one "Taken: morning" button, one reminder
+  comes per compartment, and Fill the organizer lists what goes where with the
+  pieces needed next to the supply. Tablets and capsules go in by default; a
+  switch on each medication changes that. Data model version 7.
 - Settings warn when a system setting keeps reminders quiet (Time Sensitive,
   banners, lock screen or sounds turned off for Vzato) and open the system's
   notification settings.
 - Reminders are replanned after a time zone change and at midnight.
 - Privacy policy link in Settings › About.
 - The CSV export includes missed doses.
+- History › Export offers the summary for the doctor (PDF, 30 days) and every
+  dose as a CSV table; both follow the chosen profile.
 
 ### Fixed
+- Today and History refresh as soon as the app returns from the background; Today
+  showed the state from when it was left ("Next dose at 12:00" at 12:00) for up to
+  30 seconds. Doses now turn due right on their minute.
+- The CSV export is shared as a real `.csv` file (it arrived as `.txt` in Mail
+  and Files) and opens in Excel with accents intact.
 - Snoozing one medication on the Today card no longer silences the other
   medications due at the same time.
 - A dose confirmed or skipped in the widget no longer gets "Not confirmed yet"

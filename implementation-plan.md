@@ -277,6 +277,8 @@ Podle specifikace, kapitola 14. Pořadí uvnitř fáze: (1) obrazovka Souhrn pro
 
 ### Volitelná fáze 14 – Pomocník pro týdenní dávkovač
 
+**Stav 16. 11. 2026: hotovo v kódu** (model verze 7, `OrganizerService`, Nastavení › Dávkovač, karta dílu na Dnes, Naplnit dávkovač, notifikace po dílech, testy). Před vydáním nahrát schéma do vývojového CloudKitu (`--init-cloudkit-schema`) a nasadit do produkce. Původně: **rozhodnuto, ve vývoji** (specifikace 15.1: synchronizované nastavení na profil, model verze 7, notifikace po dílech, velká karta ukazuje díl, tablety a tobolky automaticky s přepínačem u léku).
+
 Podle specifikace, kapitola 15. Pořadí: (1) `Organizer` + `OrganizerService` (rozložení, časová okna, seskupení dávek, týdenní součet kusů) s testy, (2) výběr rozložení v Nastavení, (3) seskupení a tlačítko „Vzato: ráno“ na Dnes a varianta velké karty, (4) obrazovka Naplnit dávkovač s miniaturami a porovnáním se zásobou, (5) hromadná notifikace po dílech. Žádná migrace dat, žádná závislost.
 
 ## 6. Co se rozhodne až po prototypu

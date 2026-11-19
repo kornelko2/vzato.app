@@ -1673,6 +1673,28 @@
         }
       }
     },
+    "1 day × 4 (refilled daily)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 den × 4 (plní se denně)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 nap × 4 (naponta töltve)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 deň × 4 (plní sa denne)"
+          }
+        }
+      }
+    },
     "30 days": {
       "localizations": {
         "cs": {
@@ -1717,6 +1739,94 @@
         }
       }
     },
+    "7 days × 1 (morning)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 1 (ráno)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 nap × 1 (reggel)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 1 (ráno)"
+          }
+        }
+      }
+    },
+    "7 days × 2 (morning, evening)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 2 (ráno, večer)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 nap × 2 (reggel, este)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 2 (ráno, večer)"
+          }
+        }
+      }
+    },
+    "7 days × 3 (morning, noon, evening)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 3 (ráno, poledne, večer)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 nap × 3 (reggel, dél, este)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 3 (ráno, poludnie, večer)"
+          }
+        }
+      }
+    },
+    "7 days × 4 (morning, noon, evening, night)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 4 (ráno, poledne, večer, noc)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 nap × 4 (reggel, dél, este, éjszaka)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7 dní × 4 (ráno, poludnie, večer, noc)"
+          }
+        }
+      }
+    },
     "90 days": {
       "localizations": {
         "cs": {
@@ -1735,6 +1845,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "90 dní"
+          }
+        }
+      }
+    },
+    "A daily organizer: one day to fill.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denní dávkovač: plní se jeden den."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napi adagoló: egy napot kell feltölteni."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denný dávkovač: plní sa jeden deň."
           }
         }
       }
@@ -2131,6 +2263,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dnes máte hotovo"
+          }
+        }
+      }
+    },
+    "All doses as a table (CSV)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všechny dávky jako tabulka (CSV)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden adag táblázatként (CSV)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Všetky dávky ako tabuľka (CSV)"
           }
         }
       }
@@ -2813,6 +2967,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Farba"
+          }
+        }
+      }
+    },
+    "Compartment starts at": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Díl začíná v"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A rekesz kezdete"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diel začína o"
           }
         }
       }
@@ -3653,6 +3829,28 @@
         }
       }
     },
+    "Empty": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prázdné"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üres"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prázdne"
+          }
+        }
+      }
+    },
     "End": {
       "localizations": {
         "cs": {
@@ -3759,6 +3957,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Večer"
+          }
+        }
+      }
+    },
+    "Evening: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Večer: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Večer: %@"
           }
         }
       }
@@ -4129,6 +4349,28 @@
         }
       }
     },
+    "Every dose time falls into one compartment. Morning starts at midnight.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý čas dávky spadne do jednoho dílu. Ráno začíná o půlnoci."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minden adagolási idő egy rekeszbe kerül. A reggel éjfélkor kezdődik."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Každý čas dávky patrí do jedného dielu. Ráno začína o polnoci."
+          }
+        }
+      }
+    },
     "Every dose you take is subtracted from the supply.": {
       "localizations": {
         "cs": {
@@ -4349,24 +4591,24 @@
         }
       }
     },
-    "Export CSV": {
+    "Export": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Exportovat CSV"
+            "value": "Exportovat"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "CSV exportálása"
+            "value": "Exportálás"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Exportovať CSV"
+            "value": "Exportovať"
           }
         }
       }
@@ -4455,6 +4697,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menej kusov, než zodpovedá záznamom."
+          }
+        }
+      }
+    },
+    "Fill the organizer": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naplnit dávkovač"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adagoló feltöltése"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naplniť dávkovač"
+          }
+        }
+      }
+    },
+    "Fill the organizer (in Medications or in Settings) shows what goes into each compartment and how many pieces you need.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naplnit dávkovač (v Lécích nebo v Nastavení) ukáže, co patří do kterého dílu a kolik kusů potřebujete."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Adagoló feltöltése (a Gyógyszerek vagy a Beállítások alatt) megmutatja, mi kerül az egyes rekeszekbe, és hány darabra van szükség."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naplniť dávkovač (v Liekoch alebo v Nastaveniach) ukáže, čo patrí do ktorého dielu a koľko kusov potrebujete."
+          }
+        }
+      }
+    },
+    "Filling the organizer is a good moment to count the supply.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plnění dávkovače je dobrá chvíle spočítat zásobu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adagoló feltöltése jó alkalom a készlet megszámolására."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plnenie dávkovača je dobrá chvíľa spočítať zásobu."
           }
         }
       }
@@ -4565,6 +4873,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zadarmo pre všetkých"
+          }
+        }
+      }
+    },
+    "From": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Od"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ettől"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Od"
           }
         }
       }
@@ -5075,6 +5405,50 @@
         }
       }
     },
+    "In the organizer: %@. Tablets and capsules go in by themselves; change it in a medication's settings.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V dávkovači: %@. Tablety a tobolky se zařadí samy; změnit to jde v úpravě léku."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adagolóban: %@. A tabletták és kapszulák maguktól bekerülnek; ezt a gyógyszer szerkesztésénél módosíthatja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V dávkovači: %@. Tablety a kapsuly sa zaradia samy; zmeniť to môžete v úprave lieku."
+          }
+        }
+      }
+    },
+    "In the pill organizer": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V dávkovači"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az adagolóban"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "V dávkovači"
+          }
+        }
+      }
+    },
     "Injections": {
       "localizations": {
         "cs": {
@@ -5247,6 +5621,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Neskôr"
+          }
+        }
+      }
+    },
+    "Layout": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozložení"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elrendezés"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozloženie"
           }
         }
       }
@@ -5647,24 +6043,24 @@
         }
       }
     },
-    "Medications for your children or animals.": {
+    "Medications for your children or animals. A weekly pill organizer: one Taken button and one reminder per compartment.": {
       "localizations": {
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Léky pro vaše děti nebo zvířata."
+            "value": "Léky pro vaše děti nebo zvířata. Týdenní dávkovač: jedno tlačítko Vzato a jedna připomínka na díl."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gyógyszerek a gyermekeinek vagy az állatainak."
+            "value": "Gyógyszerek a gyermekeinek vagy az állatainak. Heti adagoló: rekeszenként egy Bevéve gomb és egy emlékeztető."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lieky pre vaše deti alebo zvieratá."
+            "value": "Lieky pre vaše deti alebo zvieratá. Týždenný dávkovač: jedno tlačidlo Vzaté a jedna pripomienka na diel."
           }
         }
       }
@@ -5885,6 +6281,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ráno"
+          }
+        }
+      }
+    },
+    "Morning: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ráno: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reggel: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ráno: %@"
           }
         }
       }
@@ -6153,6 +6571,28 @@
         }
       }
     },
+    "Night: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na noc: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éjszakára: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na noc: %@"
+          }
+        }
+      }
+    },
     "No activity yet": {
       "localizations": {
         "cs": {
@@ -6263,6 +6703,28 @@
         }
       }
     },
+    "No medication of this profile goes into the organizer yet.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do dávkovače zatím nepatří žádný lék tohoto profilu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ennek a profilnak még egyetlen gyógyszere sincs az adagolóban."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do dávkovača zatiaľ nepatrí žiadny liek tohto profilu."
+          }
+        }
+      }
+    },
     "No medications": {
       "localizations": {
         "cs": {
@@ -6369,6 +6831,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Poludnie"
+          }
+        }
+      }
+    },
+    "Noon: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poledne: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dél: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poludnie: %@"
           }
         }
       }
@@ -6879,6 +7363,28 @@
         }
       }
     },
+    "Open Settings › Pill organizer, turn on Use a pill organizer and pick the layout of yours.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevřete Nastavení › Dávkovač, zapněte Používám dávkovač a vyberte rozložení toho svého."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyissa meg a Beállítások › Gyógyszeradagoló pontot, kapcsolja be az Adagolót használok opciót, és válassza ki az adagolója elrendezését."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorte Nastavenia › Dávkovač, zapnite Používam dávkovač a vyberte rozloženie toho svojho."
+          }
+        }
+      }
+    },
     "Open Settings › Profiles and tap Add profile.": {
       "localizations": {
         "cs": {
@@ -7051,6 +7557,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otvorí liek na webe ŠÚKL, kde nájdete jeho písomnú informáciu."
+          }
+        }
+      }
+    },
+    "Opens the supply check": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otevře kontrolu zásoby"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megnyitja a készletellenőrzést"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otvorí kontrolu zásoby"
           }
         }
       }
@@ -7429,6 +7957,28 @@
         }
       }
     },
+    "Pill organizer": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávkovač"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gyógyszeradagoló"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dávkovač"
+          }
+        }
+      }
+    },
     "Play": {
       "localizations": {
         "cs": {
@@ -7689,6 +8239,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zaznamenané neskôr, vzaté %@."
+          }
+        }
+      }
+    },
+    "Records every open dose of this compartment as taken now": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapíše všechny nevzaté dávky tohoto dílu jako vzaté teď"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A rekesz összes nyitott adagját most bevettként rögzíti"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapíše všetky nevzaté dávky tohto dielu ako vzaté teraz"
           }
         }
       }
@@ -8771,6 +9343,28 @@
         }
       }
     },
+    "Summary for the doctor (PDF, 30 days)": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souhrn pro lékaře (PDF, 30 dní)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Összefoglaló az orvosnak (PDF, 30 nap)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Súhrn pre lekára (PDF, 30 dní)"
+          }
+        }
+      }
+    },
     "Supply": {
       "localizations": {
         "cs": {
@@ -8899,6 +9493,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zásobu, fotografie a jedlo doplníte v Liekoch. Pomocník je v Nastaveniach."
+          }
+        }
+      }
+    },
+    "Supply: %@": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Készlet: %@"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zásoba: %@"
           }
         }
       }
@@ -9079,6 +9695,28 @@
         }
       }
     },
+    "Tablets and capsules go into the organizer; drops and syrups stay separate. In a medication's settings you can change it with In the pill organizer.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tablety a tobolky patří do dávkovače, kapky a sirupy zůstávají zvlášť. V úpravě léku to změníte přepínačem V dávkovači."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A tabletták és kapszulák az adagolóba kerülnek, a cseppek és szirupok külön maradnak. A gyógyszer szerkesztésénél ezt Az adagolóban kapcsolóval módosíthatja."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tablety a kapsuly patria do dávkovača, kvapky a sirupy zostávajú zvlášť. V úprave lieku to zmeníte prepínačom V dávkovači."
+          }
+        }
+      }
+    },
     "Take anyway": {
       "localizations": {
         "cs": {
@@ -9233,6 +9871,94 @@
         }
       }
     },
+    "Taken: evening": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato: večer"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve: este"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté: večer"
+          }
+        }
+      }
+    },
+    "Taken: morning": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato: ráno"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve: reggel"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté: ráno"
+          }
+        }
+      }
+    },
+    "Taken: night": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato: na noc"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve: éjszaka"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté: na noc"
+          }
+        }
+      }
+    },
+    "Taken: noon": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato: poledne"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevéve: dél"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzaté: poludnie"
+          }
+        }
+      }
+    },
     "Taken…": {
       "localizations": {
         "cs": {
@@ -9383,6 +10109,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lyžičky"
+          }
+        }
+      }
+    },
+    "The Export button at the top of History sends the summary for the last 30 days as a PDF, or every dose as a CSV table for Excel or Numbers.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tlačítko Exportovat nahoře v Historii pošle souhrn za posledních 30 dní jako PDF, nebo všechny dávky jako tabulku CSV pro Excel či Numbers."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az Előzmények tetején lévő Exportálás gomb PDF-ként küldi el az utolsó 30 nap összefoglalóját, vagy minden adagot CSV-táblázatként Excelhez vagy Numbershez."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tlačidlo Exportovať hore v Histórii pošle súhrn za posledných 30 dní ako PDF, alebo všetky dávky ako tabuľku CSV pre Excel či Numbers."
           }
         }
       }
@@ -9695,6 +10443,28 @@
         }
       }
     },
+    "Today shows the medications of one compartment together, with one Taken button for all of them, and one reminder comes per compartment. Your plan does not change.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes ukáže léky jednoho dílu pohromadě s jedním tlačítkem Vzato pro všechny a na každý díl přijde jedna připomínka. Plán léků se nemění."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Ma képernyő egy rekesz gyógyszereit együtt mutatja, egy Bevéve gombbal mindegyikhez, és rekeszenként egy emlékeztető érkezik. A gyógyszerterv nem változik."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes ukáže lieky jedného dielu spolu s jedným tlačidlom Vzaté pre všetky a na každý diel príde jedna pripomienka. Plán liekov sa nemení."
+          }
+        }
+      }
+    },
     "Today shows whose dose it is. Tap a name at the top to show only that profile.": {
       "localizations": {
         "cs": {
@@ -9713,6 +10483,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Obrazovka Dnes ukazuje, čia je dávka. Ťuknutím na meno hore zobrazíte len tento profil."
+          }
+        }
+      }
+    },
+    "Today then shows a whole compartment with one button, for example Taken: morning, and one reminder comes per compartment.": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes pak ukáže celý díl s jedním tlačítkem, například Vzato: ráno, a na každý díl přijde jedna připomínka."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Ma képernyő ezután egy egész rekeszt mutat egy gombbal, például Bevéve: reggel, és rekeszenként egy emlékeztető érkezik."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dnes potom ukáže celý diel s jedným tlačidlom, napríklad Vzaté: ráno, a na každý diel príde jedna pripomienka."
           }
         }
       }
@@ -9981,6 +10773,28 @@
         }
       }
     },
+    "Use a pill organizer": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Používám dávkovač"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adagolót használok"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Používam dávkovač"
+          }
+        }
+      }
+    },
     "Version": {
       "localizations": {
         "cs": {
@@ -10021,6 +10835,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vzato sa riadi jazykom, ktorý mu nastavíte v nastaveniach systému. K dispozícii je čeština, slovenčina, angličtina a maďarčina."
+          }
+        }
+      }
+    },
+    "Vzato history %@.csv": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato historie %@.csv"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato előzmények %@.csv"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vzato história %@.csv"
           }
         }
       }
@@ -10571,6 +11407,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Už môžete jesť"
+          }
+        }
+      }
+    },
+    "You need": {
+      "localizations": {
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potřebujete"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szükséges"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrebujete"
           }
         }
       }

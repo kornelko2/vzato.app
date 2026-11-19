@@ -12,6 +12,7 @@ public final class Medication: NSManagedObject {
     @NSManaged public var unitsPerDose: Double
     @NSManaged public var unitKindRaw: String
     @NSManaged public var notes: String
+    @NSManaged public var organizerModeRaw: String
     @NSManaged public var colorHex: String
     @NSManaged public var createdAt: Date?
     @NSManaged public var isArchived: Bool
@@ -99,6 +100,11 @@ public final class Medication: NSManagedObject {
     var unitKind: DoseUnit {
         get { DoseUnit(rawValue: unitKindRaw) ?? .tablet }
         set { unitKindRaw = newValue.rawValue }
+    }
+
+    var organizerMode: OrganizerMode {
+        get { OrganizerMode(rawValue: organizerModeRaw) ?? .auto }
+        set { organizerModeRaw = newValue.rawValue }
     }
 
     var effectiveUnitsPerDose: Double { max(Self.minimumDoseUnits, unitsPerDose) }

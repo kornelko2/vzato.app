@@ -77,3 +77,14 @@ struct CSVMissedTests {
         #expect(lines[2].contains(",missed,") && lines[3].contains(",missed,"))
     }
 }
+
+@MainActor
+struct CSVFileTests {
+    @Test func writesACSVFileExcelReadsAsUTF8() throws {
+        let url = try #require(CSVExport.writeFile("medication\nŽelezo\n", on: monday))
+        #expect(url.pathExtension == "csv")
+        let data = try Data(contentsOf: url)
+        #expect(data.prefix(3) == Data([0xEF, 0xBB, 0xBF]))
+        #expect(String(decoding: data.dropFirst(3), as: UTF8.self) == "medication\nŽelezo\n")
+    }
+}

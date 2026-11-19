@@ -39,6 +39,13 @@ struct VzatoApp: App {
                 SampleData.populate(in: persistence.viewContext,
                                     withProfiles: CommandLine.arguments.contains("--sample-profiles"))
             }
+            // `--sample-organizer`: a 7 × 4 pill organizer for the default profile.
+            if CommandLine.arguments.contains("--sample-organizer"), let profile = Profile.defaultProfile(in: persistence.viewContext) {
+                let organizer = OrganizerService.organizer(for: profile, in: persistence.viewContext)
+                organizer.layout = .week4
+                organizer.isEnabled = true
+                try? persistence.viewContext.save()
+            }
         }
         #endif
         if LaunchArguments.usesScratchStore {

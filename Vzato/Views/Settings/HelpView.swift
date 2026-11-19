@@ -58,6 +58,12 @@ struct HelpView: View {
             "When adding a medication, choose whose it is under For.",
             "Today shows whose dose it is. Tap a name at the top to show only that profile.",
         ]),
+        Topic(id: "organizer", title: "Pill organizer", symbol: "square.grid.3x3", steps: [
+            "Open Settings › Pill organizer, turn on Use a pill organizer and pick the layout of yours.",
+            "Tablets and capsules go into the organizer; drops and syrups stay separate. In a medication's settings you can change it with In the pill organizer.",
+            "Fill the organizer (in Medications or in Settings) shows what goes into each compartment and how many pieces you need.",
+            "Today then shows a whole compartment with one button, for example Taken: morning, and one reminder comes per compartment.",
+        ]),
         Topic(id: "photos", title: "Photos", symbol: "camera", steps: [
             "Open the medication. Under Photos add the pill, the package or the leaflet.",
             "Under Photo on Today choose which photo appears on the big card.",
@@ -66,6 +72,7 @@ struct HelpView: View {
             "History shows every day in a calendar: green is taken, red is missed.",
             "Tap a day to see it or correct it.",
             "At the bottom of History is Summary for the doctor. Choose 7, 30 or 90 days and tap Export PDF to print or send it.",
+            "The Export button at the top of History sends the summary for the last 30 days as a PDF, or every dose as a CSV table for Excel or Numbers.",
         ]),
         Topic(id: "devices", title: "iPhone, iPad and Mac", symbol: "ipad.and.iphone", steps: [
             "Sign in with the same Apple Account on all devices and turn on iCloud. Vzato syncs by itself.",

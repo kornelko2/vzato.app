@@ -35,6 +35,7 @@ struct MedicationFormView: View {
     @State private var stockCount: Double?
     @State private var unitsPerDose: Double = 1
     @State private var unitKind = DoseUnit.tablet
+    @State private var organizerMode = OrganizerMode.auto
     @State private var lowStockThreshold: Double = 5
 
     private let calendar = Calendar.current
@@ -62,6 +63,7 @@ struct MedicationFormView: View {
         _stockCount = State(initialValue: medication.tracksStock ? medication.stockCount : nil)
         _unitsPerDose = State(initialValue: medication.effectiveUnitsPerDose)
         _unitKind = State(initialValue: medication.unitKind)
+        _organizerMode = State(initialValue: medication.organizerMode)
         _lowStockThreshold = State(initialValue: medication.lowStockThreshold)
         if let schedule = medication.allSchedules.first {
             _weekdays = State(initialValue: Set(schedule.weekdays))
@@ -167,6 +169,10 @@ struct MedicationFormView: View {
                     }
                     Stepper(value: $unitsPerDose, in: (unitKind.allowsFractions ? Medication.minimumDoseUnits : 1)...unitKind.maximumPerDose, step: unitKind.step) {
                         LabeledContent("Amount per dose") { Text(DoseFormatter.amount(unitsPerDose, unit: unitKind)) }
+                    }
+                    if profile?.organizer?.isEnabled == true {
+                        Toggle("In the pill organizer", isOn: inOrganizer)
+                            .accessibilityIdentifier("inOrganizer")
                     }
                     Toggle("Track supply", isOn: $tracksStock)
                         .accessibilityIdentifier("trackSupply")
@@ -274,6 +280,14 @@ struct MedicationFormView: View {
         )
     }
 
+    /// Tablets and capsules go in by default; the switch records only a choice that differs.
+    private var inOrganizer: Binding<Bool> {
+        let byDefault = unitKind == .tablet || unitKind == .capsule
+        return Binding(
+            get: { organizerMode == .included || (organizerMode == .auto && byDefault) },
+            set: { organizerMode = $0 == byDefault ? .auto : ($0 ? .included : .excluded) })
+    }
+
     private func save() {
         let target = medication ?? Medication(context: context)
         target.name = name.trimmingCharacters(in: .whitespaces)
@@ -305,6 +319,7 @@ struct MedicationFormView: View {
         schedule.endDate = hasEndDate ? calendar.startOfDay(for: endDate) : nil
 
         target.unitKind = unitKind
+        target.organizerMode = organizerMode
         target.unitsPerDose = max(Medication.minimumDoseUnits, unitsPerDose)
         if tracksStock {
             target.lowStockThreshold = max(0, lowStockThreshold)

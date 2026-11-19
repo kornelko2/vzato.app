@@ -15,6 +15,7 @@ public final class Profile: NSManagedObject {
     @NSManaged public var isDefault: Bool
     @NSManaged public var createdAt: Date?
     @NSManaged public var medications: NSSet?
+    @NSManaged public var organizers: NSSet?
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -29,8 +30,27 @@ public final class Profile: NSManagedObject {
 
     var symbol: String { symbolName ?? kind.defaultSymbol }
 
+    /// The profile's pill organizer settings. Two devices may each create one before syncing;
+    /// every device picks the same: the oldest, then by id.
+    var organizer: Organizer? {
+        ((organizers as? Set<Organizer>) ?? []).min { a, b in
+            let (dateA, dateB) = (a.createdAt ?? .distantFuture, b.createdAt ?? .distantFuture)
+            if dateA != dateB { return dateA < dateB }
+            return (a.id?.uuidString ?? "") < (b.id?.uuidString ?? "")
+        }
+    }
+
     var medicationList: [Medication] {
         (medications as? Set<Medication>)?.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending } ?? []
+    }
+
+    /// The profile marked as default ("Me"), if any.
+    static func defaultProfile(in context: NSManagedObjectContext) -> Profile? {
+        let request = fetchRequest()
+        request.predicate = NSPredicate(format: "isDefault == YES")
+        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+        request.fetchLimit = 1
+        return try? context.fetch(request).first
     }
 
     /// Whether more than one profile exists, so names need the profile to be clear.
