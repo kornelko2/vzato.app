@@ -19,7 +19,9 @@ struct DoseRow: View {
 
     private var detailText: String {
         let strength = slot.medication.dosageText
-        return strength.isEmpty ? slot.medication.doseAmountText : "\(slot.medication.doseAmountText) · \(strength)"
+        // A taken dose shows what was taken then, even if the amount has changed since.
+        let amount = slot.event.flatMap { $0.status == .taken ? $0.amountText : nil } ?? slot.medication.doseAmountText
+        return strength.isEmpty ? amount : "\(amount) · \(strength)"
     }
     private var isOverdue: Bool { slot.isOverdue(now: now, grace: grace) }
 

@@ -46,8 +46,8 @@ final class TestStore {
         schedule.startDate = start
         schedule.endDate = end
         schedule.medication = medication
+        medication.unitsPerDose = unitsPerDose
         if let stock {
-            medication.unitsPerDose = unitsPerDose
             StockService.setStock(medication, count: stock, at: start)
         }
         try! context.save()

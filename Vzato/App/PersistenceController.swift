@@ -295,6 +295,33 @@ enum SampleData {
                 schedule.repeatKind = .months
                 schedule.startDate = calendar.date(byAdding: .month, value: -2, to: calendar.startOfDay(for: now))
             }
+            // The whole family: a child, a grandmother and a cat.
+            func profile(_ name: String, _ kind: ProfileKind, _ symbol: String, _ hex: String) -> Profile {
+                let profile = Profile(context: context)
+                profile.name = name
+                profile.kind = kind
+                profile.symbolName = symbol
+                profile.colorHex = hex
+                return profile
+            }
+            let ema = profile("Ema", .person, "figure.child", "D9822B")
+            let syrup = make("Nurofen", "100 mg/5 ml", "E86A92", times: [clamp(minutesNow + 60)], meal: .after)
+            syrup.unitKind = .milliliter
+            syrup.unitsPerDose = 5
+            syrup.profile = ema
+            let anna = profile("Anna", .person, "heart.fill", "7A5BC7")
+            let prestarium = make("Prestarium", "5 mg", "6C8EBF", times: [clamp(minutesNow - 90), clamp(minutesNow + 240)])
+            prestarium.profile = anna
+            if let scheduled = calendar.date(bySettingHour: clamp(minutesNow - 90) / 60, minute: clamp(minutesNow - 90) % 60, second: 0, of: now) {
+                let event = DoseEvent(context: context)
+                event.scheduledAt = scheduled
+                event.status = .taken
+                event.takenAt = scheduled.addingTimeInterval(6 * 60)
+                event.medication = prestarium
+            }
+            let micka = profile("Micka", .pet, "cat.fill", "9A9A9A")
+            let cat = make("Felimazole", "2.5 mg", "C9A227", times: [clamp(minutesNow + 120)])
+            cat.profile = micka
         }
         try? context.save()
     }

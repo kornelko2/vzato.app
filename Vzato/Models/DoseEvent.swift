@@ -15,6 +15,10 @@ public final class DoseEvent: NSManagedObject {
     @NSManaged public var isUnscheduled: Bool
     /// Device that recorded the dose, e.g. "iPhone", "iPad", "MacBook".
     @NSManaged public var deviceName: String?
+    /// The amount taken, in `unitRaw`, saved when the dose is taken. 0 for records from before
+    /// version 8 (or an older app on another device): those use the medication's current amount.
+    @NSManaged public var units: Double
+    @NSManaged public var unitRaw: String?
     @NSManaged public var medication: Medication?
 
     public override func awakeFromInsert() {
@@ -30,6 +34,25 @@ public final class DoseEvent: NSManagedObject {
     var status: DoseStatus {
         get { DoseStatus(rawValue: statusRaw) ?? .pending }
         set { statusRaw = newValue.rawValue }
+    }
+
+    /// What was taken: the saved amount, or the medication's current one for older records.
+    var takenUnits: Double {
+        units > 0 ? units : (medication?.effectiveUnitsPerDose ?? Medication.minimumDoseUnits)
+    }
+
+    var takenUnit: DoseUnit {
+        unitRaw.flatMap { DoseUnit(rawValue: $0) } ?? medication?.unitKind ?? .tablet
+    }
+
+    /// "½ tablet": the amount of this dose as it was taken.
+    var amountText: String { DoseFormatter.amount(takenUnits, unit: takenUnit) }
+
+    /// Saves the medication's current amount on a record that has none yet.
+    func keepAmount() {
+        guard units <= 0, let medication else { return }
+        units = medication.effectiveUnitsPerDose
+        unitRaw = medication.unitKind.rawValue
     }
 
     var source: DoseSource {

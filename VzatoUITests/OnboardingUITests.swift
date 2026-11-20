@@ -55,7 +55,10 @@ final class OnboardingUITests: XCTestCase {
         next.tap()
 
         XCTAssertFalse(app.otherElements["onboarding"].exists)
-        XCTAssertTrue(app.staticTexts["Letrox"].firstMatch.waitForExistence(timeout: 5), "The new medication is not on Today")
+        // Late in the evening both suggested times have passed and a medication added now has no dose
+        // left today, so look for it in Medications rather than on Today.
+        app.buttons["Léky"].firstMatch.tap()
+        XCTAssertTrue(app.staticTexts["Letrox"].firstMatch.waitForExistence(timeout: 5), "The new medication was not saved")
         attach(app, "7-today")
     }
 

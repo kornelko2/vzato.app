@@ -55,8 +55,8 @@ struct ProfileTests {
         let slot = DoseScheduler.slots(for: [milbemax], on: monday, calendar: testCalendar)[0]
         let event = DoseLogger(context: store.context).markTaken(slot, at: at(monday, 8))
         let csv = CSVExport.make(events: [event])
-        #expect(csv.hasPrefix("medication,dosage,scheduled_at,status,taken_at,source,unscheduled,profile\n"))
-        #expect(csv.contains(",Mentík\n"))
+        #expect(csv.hasPrefix("medication,dosage,scheduled_at,status,taken_at,source,unscheduled,profile,amount,unit\n"))
+        #expect(csv.contains(",Mentík,1,tablet\n"))
     }
 }
 

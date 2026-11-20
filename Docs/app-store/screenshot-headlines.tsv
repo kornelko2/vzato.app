@@ -1,0 +1,29 @@
+# file	language	headline	subline (optional). Used by Scripts/frame-screenshots.swift.
+01-today	cs	Připomene lék. Vy klepnete Vzato.	Zdarma, bez reklam a bez účtu
+01-today	sk	Pripomenie liek. Vy ťuknete Vzaté.	Zadarmo, bez reklám a bez účtu
+01-today	en	It reminds you. You tap Taken.	Free, no ads, no account
+01-today	hu	Emlékeztet. Ön a Bevéve gombra koppint.	Ingyenes, reklám és fiók nélkül
+02-organizer	cs	Dávkovač: celý díl jedním klepnutím
+02-organizer	sk	Dávkovač: celý diel jedným ťuknutím
+02-organizer	en	Pill organizer: a whole compartment in one tap
+02-organizer	hu	Adagoló: egy egész rekesz egy koppintással
+03-profiles	cs	Pro celou rodinu, i pro zvířata
+03-profiles	sk	Pre celú rodinu, aj pre zvieratá
+03-profiles	en	For the whole family, pets included
+03-profiles	hu	Az egész családnak, a háziállatoknak is
+04-database	cs	Lék najdete v databázi léčiv
+04-database	sk	Liek nájdete v databáze liekov
+04-database	en	Find your medicine in the database
+04-database	hu	Keresse meg a gyógyszert az adatbázisban
+05-medications	cs	Hlídá zásobu, ať vám lék nedojde
+05-medications	sk	Stráži zásobu, aby vám liek nedošiel
+05-medications	en	Keeps an eye on your supply
+05-medications	hu	Figyeli a készletet, hogy ne fogyjon ki
+06-fill	cs	Naplnění dávkovače krok za krokem
+06-fill	sk	Plnenie dávkovača krok za krokom
+06-fill	en	Fill the organizer step by step
+06-fill	hu	Az adagoló feltöltése lépésről lépésre
+07-history	cs	Historie a souhrn pro lékaře
+07-history	sk	História a súhrn pre lekára
+07-history	en	History and a summary for your doctor
+07-history	hu	Előzmények és összefoglaló az orvosnak

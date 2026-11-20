@@ -56,6 +56,18 @@ struct DoctorSummary {
 
 @MainActor
 enum DoctorSummaryBuilder {
+    /// "1 tablet → ½ tablet" when the amount changed within the period, in the order it was taken,
+    /// ending with the current amount; otherwise just the current amount.
+    static func amountHistory(of slots: [DoseSlot], current: String) -> String {
+        var steps: [String] = []
+        for event in slots.compactMap(\.event).filter({ $0.status == .taken })
+            .sorted(by: { ($0.takenAt ?? .distantPast) < ($1.takenAt ?? .distantPast) }) where steps.last != event.amountText {
+            steps.append(event.amountText)
+        }
+        if steps.last != current { steps.append(current) }
+        return steps.joined(separator: " → ")
+    }
+
     /// The last `days` days up to `now`, today included.
     static func build(medications: [Medication], days: Int, now: Date = Date(), grace: TimeInterval,
                       calendar: Calendar = .current, missedLimit: Int = 40) -> DoctorSummary {
@@ -86,7 +98,7 @@ enum DoctorSummaryBuilder {
                 id: medication.id?.uuidString ?? medication.name,
                 name: medication.name,
                 strength: medication.dosageText,
-                amountPerDose: medication.doseAmountText,
+                amountPerDose: amountHistory(of: slots, current: medication.doseAmountText),
                 repeatText: schedule?.repeatDescription(calendar: calendar) ?? "",
                 minutesOfDay: (schedule?.minutesOfDay ?? []).sorted(),
                 mealRelation: schedule?.mealRelation ?? .any,

@@ -318,9 +318,13 @@ struct MedicationFormView: View {
         schedule.startDate = calendar.startOfDay(for: startDate)
         schedule.endDate = hasEndDate ? calendar.startOfDay(for: endDate) : nil
 
+        let newUnits = max(Medication.minimumDoseUnits, unitsPerDose)
+        if target.unitKind != unitKind || abs(target.effectiveUnitsPerDose - newUnits) > 0.0001 {
+            DoseLogger.keepAmounts(of: target)
+        }
         target.unitKind = unitKind
         target.organizerMode = organizerMode
-        target.unitsPerDose = max(Medication.minimumDoseUnits, unitsPerDose)
+        target.unitsPerDose = newUnits
         if tracksStock {
             target.lowStockThreshold = max(0, lowStockThreshold)
             if let stockCount, !target.tracksStock || target.stockCount != stockCount {

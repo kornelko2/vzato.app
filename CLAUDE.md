@@ -67,7 +67,7 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   (`startMergingExternalChanges`) and only the app talks to CloudKit. Never purge persistent history:
   CloudKit export depends on it.
 
-- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 7`) and
+- `Vzato/Models` – `Vzato.xcdatamodeld` (codegen off, current version `Vzato 8`) and
   `NSManagedObject` subclasses `Profile`, `Medication`, `Schedule`, `DoseEvent`, `MedicationPhoto`, `Organizer` (pill organizer per profile; duplicates from sync resolve to the oldest). Arrays are stored as comma-separated
   strings (`weekdaysRaw`, `minutesRaw`); enums as raw strings with computed accessors.
 - `Vzato/Services` – logic without SwiftUI: `DoseScheduler` (expected doses per day,
@@ -106,6 +106,26 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   alternate icon; `Scripts/render-icons.sh` renders both into the asset catalog (needs
   Inkscape). Never edit the PNGs by hand; change the SVG and re-run the script.
 
+## Release checklist
+
+Screenshots go stale silently (1.0.1 shipped with the 1.0 pictures). Any change a user can see means
+new pictures, before the release, not after:
+
+1. **App Store:** `Scripts/screenshots.sh` (iPhone 6.7", iPad 13") and `Scripts/screenshots-mac.sh` in all
+   four languages, then `Scripts/asc.py screenshots` into the new version. Show the new features, not only
+   Today. The demo data (`--sample-data --sample-profiles --sample-organizer`) is placed around the current
+   time; the script moves the app's clock to `CLOCK` (default 10:30, `Scripts/faketime.c`), so any hour works.
+   Do the same for website pictures (iPhone 17 Pro, scaled to 506 × 1100).
+2. **Website help** (`../vzato-web`): the help for the new version is in `src/i18n/<lang>.ts` with pictures
+   in `public/img/<lang>/`. Retake every picture whose screen changed. Before the help for the next version
+   is edited, archive the current one (`src/i18n/archive/<version>/`, pictures in `public/img/help/<version>/`)
+   and add it to `src/help-versions.ts`.
+3. **On release:** set `released` in `src/help-versions.ts` to the new version (the help page and the home
+   page pictures follow it) and deploy the website.
+4. A new Core Data model version: `--init-cloudkit-schema`, then the owner deploys the schema to Production
+   in CloudKit Console before the TestFlight build.
+5. `python3 Scripts/build-medicines-index.py`, CHANGELOG, release notes in `Docs/app-store/metadata.md`.
+
 ## Conventions
 
 - Core Data model: every attribute optional or with a default, every relationship
@@ -113,6 +133,8 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   builds have shipped: any schema change = new model version with lightweight migration.
 - A scheduled dose has no `DoseEvent` until the user acts. Status for an unrecorded
   slot is derived (pending → missed after the grace period). Never pre-create events.
+- A taken `DoseEvent` stores `units`/`unitRaw` (0 on records from before model 8: use `takenUnits`, which falls back to the
+  medication's amount). Show past doses with `event.amountText`, never `medication.doseAmountText`.
 - Stock changes only in `DoseLogger` (dose taken/reset) and `StockService.setStock`.
 - Every user-visible action on a dose or the supply goes through `DoseLogger`, `StockService` or
   `ReconciliationService`, which write an `ActivityEntry`. Never edit or delete log entries, and

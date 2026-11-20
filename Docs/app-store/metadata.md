@@ -285,3 +285,31 @@ Ismétlés néhány naponta, hetente vagy havonta, például havi féreghajtó t
 Emlékeztetők: az adag idején egy értesítés az akkor esedékes összes gyógyszerrel; ha nincs megerősítve, ismétlődik, majd leáll. A Ne zavarjanak és a Fókusz módon is átjutnak (a Beállításokban kikapcsolható).
 Az archivált gyógyszerek megtalálhatók és visszaállíthatók. Kihagyás gomb a widgetben.
 Javítva az alkalmazás háttérben történő leállítása iCloud-szinkronizálás közben.
+
+### 1.0.2 – cs
+Dávkovač: nastavte svůj týdenní dávkovač (Nastavení › Dávkovač). Dnes ukáže celý díl s jedním tlačítkem „Vzato: ráno“, na každý díl přijde jedna připomínka a Naplnit dávkovač ukáže, co kam patří a kolik kusů potřebujete.
+Historie si pamatuje, kolik jste vzali. Když dávku snížíte třeba z 1 na ½ tablety, starší záznamy se nezmění a souhrn pro lékaře ukáže průběh.
+Historie › Exportovat: souhrn pro lékaře jako PDF a všechny dávky jako tabulka CSV, i se zmeškanými dávkami.
+Nastavení upozorní, když systémová volba ztiší připomínky (Time Sensitive, zvuky, zamčená obrazovka).
+Opraveno: odložení jednoho léku neumlčí ostatní, „Vzato“ těsně po předchozí dávce se z oznámení nezapíše dvakrát, obrazovka Dnes je po návratu do aplikace hned aktuální.
+
+### 1.0.2 – sk
+Dávkovač: nastavte svoj týždenný dávkovač (Nastavenia › Dávkovač). Dnes ukáže celý diel s jedným tlačidlom „Vzaté: ráno“, na každý diel príde jedna pripomienka a Naplniť dávkovač ukáže, čo kam patrí a koľko kusov potrebujete.
+História si pamätá, koľko ste vzali. Keď dávku znížite napríklad z 1 na ½ tablety, staršie záznamy sa nezmenia a súhrn pre lekára ukáže priebeh.
+História › Exportovať: súhrn pre lekára ako PDF a všetky dávky ako tabuľka CSV, aj so zmeškanými dávkami.
+Nastavenia upozornia, keď systémová voľba stíši pripomienky (Time Sensitive, zvuky, zamknutá obrazovka).
+Opravené: odloženie jedného lieku nestíši ostatné, „Vzaté“ tesne po predchádzajúcej dávke sa z oznámenia nezapíše dvakrát, obrazovka Dnes je po návrate do aplikácie hneď aktuálna.
+
+### 1.0.2 – en-US
+Pill organizer: set up your weekly organizer (Settings › Pill organizer). Today shows the whole compartment with one "Taken: morning" button, one reminder comes per compartment, and Fill the organizer shows what goes where and how many pieces you need.
+History remembers how much you took. When you lower a dose, say from 1 to ½ tablet, older records stay as they were and the summary for the doctor shows the change.
+History › Export: the summary for the doctor as a PDF and every dose as a CSV table, missed doses included.
+Settings warn when a system setting silences reminders (Time Sensitive, sounds, lock screen).
+Fixed: snoozing one medication no longer silences the others, Taken from a notification right after a previous dose is not recorded twice, and Today is up to date as soon as you return to the app.
+
+### 1.0.2 – hu
+Gyógyszeradagoló: állítsa be heti adagolóját (Beállítások › Gyógyszeradagoló). A Ma képernyő az egész rekeszt mutatja egyetlen „Bevéve: reggel” gombbal, rekeszenként egy emlékeztető érkezik, az Adagoló feltöltése pedig megmutatja, mi hova kerül és hány darab kell.
+Az előzmények megjegyzik, mennyit vett be. Ha csökkenti az adagot, például 1-ről ½ tablettára, a korábbi bejegyzések nem változnak, és az orvosnak szóló összefoglaló mutatja a változást.
+Előzmények › Exportálás: összefoglaló az orvosnak PDF-ben és minden adag CSV-táblázatként, a kihagyottakkal együtt.
+A Beállítások figyelmeztetnek, ha egy rendszerbeállítás elnémítja az emlékeztetőket (Időérzékeny, hangok, zárolási képernyő).
+Javítva: egy gyógyszer elhalasztása nem némítja el a többit, az értesítésből adott Bevéve közvetlenül az előző adag után nem rögzül kétszer, és a Ma képernyő azonnal friss, amikor visszatér az alkalmazásba.

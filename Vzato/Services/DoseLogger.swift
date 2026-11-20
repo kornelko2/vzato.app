@@ -82,15 +82,32 @@ struct DoseLogger {
         }
     }
 
+    /// A dose becoming taken saves the amount it takes now; undoing it returns exactly that amount.
     private func adjustStock(for event: DoseEvent, newStatus: DoseStatus) {
-        guard let medication = event.medication, medication.tracksStock else { return }
+        guard let medication = event.medication else { return }
         let was = event.status == .taken
         let will = newStatus == .taken
-        let units = medication.effectiveUnitsPerDose
         if !was && will {
-            medication.stockCount = max(0, medication.stockCount - units)
+            event.units = medication.effectiveUnitsPerDose
+            event.unitRaw = medication.unitKind.rawValue
+            if medication.tracksStock {
+                medication.stockCount = max(0, medication.stockCount - event.units)
+            }
         } else if was && !will {
-            medication.stockCount += units
+            // Only in the same unit: a dose taken in drops says nothing about a supply now in ml.
+            if medication.tracksStock, event.takenUnit == medication.unitKind {
+                medication.stockCount += event.takenUnits
+            }
+            event.units = 0
+            event.unitRaw = ""
+        }
+    }
+
+    /// Before a medication's amount or unit changes: doses taken with the old amount keep it.
+    /// Records from before version 8 have none saved and would otherwise show the new amount.
+    static func keepAmounts(of medication: Medication) {
+        for event in medication.eventList where event.status == .taken && event.units <= 0 {
+            event.keepAmount()
         }
     }
 

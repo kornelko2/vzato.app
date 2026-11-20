@@ -7,6 +7,10 @@ All notable changes to Vzato are listed here. The format follows
 ## [Unreleased]
 
 ### Added
+- A taken dose keeps the amount it was taken with. Changing a medication's amount
+  (tapering from 1 to ½ tablet) no longer rewrites the history; the summary for the
+  doctor shows the change ("1 tablet → ½ tablet") and the CSV export has the amount
+  and unit of every taken dose.
 - Pill organizer (Settings › Pill organizer): 7 × 1 to 7 × 4 or a daily 1 × 4
   organizer per profile, synced through iCloud. Today shows the whole
   compartment on the big card with one "Taken: morning" button, one reminder
@@ -23,6 +27,8 @@ All notable changes to Vzato are listed here. The format follows
   dose as a CSV table; both follow the chosen profile.
 
 ### Fixed
+- Undoing a dose returns exactly the amount it took from the supply, even after the
+  amount per dose was changed.
 - Today and History refresh as soon as the app returns from the background; Today
   showed the state from when it was left ("Next dose at 12:00" at 12:00) for up to
   30 seconds. Doses now turn due right on their minute.

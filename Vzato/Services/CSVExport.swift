@@ -10,7 +10,7 @@ enum CSVExport {
     /// when the person acts), so the export shows the same history as the calendar.
     static func make(events: [DoseEvent], missed: [DoseSlot] = []) -> String {
         let formatter = ISO8601DateFormatter()
-        var lines = ["medication,dosage,scheduled_at,status,taken_at,source,unscheduled,profile"]
+        var lines = ["medication,dosage,scheduled_at,status,taken_at,source,unscheduled,profile,amount,unit"]
         var rows: [(Date, String)] = missed.map { slot in
             (slot.scheduledAt, [
                 escape(slot.medication.name),
@@ -19,6 +19,7 @@ enum CSVExport {
                 DoseStatus.missed.rawValue,
                 "", "", "0",
                 escape(slot.medication.profile?.name ?? ""),
+                "", "",
             ].joined(separator: ","))
         }
         for event in events {
@@ -31,6 +32,8 @@ enum CSVExport {
                 event.sourceRaw,
                 event.isUnscheduled ? "1" : "0",
                 escape(event.medication?.profile?.name ?? ""),
+                event.status == .taken ? amountNumber(event.takenUnits) : "",
+                event.status == .taken ? event.takenUnit.rawValue : "",
             ].joined(separator: ",")))
         }
         lines += rows.sorted { $0.0 < $1.0 }.map(\.1)
@@ -61,6 +64,11 @@ enum CSVExport {
         } catch {
             return nil
         }
+    }
+
+    /// "0.5": a plain number, the same in every language, so spreadsheets read it.
+    nonisolated static func amountNumber(_ value: Double) -> String {
+        value.formatted(.number.precision(.fractionLength(0...2)).grouping(.never).locale(Locale(identifier: "en_US_POSIX")))
     }
 
     nonisolated static func escape(_ field: String) -> String {
