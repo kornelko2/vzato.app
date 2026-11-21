@@ -1,8 +1,8 @@
 # file	language	headline	subline (optional). Used by Scripts/frame-screenshots.swift.
-01-today	cs	Připomene lék. Vy klepnete Vzato.	Zdarma, bez reklam a bez účtu
-01-today	sk	Pripomenie liek. Vy ťuknete Vzaté.	Zadarmo, bez reklám a bez účtu
-01-today	en	It reminds you. You tap Taken.	Free, no ads, no account
-01-today	hu	Emlékeztet. Ön a Bevéve gombra koppint.	Ingyenes, reklám és fiók nélkül
+01-today	cs	Na lék už nezapomenete
+01-today	sk	Na liek už nezabudnete
+01-today	en	Never miss a dose
+01-today	hu	Nem felejti el többé a gyógyszert
 02-organizer	cs	Dávkovač: celý díl jedním klepnutím
 02-organizer	sk	Dávkovač: celý diel jedným ťuknutím
 02-organizer	en	Pill organizer: a whole compartment in one tap

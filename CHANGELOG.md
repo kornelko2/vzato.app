@@ -6,6 +6,8 @@ All notable changes to Vzato are listed here. The format follows
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-11-21
+
 ### Added
 - A taken dose keeps the amount it was taken with. Changing a medication's amount
   (tapering from 1 to ½ tablet) no longer rewrites the history; the summary for the

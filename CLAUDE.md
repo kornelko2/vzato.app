@@ -99,6 +99,9 @@ xcodebuild -project Vzato.xcodeproj -scheme Vzato -destination 'platform=iOS Sim
   JavaScript, no cookies, no external requests. The privacy policy must stay true to the app:
   any change that stores, sends or syncs new data updates `vzato-web/src/i18n/privacy/*.html`,
   and any change to buttons or flows updates the help pages there and `HelpView.swift`.
+- The Android app is a separate project, `../vzato-android` (Kotlin + Compose), which follows this
+  specification and ports these tests. A behavior change here is noted in its `implementation-plan.md`;
+  new or changed strings reach it through its `scripts/xcstrings-to-android.py`.
 - In-app help is `Views/Settings/HelpView.swift`; the first-start guide is `Views/Onboarding/`.
 - `Docs/app-store/metadata.md` – App Store texts; `Scripts/asc.py metadata` uploads them through the
   App Store Connect API (`ASC_ISSUER_ID` required; the key lives in `~/.appstoreconnect/private_keys`).

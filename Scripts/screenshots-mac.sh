@@ -3,7 +3,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 #
-# Mac App Store screenshots (2880 × 1800) of a Debug build, with demo data in a throwaway store
+# Mac App Store screenshots (2880 × 1800; a 1120 × 700 window scaled up, so the text is readable) of a Debug build, with demo data in a throwaway store
 # (--scratch-store), so the data of an installed Vzato on this Mac is not touched. Quits a
 # running Vzato first. Needs Screen Recording permission for the terminal. The app's clock is moved
 # to CLOCK (default 10:30) with Scripts/faketime.c, as for the simulator.
@@ -45,7 +45,7 @@ for LANG in cs sk en hu; do
         # AppKit reads "-key value" pairs from the command line; a lone value left over is taken
         # as a file to open, and the app then opens no window. So pairs first, plain flags last.
         open -n -a "$APP" --env DYLD_INSERT_LIBRARIES="$FAKETIME" --env FAKE_OFFSET="$(offset_to "$AT")" \
-            --args --window-size 1440x900 -AppleLanguages "($LANG)" -AppleLocale "$LOC" \
+            --args --window-size 1120x700 -AppleLanguages "($LANG)" -AppleLocale "$LOC" \
             "$@" --sample-data --no-onboarding --scratch-store
         WIN=""
         for _ in $(seq 1 25); do sleep 1; WIN=$("$WINID"); [ -n "$WIN" ] && break; done
