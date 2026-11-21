@@ -6,6 +6,10 @@ All notable changes to Vzato are listed here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+- Czech and Slovak reminders said "Je čas vzít si 1 tableta" (wrong case); they now read
+  "Je čas vzít si lék: 1 tableta", which is right for every amount.
+
 ## [1.0.2] - 2026-11-21
 
 ### Added
